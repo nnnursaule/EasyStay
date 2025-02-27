@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modal Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .modal {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            width: 350px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        .modal h2 {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .line-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .line {
+            width: 30px;
+            height: 3px;
+            background: gray;
+            border-radius: 5px;
+        }
+        .line.active {
+            background: #ff6b57;
+        }
+        .btn-group {
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0;
+        }
+        .btn {
+            flex: 1;
+            padding: 12px;
+            margin: 5px;
+            border: 2px solid black;
+            border-radius: 25px;
+            background: white;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .btn.active {
+            background: #ff6b57;
+            color: white;
+            border-color: #ff6b57;
+        }
+        .date-container {
+            text-align: left;
+            margin-top: 15px;
+        }
+        input[type="date"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 25px;
+            border: 1px solid #ccc;
+            text-align: center;
+            font-size: 14px;
+        }
+        .continue-btn {
+            background: #ff6b57;
+            color: white;
+            padding: 12px;
+            width: 100%;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        .continue-btn:hover {
+            background: #e05a4a;
+        }
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="modal">
+    <span class="close-btn">&times;</span>
+    
+    <div class="line-container">
+        <div class="line"></div>
+        <div class="line active"></div>
+        <div class="line"></div>
+    </div>
+
+    <h2>Help us with some details!</h2>
+    <p>We use this for gender-specific</p>
+
+    <div class="btn-group">
+        <button class="btn" onclick="selectGender(this)">Male</button>
+        <button class="btn" onclick="selectGender(this)">Female</button>
+    </div>
+    <button class="btn" onclick="selectGender(this)">Prefer not to say</button>
+
+    <div class="date-container">
+        <p>What is your date of birth?</p>
+        <input type="date" id="dob">
+    </div>
+
+    <button class="continue-btn" onclick="submitForm()">Continue</button>
+</div>
+
+<script>
+    function selectGender(button) {
+        document.querySelectorAll('.btn').forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+    }
+
+    function submitForm() {
+        const selectedGender = document.querySelector('.btn.active') ? document.querySelector('.btn.active').innerText : null;
+        const dob = document.getElementById("dob").value;
+
+        if (!selectedGender || !dob) {
+            alert("Please select gender and enter date of birth.");
+            return;
+        }
+
+        alert(`Gender: ${selectedGender}\nDate of Birth: ${dob}`);
+        window.location.href = "signup.html"; 
+    }
+</script>
+
+</body>
+</html>

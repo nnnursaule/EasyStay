@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Log in</h2>
+
+            <div class="tab">
+                <button class="tablinks active" onclick="openTab(event, 'emailTab')">E-mail address</button>
+                <button class="tablinks" onclick="openTab(event, 'phoneTab')">Phone number</button>
+            </div>
+
+            <div id="emailTab" class="tabcontent" style="display: block;">
+                <input type="email" placeholder="E-mail address">
+                <button class="continue-btn" onclick="window.location.href='#'">Continue</button>
+
+            </div>
+
+            <div id="phoneTab" class="tabcontent">
+                <input type="tel" placeholder="Phone number">
+                <button class="continue-btn" onclick="window.location.href='q1.html'">Continue</button>
+            </div>
+
+            <a href="forgot.html" class="forgot-password">Forgot your password?</a>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

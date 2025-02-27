@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roommate Selection</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .modal {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            width: 350px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        .progress {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .progress div {
+            width: 30px;
+            height: 3px;
+            background: #ccc;
+        }
+        .progress .active {
+            background: #FF5722;
+        }
+        .question {
+            margin-bottom: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .btn {
+            display: block;
+            padding: 10px;
+            margin: 10px 0;
+            width: 100%;
+            border-radius: 5px;
+            border: 1px solid black;
+            background: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background: #eee;
+        }
+        .btn.selected {
+            background: #FF5722;
+            color: white;
+            border-color: #FF5722;
+        }
+        .signin {
+            margin-top: 10px;
+            font-size: 14px;
+        }
+        .signin a {
+            color: #FF5722;
+            font-weight: bold;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="modal">
+        <div class="progress">
+            <div class="active"></div>
+            <div></div>
+            <div></div>
+        </div>
+        <div class="question">Do you need a roommate?</div>
+        <button class="btn" onclick="nextStep()">Yes</button>
+        <button class="btn" onclick="nextStep()">No</button>
+        <button class="btn" onclick="nextStep()">I already have one</button>
+        <div class="signin">Been here before? <a href="#">Sign in</a></div>
+    </div>
+    <script>
+        function nextStep() {
+            window.location.href = 'q2.html';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+        .modal {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 350px;
+            text-align: center;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        }
+        h2 {
+            margin-bottom: 10px;
+        }
+        .tabs {
+            display: flex;
+            justify-content: space-around;
+            font-weight: bold;
+            margin-bottom: 15px;
+            cursor: pointer;
+        }
+        .tabs span {
+            cursor: pointer;
+            padding-bottom: 5px;
+        }
+        .tabs .active {
+            color: #ff5722;
+            border-bottom: 2px solid #ff5722;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        form input {
+            width: 95%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .checkbox-group {
+            text-align: left;
+            font-size: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .checkbox-group label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .checkbox-group input {
+            margin: 0;
+            width: 16px;
+            height: 16px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #ff5722;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+        button:enabled {
+            cursor: pointer;
+            opacity: 1;
+        }
+        .forgot-password {
+            display: block;
+            margin-top: 10px;
+            font-size: 14px;
+            color: #ff5722;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="modal">
+            <h2>Sign up</h2>
+            <div class="tabs">
+                <span class="active" id="email-tab">E-mail address</span>
+                <span id="phone-tab">Phone number</span>
+            </div>
+            <form>
+                <input type="email" id="email-input" placeholder="E-mail address" required>
+                <input type="text" id="phone-input" placeholder="Phone number" required style="display: none;">
+                <input type="password" placeholder="Password" required>
+                <input type="text" placeholder="First Name" required>
+                <input type="text" placeholder="Last Name" required>
+                <div class="checkbox-group">
+                    <label for="termsCheckbox">
+                        <input type="checkbox" id="termsCheckbox"> 
+                        <span>By continuing, I accept the Terms of use, Privacy policy and Cookie policy.</span>
+                    </label>
+                    <label for="offersCheckbox">
+                        <input type="checkbox" id="offersCheckbox"> 
+                        <span>I’d like to receive exclusive offers and the latest info from EasyStay.com by email or SMS.</span>
+                    </label>
+                </div>
+                <button type="submit" id="signupBtn" disabled>Sign up</button>
+            </form>
+            <a href="forgot.html" class="forgot-password">Forgot your password?</a>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const termsCheckbox = document.getElementById("termsCheckbox");
+            const signupBtn = document.getElementById("signupBtn");
+            const emailTab = document.getElementById("email-tab");
+            const phoneTab = document.getElementById("phone-tab");
+            const emailInput = document.getElementById("email-input");
+            const phoneInput = document.getElementById("phone-input");
+
+            function updateButtonState() {
+                signupBtn.disabled = !termsCheckbox.checked;
+            }
+
+            termsCheckbox.addEventListener("change", updateButtonState);
+
+            emailTab.addEventListener("click", function() {
+                emailTab.classList.add("active");
+                phoneTab.classList.remove("active");
+                emailInput.style.display = "block";
+                phoneInput.style.display = "none";
+            });
+
+            phoneTab.addEventListener("click", function() {
+                phoneTab.classList.add("active");
+                emailTab.classList.remove("active");
+                phoneInput.style.display = "block";
+                emailInput.style.display = "none";
+            });
+        });
+    </script>
+</body>
+</html>
