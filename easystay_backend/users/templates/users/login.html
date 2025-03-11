@@ -7,7 +7,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
-    <link rel="stylesheet" href="login.css">
 </head>
 <body>
     <div id="loginModal" class="modal">
@@ -16,25 +15,50 @@
             <h2>Log in</h2>
 
             <div class="tab">
-                <button class="tablinks active" name="username" onclick="openTab(event, 'emailTab')">Username</button>
-                <button class="tablinks" onclick="openTab(event, 'phoneTab')">Phone number</button>
+                <button class="tablinks active" id="username-tab">Username</button>
+                <button class="tablinks" id="phone-tab">Phone number</button>
             </div>
 
-            <div id="emailTab" class="tabcontent" style="display: block;">
-                <input type="email" placeholder="E-mail address">
-                <button class="continue-btn" onclick="window.location.href='#'">Continue</button>
+            <form method="POST" action="{% url 'users:login' %}">
+                {% csrf_token %}
 
-            </div>
+                <!-- Username -->
+                <input type="text" name="username" id="username-input" placeholder="Username" required>
 
-            <div id="phoneTab" class="tabcontent">
-                <input type="tel" placeholder="Phone number">
-                <button class="continue-btn" onclick="window.location.href='q1.html'">Continue</button>
-            </div>
+                <!-- Phone (скрыт по умолчанию) -->
+                <input type="tel" name="phone_number" id="phone-input" placeholder="Phone number" style="display: none;">
+
+                <!-- Password -->
+                <input type="password" name="password" placeholder="Password" required>
+
+                <button class="continue-btn" type="submit">Log in</button>
+            </form>
 
             <a href="forgot.html" class="forgot-password">Forgot your password?</a>
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const usernameTab = document.getElementById("username-tab");
+            const phoneTab = document.getElementById("phone-tab");
+            const usernameInput = document.getElementById("username-input");
+            const phoneInput = document.getElementById("phone-input");
+
+            usernameTab.addEventListener("click", function() {
+                usernameTab.classList.add("active");
+                phoneTab.classList.remove("active");
+                usernameInput.style.display = "block";
+                phoneInput.style.display = "none";
+            });
+
+            phoneTab.addEventListener("click", function() {
+                phoneTab.classList.add("active");
+                usernameTab.classList.remove("active");
+                phoneInput.style.display = "block";
+                usernameInput.style.display = "none";
+            });
+        });
+    </script>
 </body>
 </html>

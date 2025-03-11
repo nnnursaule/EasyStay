@@ -21,8 +21,14 @@
                 <li><a href="#">Services</a></li>
                 <li><a href="#">Interesting</a></li>
                 <li><a href="#faq">FAQ</a></li>
-                <li><a href="{% url 'users:login' %}">Log in</a></li>
-                <li><a href="{% url 'users:registration' %}">Sign up</a></li>
+
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'users:logout' %}">Logout</a></li>
+                {% else %}
+                    <li><a href="{% url 'users:login' %}">Log in</a></li>
+                    <li><a href="{% url 'users:registration' %}">Sign up</a></li>
+                {% endif %}
+
             </ul>
             <button class="landlord-btn">I'm a landlord</button>
         </nav>
