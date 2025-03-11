@@ -1,4 +1,4 @@
-const images = ["image1.jpg", "image2.jpg", "image3.jpg"];
+const images = ["img/main1.png", "img/main2.png", "img/main3.png"];
 let currentIndex = 0;
 
 function changeImage(index) {
@@ -8,18 +8,33 @@ function changeImage(index) {
     });
 }
 
+document.getElementById("languageButton").addEventListener("click", function () {
+    document.getElementById("languageDropdown").classList.toggle("hidden");
+});
+
+document.querySelectorAll("#languageDropdown a").forEach(item => {
+    item.addEventListener("click", function (e) {
+        e.preventDefault();
+        window.location.href = this.getAttribute("href");
+    });
+});
+
+document.addEventListener("click", function (event) {
+    if (!document.querySelector(".language-container").contains(event.target)) {
+        document.getElementById("languageDropdown").classList.add("hidden");
+    }
+});
 document.querySelectorAll(".faq-header").forEach((item) => {
     item.addEventListener("click", function () {
         const faqItem = this.parentElement;
         faqItem.classList.toggle("active");
-
-        const button = this.querySelector(".faq-toggle");
-        button.textContent = faqItem.classList.contains("active") ? "✖" : "+";
+        this.querySelector(".faq-toggle").textContent = faqItem.classList.contains("active") ? "✖" : "+";
     });
 });
 
-
-
+document.getElementById("goToTop").addEventListener("click", function () {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+});
 
 // login
 

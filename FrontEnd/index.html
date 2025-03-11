@@ -14,24 +14,47 @@
 </head>
 <body>
     <header>
-        <nav class="navbar">
-            <div class="logo">Easystay</div>
-            <ul class="nav-links">
-                <li><a href="#">Services</a></li>
-                <li><a href="#">Interesting</a></li>
-                <li><a href="#faq">FAQ</a></li>
-                <li><a href="login.html">Log in</a></li>
-                <li><a href="signup.html">Sign up</a></li>
-            </ul>
-            <button class="landlord-btn">I'm a landlord</button>
-        </nav>
+        <header>
+            <nav class="navbar">
+                <div class="logo">
+                    <img src="img/logo.png" alt="EasyStay Logo">
+                </div>            
+                <ul class="nav-links">
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">Interesting</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                    <li><a href="login.html">Log in</a></li>
+                    <li><a href="signup.html">Sign up</a></li>
+                </ul>
+                <button class="landlord-btn">For a landlord</button>
+                <a href="wishlist.html" class="heart-btn">
+                    <i class="fa fa-heart"></i>
+                </a>
+                <div class="language-container">
+                    <button id="languageButton" class="language-btn">
+                        <i class="fa-solid fa-globe"></i> 
+                    </button>
+                    <div id="languageDropdown" class="language-dropdown hidden">
+                        <a href="index.html" data-lang="en">
+                            <i class="fa-solid fa-flag-usa"></i> English
+                        </a>
+                        <a href="index_kk.html" data-lang="kk">
+                            <i class="fa-solid fa-flag"></i> Қазақша
+                        </a>
+                        <a href="index_ru.html" data-lang="ru">
+                            <i class="fa-solid fa-flag"></i> Русский
+                        </a>
+                    </div>
+                </div>
     </header>
     <section class="hero">
         <div class="overlay"></div>
         <h1>Platform for SDU students where renting is made <span class="highlight">EASY!</span></h1>
         <div class="search-bar">
             <input type="text" placeholder="Search by regions, residential complex">
-            <button class="search-btn">🔍</button>
+            <button class="search-btn">
+                <i class="fas fa-search"></i>
+            </button>            
         </div>
         <div class="pagination">
             <span class="active" onclick="changeImage(1)">01</span>
@@ -47,21 +70,24 @@
                 <div class="about-buttons">
                     <div class="btn">
                         <i class="fas fa-th-large"></i>
-                        <span>Пример: про дизайн</span>
+                        <span>Safety</span>
                     </div>
                     <div class="btn">
                         <i class="fas fa-ruler-combined"></i>
-                        <span>Пример: про цен</span>
+                        <span>Affordable prices</span>
                     </div>
                     <div class="btn">
                         <i class="fas fa-palette"></i>
-                        <span>Дизайн интерьера</span>
+                        <span>Convenience</span>
                     </div>
                 </div>
                 <div class="about-video">
-                    <iframe width="500" height="280" src="https://www.youtube.com/" 
-                        title="YouTube video player" frameborder="0" allowfullscreen>
-                    </iframe>
+                    <iframe width="500" height="280" 
+                    src="https://www.youtube.com/embed/Wvm77W0FcLw" 
+                    title="YouTube video player" frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                    </iframe>  
                 </div>
             </div>
         </div>
@@ -72,7 +98,7 @@
         <h2>More announcements</h2>
         <div class="cards-container">
             <div class="card">
-                <img src="1.png" alt="Apartment">
+                <img src="img/1.png" alt="Apartment">
                 <div class="card-info">
                     <h3>ЖК аты</h3>
                     <p>1 комн</p>
@@ -83,7 +109,7 @@
                 </div>
             </div>
             <div class="card">
-                <img src="2.png" alt="Apartment">
+                <img src="img/2.png" alt="Apartment">
                 <div class="card-info">
                     <h3>ЖК аты</h3>
                     <p>1 комн</p>
@@ -94,7 +120,7 @@
                 </div>
             </div>
             <div class="card">
-                <img src="3.png" alt="Apartment">
+                <img src="img/3.png" alt="Apartment">
                 <div class="card-info">
                     <h3>ЖК аты</h3>
                     <p>1 комн</p>
@@ -105,40 +131,40 @@
                 </div>
             </div>
             <div class="card">
-                <img src="4.png" alt="Apartment">
+                <img src="img/4.png" alt="Apartment">
                 <div class="card-info">
                     <h3>ЖК аты</h3>
                     <p>2 комн</p>
                 </div>
                 <div class="card-hover">
                     <p>Описание квартиры: просторная, современная.</p>
-                    <a href="#" class="view-project">VIEW PROJECT</a>
+                    <a href="details.html" class="view-project">VIEW PROJECT</a>
                 </div>
             </div>
             <div class="card">
-                <img src="5.png" alt="Apartment">
+                <img src="img/5.png" alt="Apartment">
                 <div class="card-info">
                     <h3>ЖК аты</h3>
                     <p>2 комн</p>
                 </div>
                 <div class="card-hover">
                     <p>Описание квартиры: рядом с парком, уютная.</p>
-                    <a href="#" class="view-project">VIEW PROJECT</a>
+                    <a href="details.html" class="view-project">VIEW PROJECT</a>
                 </div>
             </div>
             <div class="card">
-                <img src="6.png" alt="Apartment">
+                <img src="img/6.png" alt="Apartment">
                 <div class="card-info">
                     <h3>ЖК аты</h3>
                     <p>3 комн</p>
                 </div>
                 <div class="card-hover">
                     <p>Описание квартиры: шикарный вид, большая кухня.</p>
-                    <a href="#" class="view-project">VIEW PROJECT</a>
+                    <a href="details.html" class="view-project">VIEW PROJECT</a>
                 </div>
             </div>
             <div class="card">
-                <img src="2.png" alt="Apartment">
+                <img src="img/2.png" alt="Apartment">
                 <div class="card-info">
                     <h3>ЖК аты</h3>
                     <p>1 комн</p>
@@ -149,7 +175,7 @@
                 </div>
             </div>
             <div class="card">
-                <img src="2.png" alt="Apartment">
+                <img src="img/2.png" alt="Apartment">
                 <div class="card-info">
                     <h3>ЖК аты</h3>
                     <p>1 комн</p>
@@ -255,7 +281,7 @@
         <div class="team-container">
             <div class="profile-card">
                 <div class="profile-image">
-                    <img src="cl1.png" alt="Team Member">
+                    <img src="img/cl1.png" alt="Team Member">
                 </div>
                 <div class="profile-content">
                     <p>
@@ -268,7 +294,7 @@
     
             <div class="profile-card">
                 <div class="profile-image">
-                    <img src="cl2.png" alt="Team Member">
+                    <img src="img/cl2.png" alt="Team Member">
                 </div>
                 <div class="profile-content">
                     <p>
@@ -281,7 +307,7 @@
     
             <div class="profile-card">
                 <div class="profile-image">
-                    <img src="cl3.png" alt="Team Member">
+                    <img src="img/cl3.png" alt="Team Member">
                 </div>
                 <div class="profile-content">
                     <p>
@@ -321,10 +347,10 @@
                     Our mission is to set the highest standards for the construction sphere.
                 </p>
                 <div class="social-icons">
-                        <a href="#"><i class="fab fa-whatsapp"></i></a>
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="https://www.whatsapp.com"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://www.whatsapp.com"><i class="fab fa-facebook"></i></a>
+                        <a href="https://www.whatsapp.com"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.whatsapp.com"><i class="fab fa-youtube"></i></a>
                 </div>
             </div>
             
@@ -364,10 +390,10 @@
                 </ul>
             </div>
 
-            <div class="footer-column to-top">
+            <div class="go-to-top-container">
                 <a href="#">GO TO TOP</a>
-                <button class="top-button">⬆</button>
-            </div>
+                <button id="goToTop">↑</button>
+            </div>            
         </div>
 
         <div class="footer-bottom">
