@@ -43,3 +43,10 @@ class UserCreationView(TitleMixin, SuccessMessageMixin, CreateView):
 class UserLoginView(LoginView):
     template_name = "users/login.html"
     form_class = UserLoginForm
+    redirect_authenticated_user = True
+    next_page = reverse_lazy("booking:index")
+
+
+def logout(request):
+    auth.logout(request)
+    return redirect("booking:index")
