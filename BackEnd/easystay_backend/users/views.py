@@ -8,8 +8,7 @@ from django.views.generic import CreateView, UpdateView
 from django.views.generic.base import TemplateView
 from django.contrib.auth import get_user_model
 from . forms import UserRegistrationForm, UserLoginForm
-
-
+from .models import  User, EmailVerification
 class TitleMixin:
     title = None
 
@@ -50,3 +49,19 @@ class UserLoginView(LoginView):
 def logout(request):
     auth.logout(request)
     return redirect("booking:index")
+
+
+class EmailVerificationView(TitleMixin, TemplateView):
+    title = "Store - Confirm the email"
+    template_name = "users/email_verification.html"
+
+    def get(self, request, *args, **kwargs):
+        code = kwargs['code']
+        user = User.objects.get(email=kwargs['email'])
+        email_verifications = EmailVerification.objects.filter(user=user, code=code)
+        if email_verifications.exists() and not email_verifications.first().is_expired():
+            user.is_verified = True
+            user.save()
+            return super(EmailVerificationView, self).get(request, *args, **kwargs)
+        else:
+            return HttpResponseRedirect(reverse('products:index'))

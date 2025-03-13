@@ -106,6 +106,8 @@ DATABASES = {
 }
 
 
+
+
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 
@@ -152,6 +154,8 @@ STATICFILES_DIRS = [
 ]
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
+DOMAIN_NAME = 'http://localhost:8039'
+
 
 AUTH_USER_MODEL = 'users.User'
 
@@ -159,3 +163,11 @@ AUTH_USER_MODEL = 'users.User'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+
+EMAIL_HOST = 'smtp.yandex.com'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = 'y.sailaubay@yandex.ru'
+EMAIL_HOST_PASSWORD = 'hgjbjtfgeswivalo'
+EMAIL_USE_SSL = True
+EMAIL_USE_TLS = False
