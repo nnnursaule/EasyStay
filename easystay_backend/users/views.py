@@ -7,7 +7,7 @@ from django.urls import reverse, reverse_lazy
 from django.views.generic import CreateView, UpdateView
 from django.views.generic.base import TemplateView
 from django.contrib.auth import get_user_model
-from . forms import UserRegistrationForm, UserLoginForm
+from . forms import UserRegistrationForm, UserLoginForm, ProfileForm
 from .models import  User, EmailVerification
 class TitleMixin:
     title = None
@@ -65,3 +65,12 @@ class EmailVerificationView(TitleMixin, TemplateView):
             return super(EmailVerificationView, self).get(request, *args, **kwargs)
         else:
             return HttpResponseRedirect(reverse('products:index'))
+
+
+class UserProfileView(UpdateView):
+    model = User
+    template_name = 'users/profile.html'
+    form_class = ProfileForm
+    
+    def get_success_url(self):
+        return reverse_lazy("users:profile", args=(self.object.id,))
