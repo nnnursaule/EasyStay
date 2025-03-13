@@ -90,3 +90,27 @@ class UserRegistrationForm(UserCreationForm):
         record.send_verification_email()
         return user
 
+
+
+class ProfileForm(UserChangeForm):
+    class Meta:
+        model = User
+        fields = ("first_name", "last_name", "image", "username", "email")
+
+    first_name = forms.CharField(widget=forms.TextInput(attrs={
+        'class': 'form-control py-4',
+    }))
+    last_name = forms.CharField(widget=forms.TextInput(attrs={
+        'class': 'form-control py-4',
+    }))
+    email = forms.CharField(widget=forms.EmailInput(attrs={
+        'class': 'form-control py-4',
+        'readonly': 'True'
+    }))
+    username = forms.CharField(widget=forms.TextInput(attrs={
+        'class': 'form-control py-4',
+        'readonly': 'True'
+    }))
+    image = forms.ImageField(widget=forms.FileInput(attrs={
+        'class': 'custom-file-input'
+    }), required=False)
