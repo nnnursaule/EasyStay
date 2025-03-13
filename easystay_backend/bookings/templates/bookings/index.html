@@ -77,96 +77,21 @@
 
     <section class="announcements">
         <h2>More announcements</h2>
-        <div class="cards-container">
-            <div class="card">
-                <img src="1.png" alt="Apartment">
-                <div class="card-info">
-                    <h3>ЖК аты</h3>
-                    <p>1 комн</p>
-                </div>
-                <div class="card-hover">
-                    <p>Описание квартиры: 50м², уютная, хороший ремонт.</p>
-                    <a href="#" class="view-project">VIEW PROJECT</a>
-                </div>
-            </div>
-            <div class="card">
-                <img src="2.png" alt="Apartment">
-                <div class="card-info">
-                    <h3>ЖК аты</h3>
-                    <p>1 комн</p>
-                </div>
-                <div class="card-hover">
-                    <p>Описание квартиры: светлая, удобное расположение.</p>
-                    <a href="#" class="view-project">VIEW PROJECT</a>
+        {% for apartment in apartments %}
+            <div class="cards-container">
+                <div class="card">
+                    <img src="{{ apartment.image.url }}" alt="Apartment">
+                    <div class="card-info">
+                        <h3>{{ apartment.title }}</h3>
+                        <p>{{ apartment.rooms }}</p>
+                    </div>
+                    <div class="card-hover">
+                        <p>{{ apartment.description }}</p>
+                        <a href="#" class="view-project">VIEW PROJECT</a>
+                    </div>
                 </div>
             </div>
-            <div class="card">
-                <img src="3.png" alt="Apartment">
-                <div class="card-info">
-                    <h3>ЖК аты</h3>
-                    <p>1 комн</p>
-                </div>
-                <div class="card-hover">
-                    <p>Описание квартиры: современный дизайн, вид на город.</p>
-                    <a href="#" class="view-project">VIEW PROJECT</a>
-                </div>
-            </div>
-            <div class="card">
-                <img src="4.png" alt="Apartment">
-                <div class="card-info">
-                    <h3>ЖК аты</h3>
-                    <p>2 комн</p>
-                </div>
-                <div class="card-hover">
-                    <p>Описание квартиры: просторная, современная.</p>
-                    <a href="#" class="view-project">VIEW PROJECT</a>
-                </div>
-            </div>
-            <div class="card">
-                <img src="5.png" alt="Apartment">
-                <div class="card-info">
-                    <h3>ЖК аты</h3>
-                    <p>2 комн</p>
-                </div>
-                <div class="card-hover">
-                    <p>Описание квартиры: рядом с парком, уютная.</p>
-                    <a href="#" class="view-project">VIEW PROJECT</a>
-                </div>
-            </div>
-            <div class="card">
-                <img src="6.png" alt="Apartment">
-                <div class="card-info">
-                    <h3>ЖК аты</h3>
-                    <p>3 комн</p>
-                </div>
-                <div class="card-hover">
-                    <p>Описание квартиры: шикарный вид, большая кухня.</p>
-                    <a href="#" class="view-project">VIEW PROJECT</a>
-                </div>
-            </div>
-            <div class="card">
-                <img src="2.png" alt="Apartment">
-                <div class="card-info">
-                    <h3>ЖК аты</h3>
-                    <p>1 комн</p>
-                </div>
-                <div class="card-hover">
-                    <p>Описание квартиры: светлая, удобное расположение.</p>
-                    <a href="#" class="view-project">VIEW PROJECT</a>
-                </div>
-            </div>
-            <div class="card">
-                <img src="2.png" alt="Apartment">
-                <div class="card-info">
-                    <h3>ЖК аты</h3>
-                    <p>1 комн</p>
-                </div>
-                <div class="card-hover">
-                    <p>Описание квартиры: светлая, удобное расположение.</p>
-                    <a href="#" class="view-project">VIEW PROJECT</a>
-                </div>
-            </div>
-        </div>
+        {% endfor %}
     </section>
 
     <section class="how-we-work">
