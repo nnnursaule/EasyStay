@@ -1,0 +1,29 @@
+{% load static %}
+    <form action="{% url 'users:profile' user.id %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div>
+        <label for="{{ form.first_name.id_for_label }}">Имя</label>
+        {{ form.first_name }}
+    </div>
+    <div>
+        <label for="{{ form.last_name.id_for_label }}">Фамилия</label>
+        {{ form.last_name }}
+    </div>
+    <div>
+        {{ form.image }}
+        <label for="{{ form.image.id_for_label }}">Выберите изображение</label>
+    </div>
+    <div>
+        <label for="{{ form.username.id_for_label }}">Имя пользователя</label>
+        {{ form.username }}
+    </div>
+    <div>
+        <label for="{{ form.email.id_for_label }}">Адрес электронной почты</label>
+        {{ form.email }}
+    </div>
+    <div>
+        <input type="submit" value="Сохранить">
+    </div>
+</form>
+
+
