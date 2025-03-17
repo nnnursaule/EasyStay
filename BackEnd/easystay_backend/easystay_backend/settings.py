@@ -56,10 +56,12 @@ MIDDLEWARE = [
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
-    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",  # Должно быть выше!
+    "users.middleware.PreventAdminSessionHijackMiddleware",  # Теперь после AuthenticationMiddleware
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+
 
 ROOT_URLCONF = "easystay_backend.urls"
 
@@ -171,3 +173,13 @@ EMAIL_HOST_USER = 'y.sailaubay@yandex.ru'
 EMAIL_HOST_PASSWORD = 'hgjbjtfgeswivalo'
 EMAIL_USE_SSL = True
 EMAIL_USE_TLS = False
+
+
+SESSION_ENGINE = "django.contrib.sessions.backends.db"  # Стандартное хранилище сессий
+
+# Разные cookie для админки и сайта
+SESSION_COOKIE_NAME = "sessionid_main"
+SESSION_COOKIE_SECURE = False  # Для локальной разработки, в продакшене ставь True
+
+ADMIN_SESSION_COOKIE_NAME = "sessionid_admin"
+

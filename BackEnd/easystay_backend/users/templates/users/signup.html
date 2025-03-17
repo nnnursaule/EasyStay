@@ -16,7 +16,7 @@
         }
         .container {
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
             width: 100%;
         }
@@ -30,21 +30,6 @@
         }
         h2 {
             margin-bottom: 10px;
-        }
-        .tabs {
-            display: flex;
-            justify-content: space-around;
-            font-weight: bold;
-            margin-bottom: 15px;
-            cursor: pointer;
-        }
-        .tabs span {
-            cursor: pointer;
-            padding-bottom: 5px;
-        }
-        .tabs .active {
-            color: #ff5722;
-            border-bottom: 2px solid #ff5722;
         }
         form {
             display: flex;
@@ -84,20 +69,27 @@
             cursor: pointer;
             opacity: 1;
         }
+        .back-btn {
+            margin-top: 10px;
+            width: 100%;
+            padding: 10px;
+            background: #555;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
     <div class="container">
+        <button class="back-btn" onclick="history.back()">← Back</button>
         <div class="modal">
             <h2>Sign up</h2>
-            <div class="tabs">
-                <span class="active" id="email-tab">E-mail address</span>
-                <span id="phone-tab">Phone number</span>
-            </div>
             <form method="POST" action="{% url 'users:registration' %}">
                 {% csrf_token %}
-                <input type="email" name="email" id="email-input" placeholder="E-mail address" required>
-                <input type="text" name="phone_number" id="phone-input" placeholder="Phone number" style="display: none;">
+                <input type="email" name="email" placeholder="E-mail address" required>
                 <input type="text" name="username" placeholder="Username" required>
                 <input type="password" name="password1" placeholder="Password" required>
                 <input type="password" name="password2" placeholder="Confirm Password" required>
@@ -113,64 +105,5 @@
             </form>
         </div>
     </div>
-
-    <script>
-<!--        document.addEventListener("DOMContentLoaded", function () {-->
-<!--            const emailTab = document.getElementById("email-tab");-->
-<!--            const phoneTab = document.getElementById("phone-tab");-->
-<!--            const emailInput = document.getElementById("email-input");-->
-<!--            const phoneInput = document.getElementById("phone-input");-->
-
-<!--            emailTab.addEventListener("click", function() {-->
-<!--                emailTab.classList.add("active");-->
-<!--                phoneTab.classList.remove("active");-->
-<!--                emailInput.style.display = "block";-->
-<!--                phoneInput.style.display = "none";-->
-<!--            });-->
-
-<!--            phoneTab.addEventListener("click", function() {-->
-<!--                phoneTab.classList.add("active");-->
-<!--                emailTab.classList.remove("active");-->
-<!--                phoneInput.style.display = "block";-->
-<!--                emailInput.style.display = "none";-->
-<!--            });-->
-<!--        });-->
-    document.addEventListener("DOMContentLoaded", function () {
-    const emailTab = document.getElementById("email-tab");
-    const phoneTab = document.getElementById("phone-tab");
-    const emailInput = document.getElementById("email-input");
-    const phoneInput = document.getElementById("phone-input");
-
-    function switchToEmail() {
-        emailTab.classList.add("active");
-        phoneTab.classList.remove("active");
-        emailInput.style.display = "block";
-        phoneInput.style.display = "none";
-
-        emailInput.required = true;
-        phoneInput.required = false;
-        phoneInput.value = "";  // Очищаем скрытое поле
-    }
-
-    function switchToPhone() {
-        phoneTab.classList.add("active");
-        emailTab.classList.remove("active");
-        phoneInput.style.display = "block";
-        emailInput.style.display = "none";
-
-        phoneInput.required = true;
-        emailInput.required = false;
-        emailInput.value = "";  // Очищаем скрытое поле
-    }
-
-    emailTab.addEventListener("click", switchToEmail);
-    phoneTab.addEventListener("click", switchToPhone);
-
-    // Установить email как обязательный по умолчанию
-    switchToEmail();
-});
-
-
-    </script>
 </body>
 </html>
