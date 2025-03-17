@@ -1,11 +1,11 @@
 import uuid
 from datetime import timedelta
-
+from django.contrib.auth.hashers import check_password
 from django.utils.timezone import now
-from . models import User, EmailVerification
 from django import forms
-from django.contrib.auth.forms import (AuthenticationForm, UserChangeForm,
-                                       UserCreationForm)
+from django.contrib.auth.forms import UserChangeForm, AuthenticationForm, UserCreationForm
+from .models import User, EmailVerification
+
 class UserLoginForm(AuthenticationForm):
     username = forms.CharField(widget=forms.TextInput(attrs={
         'class': 'form-control py-4',
@@ -15,6 +15,7 @@ class UserLoginForm(AuthenticationForm):
         'class': 'form-control py-4',
         'placeholder': 'Input the password'
     }))
+
     class Meta:
         model = User
         fields = ("username", "password")
@@ -23,36 +24,28 @@ class UserLoginForm(AuthenticationForm):
 class UserRegistrationForm(UserCreationForm):
     first_name = forms.CharField(widget=forms.TextInput(attrs={
         'class': 'form-control py-4',
-        'placeholder': 'Input the first_name:'
+        'placeholder': 'Input the first name:'
     }))
-
     last_name = forms.CharField(widget=forms.TextInput(attrs={
         'class': 'form-control py-4',
-        'placeholder': 'Input the last_name:'
+        'placeholder': 'Input the last name:'
     }))
-
     phone_number = forms.CharField(required=False, widget=forms.TextInput(attrs={
         'class': 'form-control',
-        'placeholder': 'Phone Number'},
-
-    ))
-
-
-    email = forms.CharField(required=False, widget=forms.EmailInput(attrs={
+        'placeholder': 'Phone Number'
+    }))
+    email = forms.EmailField(required=False, widget=forms.EmailInput(attrs={
         'class': 'form-control py-4',
         'placeholder': 'Input the email:'
     }))
-
     username = forms.CharField(widget=forms.TextInput(attrs={
         'class': 'form-control py-4',
         'placeholder': 'Input the username:'
     }))
-
     password1 = forms.CharField(widget=forms.PasswordInput(attrs={
         'class': 'form-control py-4',
         'placeholder': 'Input the password'
     }))
-
     password2 = forms.CharField(widget=forms.PasswordInput(attrs={
         'class': 'form-control py-4',
         'placeholder': 'Confirm the password'
@@ -63,19 +56,8 @@ class UserRegistrationForm(UserCreationForm):
         email = cleaned_data.get("email")
         phone_number = cleaned_data.get("phone_number")
 
-        # Преобразуем пустые строки в None
-        if email == "":
-            email = None
-        if phone_number == "":
-            phone_number = None
-
         if not email and not phone_number:
             raise forms.ValidationError("Either email or phone number must be provided.")
-
-        # Обновляем данные формы
-        cleaned_data["email"] = email
-        cleaned_data["phone_number"] = phone_number
-        print(cleaned_data)  # Добавь перед return
 
         return cleaned_data
 
@@ -84,33 +66,59 @@ class UserRegistrationForm(UserCreationForm):
         fields = ("first_name", "last_name", "phone_number", "email", "username", "password1", "password2")
 
     def save(self, commit=True):
-        user = super(UserRegistrationForm, self).save(commit=True)
+        user = super().save(commit=True)
         expiration = now() + timedelta(hours=48)
         record = EmailVerification.objects.create(code=uuid.uuid4(), user=user, expiration=expiration)
         record.send_verification_email()
         return user
 
 
-
 class ProfileForm(UserChangeForm):
+    delete_image = forms.BooleanField(
+        required=False, label="Удалить изображение"
+    )
+    old_password = forms.CharField(
+        widget=forms.PasswordInput(attrs={'class': 'form-control py-4'}),
+        required=False,
+        label="Старый пароль"
+    )
+    new_password = forms.CharField(
+        widget=forms.PasswordInput(attrs={'class': 'form-control py-4'}),
+        required=False,
+        label="Новый пароль"
+    )
+
     class Meta:
         model = User
-        fields = ("first_name", "last_name", "image", "username", "email")
+        fields = ("first_name", "last_name", "image", "delete_image", "username", "email")
 
-    first_name = forms.CharField(widget=forms.TextInput(attrs={
-        'class': 'form-control py-4',
-    }))
-    last_name = forms.CharField(widget=forms.TextInput(attrs={
-        'class': 'form-control py-4',
-    }))
-    email = forms.CharField(widget=forms.EmailInput(attrs={
-        'class': 'form-control py-4',
-        'readonly': 'True'
-    }))
-    username = forms.CharField(widget=forms.TextInput(attrs={
-        'class': 'form-control py-4',
-        'readonly': 'True'
-    }))
-    image = forms.ImageField(widget=forms.FileInput(attrs={
-        'class': 'custom-file-input'
-    }), required=False)
+    def clean(self):
+        cleaned_data = super().clean()
+        old_password = cleaned_data.get("old_password")
+        new_password = cleaned_data.get("new_password")
+
+        # Проверяем, если введён новый пароль, но не введён старый
+        if new_password and not old_password:
+            self.add_error("old_password", "Введите старый пароль перед сменой нового.")
+
+        # Проверка корректности старого пароля
+        if old_password and not check_password(old_password, self.instance.password):
+            self.add_error("old_password", "Старый пароль неверный.")
+
+        return cleaned_data
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+
+        # Удаление изображения, если выбрано
+        if self.cleaned_data.get("delete_image"):
+            user.image.delete(save=False)
+            user.image = None
+
+        # Изменение пароля, если он введён
+        if self.cleaned_data.get("new_password"):
+            user.set_password(self.cleaned_data["new_password"])
+
+        if commit:
+            user.save()
+        return user

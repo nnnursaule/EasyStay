@@ -50,16 +50,23 @@
             border: 1px solid #ccc;
             border-radius: 5px;
         }
+        .delete-btn {
+            background: red;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
     <section class="profile-container">
         <div class="profile-header">
-            <img src="img/profile.png" alt="Profile Picture" class="avatar">
+            <img id="profile-image" src="{% if user.image %}{{ user.image.url }}{% else %}{% static 'vendor/img/users/default_avatar.jpg' %}{% endif %}" alt="Profile Picture" class="avatar">
             <div class="profile-info">
-                <h2>Madina Shakman</h2>
-                <p>20 y.o, Student status in SDU University</p>
-                <p>Registration date: 20.01.2025</p>
+                <h2>{{ user.first_name }} {{ user.last_name }}</h2>
             </div>
         </div>
         <form action="{% url 'users:profile' user.id %}" method="POST" enctype="multipart/form-data">
@@ -75,6 +82,8 @@
             <div class="input-group">
                 {{ form.image }}
                 <label for="{{ form.image.id_for_label }}">Выберите изображение</label>
+                <input type="checkbox" name="delete_image" id="delete-image">
+                <label for="delete-image">Удалить изображение</label>
             </div>
             <div class="input-group">
                 <label for="{{ form.username.id_for_label }}">Имя пользователя</label>
@@ -83,6 +92,14 @@
             <div class="input-group">
                 <label for="{{ form.email.id_for_label }}">Адрес электронной почты</label>
                 {{ form.email }}
+            </div>
+            <div class="input-group">
+                <label for="old-password">Старый пароль</label>
+                <input type="password" id="old-password" name="old_password">
+            </div>
+            <div class="input-group">
+                <label for="new-password">Новый пароль</label>
+                <input type="password" id="new-password" name="new_password">
             </div>
             <div>
                 <input type="submit" value="Сохранить">

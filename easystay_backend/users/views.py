@@ -9,6 +9,7 @@ from django.views.generic.base import TemplateView
 from django.contrib.auth import get_user_model
 from . forms import UserRegistrationForm, UserLoginForm, ProfileForm
 from .models import  User, EmailVerification
+from django.contrib.auth.hashers import make_password
 class TitleMixin:
     title = None
 
@@ -72,5 +73,26 @@ class UserProfileView(UpdateView):
     template_name = 'users/profile.html'
     form_class = ProfileForm
 
+    def form_valid(self, form):
+        user = form.instance
+
+        # Удаление изображения, если отмечен чекбокс
+        if form.cleaned_data.get("delete_image"):
+            user.image.delete(save=False)
+            user.image = None
+
+        # Если введен новый пароль → хешируем его
+        new_password = form.cleaned_data.get("password")
+        if new_password:
+            user.password = make_password(new_password)
+
+        user.save()
+        return super().form_valid(form)
+
     def get_success_url(self):
         return reverse_lazy("users:profile", args=(self.object.id,))
+
+
+
+def base(request):
+    return render(request, "users/base.html")
