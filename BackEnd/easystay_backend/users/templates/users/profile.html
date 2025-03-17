@@ -1,29 +1,93 @@
 {% load static %}
-    <form action="{% url 'users:profile' user.id %}" method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    <div>
-        <label for="{{ form.first_name.id_for_label }}">Имя</label>
-        {{ form.first_name }}
-    </div>
-    <div>
-        <label for="{{ form.last_name.id_for_label }}">Фамилия</label>
-        {{ form.last_name }}
-    </div>
-    <div>
-        {{ form.image }}
-        <label for="{{ form.image.id_for_label }}">Выберите изображение</label>
-    </div>
-    <div>
-        <label for="{{ form.username.id_for_label }}">Имя пользователя</label>
-        {{ form.username }}
-    </div>
-    <div>
-        <label for="{{ form.email.id_for_label }}">Адрес электронной почты</label>
-        {{ form.email }}
-    </div>
-    <div>
-        <input type="submit" value="Сохранить">
-    </div>
-</form>
-
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <title>Profile Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .profile-container {
+            width: 50%;
+            margin: 40px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .profile-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-right: 15px;
+        }
+        .profile-form {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+        .input-group {
+            display: flex;
+            flex-direction: column;
+        }
+        .input-group label {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .input-group input {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <section class="profile-container">
+        <div class="profile-header">
+            <img src="img/profile.png" alt="Profile Picture" class="avatar">
+            <div class="profile-info">
+                <h2>Madina Shakman</h2>
+                <p>20 y.o, Student status in SDU University</p>
+                <p>Registration date: 20.01.2025</p>
+            </div>
+        </div>
+        <form action="{% url 'users:profile' user.id %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="input-group">
+                <label for="{{ form.first_name.id_for_label }}">Имя</label>
+                {{ form.first_name }}
+            </div>
+            <div class="input-group">
+                <label for="{{ form.last_name.id_for_label }}">Фамилия</label>
+                {{ form.last_name }}
+            </div>
+            <div class="input-group">
+                {{ form.image }}
+                <label for="{{ form.image.id_for_label }}">Выберите изображение</label>
+            </div>
+            <div class="input-group">
+                <label for="{{ form.username.id_for_label }}">Имя пользователя</label>
+                {{ form.username }}
+            </div>
+            <div class="input-group">
+                <label for="{{ form.email.id_for_label }}">Адрес электронной почты</label>
+                {{ form.email }}
+            </div>
+            <div>
+                <input type="submit" value="Сохранить">
+            </div>
+        </form>
+    </section>
+</body>
+</html>
