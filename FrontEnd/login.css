@@ -1,7 +1,9 @@
 body {
     font-family: Arial, sans-serif;
     text-align: center;
-    background-color: #111;
+    background-image: url(img/ex.png);
+    background-repeat: no-repeat;
+    background-size: cover;
     color: white;
 }
 
