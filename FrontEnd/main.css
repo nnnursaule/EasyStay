@@ -529,3 +529,442 @@ h1 {
 /* .cards { display: none; }
 .show { display: block; } */
 
+
+
+.faq {
+    max-width: 900px;
+    margin: 50px auto;
+    background: white;
+    padding: 40px;
+    border-radius: 10px;
+}
+
+.faq-item {
+    border-bottom: 1px solid #ccc;
+    padding: 25px 0;
+}
+
+.faq-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    padding: 15px 20px; 
+    font-size: 22px;
+}
+
+.faq-number {
+    font-size: 25px;
+    font-weight: bold;
+    color: #FF5A30;
+    margin-right: 10px;
+}
+
+.faq-header h3 {
+    font-size: 24px;
+    font-weight: bold;
+    flex: 1;
+}
+
+.faq-toggle {
+    background: #f5f5f5;
+    border: none;
+    font-size: 24px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.faq-toggle:hover {
+    background: #ddd;
+}
+
+.faq-content {
+    display: none;
+    padding: 20px;
+    font-size: 18px; 
+    color: #666;
+    line-height: 1.6;
+}
+
+.faq-item.active .faq-content {
+    display: block;
+}
+
+.faq-item.active .faq-toggle {
+    background: #000;
+    color: white;
+}
+
+.team-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 20px;
+    position: relative;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), 
+                url('img/team.png') center/cover no-repeat;
+    color: white;
+    padding: 100px 0;
+}
+
+.team-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 10px;
+    background-color: rgb(97, 93, 93); 
+    min-height: 10vh;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.section-header h2 {
+    color: white;
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.team-container {
+    display: flex;
+    gap: 40px;
+}
+
+.profile-card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.2);
+    overflow: hidden;
+    text-align: center;
+    width: 320px;
+    padding-bottom: 20px;
+}
+
+.profile-image {
+    background: white;
+    padding: 15px;
+}
+
+.profile-image img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.profile-content {
+    padding: 20px;
+}
+
+.profile-content p {
+    font-size: 15px;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.profile-content .name {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.hero-section {
+    position: relative;
+    width: 100%;
+    height: 300px; 
+    background: url('img/feedback.png') center/cover no-repeat; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6); 
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 80%;
+}
+
+.hero-content h2 {
+    color: white;
+    font-size: 26px;
+    font-weight: bold;
+    line-height: 1.4;
+}
+
+.review-section {
+    background: white;
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.review-section h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.review-form {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    max-width: 800px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+}
+
+.review-form input, .review-form button {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.review-form input {
+    width: 320px;
+    flex: 1;
+}
+
+.review-form button {
+    background: #FF5A30;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.review-form button:hover {
+    background: #FF5A30;
+}
+
+.form-container {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.footer {
+    background-color: #000815; 
+    color: #ddd;
+    font-size: 14px;
+    font-family: Ubuntu;
+  }
+  
+.footer-top,
+.footer-mid,
+.footer-bottom {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+  
+.footer-left {
+    flex: 1 1 400px;
+    margin-right: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+  
+.logo-and-icons {
+    display: flex;
+    align-items: center;
+    gap: 290px;  
+}
+  
+.footer-logo img {
+    width: 150px; 
+    height: auto;
+    display: block;
+    margin: 0;
+ }
+  
+.logo-icons {
+    display: flex;
+    gap: 20px;
+ }
+  
+.logo-icons a {
+    color: #c2bfbf;         
+    font-size: 20px;     
+    transition: color 0.3s;
+}
+  
+.logo-icons a:hover {
+    color: #ff5a30;      
+}
+  
+.footer-left .footer-logo img {
+    width: 120px;
+    height: auto;
+    display: block;
+    margin-bottom: 10px;
+    filter: invert(37%) sepia(85%) saturate(3291%) hue-rotate(354deg) brightness(100%) contrast(101%);
+}
+  
+.footer-description {
+    max-width: 610px;
+    text-align: left;      
+    margin: 0;             
+    padding: 0;        
+    line-height: 1.6;
+    font-size: 16px;
+}
+  
+.footer-right {
+    flex: 1 1 300px;
+}
+  
+.stay-in-touch {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px; 
+    margin-top: 20px;
+}
+  
+.stay-in-touch h2 {
+    margin: 0;
+    font-size: 24px;  
+    color: #fff;
+}
+  
+.subscribe-form {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+.subscribe-form input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #333;
+    border-radius: 4px;
+    background-color: #222;
+    color: #fff;
+}
+
+.subscribe-form input::placeholder {
+    color: #888;
+}
+
+.subscribe-form button {
+    background-color: #ff5a30;
+    border: none;
+    border-radius: 4px;
+    padding: 0 16px;
+    color: #fff;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.subscribe-form button:hover {
+    background-color: #e64a19;
+}
+  
+.subscribe-info {
+    margin-top: 20px;   
+    text-align: left;
+    font-size: 16px;
+    color: #aaa;
+}
+  
+.footer-mid {
+    display: flex;
+    justify-content: flex-start; 
+    gap: 100px; 
+}
+  
+.footer-col {
+    text-align: left;
+}
+ 
+.footer-col h3 {
+    margin-bottom: 10px; 
+    color: #fff; 
+}
+  
+.footer-col p {
+    margin: 5px 0; 
+    color: #888;
+    font-size: 16px; 
+}
+  
+.footer-col p span {
+    font-weight: bold; 
+    color: #ffffff;
+}
+
+.footer-col p a {
+    color: #888; 
+    text-decoration: none;
+}
+  
+.footer-col p a:hover {
+    text-decoration: underline; 
+}
+
+.footer-bottom {
+    margin-top: 10px;
+    padding-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+  
+.footer-bottom p {
+    margin: 0;
+    color: #888;
+    font-size: 13px;
+}
+  
+.go-top-group {
+    display: flex;
+    align-items: center;
+    gap: 10px; 
+}
+  
+.go-top-text {
+    font-size: 14px;
+    color: #fff;
+}
+  
+.go-top {
+    background-color: #ff5a30;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s;
+}
+  
+.go-top:hover {
+    background-color: #e64a19;
+}
+  
+.go-top i {
+    font-size: 16px;
+}
+  
