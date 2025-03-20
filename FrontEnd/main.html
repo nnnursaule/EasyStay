@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 </head>
 <body>
     <header>
@@ -26,7 +27,7 @@
                 <div class="right-nav">
                     <button class="landlord-btn">For a landlord</button>
 
-                    <div class="action-profile" onclick="menuToggle();">
+                    <div class="action-profile" onclick="menuProfile();">
                         <div class="profile-image"> 
                             <img src="img/photo.png" alt="EasyStay">                           
                         </div>
@@ -114,20 +115,15 @@
                             </svg>
                     </a>
                     <div class="language-container">
-                        <button id="languageButton" class="language-btn">
+                        <button id="languageButton" class="language-btn" onclick="">
                             <img src="img/translate.png">        
                         </button>
-                        <!-- <div id="languageDropdown" class="language-dropdown hidden">
-                            <a href="index.html" data-lang="en">
-                                English
-                            </a>
-                            <a href="index_kk.html" data-lang="kk">
-                                Қазақша
-                            </a>
-                            <a href="index_ru.html" data-lang="ru">
-                                Русский
-                            </a>
-                        </div> -->
+                        <div id="languageDropdown" class="language-dropdown hidden">
+                            <a href="main.html" data-lang="en">English</a>
+                            <a href="main_ru.html" data-lang="ru">Русский</a>
+                            <a href="main_kk.html" data-lang="kk">Қазақша</a>
+                        </div>
+                        
                     </div>
                 </div>
             </nav>
@@ -705,7 +701,197 @@
     </section>
 
     
+    <section id="faq" class="faq">
+        <div class="container">
+            <div class="faq-item active">
+                <div class="faq-header">
+                    <span class="faq-number">01</span>
+                    <h3>How do I register on the platform?</h3>
+                    <button class="faq-toggle">✖</button>
+                </div>
+                <div class="faq-content">
+                    <p>On the main page, click "Sign up". First, enter your address, password, first name and last name. Then, provide your phone number.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-header">
+                    <span class="faq-number">02</span>
+                    <h3>How do I add a rental ad?</h3>
+                    <button class="faq-toggle">+</button>
+                </div>
+                <div class="faq-content">
+                    <p>On the main page, click "Sign up". First, enter your address, password, first name and last name. Then, provide your phone number.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-header">
+                    <span class="faq-number">03</span>
+                    <h3>How do I recover y password if i forget it?</h3>
+                    <button class="faq-toggle">+</button>
+                </div>
+                <div class="faq-content">
+                    <p>Answer text.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-header">
+                    <span class="faq-number">04</span>
+                    <h3>If it possible to save ads to favorites?</h3>
+                    <button class="faq-toggle">+</button>
+                </div>
+                <div class="faq-content">
+                    <p>Answer text.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="team-section">
+        <div class="section-header">
+            <h2>What our clients are saying</h2>
+        </div>
     
+        <div class="team-container">
+            <div class="profile-card">
+                <div class="profile-image">
+                    <img src="img/cl1.png" alt="Team Member">
+                </div>
+                <div class="profile-content">
+                    <p>
+                        The house is very cozy, spacious rooms and good lighting. Inside is clean, furniture is new, neighbors are friendly!
+                    </p>
+                    <p class="name">Asem Anuarbek</p>
+                </div>
+            </div>
+    
+            <div class="profile-card">
+                <div class="profile-image">
+                    <img src="img/cl2.png" alt="Team Member">
+                </div>
+                <div class="profile-content">
+                    <p>
+                        The owner of the house is responsive, all issues are resolved quickly. The house is warm, with good sound insulation.
+                    </p>
+                    <p class="name">Bakyt Duman</p>
+                </div>
+            </div>
+    
+            <div class="profile-card">
+                <div class="profile-image">
+                    <img src="img/cl3.png" alt="Team Member">
+                </div>
+                <div class="profile-content">
+                    <p>
+                        Overall, a nice house, but the furniture is a bit old. But the price is nice!
+                    </p>
+                    <p class="name">Aliya Ospanova</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="hero-section">
+        <div class="overlay"></div> 
+        <div class="hero-content">
+            <h2>We only have the most comfortable <br> and safe housing near the university</h2>
+        </div>
+    </section>
+
+    <section class="review-section">
+        <h2>Leave feedback</h2>
+        <div class="form-container">
+            <form class="review-form">
+                <div class="form-column">
+                    <label for="name">Name</label>
+                    <input type="text" placeholder="Your name" name="name">
+                </div>
+                <div class="form-column">
+                    <label for="phone">Phone</label>
+                    <input type="text" placeholder="Your phone" name="phone">
+                </div>
+                <div class="form-column">
+                    <label for="message">Message</label>
+                    <input type="text" placeholder="Your message" name="message">
+                </div>
+                <button type="submit">SEND</button>
+            </form>
+        </div>
+    </section>
+
+
+    <footer class="footer">
+        <div class="footer-top">
+          <div class="footer-left">
+            <div class="logo-and-icons">
+                <div class="footer-logo">
+                  <img src="img/logo.png" alt="EASYSTAY" />
+                </div>
+                <div class="logo-icons">
+                  <a href="#" target="_blank"><i class="bi bi-whatsapp"></i></a>
+                  <a href="#" target="_blank"><i class="bi bi-messenger"></i></a>
+                  <a href="#" target="_blank"><i class="bi bi-facebook"></i></a>
+                  <a href="#" target="_blank"><i class="bi bi-twitter"></i></a>
+                  <a href="#" target="_blank"><i class="bi bi-youtube"></i></a>
+                </div>
+              </div>
+              
+            <p class="footer-description">
+              EasyStay is a modern solution for SDU students to find housing easily and safely. 
+              We create a convenient rental environment by providing up-to-date listings, 
+              search filters and the ability to communicate with landlords. 
+              Our main goal is to make the housing search process fast, transparent and convenient.
+            </p>
+          </div>
+    
+          <div class="footer-right">
+            <div class="stay-in-touch">
+                <h2>Let's stay in touch!</h2>
+            </div>
+            <form class="subscribe-form">
+              <input type="email" placeholder="Your email address" />
+              <button type="submit">Subscribe</button>
+            </form>
+            <p class="subscribe-info">
+                Register to learn more and receive the latest news from EasyStay.
+            </p>              
+          </div>
+        </div>
+        <div class="footer-mid">
+            <div class="footer-col">
+              <h3>HEAD OFFICE</h3>
+              <p><span>Address:</span> Ablyai Khan Avenue, 1/1</p>
+              <p><span>Call:</span> <a href="tel:+77273019565">+7 (727) 301-95-65</a></p>
+              <p><span>Email:</span> <a href="mailto:sdu.edu.kz">sdu.edu.kz</a></p>          
+            </div>
+            <div class="footer-col">
+              <h3>WHO WE ARE</h3>
+              <p>About Us</p>
+              <p>FAQ</p>
+              <p>Contacts</p>
+            </div>
+            <div class="footer-col">
+              <h3>OUR EXPERIENCE</h3>
+              <p>Services</p>
+              <p>Work</p>
+              <p>Interesting</p>
+            </div>
+          </div>
+          
+
+        <div class="footer-bottom">
+            <p>
+              © All rights reserved. Made with 
+              <i class="bi bi-heart-fill" style="color:red;"></i> by EASYSTAY
+            </p>
+            <div class="go-top-group">
+              <span class="go-top-text">GO TO TOP</span>
+              <button class="go-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">
+                <i class="bi bi-chevron-up"></i>
+              </button>
+            </div>
+          </div>
+          
+      </footer>
 
 
 
@@ -713,8 +899,7 @@
 
 
 
-
-    <script>
+    <!-- <script>
         document.querySelectorAll(".heart-icon").forEach(heart => {
             heart.addEventListener("click", function() {
                 heart.classList.toggle('active');
@@ -726,23 +911,25 @@
             toggleMenu.classList.toggle("active");
       }
 
-      function viewCard(evt, card) {
+      function viewCard(evt, cityName) {
 
-            var i, cardcontent, links;
-            cardcontent = document.getElementsByClassName("cards");
-            for (i = 0; i < cardcontent.length; i++) {
-                cardcontent[i].style.display = "none";
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("cards");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
             }
-            links = document.getElementsByClassName("link-2");
-            for (i = 0; i < links.length; i++) {
-                links[i].className = links[i].className.replace(" active", "");
+            tablinks = document.getElementsByClassName("link-2");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
             }
-            document.getElementById(card).style.display = "grid";
+            document.getElementById(cityName).style.display = "grid";
             evt.currentTarget.className += " active";
         }
 
         document.getElementById("defaultLink").click();
-    </script>
+    </script> -->
+    <script src="main.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
 
