@@ -9,6 +9,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  max-width: 100%;
 }
 body {
   font-family: Poppins;
@@ -21,6 +22,7 @@ body {
   padding: 10px 20px;
   background-color: #fff;
   border-bottom: 1px solid #ddd;
+  width: 100%;
 }
 .logo {
   font-size: 1.5rem;
@@ -238,29 +240,19 @@ body {
   display: block;
   margin-top: 10px;
   text-decoration: none;
-  color: #007bff;
-  font-weight: bold;
+  color: #000000;
+ 
 }
 
 .favorites-section {
   margin-top: 20px;
   padding: 10px;
   margin-left: 170px;
-}
-
-.filter-buttons {
-  display: flex;
-  gap: 10px;
   margin-bottom: 30px;
 }
 
-.filter-dropdown {
-  padding: 8px 12px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  font-size: 14px;
-  background: #fff;
-  cursor: pointer;
+.favorites-section h3 {
+    margin-bottom: 15px; 
 }
 
 .favorites-container {
@@ -552,7 +544,7 @@ footer {
   <header class="top-nav">
     <div class="logo">EASYSTAY</div>
     <div class="nav-icons">
-      <img src="img/profile.png" alt="Аватар" class="nav-ava">
+      <img src="img/landlord.ava.png" alt="Аватар" class="nav-ava">
       <i class="bi bi-heart"></i>
       <i class="bi bi-globe"></i>
     </div>
@@ -561,11 +553,11 @@ footer {
   <section class="hero-section">
     <img src="img/profileback.png" alt="Header Background" class="hero-bg" />
 
-    <img src="img/profile.png" alt="User Avatar" class="avatar" />
+    <img src="img/landlord.ava.png" alt="User Avatar" class="avatar" />
     <p class="profile-text">
-      <span class="profile-name"><strong>Madina Shakman</strong></span><br>
-      <span class="profile-info">1 month in EasyStay</span><br>
-      <span class="profile-date">Registration date: 20.01.2025</span><br>
+      <span class="profile-name"><strong>Kelly</strong></span><br>
+      <span class="profile-info">1 year in EasyStay</span><br>
+      <span class="profile-date">Registration date: 20.01.2024</span><br>
       <span class="profile-number">Phone number: 87024567895</span>
     </p>
   </section>
@@ -576,26 +568,27 @@ footer {
 </div>
 
 <div class="profile-about">
-  <h3>More about Me</h3>
+  <h3>More about Kelly</h3>
   <div class="about-box">
-      <p>Hi, I'm Madina!<br>Looking for a roommate.<br>Non-conflict, clean, decent, no bad habits.</p>
+      <p>Hello! My name is Kelly, and I am a property owner. I have been renting out housing for1 year and always try to create comfortable conditions for tenants.
+        It is important to me that tenants feel comfortable and safe, so I monitor the condition of the apartment, promptly resolve household issues and adhere to fair rental conditions. The apartment is located in a convenient area with developed infrastructure - there is [university, shops, transport] nearby, which makes it an excellent option for students and young professionals.
+       I am looking for decent tenants who will take good care of the housing and keep the agreements. I am always ready to discuss details and answer questions. If you are interested in my offer, I will be happy to contact you!</p>
   </div>
 </div>
 
 <section class="reviews-section">
-  <h3>Madina: my reviews</h3>
+  <h3>Kelly: user reviews</h3>
   <div class="reviews-container">
     <div class="review-card">
       <p>...A beautiful night in this quaint home. The lift is excellent, the garden is spacious. 
          The bed is comfortable, the kitchen is fully functional. Do it again... to recharge your batteries and...</p>
       <div class="review-footer">
-        <img src="img/profile.png" alt="Madina" class="review-avatar">
+        <img src="img/review1.png" alt="Author" class="review-avatar">
         <div class="review-info">
-          <strong>Madina</strong>
+          <strong>Damien</strong>
           <span>February 2025</span>
         </div>
         <div class="review-actions">
-          <i class="bi bi-pencil edit-icon"></i>
           <i class="bi bi-trash delete-icon" onclick="window.location.href='delete.html'" style="cursor: pointer;"></i>
         </div>
       </div>
@@ -605,38 +598,23 @@ footer {
       <p>...The accommodation was excellent location and cleanliness, the host was amazing and friendly, 
          he was so welcoming and helpful that we felt right at home... Big...</p>
       <div class="review-footer">
-        <img src="img/profile.png" alt="Madina" class="review-avatar">
+        <img src="img/review2.png" alt="Author" class="review-avatar">
         <div class="review-info">
-          <strong>Madina</strong>
+          <strong>Muath</strong>
           <span>January 2025</span>
         </div>
         <div class="review-actions">
-          <i class="bi bi-pencil edit-icon"></i>
-          <i class="bi bi-trash delete-icon"></i>
+          <i class="bi bi-trash delete-icon" onclick="window.location.href='delete.html'" style="cursor: pointer;"></i>
         </div>
       </div>
     </div>
   </div>
-  <a href="#" class="show-reviews">Show all reviews (2)</a>
+  <a href="#" class="show-reviews">Show all reviews (28)</a>
 </section>
 
 <section class="favorites-section">
-  <h3>Madina: all favourites</h3>
-  
-  <div class="filter-buttons">
-    <select class="filter-dropdown">
-      <option>Date</option>
-      <option>Price</option>
-      <option>Popularity</option>
-    </select>
-    
-    <select class="filter-dropdown">
-      <option>New / Old</option>
-      <option>Old / New</option>
-    </select>
-  </div>
-
-  <div class="favorites-container">
+  <h3>Kelly: all favourites</h3>
+    <div class="favorites-container">
     <div class="favorite-card">
       <div class="favorite-image">
         <img src="img/1.png" alt="Exclusive Opera">
@@ -647,6 +625,17 @@ footer {
         <span>250k a месяц</span>
       </div>
     </div>
+     <!-- 2-ші карточка -->
+     <div class="favorite-card">
+        <div class="favorite-image">
+          <img src="img/2.png" alt="Luxury Apartment">
+          <span class="heart-icon" data-id="2">🤍</span>
+        </div>
+        <div class="favorite-info">
+          <h4>Luxury Apartment</h4>
+          <span>300k a месяц</span>
+        </div>
+      </div>
   </div>
 </section>
 
