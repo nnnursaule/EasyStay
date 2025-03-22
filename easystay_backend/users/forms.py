@@ -1,4 +1,4 @@
-import uuid
+import uuid, random
 from datetime import timedelta
 from django.contrib.auth.hashers import check_password
 from django.utils.timezone import now
@@ -22,6 +22,17 @@ class UserLoginForm(AuthenticationForm):
 
 
 class UserRegistrationForm(UserCreationForm):
+    ROLE_CHOICES = [
+        (False, 'Студент'),
+        (True, 'Арендодатель')
+    ]
+
+    role_choice = forms.ChoiceField(
+        choices=ROLE_CHOICES,
+        widget=forms.RadioSelect(),
+        label="Выберите роль"
+    )
+
     first_name = forms.CharField(widget=forms.TextInput(attrs={
         'class': 'form-control py-4',
         'placeholder': 'Input the first name:'
@@ -66,10 +77,16 @@ class UserRegistrationForm(UserCreationForm):
         fields = ("first_name", "last_name", "phone_number", "email", "username", "password1", "password2")
 
     def save(self, commit=True):
-        user = super().save(commit=True)
-        expiration = now() + timedelta(hours=48)
-        record = EmailVerification.objects.create(code=uuid.uuid4(), user=user, expiration=expiration)
-        record.send_verification_email()
+        user = super().save(commit=False)
+        user.is_landlord = self.cleaned_data['role_choice'] == 'True'  # Определяем роль пользователя
+
+        if commit:
+            user.save()
+            expiration = now() + timedelta(hours=48)
+            code = str(random.randint(1000, 9999))
+            record = EmailVerification.objects.create(code=code, user=user, expiration=expiration)
+            record.send_verification_email()
+
         return user
 
 
@@ -122,3 +139,10 @@ class ProfileForm(UserChangeForm):
         if commit:
             user.save()
         return user
+
+
+class VerificationCodeForm(forms.Form):
+    digit1 = forms.CharField(max_length=1, required=True)
+    digit2 = forms.CharField(max_length=1, required=True)
+    digit3 = forms.CharField(max_length=1, required=True)
+    digit4 = forms.CharField(max_length=1, required=True)
