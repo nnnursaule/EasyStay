@@ -183,3 +183,4 @@ SESSION_COOKIE_SECURE = False  # Для локальной разработки,
 
 ADMIN_SESSION_COOKIE_NAME = "sessionid_admin"
 
+MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'

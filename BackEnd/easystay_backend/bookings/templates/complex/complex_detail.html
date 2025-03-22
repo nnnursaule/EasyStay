@@ -1,0 +1,25 @@
+{% extends "bookings/base.html" %}
+
+{% block content %}
+  <h1>{{ complex.name }}</h1>
+  <img src="{{ complex.image.url }}" alt="{{ complex.name }}" width="500">
+  <p><strong>Адрес:</strong> {{ complex.address }}</p>
+  <p><strong>Город:</strong> {{ complex.city }}</p>
+  <p><strong>Описание:</strong> {{ complex.description }}</p>
+  <p><strong>Год постройки:</strong> {{ complex.built_year }}</p>
+  <p><strong>Застройщик:</strong> {{ complex.developer }}</p>
+  <p><strong>Парковка:</strong> {% if complex.parking %}Есть{% else %}Нет{% endif %}</p>
+
+  <h2>Квартиры в этом ЖК</h2>
+  {% for apartment in complex.apartments.all %}
+    <div>
+      <h3>{{ apartment.title }}</h3>
+      <p>Комнат: {{ apartment.rooms }}</p>
+      <p>Площадь: {{ apartment.area }} м²</p>
+      <p>Цена за месяц: {{ apartment.price_per_month }} ₸</p>
+      <a href="#">Подробнее</a>
+    </div>
+  {% empty %}
+    <p>В этом ЖК пока нет квартир.</p>
+  {% endfor %}
+{% endblock %}
