@@ -52,27 +52,28 @@ p {
     margin-bottom: 20px;
 }
 
-input {
+input, button {
     width: 100%;
     padding: 12px;
     margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 20px;
-    text-align: center;
     font-size: 14px;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+input {
+    border-radius: 5px; 
 }
 
 button {
-    width: 100%;
-    padding: 12px;
-    border: none;
-    border-radius: 20px;
+    border-radius: 5px; 
     cursor: not-allowed;
     background: #ff5722;
     color: white;
     font-size: 16px;
     opacity: 0.5;
     transition: 0.3s;
+    border: none;
 }
 
 button:enabled {
@@ -82,18 +83,19 @@ button:enabled {
 
 .right {
     flex: 1;
-    background: url('forget.png') center/cover no-repeat;
+    background: url('img/forget.jpg') center/cover no-repeat;
     position: relative;
 }
 
 .login-btn {
     position: absolute;
-    top: 15px;
-    right: 0px;
+    bottom: 20px;
+    right: 30px;
     background: #ff5722;
     border: none;
-    padding: 10px 20px;
-    border-radius: 20px;
+    width: 100px;
+    height: 40px;
+    border-radius: 5px;
     color: white;
     font-size: 14px;
     cursor: pointer;

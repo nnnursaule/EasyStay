@@ -6,7 +6,10 @@
     <title>Modal Form</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: Arial, sans-serif; 
+            background-image: url(img/ex.png);
+            background-repeat: no-repeat;
+            background-size: cover; 
             background-color: rgba(0, 0, 0, 0.7);
             display: flex;
             justify-content: center;
@@ -141,8 +144,6 @@
             alert("Please select gender and enter date of birth.");
             return;
         }
-
-        alert(`Gender: ${selectedGender}\nDate of Birth: ${dob}`);
         window.location.href = "signup.html"; 
     }
 </script>

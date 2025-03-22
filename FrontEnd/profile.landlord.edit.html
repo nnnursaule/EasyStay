@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Profile Page</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" />
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: Poppins;
+  background-color: #f7f7f7;
+}
+.top-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #fff;
+  border-bottom: 1px solid #ddd;
+}
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #fa6400;
+}
+.nav-icons i {
+  margin-left: 15px;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.hero-section {
+  position: relative;
+  width: 100%;
+  height: 220px;
+  overflow: visible;
+  background-color: #333;
+}
+.hero-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+.avatar {
+  position: absolute;
+  bottom: -120px; 
+  left: 10%; 
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  object-fit: cover;
+  z-index: 2;
+}
+
+.profile-text {
+  position: absolute;
+  bottom: -110px;
+  left: calc(10% + 200px); 
+  z-index: 2;
+  font-family: Ubuntu;
+  color: #000000;
+  font-size: 16px;
+  line-height: 1.4;
+}
+.profile-name {
+  font-weight: bold;
+  font-size: 1.4rem;
+}
+.profile-info {
+  font-size: 1rem;
+  font-family: Ubuntu;
+  color: #666;
+}
+.profile-date {
+  font-size: 0.9rem;
+  font-family: Ubuntu;
+  color: #666;
+}
+
+.view-profile-btn {
+  position: absolute;
+  bottom: -60px;
+  right: 10%;
+  padding: 8px 16px;
+  background-color: #fa6400;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.form-section {
+  margin: 140px auto 40px;
+  width: 90%;
+  max-width: 1200px;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+.profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group select {
+  padding: 10px;
+  border: 1px solid #fc0000;
+  border-radius: 4px;
+  font-size: 16px;
+  width: 100%;
+}
+.form-row {
+  display: flex;
+  flex-wrap: wrap; 
+  gap: 20px;
+  margin-bottom: 20px; 
+}
+
+.form-group {
+  flex: 1; 
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.form-group input {
+  padding: 10px;
+  border: 1px solid #b9b9b9;
+  border-radius: 4px;
+}
+
+.contact-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  max-width: 1000px; 
+  margin: 0 auto;
+  margin: 0; 
+  margin-left: 2; 
+}
+
+.email-block {
+  flex: 1;
+}
+
+.info-block {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-left: 170px;
+}
+
+
+.email-block label {
+  font-weight: 600;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.email-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 10px 0;
+}
+
+.email-option {
+  display: flex;
+  align-items:start;
+  align-items: center; 
+  gap: 10px;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.email-option:hover {
+  background-color: #f9f9f9;
+}
+
+.email-option input[type="radio"] {
+  accent-color: #fa6400;
+}
+.email-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.email-text {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.email-last-used {
+  font-size: 12px;
+  color: #666;
+}
+.add-email-btn {
+  margin-top: 10px;
+  padding: 8px 16px;
+  background-color: #fa6400;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  align-self: flex-start;
+}
+
+.input-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-container i {
+    position: absolute;
+    left: 10px;
+    color: #747474;
+    font-size: 16px;
+}
+
+.input-container input {
+    width: 100%;
+    padding-left: 30px; 
+    padding-right: 10px;
+    height: 35px;
+    box-sizing: border-box;
+}
+
+.password-row .form-group {
+  position: relative;
+}
+
+.password-input {
+  position: relative;
+}
+
+.password-input input {
+  width: 100%;
+  padding-right: 40px; 
+}
+
+
+.toggle-password {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #999;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.reset-btn,
+.save-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.reset-btn {
+  background-color: #ddd;
+}
+
+.save-btn {
+  background-color: #fa6400;
+  color: #fff;
+}
+
+
+</style>
+</head>
+<body>
+  <!-- Navifation -->
+  <header class="top-nav">
+    <div class="logo">EASYSTAY</div>
+    <div class="nav-icons">
+      <i class="bi bi-heart"></i>
+      <i class="bi bi-globe"></i>
+      <i class="bi bi-person"></i>
+    </div>
+  </header>
+
+  <section class="hero-section">
+    <img src="img/profileback.png" alt="Header Background" class="hero-bg" />
+
+    <img src="img/landlord.ava.png" alt="User Avatar" class="avatar" />
+    <p class="profile-text">
+      <span class="profile-name"><strong>Kelly</strong></span><br>
+      <span class="profile-info">32 y.o, Landlord in Almaty</span><br>
+      <span class="profile-date">Registration date: 20.01.2024</span>
+    </p>
+
+    <button class="view-profile-btn">View profile</button>
+  </section>
+
+  <section class="form-section">
+    <form class="profile-form">
+      <!-- Names -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="firstName">Full Name</label>
+          <input type="text" id="firstName" placeholder="Your first name" />
+        </div>
+        <div class="form-group">
+          <label for="lastName">Last Name</label>
+          <input type="text" id="lastName" placeholder="Your last name" />
+        </div>
+      </div>
+
+      <!-- Gender date -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="gender">Gender</label>
+          <input type="text" id="gender" placeholder="Gender" />
+        </div>
+        <div class="form-group">
+          <label for="dob">Date of birth</label>
+          <input type="date" id="dob" />
+        </div>
+      </div>
+
+      <!-- Phone numner location -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="phone">Phone number</label>
+          <input type="tel" id="phone" placeholder="Enter your phone number" />
+        </div>
+        <div class="form-group">
+          <label for="location">Occupation</label>
+          <input type="text" id="occupation" placeholder="Occupation" />
+        </div>
+      </div>
+
+      <div class="contact-container">
+        <!-- Email блок -->
+            <div class="form-group email-block">
+                <label>My Email Address</label>
+                <div class="email-options">
+                  <label class="email-option">
+                    <input type="radio" name="email" value="olexarowles@gmail.com" />
+                    <span>kellyraweles@gmail.com</span>
+                  </label>
+                  <small class="email-last-used">Last used: 1 month ago</small>
+                </div>
+                <button type="button" class="add-email-btn">+ Add Email Address</button>
+              </div>
+              <div class="info-block">
+                <div class="form-group">
+                  <label for="location">Location</label>
+                  <div class="input-container">
+                    <i class="bi bi-geo-alt"></i>
+                    <input type="text" id="location" placeholder="" />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="timeZone">Time Zone</label>
+                  <div class="input-container">
+                    <i class="bi bi-clock"></i>
+                    <input type="text" id="timeZone" placeholder="" />
+                  </div>
+                </div>
+              </div>
+            
+          </div>
+        </div>
+       
+    
+      <div class="form-row password-row">
+        <div class="form-group">
+          <label for="currentPassword">Current Password</label> 
+          <div class="password-input">
+            <input type="password" id="currentPassword" placeholder="">
+            <i class="bi bi-eye-slash toggle-password"></i>
+          </div>
+        </div>
+      
+        <!-- New Password -->
+        <div class="form-group"> 
+          <label for="newPassword">New Password</label>
+          <div class="password-input">
+            <input type="password" id="newPassword" placeholder="">
+            <i class="bi bi-eye-slash toggle-password"></i>
+          </div>
+        </div>
+      
+        <!-- Confirm New Password -->
+        <div class="form-group"> 
+          <label for="confirmPassword">Confirm New Password</label>
+          <div class="password-input">
+            <input type="password" id="confirmPassword" placeholder="">
+            <i class="bi bi-eye-slash toggle-password"></i>
+          </div>
+      </div>
+      
+      <div class="form-actions">
+        <button type="reset" class="reset-btn">Reset</button>
+        <button type="submit" class="save-btn">Save Changes</button>
+      </div>
+    </form>
+  </section>
+  <script>
+    document.querySelectorAll('.toggle-password').forEach(icon => {
+      icon.addEventListener('click', () => {
+        const input = icon.previousElementSibling;
+        if (input.type === 'password') {
+          input.type = 'text';
+          icon.classList.remove('bi-eye-slash');
+          icon.classList.add('bi-eye');
+        } else {
+          input.type = 'password';
+          icon.classList.remove('bi-eye');
+          icon.classList.add('bi-eye-slash');
+        }
+      });
+    });
+  </script>
+  
+</body>
+</html>
