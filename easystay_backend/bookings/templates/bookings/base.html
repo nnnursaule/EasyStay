@@ -22,7 +22,11 @@
                 <li><a href="#faq">FAQ</a></li>
                 {% if user.is_authenticated %}
                 <li><a href="{% url 'users:logout' %}">Logout</a></li>
-                <li><a href="{% url 'users:profile' user.id %}">Profile</a></li>
+                    {% if user.is_landlord %}
+                        <li><a href="{% url 'users:landlord_profile' user.id %}">Profile</a></li>
+                    {% else %}
+                        <li><a href="{% url 'users:tenant_profile' user.id %}">Profile</a></li>
+                    {% endif %}
                 {% else %}
                 <li><a href="{% url 'users:login' %}">Log in</a></li>
                 <li><a href="{% url 'users:registration' %}">Sign up</a></li>
@@ -30,11 +34,11 @@
             </ul>
             {% if user.is_landlord %}
                 <button class="landlord-btn">
-                    <a href="{% url 'booking:apartment_management' %}">
+                    <a href="#">
                         For a landlord
                     </a>
                 </button>
-                <a href="{% url 'booking:apartment_management' %}" class="heart-btn">
+                <a href="#" class="heart-btn">
                     <i class="fa fa-heart"></i>
                 </a>
             {% endif %}

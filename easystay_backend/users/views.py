@@ -2,7 +2,7 @@ from django.contrib import auth, messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView
 from django.contrib.messages.views import SuccessMessageMixin
-from django.shortcuts import HttpResponseRedirect, redirect, render
+from django.shortcuts import HttpResponseRedirect, redirect, render, get_object_or_404
 from django.urls import reverse, reverse_lazy
 from django.views.generic import CreateView, UpdateView
 from django.views.generic.base import TemplateView
@@ -12,6 +12,7 @@ from .models import  User, EmailVerification
 from django.contrib.auth.hashers import make_password
 from django.utils.timezone import now
 from datetime import timedelta
+from bookings.models import Review, Apartment
 import random
 
 
@@ -149,3 +150,27 @@ class UserProfileView(UpdateView):
 
 def base(request):
     return render(request, "users/email_verification.html")
+
+
+def landlord_reviews(request, pk):
+    landlord = get_object_or_404(User, id=pk, is_landlord=True)
+    apartments = Apartment.objects.filter(landlord=landlord)
+    reviews = Review.objects.filter(apartment__in=apartments).select_related("author")
+
+    return render(request, "profile/profile_landlord.html", {
+        "user": landlord,
+        "reviews": reviews,
+        "apartments": apartments,
+    })
+
+
+def tenant_reviews(request, pk):
+    tenant = get_object_or_404(User, id=pk, is_landlord=False)
+    reviews = Review.objects.filter(author=tenant).select_related("apartment")
+    apartments = tenant.favourites.all()
+    print(apartments)
+    return render(request, "profile/profile_tenant.html", {
+        "user": tenant,
+        "reviews": reviews,
+        "apartments": apartments,
+    })
