@@ -7,14 +7,18 @@ from django.utils.timezone import now
 import random
 from datetime import timedelta
 
+
 class User(AbstractUser):
     email = models.EmailField(unique=True)
     image = models.ImageField(upload_to='users_images', null=True, blank=True)
     is_landlord = models.BooleanField(default=False)  # Арендодатель или студент
     phone_number = models.CharField(max_length=15, unique=True, blank=True, null=True)
     is_verified = models.BooleanField(default=False)
+    date_joined = models.DateTimeField(null=True, auto_now_add=True)
 
-
+    about = models.TextField(blank=True, null=True)  # Описание арендатора
+    favourites = models.ManyToManyField('bookings.Apartment', related_name='favourited_by', blank=True)  # Избранное
+    experience = models.IntegerField(default=0, null=True)
     def __str__(self):
         return self.email
 
