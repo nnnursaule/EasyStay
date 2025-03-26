@@ -1,0 +1,80 @@
+
+{% extends 'bookings/base.html' %}
+
+{% block title %}Home - Easystay{% endblock %}
+
+{% block content %}
+    <section class="hero">
+        <div class="overlay"></div>
+        <h1>Platform for SDU students where renting is made <span class="highlight">EASY!</span></h1>
+        <div class="search-bar">
+            <input type="text" placeholder="Search by regions, residential complex">
+            <button class="search-btn">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+    </section>
+    <section class="about-us">
+        <div class="container">
+          <h2>About us</h2>
+          <div class="about-content">
+
+            <div class="left-cards">
+              <!-- Safety -->
+              <div class="about-card">
+                <div class="card-icon">
+                  <i class="bi bi-bricks" style="font-size: 2rem; color: #fa6400;"></i>
+                </div>
+                <h3>Safety</h3>
+              </div>
+              <!-- Affordable prices -->
+              <div class="about-card">
+                <div class="card-icon">
+                  <i class="bi bi-wallet2" style="font-size: 2rem; color: #fa6400;"></i>
+                </div>
+                <h3>Affordable prices</h3>
+              </div>
+              <!-- Convenience -->
+              <div class="about-card convenience">
+                <div class="card-overlay">
+                  <div class="card-icon">
+                    <i class="bi bi-house-door" style="font-size: 2rem; color: #fff;"></i>
+                  </div>
+                  <h3>Convenience</h3>
+                </div>
+              </div>
+            </div>
+
+            <div class="right-video">
+              <div class="video-content">
+                <iframe
+                        src="https://www.youtube.com/embed/Wvm77W0FcLw"
+                        title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                        </iframe>
+               </div>
+            </div>
+        </div>
+      </section>
+    <section class="announcements">
+        <h2>More announcements</h2>
+        {% for complex in complexes %}
+            <div class="cards-container">
+                <div class="card">
+                    <img src="{{ complex.image.url }}" alt="Apartment">
+                    <div class="card-info">
+                        <h3>{{ complex.name }}</h3>
+                        <p>{{ complex.city }}</p>
+                    </div>
+                    <div class="card-hover">
+                        <p>{{ complex.description }}</p>
+                        <a href="{% url 'booking:complex_detail' complex.id %}" class="view-project">VIEW PROJECT</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </section>
+
+
+{% endblock %}

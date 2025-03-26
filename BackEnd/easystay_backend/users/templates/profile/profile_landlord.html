@@ -1,0 +1,718 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Profile Page</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" />
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  max-width: 100%;
+}
+body {
+  font-family: Poppins;
+  background-color: #f7f7f7;
+}
+.top-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #fff;
+  border-bottom: 1px solid #ddd;
+  width: 100%;
+}
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #fa6400;
+}
+
+.nav-icons {
+    display: flex;
+    align-items: center;
+}
+
+.nav-icons i {
+  margin-left: 15px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.nav-ava {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-left: 15px;
+    cursor: pointer;
+}
+
+.hero-section {
+  position: relative;
+  width: 100%;
+  height: 220px;
+  overflow: visible;
+  background-color: #333;
+}
+.hero-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1500px;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+.avatar {
+  position: absolute;
+  bottom: -120px;
+  left: 10%;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  object-fit: cover;
+  z-index: 2;
+}
+
+.profile-text {
+  position: absolute;
+  bottom: -110px;
+  left: calc(10% + 200px);
+  z-index: 2;
+  font-family: Ubuntu;
+  color: #000000;
+  font-size: 16px;
+  line-height: 1.4;
+}
+.profile-name {
+  font-weight: bold;
+  font-size: 1.4rem;
+}
+.profile-info {
+  font-size: 1rem;
+  font-family: Ubuntu;
+  color: #666;
+}
+.profile-date {
+  font-size: 0.9rem;
+  font-family: Ubuntu;
+  color: #666;
+}
+
+.profile-number {
+  font-size: 0.9rem;
+  font-family: Ubuntu;
+  color: #666;
+
+}
+
+.profile-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 20px;
+  margin-right: 270px;
+  margin-top: 30px;
+}
+
+.report-profile {
+  font-size: 0.9rem;
+  color: #666;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+
+.report-profile i {
+  margin-right: 5px;
+}
+
+.edit-profile {
+  background-color: #fa6400;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  font-size: 0.9rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.edit-profile:hover {
+  background-color: #d85400;
+}
+
+
+.view-profile-btn {
+  position: absolute;
+  bottom: -60px;
+  right: 10%;
+  padding: 8px 16px;
+  background-color: #fa6400;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.profile-about {
+    margin-top: 50px;
+    margin-left: 172px;
+    width: 100%;
+}
+
+.profile-about h3 {
+  margin-bottom: 15px;
+}
+
+.about-box {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 8px;
+  font-size: 1rem;
+  color: #333;
+  height: 150px;
+  max-width: 1050px;
+
+}
+.reviews-section {
+  margin-top: 20px;
+  padding: 10px;
+  margin-left: 170px;
+}
+.reviews-section h3 {
+  margin-bottom: 15px;
+}
+
+.reviews-container {
+  display: flex;
+  gap: 15px;
+}
+
+.review-card {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  width: 320px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.review-footer {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  gap: 5px;
+}
+
+.review-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+
+.review-info {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.9rem;
+  color: #333;
+  margin-right: auto;
+}
+
+.review-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.edit-icon, .delete-icon {
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: #666;
+}
+
+.show-reviews {
+  display: block;
+  margin-top: 10px;
+  text-decoration: none;
+  color: #000000;
+
+}
+
+.favorites-section {
+  margin-top: 20px;
+  padding: 10px;
+  margin-left: 170px;
+  margin-bottom: 30px;
+}
+
+.favorites-section h3 {
+    margin-bottom: 15px;
+}
+
+.favorites-container {
+  display: flex;
+  gap: 15px;
+}
+
+.favorite-card {
+  width: 250px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.favorite-image {
+  position: relative;
+  width: 100%;
+  height: 250px;
+}
+
+.favorite-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.heart-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 20px;
+  transition: transform 0.2s ease-in-out;
+}
+.heart-icon.active {
+  color: red;
+  transform: scale(1.2);
+}
+
+.favorite-info {
+  padding: 10px;
+  text-align: center;
+}
+
+.favorite-info h4 {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.favorite-info span {
+  font-size: 14px;
+  color: #666;
+}
+
+footer {
+    background-color: #000815;
+    color: #ddd;
+    font-size: 14px;
+    font-family: Ubuntu;
+  }
+
+  .footer-top,
+  .footer-mid,
+  .footer-bottom {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .footer-left {
+    flex: 1 1 400px;
+    margin-right: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .logo-and-icons {
+    display: flex;
+    align-items: center;
+    gap: 290px;
+  }
+
+  .footer-logo img {
+    width: 150px;
+    height: auto;
+    display: block;
+    margin: 0;
+  }
+
+  .logo-icons {
+    display: flex;
+    gap: 20px;
+  }
+
+  .logo-icons a {
+    color: #c2bfbf;
+    font-size: 20px;
+    transition: color 0.3s;
+  }
+
+  .logo-icons a:hover {
+    color: #ff5a30;
+  }
+
+
+  .footer-left .footer-logo img {
+    width: 120px;
+    height: auto;
+    display: block;
+    margin-bottom: 10px;
+    filter: invert(37%) sepia(85%) saturate(3291%) hue-rotate(354deg) brightness(100%) contrast(101%);
+
+  }
+
+  .footer-description {
+    max-width: 610px;
+    text-align: left;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    font-size: 16px;
+  }
+
+  .footer-right {
+    flex: 1 1 300px;
+  }
+
+  .stay-in-touch {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    margin-top: 20px;
+  }
+
+  .stay-in-touch h2 {
+    margin: 0;
+    font-size: 24px;
+    color: #fff;
+  }
+
+  .subscribe-form {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  .subscribe-form input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #333;
+    border-radius: 4px;
+    background-color: #222;
+    color: #fff;
+  }
+  .subscribe-form input::placeholder {
+    color: #888;
+  }
+  .subscribe-form button {
+    background-color: #ff5a30;
+    border: none;
+    border-radius: 4px;
+    padding: 0 16px;
+    color: #fff;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  .subscribe-form button:hover {
+    background-color: #e64a19;
+  }
+
+  .subscribe-info {
+    margin-top: 20px;
+    text-align: left;
+    font-size: 16px;
+    color: #aaa;
+  }
+
+  .footer-mid {
+    display: flex;
+    justify-content: flex-start;
+    gap: 100px;
+  }
+
+  .footer-col {
+    text-align: left;
+  }
+
+  .footer-col h3 {
+    margin-bottom: 10px;
+    color: #fff;
+  }
+
+  .footer-col p {
+    margin: 5px 0;
+    color: #888;
+    font-size: 16px;
+  }
+
+  .footer-col p span {
+    font-weight: bold;
+    color: #ffffff;
+  }
+
+  .footer-col p a {
+    color: #888;
+    text-decoration: none;
+  }
+
+  .footer-col p a:hover {
+    text-decoration: underline;
+  }
+
+  .footer-bottom {
+    margin-top: 10px;
+    padding-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-bottom p {
+    margin: 0;
+    color: #888;
+    font-size: 13px;
+  }
+
+  .go-top-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .go-top-text {
+    font-size: 14px;
+    color: #fff;
+  }
+
+  .go-top {
+    background-color: #ff5a30;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s;
+  }
+
+  .go-top:hover {
+    background-color: #e64a19;
+  }
+
+  .go-top i {
+    font-size: 16px;
+  }
+
+
+  @media (max-width: 768px) {
+    .footer-top,
+    .footer-mid,
+    .footer-bottom {
+      flex-direction: column;
+    }
+
+    .footer-right {
+      margin-top: 20px;
+    }
+
+    .footer-mid .footer-col {
+      margin-top: 20px;
+    }
+
+    .go-top {
+      margin-top: 20px;
+    }
+  }
+
+</style>
+</head>
+<body>
+  <header class="top-nav">
+    <div class="logo"><a href="{% url 'booking:index' %}">EASYSTAY</a></div>
+    <div class="nav-icons">
+      <img src="{% if user.image %}{{ user.image.url }}{% else %}{% static 'vendor/img/users/default_avatar.jpg' %}{% endif %}" alt="Аватар" class="nav-ava">
+      <i class="bi bi-heart"></i>
+      <i class="bi bi-globe"></i>
+    </div>
+  </header>
+
+  <section class="hero-section">
+    <img src="{% static 'vendor/img/products/profileback.png' %}" alt="Header Background" class="hero-bg" />
+    <img src="{% if user.image %}{{ user.image.url }}{% else %}{% static 'vendor/img/users/default_avatar.jpg' %}{% endif %}" alt="User Avatar" class="avatar" />
+    <p class="profile-text">
+      <span class="profile-name"><strong>{{ user.username }}</strong></span><br>
+      <span class="profile-info">{{ user.experience }} year in EasyStay</span><br>
+      <span class="profile-date">Registration date: {{ user.date_joined|date:"d.m.Y" }}</span><br>
+      <span class="profile-number">Phone number: {{ user.phone_number }}</span>
+    </p>
+  </section>
+  <div class="profile-actions">
+    <a href="#" class="report-profile"><i class="bi bi-flag"></i> Report this profile</a>
+    <button class="edit-profile" onclick="window.location.href='profile.tenant.edit.html';">Edit profile</button>
+
+</div>
+
+<div class="profile-about">
+  <h3>More about {{ user.username }}</h3>
+  <div class="about-box">
+      <p>{{ user.about }}</p>
+  </div>
+</div>
+
+<section class="reviews-section">
+  <h3>{{ user.username }}: user reviews</h3>
+  <div class="reviews-container">
+    {% for review in reviews %}
+      <div class="review-card">
+        <p>{{ review.text }}</p>
+        <div class="review-footer">
+          <img src="{{ review.author.image.url }}" alt="Author" class="review-avatar">
+          <div class="review-info">
+            <strong>{{ review.author.username }}</strong>
+            <span>{{ review.created_at|date:"F Y" }}</span>
+          </div>
+        </div>
+      </div>
+    {% empty %}
+      <p>No reviews yet.</p>
+    {% endfor %}
+     <a href="#" class="show-reviews">Show all reviews (28)</a>
+  </div>
+</section>
+</section>
+
+<section class="favorites-section">
+  <h3>{{ user.username }}: all apartments</h3>
+  {% for apartment in apartments %}
+    <div class="favorites-container">
+      <div class="favorite-card">
+        <div class="favorite-image">
+          <img src="{{ apartment.image.url }}" alt="Exclusive Opera">
+          <span class="heart-icon" data-id="1">🤍</span>
+        </div>
+        <div class="favorite-info">
+          <h4>{{ apartment.title }}</h4>
+          <span>{{ apartment.price_per_month }}</span>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+</section>
+
+<footer class="footer">
+  <div class="footer-top">
+    <div class="footer-left">
+      <div class="logo-and-icons">
+          <div class="footer-logo">
+            <a href="{% url 'booking:index' %}"><img src="{% static 'vendor/img/products/logo.png' %}" alt="EASYSTAY"/></a>
+          </div>
+          <div class="logo-icons">
+            <a href="#" target="_blank"><i class="bi bi-whatsapp"></i></a>
+            <a href="#" target="_blank"><i class="bi bi-messenger"></i></a>
+            <a href="#" target="_blank"><i class="bi bi-facebook"></i></a>
+            <a href="#" target="_blank"><i class="bi bi-twitter"></i></a>
+            <a href="#" target="_blank"><i class="bi bi-youtube"></i></a>
+          </div>
+        </div>
+
+      <p class="footer-description">
+        EasyStay is a modern solution for SDU students to find housing easily and safely.
+        We create a convenient rental environment by providing up-to-date listings,
+        search filters and the ability to communicate with landlords.
+        Our main goal is to make the housing search process fast, transparent and convenient.
+      </p>
+    </div>
+
+    <div class="footer-right">
+      <div class="stay-in-touch">
+
+      <h2>Let's stay in touch!</h2>
+      </div>
+      <form class="subscribe-form">
+        <input type="email" placeholder="Your email address" />
+        <button type="submit">Subscribe</button>
+      </form>
+      <p class="subscribe-info">
+          Register to learn more and receive the latest news from EasyStay.
+      </p>
+    </div>
+  </div>
+  <div class="footer-mid">
+      <div class="footer-col">
+        <h3>HEAD OFFICE</h3>
+        <p><span>Address:</span> Ablyai Khan Avenue, 1/1</p>
+        <p><span>Call:</span> <a href="tel:+77273019565">+7 (727) 301-95-65</a></p>
+        <p><span>Email:</span> <a href="mailto:sdu.edu.kz">sdu.edu.kz</a></p>
+      </div>
+      <div class="footer-col">
+        <h3>WHO WE ARE</h3>
+        <p>About Us</p>
+        <p>FAQ</p>
+        <p>Contacts</p>
+      </div>
+      <div class="footer-col">
+        <h3>OUR EXPERIENCE</h3>
+        <p>Services</p>
+        <p>Work</p>
+        <p>Interesting</p>
+      </div>
+    </div>
+
+  <div class="footer-bottom">
+      <p>
+        © All rights reserved. Made with
+        <i class="bi bi-heart-fill" style="color:red;"></i> by EASYSTAY
+      </p>
+      <div class="go-top-group">
+        <span class="go-top-text">GO TO TOP</span>
+        <button class="go-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">
+          <i class="bi bi-chevron-up"></i>
+        </button>
+      </div>
+    </div>
+
+</footer>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const heartIcon = document.querySelector(".heart-icon");
+    const itemId = heartIcon.getAttribute("data-id");
+
+    if (localStorage.getItem(`wishlist_${itemId}`) === "true") {
+        heartIcon.textContent = "❤️";
+        heartIcon.classList.add("active");
+    }
+
+    heartIcon.addEventListener("click", function () {
+        if (this.classList.contains("active")) {
+            this.textContent = "🤍";
+            localStorage.removeItem(`wishlist_${itemId}`);
+        } else {
+            this.textContent = "❤️";
+            localStorage.setItem(`wishlist_${itemId}`, "true");
+        }
+        this.classList.toggle("active");
+    });
+});
+
+</script>
+
+
+</body>
+</html>
