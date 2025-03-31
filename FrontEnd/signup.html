@@ -6,7 +6,7 @@
     <title>Sign Up</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; 
             background-image: url(img/ex.png);
             background-repeat: no-repeat;
             background-size: cover;
@@ -97,6 +97,34 @@
             color: #ff5722;
             text-decoration: none;
         }
+
+
+    @media (max-width: 768px) {
+    .modal {
+        width: 50%; 
+        padding: 10px; 
+    }
+    
+    form input {
+        width: 96%; 
+        padding: 8px; 
+        font-size: 14px; 
+    }
+
+    button {
+        padding: 11px;
+        font-size: 14px; 
+    }
+
+    .checkbox-group label {
+        font-size: 12px;
+    }
+
+    .forgot-password {
+        font-size: 12px; 
+    }
+}
+
     </style>
 </head>
 <body>
@@ -105,11 +133,9 @@
             <h2>Sign up</h2>
             <div class="tabs">
                 <span class="active" id="email-tab">E-mail address</span>
-                <span id="phone-tab">Phone number</span>
             </div>
             <form>
                 <input type="email" id="email-input" placeholder="E-mail address" required>
-                <input type="text" id="phone-input" placeholder="Phone number" required style="display: none;">
                 <input type="password" placeholder="Password" required>
                 <input type="text" placeholder="First Name" required>
                 <input type="text" placeholder="Last Name" required>
@@ -134,9 +160,7 @@
             const termsCheckbox = document.getElementById("termsCheckbox");
             const signupBtn = document.getElementById("signupBtn");
             const emailTab = document.getElementById("email-tab");
-            const phoneTab = document.getElementById("phone-tab");
             const emailInput = document.getElementById("email-input");
-            const phoneInput = document.getElementById("phone-input");
 
             function updateButtonState() {
                 signupBtn.disabled = !termsCheckbox.checked;
@@ -151,12 +175,14 @@
                 phoneInput.style.display = "none";
             });
 
-            phoneTab.addEventListener("click", function() {
-                phoneTab.classList.add("active");
-                emailTab.classList.remove("active");
-                phoneInput.style.display = "block";
-                emailInput.style.display = "none";
-            });
+            signupBtn.addEventListener("click", function (event) {
+            event.preventDefault(); // Форма жіберілмес үшін алдын ала болдырмау
+            if (!signupBtn.disabled) {
+                window.location.href = "successful.html"; // Өткізілетін беттің атауын өзгертіңіз
+            }
+        });
+
+        
         });
     </script>
 </body>

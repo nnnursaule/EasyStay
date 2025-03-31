@@ -12,6 +12,11 @@ body {
     overflow-x: hidden; 
     background-color: #fafafa;
 }
+.left-nav{margin-left: 3%;}
+.logo2 img{
+    display: inline-block;
+    top: -109px;
+}
 .landlord-btn{
     border-radius: 50px;
 }
@@ -19,7 +24,6 @@ body {
 .images {
     width: 100%;
     height: 907px;
-    background: url('img/details1.png') no-repeat center center/cover;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -27,10 +31,26 @@ body {
     position: relative;
     padding-top: 72px;
 }
+
 .img-show{
     width: 80%;
-    margin: 0 10%;
     z-index: 2;
+    display: flex;
+}
+.images .img-slide{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    z-index: -1;
+}
+.img-slide .apartment-images{
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+    width: 100vw;
+    height: 90vh;
+    object-fit: cover;
 }
 .img-show svg{
     z-index: 3;
@@ -51,16 +71,17 @@ body {
 .img-show .btns-div{
     position: absolute;
     display: flex;
-    top: 712px;
+    top: 752px;
     left: 10%;
     border-radius: 50px;
-    gap: 10px;
+    /* gap: 10px; */
     padding: 8px 29px 5px 29px;
     background-color: #FFFFFF94;
+    border-color: transparent;
     font-size: 20px;
     font-weight: 400;
 }
-.img-show .btns-div span{text-align: center; margin-top: 5px;}
+.img-show .btns-div a{text-align: center; margin-top: 5px; text-decoration: none; color: #000000;}
 
 .img-show #wishlist-btn{
     left: 10%;
@@ -68,7 +89,7 @@ body {
     height: 56px;
 
 }
-.img-show #wishlist-btn span{
+.img-show #wishlist-btn a{
     width: 140px;
     height: 32px;
 
@@ -84,7 +105,7 @@ body {
 }
 .img-show #share-btn{
     display: flex;
-    justify-content: space-between;
+    gap: 20px;
     width: 181px;
     height: 56px;
     left: 40%;
@@ -571,8 +592,231 @@ ul.fac-list li.x{
     color: #6A6A6A;
   }
 
+.availability .calendar-check{
+    width:30%;
+    height: 444px;
+    gap: 10px;
+    padding: 24px;
+    background-color: #F5F5F5;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+.availability .calendar-check .cal-components{
+    width: 85%;
+    gap: 12px;
+    height: 90%;
+}
+.availability #cal-1{
+    top: 202px;
+    border-top-left-radius: 16px;
+    border-bottom-left-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+}
+.availability #cal-2{
+    top: 202px;
+    left: 60%;
+    border-top-right-radius: 16px;
+    border-bottom-right-radius: 16px;
+}
+.cal-components .cal-header{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 44px;
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+.availability #cal-1 button#prevmonth {
+    position: absolute;
+}
+
+
+.availability img{
+    position: relative;
+    width: 264.3084716796875;
+    height: 263;
+    top: 250px;
+
+}
 
 .sim-places{
     position: absolute;
     top: 4340px;
 }
+
+
+.clients{
+    position: relative;
+    width: 100%;
+    height: 802.98px;
+    margin-top: 50px;
+    z-index: 2;
+    top: 3500px;
+
+    background: radial-gradient(50% 50% at 50% 50%, rgba(2, 3, 59, 0.61) 6.4%, #000000 100%);
+}
+.clients .question-p{
+    width: 563.4187622070312;
+    height: 45;
+    position: relative;
+    top: 106px;
+    /* left: 466px; */
+    font-family: Inter;
+    font-weight: 800;
+    font-size: 36px;
+    line-height: 45px;
+    letter-spacing: -0.72px;
+    vertical-align: middle;
+    color: #FFFFFF;
+}
+
+.clients .commentsofclients{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 0px 848px 0px 0px;
+
+    position: absolute;
+    width: 2096px;
+    height: 305.98px;
+    left: calc(50% - 2096px/2 - 424px);
+    top: 243px;
+}
+.clients .commentsofclients div {
+    /* div */
+
+    width: 1248px;
+    height: 305.98px;
+
+
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+
+
+}
+.clients .commentsofclients div .comment-row {
+    
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px;
+    gap: 24px;
+
+    position: absolute;
+    width: 2096px;
+    height: 306px;
+    left: 424px;
+    top: 0px;
+    
+    display: flex;
+    overflow-x: scroll; 
+    scroll-behavior: smooth; 
+    -webkit-overflow-scrolling: touch; 
+  
+    scrollbar-width: none;
+
+
+
+}
+
+
+.clients .commentsofclients .comment{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 400px;
+    height: 306px;
+    gap: 24px;
+    border-radius: 48px;
+    padding: 36px;
+    background-color: #FFFFFF;
+    box-shadow: 12px 12px 20px rgba(0, 0, 0, 0.1);
+
+}
+
+.comment .text{
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: 0%;
+    vertical-align: middle;
+    width: 318.79px;
+    /* height: 80px; */
+    text-align: left;
+
+}
+.comment .username{
+    font-weight: 800;
+    font-size: 15px;
+    line-height: 20px;
+    letter-spacing: 0%;
+    vertical-align: middle;
+    position: relative;
+    width: 120px;
+    height: 20px;
+    text-align: left;
+
+}
+#clients-bottom{
+
+position: absolute;
+width: 100%;
+height: 95px;
+left: 96px;
+top: 623.98px;
+
+}
+#clients-bottom rect{
+
+    position: absolute;
+    width: 100%;
+    height: 106px;
+    left: -95px;
+    top: 19.02px;
+
+    background: #D9D9D9;
+
+}
+#clients-bottom div{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px;
+    gap: 5%;
+
+    position: relative;
+    width: 117.5%;
+    height: 65px;
+    left: -16.5%;
+    top: 40px;
+
+
+}
+.hero-section{
+    position: relative;
+    top: 3500px;
+}
+
+.review-section{
+    position: relative;
+    top: 3550px;
+}
+
+
+.footer{
+    position: relative;
+    top: 3600px;
+    width: 100%;
+}
+
+

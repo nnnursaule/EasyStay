@@ -5,7 +5,7 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     text-align: center;
     background-color: #fafafa;
 }
@@ -14,7 +14,7 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
-    background: rgba(0, 0, 0, 0.85);
+    background: rgba(19, 18, 18, 0.85);
     color: white;
     width: 100%;
     position: fixed; 
@@ -46,7 +46,7 @@ body {
 .nav-links a {
     text-decoration: none;
     color: white;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 500;
     transition: color 0.3s ease;
 }
@@ -119,18 +119,6 @@ body {
     display: none;
 }
 
-.heart-btn {
-    display: inline-block;
-    font-size: 20px;
-    color: white; 
-    text-decoration: none;
-    transition: color 0.3s;
-}
-
-.heart-btn:hover {
-    color: red;
-}
-
 .hero {
     width: 100%;
     height: 100vh;
@@ -150,13 +138,24 @@ body {
     height: 100%;
     background: rgba(0, 0, 0, 0.5);
 }
-
-h1 {
-    color: white;
-    font-size: 2rem;
+.content {
     position: relative;
-    text-align: center;
     z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    text-align: left;
+    width: fit-content;
+    margin-left: -80px;
+
+}
+.title {
+    color: white;
+    font-size: 3rem;
+    position: relative;
+    text-align: left;
+    z-index: 1;
+    
 }
 
 .highlight {
@@ -168,12 +167,11 @@ h1 {
     align-items: center;
     background: white;
     padding: 12px 20px;
-    border-radius: 25px;
+    border-radius: 10px;
     position: relative;
     margin-top: 20px;
     z-index: 1;
-    width: 60%; 
-    max-width: 800px; 
+    max-width: 1200px; 
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -395,6 +393,8 @@ h1 {
                 url('img/wework.jpg') center/cover no-repeat;
     color: white;
     padding: 100px 0;
+    text-align: center;
+
 }
 
 .how-we-work h2 {
@@ -405,7 +405,8 @@ h1 {
 
 .steps {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    flex-wrap: wrap;
     gap: 20px;
 }
 
@@ -527,51 +528,72 @@ p {
 }
 
 .team-section {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 50px 20px;
     position: relative;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), 
-                url('img/team.png') center/cover no-repeat;
-    color: white;
-    padding: 100px 0;
-}
-
-.team-section {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 20px 10px;
-    background-color: rgb(97, 93, 93); 
-    min-height: 10vh;
-}
-
-.section-header {
-    text-align: center;
-    margin-bottom: 40px;
-}
-
-.section-header h2 {
+    padding: 100px 20px;
     color: white;
-    font-size: 28px;
-    margin-bottom: 10px;
+    min-height: 50vh;
+}
+
+.team-section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60vh; 
+    background: 
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+        url('img/team.png') center/cover no-repeat;
+    z-index: -1;
+}
+
+.team-section .section-header {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+}
+
+.team-section .section-header h2 {
+    font-size: 2rem;
+    text-align: center;
+    color: white;
 }
 
 .team-container {
     display: flex;
-    gap: 40px;
+    gap: 50px;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    position: relative;
+    padding: 10px 0;
+}
+
+.team-container::before {
+    content: "";
+
+    width: 100%;
+    height: calc(50% + 100px); 
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6),);
+    z-index: -1;
 }
 
 .profile-card {
     background: white;
     border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     text-align: center;
     width: 320px;
     padding-bottom: 20px;
+    position: relative;
+    z-index: 1;
 }
 
 .profile-image {
@@ -586,6 +608,7 @@ p {
     border-radius: 5px;
 }
 
+/* Мәтін бөлігі */
 .profile-content {
     padding: 20px;
 }
@@ -899,24 +922,236 @@ p {
   
   
 @media (max-width: 768px) {
+        * {
+            box-sizing: border-box;
+        }
+    
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            overflow-x: hidden;
+        }
+    
+        .container {
+            width: 100%;
+            padding: 0 15px; 
+        }
+    
+        .content {
+            margin: 0 auto; 
+            max-width: 100%;
+        }
+    
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); 
+            gap: 10px;
+        }
+    
+        .card {
+            width: 100%;
+        }
+         .navbar {
+            flex-direction: row;
+            align-items: center;
+            gap: 5px;
+        }
+    
+        .nav-links {
+            flex-direction: row;
+            align-items: center;
+            gap: 10px;
+        }
+    
+        .hero {
+            height: auto;
+            padding: 150px 20px;
+        }
+    
+        .title {
+            font-size: 2rem;
+            text-align: center;
+        }
+    
+        .content {
+            margin-left: 0;
+            text-align: center;
+            width: 100%;
+        }
+    
+        .search-bar {
+            flex-direction: row;
+            width: 60%;
+            height: 30%;
+            padding: 10px;
+            justify-content: center;
+            margin: 0 auto;
+        }
+    
+        .search-bar input {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+    
+        .about-content {
+            flex-direction: column;
+            align-items: center;
+        }
+    
+        .cards-container {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    
+        .steps {
+            flex-direction: row;
+            align-items: center;
+        }
+    
+        .step {
+            width: 30%;
+        }
+    
+        .card img {
+            height: 250px;
+        }
+    
+        .right-video {
+            max-width: 100%;
+        }
+
+
+        .footer-top,
+        .footer-mid,
+        .footer-bottom {
+            flex-direction: row;
+        }
+  
+        .footer-right {
+            margin-top: 20px;
+        }
+  
+        .footer-mid .footer-col {
+            margin-top: 20px;
+        }
+  
+        .go-top {
+            margin-top: 20px;
+        }
+  }
+ 
+  @media (max-width: 414px) {
+    * {
+        box-sizing: border-box;
+    }
+
+    body, html {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        overflow-x: hidden;
+    }
+
+    .container {
+        width: 100%;
+        padding: 0 10px; 
+    }
+
+    .content {
+        margin: 0 auto;
+        max-width: 100%;
+    }
+
+    .cards-container {
+        display: grid;
+        grid-template-columns: 1fr; 
+        gap: 10px;
+    }
+
+    .card {
+        width: 100%;
+    }
+
+    .navbar {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        padding: 10px;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .hero {
+        height: auto;
+        padding: 100px 15px;
+    }
+
+    .title {
+        font-size: 1.8rem;
+        text-align: center;
+    }
+
+    .content {
+        text-align: center;
+        width: 100%;
+    }
+
+    .search-bar {
+        flex-direction: column;
+        width: 100%;
+        padding: 10px;
+        margin: 0 auto;
+    }
+
+    .search-bar input {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .about-content {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .steps {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .step {
+        width: 100%;
+    }
+
+    .card img {
+        height: 100px;
+    }
+
+    .right-video {
+        max-width: 100%;
+    }
+
     .footer-top,
     .footer-mid,
     .footer-bottom {
-      flex-direction: column;
+        flex-direction: column;
+        align-items: center;
     }
-  
+
     .footer-right {
-      margin-top: 20px;
+        margin-top: 10px;
+        text-align: center;
     }
-  
+
     .footer-mid .footer-col {
-      margin-top: 20px;
+        margin-top: 10px;
+        text-align: center;
     }
-  
+
     .go-top {
-      margin-top: 20px;
+        margin-top: 10px;
     }
-  }
-  
-  
-  
+}
