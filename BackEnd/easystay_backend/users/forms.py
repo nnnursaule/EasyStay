@@ -3,8 +3,9 @@ from datetime import timedelta
 from django.contrib.auth.hashers import check_password
 from django.utils.timezone import now
 from django import forms
-from django.contrib.auth.forms import UserChangeForm, AuthenticationForm, UserCreationForm
+from django.contrib.auth.forms import UserChangeForm, AuthenticationForm, UserCreationForm, SetPasswordForm
 from .models import User, EmailVerification
+from django.core.exceptions import ValidationError
 
 class UserLoginForm(AuthenticationForm):
     username = forms.CharField(widget=forms.TextInput(attrs={
@@ -19,6 +20,48 @@ class UserLoginForm(AuthenticationForm):
     class Meta:
         model = User
         fields = ("username", "password")
+
+
+class PasswordResetRequestForm(forms.Form):
+    email = forms.EmailField(widget=forms.EmailInput(attrs={
+        'class': 'form-control',
+        'placeholder': 'Enter your email'
+    }))
+
+    def clean_email(self):
+        email = self.cleaned_data.get("email")
+        if not User.objects.filter(email=email).exists():
+            raise ValidationError("Email not found.")
+        return email
+
+
+class ResetPasswordForm(SetPasswordForm):
+    new_password1 = forms.CharField(
+        widget=forms.PasswordInput(attrs={'placeholder': 'Enter your new password', 'class': 'form-control'})
+    )
+    new_password2 = forms.CharField(
+        widget=forms.PasswordInput(attrs={'placeholder': 'Confirm password', 'class': 'form-control'})
+    )
+
+    def clean_code(self):
+        code = self.cleaned_data.get("code")
+        if not code.isdigit() or len(code) != 4:
+            raise ValidationError("Invalid code.")
+        return code
+
+    def clean(self):
+        cleaned_data = super().clean()
+        password1 = cleaned_data.get("new_password1")
+        password2 = cleaned_data.get("new_password2")
+
+        if password1 and password2 and password1 != password2:
+            raise ValidationError("The two password fields must match.")
+
+        # Дополнительная проверка на сложность пароля (например, минимум 8 символов)
+        if password1 and len(password1) < 8:
+            raise ValidationError("The password must be at least 8 characters long.")
+
+        return cleaned_data
 
 
 class UserRegistrationForm(UserCreationForm):
@@ -107,7 +150,7 @@ class ProfileForm(UserChangeForm):
 
     class Meta:
         model = User
-        fields = ("first_name", "last_name", "image", "delete_image", "username", "email")
+        fields = ("first_name", "last_name", "image", "delete_image", "username", "age", "gender", "phone_number")
 
     def clean(self):
         cleaned_data = super().clean()

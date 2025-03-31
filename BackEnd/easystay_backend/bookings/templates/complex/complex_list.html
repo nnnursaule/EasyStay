@@ -1,5 +1,6 @@
-
 {% extends 'bookings/base.html' %}
+{% load static %}
+
 
 {% block title %}Home - Easystay{% endblock %}
 
@@ -12,6 +13,11 @@
             <button class="search-btn">
                 <i class="fas fa-search"></i>
             </button>
+        </div>
+        <div class="pagination">
+            <span class="active" onclick="changeImage(1)">01</span>
+            <span onclick="changeImage(2)">02</span>
+            <span onclick="changeImage(3)">03</span>
         </div>
     </section>
     <section class="about-us">
@@ -75,6 +81,16 @@
             </div>
         {% endfor %}
     </section>
+
+    {% block extra_js %}
+        <script>
+            const images = [
+                "{% static 'vendor/img/products/main1.png' %}",
+                "{% static 'vendor/img/products/main2.png' %}",
+                "{% static 'vendor/img/products/main3.png' %}"
+            ];
+        </script>
+    {% endblock %}
 
 
 {% endblock %}

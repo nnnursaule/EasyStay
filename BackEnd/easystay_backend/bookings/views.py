@@ -3,6 +3,7 @@ from django.views.generic.list import ListView
 from .models import Apartment, ResidentialComplex, ALL_AMENITIES, AMENITIES_TRANSLATION
 from .forms import ApartmentForm
 from django.views.generic import DetailView
+from users.models import User
 class ResidentialComplexListView(ListView):
     model = ResidentialComplex
     template_name = "complex/complex_list.html"
@@ -34,3 +35,16 @@ class ResidentialComplexDetailView(DetailView):
         context["existing_amenities"] = existing_amenities
         context["missing_amenities"] = missing_amenities
         return context
+
+
+def share_with_others(request):
+    return render(request, "complex/share_with_others.html")
+
+
+def main_page(request, pk):
+    user = get_object_or_404(User, id=pk)
+    complex = ResidentialComplex.objects.all()
+    return render(request, 'bookings/index.html', {
+        "user":user,
+        "complexes": complex,
+    })

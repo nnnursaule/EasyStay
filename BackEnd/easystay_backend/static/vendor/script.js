@@ -1,4 +1,4 @@
-const images = ["img/main1.png", "img/main2.png", "img/main3.png"];
+
 let currentIndex = 0;
 
 function changeImage(index) {
