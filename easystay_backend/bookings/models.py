@@ -6,6 +6,7 @@ ALL_AMENITIES = [
     "Security", "Garden", "Shops", "Laundry", "CCTV", "Bike Parking"
 ]
 
+
 AMENITIES_TRANSLATION = {
     "Parking": "Парковка",
     "WiFi": "WiFi",

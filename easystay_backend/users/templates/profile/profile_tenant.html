@@ -551,7 +551,7 @@ footer {
 </head>
 <body>
   <header class="top-nav">
-    <div class="logo"><a href="{% url 'booking:index' %}">EASYSTAY</a></div>
+    <div class="logo"><a href="{% url 'booking:main' user.id %}">EASYSTAY</a></div>
     <div class="nav-icons">
       <img src="{% if user.image %}{{ user.image.url }}{% else %}{% static 'vendor/img/users/default_avatar.jpg' %}{% endif %}" alt="Аватар" class="nav-ava">
       <i class="bi bi-heart"></i>
@@ -571,8 +571,9 @@ footer {
   </section>
   <div class="profile-actions">
     <a href="#" class="report-profile"><i class="bi bi-flag"></i> Report this profile</a>
-    <button class="edit-profile" onclick="window.location.href='profile.tenant.edit.html';">Edit profile</button>
-
+    <a href="{% url 'users:edit_profile' user.id %}">
+        <button class="edit-profile" onclick="window.location.href='profile.tenant.edit.html';">Edit profile</button>
+    </a>
 </div>
 
 <div class="profile-about">

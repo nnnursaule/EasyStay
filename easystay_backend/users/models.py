@@ -15,6 +15,14 @@ class User(AbstractUser):
     phone_number = models.CharField(max_length=15, unique=True, blank=True, null=True)
     is_verified = models.BooleanField(default=False)
     date_joined = models.DateTimeField(null=True, auto_now_add=True)
+    age = models.PositiveIntegerField(null=True, blank=True)
+
+    GENDER_CHOICES = [
+        ('male', 'Male'),
+        ('female', 'Female'),
+    ]
+
+    gender = models.CharField(max_length=6, choices=GENDER_CHOICES, null=True, blank=True)
 
     about = models.TextField(blank=True, null=True)  # Описание арендатора
     favourites = models.ManyToManyField('bookings.Apartment', related_name='favourited_by', blank=True)  # Избранное
