@@ -74,23 +74,24 @@ body {
     top: 752px;
     left: 10%;
     border-radius: 50px;
-    /* gap: 10px; */
     padding: 8px 29px 5px 29px;
+    gap: 10px;
     background-color: #FFFFFF94;
     border-color: transparent;
     font-size: 20px;
     font-weight: 400;
+    margin-right: 20%;
 }
 .img-show .btns-div a{text-align: center; margin-top: 5px; text-decoration: none; color: #000000;}
 
 .img-show #wishlist-btn{
     left: 10%;
-    width: 244px;
+    width: 15%;
     height: 56px;
 
 }
 .img-show #wishlist-btn a{
-    width: 140px;
+    width: 70%;
     height: 32px;
 
 }
@@ -98,17 +99,17 @@ body {
 
 
 .img-show #save-btn{
-    left: 25%;
-    width: 234px;
+    margin-left: 16.5%;
+    width: 14%;
     height: 56px;
 
 }
 .img-show #share-btn{
     display: flex;
     gap: 20px;
-    width: 181px;
+    width: 10%;
     height: 56px;
-    left: 40%;
+    margin-left: 32%;
 }
 
 .img-show #share-btn span{ width: 52px; height: 32px;}
@@ -596,7 +597,7 @@ ul.fac-list li.x{
     width:30%;
     height: 444px;
     gap: 10px;
-    padding: 24px;
+    /* padding: 24px; */
     background-color: #F5F5F5;
     display: flex;
     flex-direction: column;
@@ -604,9 +605,12 @@ ul.fac-list li.x{
     justify-content: flex-start;
 }
 .availability .calendar-check .cal-components{
-    width: 85%;
+    width: 90%;
     gap: 12px;
     height: 90%;
+    position: absolute;
+    top: 0px;
+    margin: 24px;
 }
 .availability #cal-1{
     top: 202px;
@@ -625,17 +629,201 @@ ul.fac-list li.x{
     border-bottom-right-radius: 16px;
 }
 .cal-components .cal-header{
-    position: absolute;
+    position: relative;
     top: 0;
     left: 0;
     height: 44px;
-    width: 90%;
+    width: 100%;
     display: flex;
     flex-direction: row;
-    align-items: flex-start;
+    /* align-items: flex-start; */
+    justify-content: center;
 }
 .availability #cal-1 button#prevmonth {
     position: absolute;
+    left: 10px;
+    width: 44px;
+    height: 44px;
+    border-radius: 80px;
+    background-color: #FFFFFF;
+    box-shadow: 0px 1px 1px 0px  #000E330D;
+    border-color: transparent;
+
+}
+.availability #cal-2 button#nextmonth{
+    position: absolute;
+    right: 20px;
+    width: 44px;
+    height: 44px;
+    border-radius: 80px;
+    background-color: #FFFFFF;
+    box-shadow: 0px 1px 1px 0px  #000E330D;
+    border-color: transparent;
+}
+.cal-components .w-days{
+    position: relative;
+    width: 100%;
+    height: 44px;
+    top: 10px;
+    display: grid;
+    grid-template-columns: repeat(7,1fr);
+    gap: 5px;
+
+}
+.cal-components .w-days div{
+    position: relative; 
+    width: 54px; 
+    height: 44px; 
+    top: 0px;
+    height: 44;
+    left: 2.5px;
+    gap: 10px;
+    padding: 13px 15px 13px 15px;
+    border-radius: 4px;
+    font-size: 20px;
+    font-weight: 500;
+    vertical-align: center;
+    color: #1F1F1F;
+
+    font-family: 'Lexend';
+
+    line-height: 100%;
+    letter-spacing: 0%;
+    text-align: center;
+    vertical-align: middle;
+
+
+}
+.cal-components .cal-header .month-year-div{
+    display: flex;
+    position: absolute;
+    width: 215px;
+    height: 44px;
+    top: 0px;
+    left: 30%;
+    gap: 10px;
+}
+select.month-year{
+    /* width: 95px; */
+    height: 44px;
+    border-radius: 6px;
+    /* gap: 10px; */
+    padding: 10px 12px 10px 12px;
+    font-size: 20px;
+    font-family: 'Lexend';
+    font-weight: 700;
+    letter-spacing: -2%;
+    line-height: 100%;
+    text-align: center;
+    background-color: #FFFFFF;
+    box-shadow: 0px 1px 1px 0px #000E330D;
+    border-color: transparent;
+}
+select#month-c1, select#month-c2{
+    width: 120px;
+}
+select#year-c1, select#year-c2{
+    width: 90px;
+}
+
+select.month-year::after{
+    color: #000000;
+}
+
+
+
+.cal-components .cal-dates{
+    position: relative;
+    width: 100%;
+    height: 236px;
+    top: 10px;
+    left: 5px;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    color: #000000;
+}
+.cal-dates div{ 
+    position: relative;
+    top: 0px;
+    left: 0px;
+    width: 50px;
+    height: 44px;
+    border-radius: 6px;
+    padding:  13px 20px 13px 20px;
+    
+}
+.cal-dates .date{
+    color: #000000; 
+    background-color: #FFFFFF;
+    box-shadow: 0px 1px 1px 0px #000E330D;
+
+}
+.cal-dates .date-inactive{
+    color: #6A6A6A;
+}
+
+button#check-dates{
+    position: relative;
+    width: 20%;
+    height: 44px;
+    top: 105%;
+    left: 80%;
+    border-radius: 4px;
+    padding: 0 16px;
+    background-color: #FF5A30;
+    border-color: transparent;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    text-align: center;
+    text-transform: uppercase;
+    color: #FFFFFF;
+
+
+
+
+}
+.day {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    margin: 2px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.day:hover {
+    background-color: lightgray;
+}
+
+.prev-month, .next-month {
+    color: gray;
+}
+
+.selected {
+    background-color: yellow;
+}
+
+.available {
+    background-color: green;
+    color: white;
+}
+
+.unavailable {
+    background-color: red;
+    color: white;
+}
+.selected-start{
+    background-color: yellow;
+    color: white;
+}
+
+.selected-end{
+    background-color: yellow;
+    color: white;
 }
 
 
