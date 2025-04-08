@@ -52,7 +52,7 @@
                                     <path d="M6.44784 7.96942C6.76219 5.14032 9.15349 3 12 3V3C14.8465 3 17.2378 5.14032 17.5522 7.96942L17.804 10.2356C17.8072 10.2645 17.8088 10.279 17.8104 10.2933C17.9394 11.4169 18.3051 12.5005 18.8836 13.4725C18.8909 13.4849 18.8984 13.4973 18.9133 13.5222L19.4914 14.4856C20.0159 15.3599 20.2782 15.797 20.2216 16.1559C20.1839 16.3946 20.061 16.6117 19.8757 16.7668C19.5971 17 19.0873 17 18.0678 17H5.93223C4.91268 17 4.40291 17 4.12434 16.7668C3.93897 16.6117 3.81609 16.3946 3.77841 16.1559C3.72179 15.797 3.98407 15.3599 4.50862 14.4856L5.08665 13.5222C5.10161 13.4973 5.10909 13.4849 5.11644 13.4725C5.69488 12.5005 6.06064 11.4169 6.18959 10.2933C6.19123 10.279 6.19283 10.2645 6.19604 10.2356L6.44784 7.96942Z" stroke="#33363F" stroke-width="2"/>
                                     <path d="M8 17C8 17.5253 8.10346 18.0454 8.30448 18.5307C8.5055 19.016 8.80014 19.457 9.17157 19.8284C9.54301 20.1999 9.98396 20.4945 10.4693 20.6955C10.9546 20.8965 11.4747 21 12 21C12.5253 21 13.0454 20.8965 13.5307 20.6955C14.016 20.4945 14.457 20.1999 14.8284 19.8284C15.1999 19.457 15.4945 19.016 15.6955 18.5307C15.8965 18.0454 16 17.5253 16 17" stroke="#33363F" stroke-width="2" stroke-linecap="round"/>
                                 </svg>
-                                <a href="#">Alerts</a>
+                                <a href="#">Notifications</a>
                               </li>
                               <li>
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -67,7 +67,7 @@
                                     <circle cx="12" cy="18" r="0.5" fill="#33363F" stroke="#33363F"/>
                                     <path d="M12 16V14.5811C12 13.6369 12.6042 12.7986 13.5 12.5V12.5C14.3958 12.2014 15 11.3631 15 10.4189V9.90569C15 8.30092 13.6991 7 12.0943 7H12C10.3431 7 9 8.34315 9 10V10" stroke="#33363F" stroke-width="2"/>
                                 </svg>
-                                <a href="#">How it work?</a>
+                                <a href="#">How we work?</a>
                               </li>
                               <li>
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -75,7 +75,7 @@
                                     <path d="M12.5 7.5C12.5 7.77614 12.2761 8 12 8C11.7239 8 11.5 7.77614 11.5 7.5C11.5 7.22386 11.7239 7 12 7C12.2761 7 12.5 7.22386 12.5 7.5Z" fill="#33363F" stroke="#33363F"/>
                                     <path d="M12 17V10" stroke="#33363F" stroke-width="2"/>
                                 </svg>
-                                <a href="#">Help</a></li>
+                                <a href="#">AI Chatbot</a></li>
                               <li>
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <circle cx="12" cy="12" r="9" stroke="#33363F" stroke-width="2"/>
@@ -89,7 +89,7 @@
                                     <path d="M2 12L1.21913 11.3753L0.719375 12L1.21913 12.6247L2 12ZM11 13C11.5523 13 12 12.5523 12 12C12 11.4477 11.5523 11 11 11V13ZM5.21913 6.3753L1.21913 11.3753L2.78087 12.6247L6.78087 7.6247L5.21913 6.3753ZM1.21913 12.6247L5.21913 17.6247L6.78087 16.3753L2.78087 11.3753L1.21913 12.6247ZM2 13H11V11H2V13Z" fill="#33363F"/>
                                     <path d="M10 8.13193V7.38851C10 5.77017 10 4.961 10.474 4.4015C10.9479 3.84201 11.7461 3.70899 13.3424 3.44293L15.0136 3.1644C18.2567 2.62388 19.8782 2.35363 20.9391 3.25232C22 4.15102 22 5.79493 22 9.08276V14.9172C22 18.2051 22 19.849 20.9391 20.7477C19.8782 21.6464 18.2567 21.3761 15.0136 20.8356L13.3424 20.5571C11.7461 20.291 10.9479 20.158 10.474 19.5985C10 19.039 10 18.2298 10 16.6115V16.066" stroke="#33363F" stroke-width="2"/>
                                 </svg>
-                                <a href="#">Logout</a>
+                                <a href="#">Log out</a>
                               </li>
                             </ul>
                         </div>
@@ -801,15 +801,15 @@
         <h2>Leave feedback</h2>
         <div class="form-container">
             <form class="review-form">
-                <div class="form-column">
+                <div class="form-column" id="form-name">
                     <label for="name">Name</label>
                     <input type="text" placeholder="Your name" name="name">
                 </div>
-                <div class="form-column">
+                <div class="form-column" id="form-phone">
                     <label for="phone">Phone</label>
                     <input type="text" placeholder="Your phone" name="phone">
                 </div>
-                <div class="form-column">
+                <div class="form-column" id="form-msg">
                     <label for="message">Message</label>
                     <input type="text" placeholder="Your message" name="message">
                 </div>
@@ -881,11 +881,17 @@
                   <img src="img/logo.png" alt="EASYSTAY" />
                 </div>
                 <div class="logo-icons">
+                  <a href="#" target="_blank">
+                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24" viewBox="0,0,256,256">
+                        <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><g transform="scale(5.33333,5.33333)"><path d="M24,4c-11.04569,0 -20,8.95431 -20,20c0,11.04569 8.95431,20 20,20c11.04569,0 20,-8.95431 20,-20c0,-11.04569 -8.95431,-20 -20,-20z" fill="#c2bfbf"></path><path d="M35.937,18.041c0.046,-0.151 0.068,-0.291 0.062,-0.416c-0.015,-0.362 -0.264,-0.625 -0.85,-0.625h-2.618c-0.661,0 -0.966,0.4 -1.144,0.801c0,0 -1.632,3.359 -3.513,5.574c-0.61,0.641 -0.92,0.625 -1.25,0.625c-0.177,0 -0.624,-0.214 -0.624,-0.801v-5.185c0,-0.694 -0.173,-1.014 -0.732,-1.014h-4.649c-0.407,0 -0.619,0.32 -0.619,0.641c0,0.667 0.898,0.827 1,2.696v3.623c0,0.88 -0.153,1.04 -0.483,1.04c-0.89,0 -2.642,-3 -3.815,-6.932c-0.254,-0.774 -0.508,-1.068 -1.169,-1.068h-2.643c-0.763,0 -0.89,0.374 -0.89,0.774c0,0.721 0.6,4.619 3.875,9.101c2.375,3.25 5.504,5.125 8.274,5.125c1.678,0 1.85,-0.427 1.85,-1.094v-2.972c0.001,-0.801 0.184,-0.934 0.718,-0.934c0.381,0 1.158,0.25 2.658,2c1.73,2.018 2.044,3 3.036,3h2.618c0.608,0 0.957,-0.255 0.971,-0.75c0.003,-0.126 -0.015,-0.267 -0.056,-0.424c-0.194,-0.576 -1.084,-1.984 -2.194,-3.326c-0.615,-0.743 -1.222,-1.479 -1.501,-1.879c-0.187,-0.261 -0.258,-0.445 -0.249,-0.621c0.009,-0.185 0.105,-0.361 0.249,-0.607c-0.026,0 3.358,-4.751 3.688,-6.352z" fill="#131314"></path></g></g>
+                    </svg>
+                  </a>  
                   <a href="#" target="_blank"><i class="bi bi-whatsapp"></i></a>
-                  <a href="#" target="_blank"><i class="bi bi-messenger"></i></a>
                   <a href="#" target="_blank"><i class="bi bi-facebook"></i></a>
-                  <a href="#" target="_blank"><i class="bi bi-twitter"></i></a>
                   <a href="#" target="_blank"><i class="bi bi-youtube"></i></a>
+                  <a href="#" target="_blank">
+                    <i class="bi bi-instagram"></i>     
+                  </a>
                 </div>
               </div>
               
@@ -948,40 +954,6 @@
       </footer>
 
 
-
-
-
-
-
-    <!-- <script>
-        document.querySelectorAll(".heart-icon").forEach(heart => {
-            heart.addEventListener("click", function() {
-                heart.classList.toggle('active');
-            });
-        });
-
-        function menuToggle() {
-            const toggleMenu = document.querySelector(".menu");
-            toggleMenu.classList.toggle("active");
-      }
-
-      function viewCard(evt, cityName) {
-
-            var i, tabcontent, tablinks;
-            tabcontent = document.getElementsByClassName("cards");
-            for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = "none";
-            }
-            tablinks = document.getElementsByClassName("link-2");
-            for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].className = tablinks[i].className.replace(" active", "");
-            }
-            document.getElementById(cityName).style.display = "grid";
-            evt.currentTarget.className += " active";
-        }
-
-        document.getElementById("defaultLink").click();
-    </script> -->
     <script src="main.js"></script>
     <script src="script.js"></script>
 </body>
