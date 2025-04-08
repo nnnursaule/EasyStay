@@ -1,0 +1,46 @@
+
+<style>
+    table {
+    width: 100%;
+    border-collapse: collapse;
+}
+th, td {
+    border: 1px solid white;
+    padding: 10px;
+    text-align: left;
+}
+th {
+    background-color: #222;
+    color: white;
+}
+td {
+    background-color: #333;
+    color: white;
+}
+a {
+    color: #1E90FF;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+</style>
+<h2>Ваши квартиры</h2>
+
+<table border="1">
+    <tr>
+        <th>Название</th>
+        <th>Описание</th>
+        <th>Цена</th>
+    </tr>
+    {% for apartment in apartments %}
+    <tr>
+        <td><a href="{% url 'booking:apartment_detail' apartment_id=apartment.id %}">{{ apartment.name }}</a></td>
+        <td>{{ apartment.description }}</td>
+        <td>{{ apartment.price }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<a href="{% url 'booking:apartment_create' %}">➕ Добавить новую квартиру</a>
+
