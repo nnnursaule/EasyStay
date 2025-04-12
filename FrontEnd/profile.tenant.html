@@ -798,19 +798,16 @@ footer {
     const id = card.getAttribute("data-id");
     const p = document.getElementById("review-text-" + id);
     
-    // Егер localStorage-та жоқ болса, онда HTML-дағы бастапқы пікірді сақтап қоямыз
     if (!localStorage.getItem(id)) {
       localStorage.setItem(id, p.innerText.trim());
     }
 
-    // localStorage-та жаңартылған нұсқа болса, соны көрсетеміз
     const updated = localStorage.getItem(id);
     if (updated) {
       p.innerText = updated;
     }
   });
 
-  // Жою батырмасы
   document.querySelectorAll(".delete-icon").forEach(icon => {
     icon.addEventListener("click", function () {
       const id = this.getAttribute("data-id");
