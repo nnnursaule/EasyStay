@@ -2,8 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Profile Page</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
 * {
   margin: 0;
@@ -83,7 +85,6 @@ body {
   bottom: -110px;
   left: calc(10% + 200px); 
   z-index: 2;
-  font-family: Ubuntu;
   color: #000000;
   font-size: 16px;
   line-height: 1.4;
@@ -94,18 +95,15 @@ body {
 }
 .profile-info {
   font-size: 1rem;
-  font-family: Ubuntu;
   color: #666;
 }
 .profile-date {
   font-size: 0.9rem;
-  font-family: Ubuntu;
   color: #666;
 }
 
 .profile-number {
   font-size: 0.9rem;
-  font-family: Ubuntu;
   color: #666;
   
 }
@@ -230,7 +228,7 @@ body {
   gap: 10px;
 }
 
-.edit-icon, .delete-icon {
+.delete-icon {
   cursor: pointer;
   font-size: 1.2rem;
   color: #666;
@@ -312,7 +310,6 @@ footer {
     background-color: #000815; 
     color: #ddd;
     font-size: 14px;
-    font-family: Ubuntu;
   }
   
   .footer-top,
@@ -354,7 +351,7 @@ footer {
   
   .logo-icons a {
     color: #c2bfbf;         
-    font-size: 24px;     
+    font-size: 20px;     
     transition: color 0.3s;
   }
   
@@ -517,25 +514,87 @@ footer {
     font-size: 16px;
   }
   
-  
   @media (max-width: 768px) {
-    .footer-top,
-    .footer-mid,
-    .footer-bottom {
-      flex-direction: column;
-    }
+  .top-nav {
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 10px;
+  }
+
+  .nav-icons {
+    margin-top: 10px;
+    justify-content: flex-end;
+    width: 100%;
+  }
+
+  .hero-bg {
+    width: 100%;
+  }
+
+  .avatar {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    bottom: -200px;
+    left: 20px;
+    margin: 20px auto 10px;
+  }
+
+  .profile-text {
+    left: 140px;
+    text-align: left;
+    margin-top: 5px;
+    padding: 0 10px;
+    font-size: 10px;
+  }
+
+  .profile-actions {
+    align-items: center;
+    margin: 20px auto;
+    margin-left: 400px;
+  }
+ 
+  .profile-about {
+    margin-left: 0;
+    padding: 0 10px;
+  }
+
+  .about-box {
+    max-width: 87%;
+    height: auto;
+  }
+
+  .reviews-section,
+  .favorites-section {
+    margin-left: 0;
+    padding: 0 10px;
+  }
+
+  .reviews-container,
+  .favorites-container {
+    flex-direction: row;
+    align-items: center;
+  }
+
   
-    .footer-right {
-      margin-top: 20px;
-    }
+  .footer-top,
+  .footer-mid,
+  .footer-bottom {
+    flex-direction: row;
+  }
   
-    .footer-mid .footer-col {
-      margin-top: 20px;
-    }
+  .footer-right {
+    margin-top: 20px;
+  }
   
-    .go-top {
-      margin-top: 20px;
-    }
+  .footer-mid .footer-col {
+    margin-top: 20px;
+  }
+  
+  .go-top {
+    margin-top: 20px;
+  }
+  
   }
 
 </style>
@@ -564,8 +623,7 @@ footer {
   <div class="profile-actions">
     <a href="#" class="report-profile"><i class="bi bi-flag"></i> Report this profile</a>
     <button class="edit-profile" onclick="window.location.href='profile.tenant.edit.html';">Edit profile</button>
-
-</div>
+  </div>
 
 <div class="profile-about">
   <h3>More about Kelly</h3>
@@ -625,6 +683,7 @@ footer {
         <span>250k a месяц</span>
       </div>
     </div>
+     <!-- 2-ші карточка -->
      <div class="favorite-card">
         <div class="favorite-image">
           <img src="img/2.png" alt="Luxury Apartment">
@@ -646,11 +705,11 @@ footer {
             <img src="img/logo.png" alt="EASYSTAY" />
           </div>
           <div class="logo-icons">
-                  <a href="#" target="_blank"><i class="fab fa-vk"></i></a>
-                  <a href="#" target="_blank"><i class="fab fa-whatsapp"></i></a>
-                  <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                  <a href="#" target="_blank"><i class="fab fa-youtube"></i></a> 
-                  <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-vk"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-youtube"></i></a> 
+            <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
           </div>
         </div>
         
@@ -739,3 +798,4 @@ footer {
   
 </body>
 </html>
+
