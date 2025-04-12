@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Profile Page</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -11,10 +12,12 @@
   padding: 0;
   box-sizing: border-box;
 }
+
 body {
-  font-family: Poppins;
   background-color: #f7f7f7;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
+
 .top-nav {
   display: flex;
   justify-content: space-between;
@@ -23,6 +26,7 @@ body {
   background-color: #fff;
   border-bottom: 1px solid #ddd;
 }
+
 .logo {
   font-size: 1.5rem;
   font-weight: bold;
@@ -114,7 +118,7 @@ body {
   flex-direction: column; 
   align-items: flex-end; 
   gap: 20px; 
-  margin-right: 270px;
+  margin-right: 250px;
   margin-top: 30px;
 }
 
@@ -232,15 +236,15 @@ body {
 .edit-icon, .delete-icon {
   cursor: pointer;
   font-size: 1.2rem;
-  color: #666;
+  color: #000000;
 }
 
 .show-reviews {
   display: block;
   margin-top: 10px;
   text-decoration: none;
-  color: #007bff;
-  font-weight: bold;
+  color: #000000;
+
 }
 
 .favorites-section {
@@ -267,6 +271,7 @@ body {
 .favorites-container {
   display: flex;
   gap: 15px;
+  margin-bottom: 30px;
 }
 
 .favorite-card {
@@ -321,7 +326,6 @@ footer {
     background-color: #000815; 
     color: #ddd;
     font-size: 14px;
-    font-family: Ubuntu;
   }
   
   .footer-top,
@@ -363,7 +367,7 @@ footer {
   
   .logo-icons a {
     color: #c2bfbf;         
-    font-size: 24px;     
+    font-size: 20px;     
     transition: color 0.3s;
   }
   
@@ -528,25 +532,87 @@ footer {
   
   
   @media (max-width: 768px) {
-    .footer-top,
-    .footer-mid,
-    .footer-bottom {
-      flex-direction: column;
-    }
-  
-    .footer-right {
-      margin-top: 20px;
-    }
-  
-    .footer-mid .footer-col {
-      margin-top: 20px;
-    }
-  
-    .go-top {
-      margin-top: 20px;
-    }
+  .top-nav {
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 10px;
   }
 
+  .nav-icons {
+    margin-top: 10px;
+    justify-content: flex-end;
+    width: 100%;
+  }
+
+  .hero-bg {
+    width: 100%;
+  }
+
+  .avatar {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    bottom: -200px;
+    left: 20px;
+    margin: 20px auto 10px;
+  }
+
+  .profile-text {
+    left: 140px;
+    text-align: left;
+    margin-top: 5px;
+    padding: 0 10px;
+    font-size: 10px;
+  }
+
+  .profile-actions {
+    align-items: center;
+    margin: 20px auto;
+    margin-left: 400px;
+  }
+ 
+  .profile-about {
+    margin-left: 0;
+    padding: 0 10px;
+  }
+
+  .about-box {
+    max-width: 87%;
+    height: auto;
+  }
+
+  .reviews-section,
+  .favorites-section {
+    margin-left: 0;
+    padding: 0 10px;
+  }
+
+  .reviews-container,
+  .favorites-container {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  
+  .footer-top,
+  .footer-mid,
+  .footer-bottom {
+    flex-direction: row;
+  }
+  
+  .footer-right {
+    margin-top: 20px;
+  }
+  
+  .footer-mid .footer-col {
+    margin-top: 20px;
+  }
+  
+  .go-top {
+    margin-top: 20px;
+  }
+  
+  }
 </style>
 </head>
 <body>
@@ -586,9 +652,11 @@ footer {
 <section class="reviews-section">
   <h3>Madina: my reviews</h3>
   <div class="reviews-container">
-    <div class="review-card">
-      <p>...A beautiful night in this quaint home. The lift is excellent, the garden is spacious. 
-         The bed is comfortable, the kitchen is fully functional. Do it again... to recharge your batteries and...</p>
+    <div class="review-card" data-id="review1">
+      <p id="review-text-review1">
+        ...A beautiful night in this quaint home. The lift is excellent, the garden is spacious. 
+        The bed is comfortable, the kitchen is fully functional. Do it again... to recharge your batteries and...
+      </p>
       <div class="review-footer">
         <img src="img/profile.png" alt="Madina" class="review-avatar">
         <div class="review-info">
@@ -596,14 +664,14 @@ footer {
           <span>February 2025</span>
         </div>
         <div class="review-actions">
-          <i class="bi bi-pencil edit-icon"></i>
-          <i class="bi bi-trash delete-icon" onclick="window.location.href='delete.html'" style="cursor: pointer;"></i>
+          <a href="edit-review.html?id=review1" class="bi bi-pencil edit-icon" title="Edit"></a>
+          <a href="delete.html"><i class="bi bi-trash delete-icon" title="Delete"></i></a>
         </div>
       </div>
     </div>
 
-    <div class="review-card">
-      <p>...The accommodation was excellent location and cleanliness, the host was amazing and friendly, 
+    <div class="review-card" data-id="review2">
+      <p id="review-text-review2">...The accommodation was excellent location and cleanliness, the host was amazing and friendly, 
          he was so welcoming and helpful that we felt right at home... Big...</p>
       <div class="review-footer">
         <img src="img/profile.png" alt="Madina" class="review-avatar">
@@ -612,8 +680,8 @@ footer {
           <span>January 2025</span>
         </div>
         <div class="review-actions">
-          <i class="bi bi-pencil edit-icon"></i>
-          <i class="bi bi-trash delete-icon"></i>
+          <a href="edit-review.html?id=review2" class="bi bi-pencil edit-icon" title="Edit"></a>
+          <a href="delete.html"><i class="bi bi-trash delete-icon" title="Delete"></i></a>
         </div>
       </div>
     </div>
@@ -659,11 +727,11 @@ footer {
             <img src="img/logo.png" alt="EASYSTAY" />
           </div>
           <div class="logo-icons">
-                  <a href="#" target="_blank"><i class="fab fa-vk"></i></a>
-                  <a href="#" target="_blank"><i class="fab fa-whatsapp"></i></a>
-                  <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                  <a href="#" target="_blank"><i class="fab fa-youtube"></i></a> 
-                  <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-vk"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-youtube"></i></a> 
+            <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
           </div>
         </div>
         
@@ -726,6 +794,36 @@ footer {
 </footer>
 
 <script>
+  document.querySelectorAll(".review-card").forEach(card => {
+    const id = card.getAttribute("data-id");
+    const p = document.getElementById("review-text-" + id);
+    
+    // Егер localStorage-та жоқ болса, онда HTML-дағы бастапқы пікірді сақтап қоямыз
+    if (!localStorage.getItem(id)) {
+      localStorage.setItem(id, p.innerText.trim());
+    }
+
+    // localStorage-та жаңартылған нұсқа болса, соны көрсетеміз
+    const updated = localStorage.getItem(id);
+    if (updated) {
+      p.innerText = updated;
+    }
+  });
+
+  // Жою батырмасы
+  document.querySelectorAll(".delete-icon").forEach(icon => {
+    icon.addEventListener("click", function () {
+      const id = this.getAttribute("data-id");
+      const confirmDelete = confirm("Пікірді өшіргіңіз келе ме?");
+      if (confirmDelete) {
+        localStorage.removeItem(id);
+        location.reload();
+      }
+    });
+  });
+
+
+
   document.addEventListener("DOMContentLoaded", function () {
     const heartIcon = document.querySelector(".heart-icon");
     const itemId = heartIcon.getAttribute("data-id"); 
@@ -752,3 +850,4 @@ footer {
   
 </body>
 </html>
+
