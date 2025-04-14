@@ -3,7 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <title>Profile Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
 <style>
 * {
   margin: 0;
@@ -11,8 +15,8 @@
   box-sizing: border-box;
 }
 body {
-  font-family: Poppins;
-  background-color: #f7f7f7;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background-color: #ffffff;
 }
 .top-nav {
   display: flex;
@@ -22,6 +26,7 @@ body {
   background-color: #fff;
   border-bottom: 1px solid #ddd;
 }
+
 .logo {
   font-size: 1.5rem;
   font-weight: bold;
@@ -38,7 +43,7 @@ body {
   width: 100%;
   height: 220px;
   overflow: visible;
-  background-color: #333;
+  background-color: #ffffff;
 }
 .hero-bg {
   position: absolute;
@@ -54,20 +59,35 @@ body {
   position: absolute;
   bottom: -120px; 
   left: 10%; 
-  width: 180px;
-  height: 180px;
+  width: 190px;
+  height: 190px;
   border-radius: 50%;
-  border: 3px solid #fff;
   object-fit: cover;
   z-index: 2;
+}
+.edit-icon {
+  position: absolute;
+  bottom: -120px;
+  left: 230px;
+  background-color: #FF5A30;
+  padding: 8px;
+  border-radius: 50%;
+  color: white;
+  font-size: 12px;
+  z-index: 3;
+}
+
+.edit-icon svg {
+  width: 25px;
+  height: 25px;
+  fill: #fff;
 }
 
 .profile-text {
   position: absolute;
-  bottom: -110px;
-  left: calc(10% + 200px); 
+  bottom: -93px;
+  left: calc(10% + 220px); 
   z-index: 2;
-  font-family: Ubuntu;
   color: #000000;
   font-size: 16px;
   line-height: 1.4;
@@ -78,19 +98,17 @@ body {
 }
 .profile-info {
   font-size: 1rem;
-  font-family: Ubuntu;
   color: #666;
 }
 .profile-date {
   font-size: 0.9rem;
-  font-family: Ubuntu;
   color: #666;
 }
 
 .view-profile-btn {
   position: absolute;
-  bottom: -60px;
-  right: 10%;
+  bottom: -50px;
+  right: 12%;
   padding: 8px 16px;
   background-color: #fa6400;
   color: #fff;
@@ -102,13 +120,13 @@ body {
 
 .form-section {
   margin: 140px auto 40px;
-  width: 90%;
+  width: 80%;
   max-width: 1200px;
   background-color: #fff;
   border-radius: 8px;
   padding: 20px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
+
 .profile-form {
   display: flex;
   flex-direction: column;
@@ -135,17 +153,18 @@ body {
   flex-direction: column;
 }
 
-/* Label стилі */
 .form-group label {
-  font-weight: 600;
-  margin-bottom: 5px;
+  font-weight: 350;
+  margin-bottom: 10px;
+  font-size: 14px;
 }
 
-/* Жай input өрістер */
 .form-group input {
   padding: 10px;
-  border: 1px solid #b9b9b9;
+  border: 1px solid #F9F9F9;
+  background-color: #F9F9F9;
   border-radius: 4px;
+  height: 45px;
 }
 
 .contact-container {
@@ -171,11 +190,16 @@ body {
   margin-left: 170px;
 }
 
+.email-section {
+  padding: 20px;
+  max-width: 500px;
+  margin-left: 0;
+  background: #fff;
+  border-radius: 10px;
+}
 
-.email-block label {
-  font-weight: 600;
-  margin-bottom: 5px;
-  display: block;
+.email-section label {
+  font-weight: 500; 
 }
 
 .email-options {
@@ -191,7 +215,6 @@ body {
   align-items: center; 
   gap: 10px;
   padding: 8px;
-  border: 1px solid #ddd;
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.2s;
@@ -202,7 +225,7 @@ body {
 }
 
 .email-option input[type="radio"] {
-  accent-color: #fa6400;
+  accent-color: #ff5a30;
 }
 .email-details {
   display: flex;
@@ -216,13 +239,13 @@ body {
 
 .email-last-used {
   font-size: 12px;
-  color: #666;
+  color: #454444;
 }
 .add-email-btn {
   margin-top: 10px;
   padding: 8px 16px;
-  background-color: #fa6400;
-  color: #fff;
+  background-color: #f9e0e0;
+  color: #FF5A30;
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -240,14 +263,12 @@ body {
     position: absolute;
     left: 10px;
     color: #747474;
-    font-size: 16px;
 }
 
 .input-container input {
     width: 100%;
     padding-left: 30px; 
     padding-right: 10px;
-    height: 35px;
     box-sizing: border-box;
 }
 
@@ -288,15 +309,67 @@ body {
 }
 
 .reset-btn {
-  background-color: #ddd;
+  background-color: #ffffff;
+  color: #FF5A30;
+  border: #FF5A30 solid 1px;
 }
 
 .save-btn {
-  background-color: #fa6400;
+  background-color: #ff5a30;
   color: #fff;
 }
 
+@media (max-width: 768px) {
+.avatar {
+  position: absolute;
+  bottom: -100px; 
+  left: 10%; 
+  width: 150px;
+  height: 150px;
+}
 
+.edit-icon {
+  bottom: -100px;
+  left: 190px;
+}
+
+.edit-icon svg {
+  width: 21px;
+  height: 21px;
+}
+
+.profile-text {
+  bottom: -90px;
+  left: calc(10% + 180px); 
+  z-index: 2;
+  color: #000000;
+  font-size: 16px;
+  line-height: 1.4;
+}
+}
+
+@media (max-width: 480px) {
+  .profile-header {
+    height: 180px;
+  }
+
+  .profile-picture {
+    width: 100px;
+    height: 100px;
+    bottom: -50px;
+  }
+
+  .edit-icon {
+    padding: 5px;
+    bottom: 4px;
+    right: 4px;
+  }
+
+  .edit-icon svg {
+    width: 12px;
+    height: 12px;
+  }
+}
 </style>
 </head>
 <body>
@@ -311,9 +384,19 @@ body {
   </header>
 
   <section class="hero-section">
-    <img src="img/profileback.png" alt="Header Background" class="hero-bg" />
+    <img src="img/profileback.png" alt="Header Background" class="hero-bg">
 
-    <img src="img/profile.png" alt="User Avatar" class="avatar" />
+    <div class="profile-picture">
+      <img src="img/profile.png" alt="User Avatar" class="avatar" />
+      <a href="edit-profile.html" class="edit-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 
+          7.04a1.003 1.003 0 0 0 0-1.42l-2.34-2.34a1.003 
+          1.003 0 0 0-1.42 0l-1.83 1.83 3.75 3.75 1.84-1.82z"/>
+        </svg>
+      </a>
+    </div>
+
     <p class="profile-text">
       <span class="profile-name"><strong>Madina Shakman</strong></span><br>
       <span class="profile-info">20 y.o, Student status in SDU University</span><br>
@@ -361,40 +444,19 @@ body {
         </div>
       </div>
 
-      <div class="contact-container">
-        <!-- Email блок -->
-            <div class="form-group email-block">
-                <label>My Email Address</label>
-                <div class="email-options">
-                  <label class="email-option">
-                    <input type="radio" name="email" value="olexarowles@gmail.com" />
-                    <span>olexarowles@gmail.com</span>
-                  </label>
-                  <small class="email-last-used">Last used: 1 month ago</small>
-                </div>
-                <button type="button" class="add-email-btn">+ Add Email Address</button>
-              </div>
-              <div class="info-block">
-                <div class="form-group">
-                  <label for="location">Location</label>
-                  <div class="input-container">
-                    <i class="bi bi-geo-alt"></i>
-                    <input type="text" id="location" placeholder="" />
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="timeZone">Time Zone</label>
-                  <div class="input-container">
-                    <i class="bi bi-clock"></i>
-                    <input type="text" id="timeZone" placeholder="" />
-                  </div>
-                </div>
-              </div>
-            
-          </div>
-        </div>
-       
-    
+
+<!-- Email -->
+<div class="email-section">
+  <label>My Email Address</label>
+  <div class="email-options" id="emailList">
+    <!-- emails will be here -->
+  </div>
+  <button type="button" class="add-email-btn" onclick="window.location.href='add-email.html'">
+    + Add Email Address
+  </button>
+</div>
+
+
       <div class="form-row password-row">
         <div class="form-group">
           <label for="currentPassword">Current Password</label> 
@@ -412,6 +474,7 @@ body {
             <i class="bi bi-eye-slash toggle-password"></i>
           </div>
         </div>
+      </div>
       
         <!-- Confirm New Password -->
         <div class="form-group"> 
@@ -428,7 +491,40 @@ body {
       </div>
     </form>
   </section>
+
   <script>
+    // Load email list from localStorage
+    const container = document.getElementById("emailList");
+  let emailList = JSON.parse(localStorage.getItem("emails")) || [];
+
+  emailList.forEach(email => {
+    const label = document.createElement("label");
+    label.className = "email-option";
+
+    const input = document.createElement("input");
+    input.type = "radio";
+    input.name = "email";
+    input.value = email;
+
+    const details = document.createElement("div");
+    details.className = "email-details";
+
+    const span = document.createElement("span");
+    span.className = "email-text";
+    span.textContent = email;
+
+    const lastUsed = document.createElement("span");
+    lastUsed.className = "email-last-used";
+    lastUsed.textContent = "Last used recently"; 
+    details.appendChild(span);
+    details.appendChild(lastUsed);
+
+    label.appendChild(input);
+    label.appendChild(details);
+
+    container.appendChild(label);
+  });
+
     document.querySelectorAll('.toggle-password').forEach(icon => {
       icon.addEventListener('click', () => {
         const input = icon.previousElementSibling;
