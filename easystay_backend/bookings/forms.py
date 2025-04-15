@@ -4,4 +4,7 @@ from .models import Apartment
 class ApartmentForm(forms.ModelForm):
     class Meta:
         model = Apartment
-        fields = ['title','complex', 'rooms', 'area', 'floor', 'price_per_month', 'image']
+        fields = ['title', 'address', 'price_per_month', 'price_per_day',
+                  'status', 'description', 'image']
+
+
