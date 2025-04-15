@@ -137,7 +137,7 @@
       let emailList = JSON.parse(localStorage.getItem("emails")) || [];
 
       if (emailList.includes(email)) {
-        errorMsg.textContent = "Бұл email бұрын қосылған.";
+        errorMsg.textContent = "This email added before.";
         return;
       }
 
