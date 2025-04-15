@@ -29,7 +29,9 @@
                 </div>
 
                 <div class="right-nav">
-                    <button class="landlord-btn">For a landlord</button>
+                    <a href="{% url 'booking:landlord_apartments' user.id %}">
+                         <button class="landlord-btn">For a landlord</button>
+                    </a>
 
                     <div class="action-profile" onclick="menuProfile();">
                         <div class="profile-image">

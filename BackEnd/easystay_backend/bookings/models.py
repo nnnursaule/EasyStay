@@ -100,6 +100,7 @@ class ResidentialComplex(models.Model):  # ЖК
 class Apartment(models.Model):
     landlord = models.ForeignKey(User, on_delete=models.CASCADE, related_name="apartments")
     title = models.CharField(max_length=255)  # Название ЖК или квартиры
+    address = models.CharField(max_length=255, null=True)
     complex = models.ForeignKey(ResidentialComplex, on_delete=models.CASCADE, related_name="apartments", null=True)  # ЖК
     rooms = models.IntegerField()  # Количество комнат
     area = models.FloatField()  # Площадь в м²
