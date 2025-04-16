@@ -30,6 +30,13 @@
     text-align: center;
     position: relative;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    font-size: 25px;
+    text-align: left;
+    margin-top: 0%;
+    color: #1E212C;
 
 }
 
@@ -37,7 +44,7 @@
     position: absolute;
     top: 10px;
     right: 15px;
-    font-size: 20px;
+    font-size: 25px;
     cursor: pointer;
 }
 
@@ -58,6 +65,7 @@
 .tab button.active {
     color: #FF5A30;
     font-weight: bold;
+    font-size: 20px;
 }
 
 input {
@@ -79,7 +87,7 @@ input {
     border-radius: 5px;
     margin-top: 5px;
     margin-bottom: 20px;
-    font-size: 16px;
+    font-size: 18px;
 }
 
 .continue-btn:hover {
@@ -90,7 +98,7 @@ input {
     display: block;
     margin-top: 10px;
     color: #FF5A30;
-    font-size: 15px;
+    font-size: 16px;
     text-decoration: none;
 
 }
@@ -101,70 +109,32 @@ input {
         padding: 20px;
     }
 
-    .tab {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .tab button {
-        font-size: 14px;
-    }
-
-    input {
-        font-size: 14px;
-        padding: 8px;
-    }
-
-    .continue-btn {
-        font-size: 14px;
-        padding: 8px;
-    }
-
-    .forgot-password {
-        font-size: 14px;
-    }
-}
-
-@media (max-width: 430px) {
-    .modal-content {
-        width: 30%;
-        padding: 5px;
-    }
-
-    .tab {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .tab button {
-        font-size: 13px;
-    }
-
-    input {
-        font-size: 13px;
-        padding: 7px;
-    }
-
-    .continue-btn {
-        font-size: 13px;
-        padding: 7px;
-    }
-
-    .forgot-password {
-        font-size: 13px;
-    }
-
     h2 {
-        font-size: 18px;
+        font-size: 22px;
     }
 
-    .close {
-        font-size: 18px;
-        top: 5px;
-        right: 10px;
+    .tab button.active {
+    font-size: 18px;
+    }
+
+    .tab button {
+        font-size: 14px;
+    }
+
+    input {
+        font-size: 15px;
+        padding: 8px;
+    }
+
+    .continue-btn {
+        font-size: 15px;
+        padding: 8px;
+    }
+
+    .forgot-password {
+        font-size: 14px;
     }
 }
-
     </style>
 </head>
 <body>
@@ -188,23 +158,29 @@ input {
     </div>
 
     <script>
-const modal = document.getElementById("loginModal");
-const openModalBtn = document.getElementById("openModalBtn");
-const closeBtn = document.querySelector(".close");
+          const modal = document.getElementById("loginModal");
+  const openModalBtn = document.getElementById("openModalBtn");
+  const closeBtn = document.querySelector(".close");
 
-openModalBtn.addEventListener("click", () => {
-    modal.style.display = "flex";
-});
 
-closeBtn.addEventListener("click", () => {
+  if (openModalBtn) {
+    openModalBtn.addEventListener("click", () => {
+      modal.style.display = "flex";
+    });
+  }
+
+  closeBtn.addEventListener("click", () => {
     modal.style.display = "none";
+    history.back(); 
 });
 
 window.addEventListener("click", (e) => {
     if (e.target === modal) {
         modal.style.display = "none";
+        history.back();
     }
 });
+
     </script>
 </body>
 </html>
