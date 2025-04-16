@@ -33,14 +33,9 @@ body {
 .nav-links {
     list-style: none;
     display: flex;
-    gap: 30px;
-}
-
-.nav-links {
-    list-style: none;
-    display: flex;
     margin-right: auto; 
     padding-left: 0;
+    gap: 27px;
 }
 
 .nav-links a {
@@ -241,7 +236,6 @@ body {
 /* Cards */
 .about-card {
     background-color: #fff;
-    border: 1px solid #eee;
     box-shadow: 0 4px 7px rgba(0, 0, 0, 0.2);
     border-radius: 8px;
     padding: 20px;
@@ -300,7 +294,7 @@ body {
     width: 100%;
     padding-bottom: 56.25%; 
     overflow: hidden;
-    border-radius: 12px;
+    border-radius: 5px;
     background-color: #000; 
 }
   
@@ -312,7 +306,6 @@ body {
     height: 100%;
     border: none;
 }
-
 
 .announcements {
     background-color: #fafafa;
@@ -328,7 +321,7 @@ body {
 .cards-container {
     display: grid;
     grid-template-columns: repeat(4, 1fr); 
-    gap: 20px; 
+    gap: 30px; 
     justify-content: center; 
     padding: 20px;
 }
@@ -342,6 +335,7 @@ body {
     flex-direction: column;
     align-items: center;
     height: 400px;
+    box-shadow: 0 4px 7px rgba(0, 0, 0, 0.2);
 }
 
 .card img {
@@ -350,7 +344,6 @@ body {
     object-fit: cover;
     display: block;
 }
-
 .card-hover {
     position: absolute;
     top: 0;
@@ -383,10 +376,6 @@ body {
     border-radius: 5px;
 }
 
-.view-project:hover {
-    background: #FF5A30;
-}
-
 .how-we-work {
     position: relative;
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), 
@@ -411,17 +400,11 @@ body {
 }
 
 .step {
-    background: rgba(255, 255, 255, 0.15);
     padding: 20px;
     border-radius: 10px;
     width: 18%;
     text-align: center;
     transition: 0.3s;
-}
-
-.step:hover {
-    background: rgba(255, 255, 255, 0.25);
-    transform: translateY(-5px);
 }
 
 .step-icon {
@@ -451,6 +434,7 @@ p {
     background: #FF5A30;
     color: white;
     font-size: 18px;
+    font-weight: 600;
     padding: 12px 25px;
     border: none;
     border-radius: 8px;
@@ -1009,36 +993,6 @@ p {
   
   
 @media (max-width: 768px) {
-        * {
-            box-sizing: border-box;
-        }
-    
-        body, html {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            overflow-x: hidden;
-        }
-    
-        .container {
-            width: 100%;
-            padding: 0 15px; 
-        }
-    
-        .content {
-            margin: 0 auto; 
-            max-width: 100%;
-        }
-    
-        .cards-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); 
-            gap: 10px;
-        }
-    
-        .card {
-            width: 100%;
-        }
          .navbar {
             flex-direction: row;
             align-items: center;
@@ -1050,6 +1004,10 @@ p {
             align-items: center;
             gap: 10px;
         }
+
+        .nav-links a {
+            font-size: 14px;
+        }
     
         .hero {
             height: auto;
@@ -1057,7 +1015,7 @@ p {
         }
     
         .title {
-            font-size: 2rem;
+            font-size: 1.75rem;
             text-align: center;
         }
     
@@ -1069,8 +1027,8 @@ p {
     
         .search-bar {
             flex-direction: row;
-            width: 60%;
-            height: 30%;
+            width: 55%;
+            height: 25%;
             padding: 10px;
             justify-content: center;
             margin: 0 auto;
@@ -1080,7 +1038,10 @@ p {
             width: 100%;
             margin-bottom: 10px;
         }
-  
+
+        .about-card {
+            height: 50%;
+        }
         .about-content {
             flex-direction: column;
             align-items: center;
@@ -1090,29 +1051,83 @@ p {
             width: 50%;
             flex-direction: row;
             align-items: center;
+            margin-right: 70px;
+        }
 
+        .right-video {
+            width: 65%;
         }
     
         .cards-container {
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(3, 1fr);
         }
     
-        .steps {
-            flex-direction: row;
-            align-items: center;
-        }
-    
-        .step {
-            width: 40%;
+        .card {
+            height: 300px;
         }
     
         .card img {
-            height: 250px;
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
         }
     
-        .right-video {
-            max-width: 100%;
+        .how-we-work {
+            padding: 9px 5px;
         }
+        
+        .how-we-work h2 {
+            font-size: 28px;
+        }
+        
+        .steps {
+            gap: 10px;
+        }
+        
+        .step-icon {
+            font-size: 1.7rem;
+            margin-bottom: 10px;
+            color: #ffffff; 
+          }
+        
+        .step-number {
+            font-size: 18px;
+        }
+
+.team-section .section-header h2 {
+    font-size: 1.8rem;
+}
+
+.team-container {
+    gap: 30px;
+    width: 100%;
+    padding: 8px 0;
+}
+
+.profile-card {
+    width: 210px;
+    height: 390px;
+    padding-bottom: 20px;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 4px 7px rgba(0, 0, 0, 0.2);
+}
+
+.profile-image img {
+    width: 100%;
+    height: 170px;
+}
+
+.profile-content p {
+    font-size: 14px;
+}
+
+.profile-content .name {
+    font-size: 18px;
+}
+
+        
 
         .footer-top,
         .footer-mid,
