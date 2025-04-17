@@ -20,7 +20,7 @@ body {
     background: rgba(0, 0, 0, 0.6);
     color: white;
     width: 100%;
-    height: 7%;
+    height: 8%;
     position: fixed; 
     top: 0;
     left: 0;
@@ -758,8 +758,116 @@ h1 {
     width: 682px;
     height: 90px;
 }
+.feedback-section {
+    background: #FFFFFF;
+    position: relative;
+    top: 250px;
+    margin: 80px auto;
+    border-radius: 2px;
+    max-width: 80%;
+    height: 285px;
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 40px;
+  }
 
-.review-section {
+  .feedback-section h2 {
+    padding-top: 30px;
+    font-size: 35px;
+    font-weight: 700;
+    margin-bottom: 50px;
+    color: #1E212C;
+    font-family: Ubuntu;
+  }
+
+  .feedback-form {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+    text-align: left;
+  }
+
+  .form-group.large {
+    width: 450px;
+  }
+
+  label {
+    font-weight: 400;
+    color: #424551;
+    ;
+    margin-bottom: 8px;
+    font-size: 15px;
+    text-align: left;
+  }
+
+  .feedback-form input {
+    padding: 15px;
+    font-size: 14px;
+    border: 1px solid #D7DADD;
+    border-radius: 6px;
+    background: #F4F5F6;
+    transition: border 0.2s;
+    height: 50px;
+    text-align: left;
+  }
+
+  .feedback-form input:focus {
+    border-color: #888;
+    outline: none;
+  }
+.send-btn {
+    background: #FF5A30;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 0 30px;
+    height: 50px;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+    margin-top: 20px;
+  }
+
+  .send-btn:hover {
+    background: #FF5A30;
+  }
+
+  .stars {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+    flex-direction: row-reverse;
+  }
+
+  .stars input {
+    display: none;
+  }
+
+  .stars label {
+    font-size: 30px;
+    color: #ccc;
+    cursor: pointer;
+  }
+
+  .stars input:checked ~ label,
+  .stars input:hover ~ label {
+    color: #FF5A30;
+  }
+
+
+/* .review-section {
     background: white;
     width: 80%;
     margin: 0 10%;
@@ -782,7 +890,6 @@ h1 {
     gap: 2.5%;
     width: 100%36;
     background-color: transparent;
-    /* margin: 0 5%; */
     flex-wrap: wrap;
 }
 
@@ -846,15 +953,13 @@ h1 {
 .form-container {
     padding: 30px;
     border-radius: 10px; 
-    /* margin: 0 5%; */
 }
 .form-container svg{position: relative; top: 20px; margin: auto;}
 .form-column{
     float : left;
     text-align: left;
-    /* width: 20%; */
     
-}
+} */
 
 .footer {
     background-color: #000815; 
