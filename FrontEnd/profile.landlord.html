@@ -242,23 +242,23 @@ body {
  
 }
 
-.favorites-section {
+.advertisements-section {
   margin-top: 20px;
   padding: 10px;
   margin-left: 170px;
   margin-bottom: 30px;
 }
 
-.favorites-section h3 {
+.advertisements-section h3 {
     margin-bottom: 15px; 
 }
 
-.favorites-container {
+.advertisement-container {
   display: flex;
   gap: 15px;
 }
 
-.favorite-card {
+.advertisement-card {
   width: 250px;
   background: #fff;
   border: 1px solid #ddd;
@@ -267,13 +267,13 @@ body {
   overflow: hidden;
 }
 
-.favorite-image {
+.advertisement-image {
   position: relative;
   width: 100%;
   height: 250px;
 }
 
-.favorite-image img {
+.advertisement-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -290,22 +290,38 @@ body {
   color: red;
   transform: scale(1.2);
 }
+.title-edit-row {
+  position: relative;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-.favorite-info {
+.title-edit-row h4 {
+  margin: 0;
+  font-size: 16px;
+  text-align: center;
+}
+
+.edit-icon {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.advertisement-info {
   padding: 10px;
   text-align: center;
 }
 
-.favorite-info h4 {
-  font-size: 16px;
-  margin-bottom: 5px;
-}
-
-.favorite-info span {
+.advertisement-info span {
   font-size: 14px;
   color: #666;
 }
- 
+
 footer {
     background-color: #000815; 
     color: #ddd;
@@ -621,7 +637,7 @@ footer {
     </p>
   </section>
   <div class="profile-actions">
-     <a href="complain.html" class="report-profile"><i class="bi bi-flag"></i> Report this profile</a>
+    <a href="complain.html" class="report-profile"><i class="bi bi-flag"></i> Report this profile</a>
     <button class="edit-profile" onclick="window.location.href='profile.tenant.edit.html';">Edit profile</button>
   </div>
 
@@ -670,32 +686,48 @@ footer {
   <a href="#" class="show-reviews">Show all reviews (28)</a>
 </section>
 
-<section class="favorites-section">
-  <h3>Kelly: all favourites</h3>
-    <div class="favorites-container">
-    <div class="favorite-card">
-      <div class="favorite-image">
+<section class="advertisements-section">
+  <h3>Kelly: all advertisements</h3>
+    <div class="advertisement-container">
+    <div class="advertisement-card">
+      <div class="advertisement-image">
         <img src="img/1.png" alt="Exclusive Opera">
         <span class="heart-icon" data-id="1">🤍</span>
       </div>
-      <div class="favorite-info">
+      <div class="advertisement-info">
+        <div class="title-edit-row">
         <h4>Exclusive Opera</h4>
+        <span class="edit-icon" onclick="goToEditPage()">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M17.2047 10.7959L19.0007 8.99994C19.546 8.45469 19.8186 8.18207 19.9644 7.88797C20.2416 7.32842 20.2416 6.67146 19.9644 6.11191C19.8186 5.81782 19.546 5.54519 19.0007 4.99994C18.4555 4.45469 18.1829 4.18207 17.8888 4.03633C17.3292 3.75905 16.6723 3.75905 16.1127 4.03633C15.8186 4.18207 15.546 4.45469 15.0007 4.99994L13.1821 6.8186C14.146 8.4692 15.5321 9.84476 17.2047 10.7959ZM11.7276 8.27305L4.85713 15.1436C4.43207 15.5686 4.21954 15.7812 4.0798 16.0422C3.94007 16.3033 3.88112 16.5981 3.76323 17.1875L3.14784 20.2645C3.08131 20.5971 3.04805 20.7634 3.14266 20.858C3.23727 20.9526 3.40357 20.9194 3.73618 20.8529L6.81316 20.2375C7.40262 20.1196 7.69734 20.0606 7.95844 19.9209C8.21954 19.7812 8.43207 19.5686 8.85713 19.1436L15.7465 12.2542C14.1249 11.2385 12.7532 9.87622 11.7276 8.27305Z" fill="#222222"/>
+            </svg>
+          </span> 
+      </div>
         <span>250k a месяц</span>
       </div>
     </div>
      <!-- 2-ші карточка -->
-     <div class="favorite-card">
-        <div class="favorite-image">
+     <div class="advertisement-card">
+        <div class="advertisement-image">
           <img src="img/2.png" alt="Luxury Apartment">
           <span class="heart-icon" data-id="2">🤍</span>
         </div>
-        <div class="favorite-info">
-          <h4>Luxury Apartment</h4>
+        <div class="advertisement-info">
+          <div class="title-edit-row">
+            <h4>Luxury Apartment</h4>
+            <span class="edit-icon" onclick="goToEditPage()">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M17.2047 10.7959L19.0007 8.99994C19.546 8.45469 19.8186 8.18207 19.9644 7.88797C20.2416 7.32842 20.2416 6.67146 19.9644 6.11191C19.8186 5.81782 19.546 5.54519 19.0007 4.99994C18.4555 4.45469 18.1829 4.18207 17.8888 4.03633C17.3292 3.75905 16.6723 3.75905 16.1127 4.03633C15.8186 4.18207 15.546 4.45469 15.0007 4.99994L13.1821 6.8186C14.146 8.4692 15.5321 9.84476 17.2047 10.7959ZM11.7276 8.27305L4.85713 15.1436C4.43207 15.5686 4.21954 15.7812 4.0798 16.0422C3.94007 16.3033 3.88112 16.5981 3.76323 17.1875L3.14784 20.2645C3.08131 20.5971 3.04805 20.7634 3.14266 20.858C3.23727 20.9526 3.40357 20.9194 3.73618 20.8529L6.81316 20.2375C7.40262 20.1196 7.69734 20.0606 7.95844 19.9209C8.21954 19.7812 8.43207 19.5686 8.85713 19.1436L15.7465 12.2542C14.1249 11.2385 12.7532 9.87622 11.7276 8.27305Z" fill="#222222"/>
+              </svg>
+            </span> 
+          </div>
           <span>300k a месяц</span>
+         
         </div>
       </div>
   </div>
 </section>
+
 
 <footer class="footer">
   <div class="footer-top">
@@ -772,6 +804,10 @@ footer {
 </footer>
 
 <script>
+  function goToEditPage() {
+  window.location.href = "edit-advertisments.html"; 
+}
+////////
   document.addEventListener("DOMContentLoaded", function () {
     const heartIcon = document.querySelector(".heart-icon");
     const itemId = heartIcon.getAttribute("data-id"); 
@@ -798,4 +834,3 @@ footer {
   
 </body>
 </html>
-
