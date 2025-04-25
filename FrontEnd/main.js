@@ -59,6 +59,11 @@ document.getElementById("logo2-img").addEventListener("click", function() {
   }
 
 
+//   function toggleDropdown(dropdown) {
+//     document.getElementById(dropdown).classList.toggle("active");
+//   }
+
+  
 
   document.addEventListener("DOMContentLoaded", function() {
 
@@ -68,13 +73,12 @@ document.getElementById("logo2-img").addEventListener("click", function() {
             this.yearChoose = document.getElementById(yearChoose);
             this.daycont = document.getElementById(daycont);
 
+
             this.changeDropdowns = this.changeDropdowns.bind(this);
-            this.monthChoose.addEventListener('change', this.changeDropdowns);
+            this.monthChoose.addEventListener('change', this.changeDropdowns, this.ne);
             this.yearChoose.addEventListener('change', this.changeDropdowns);
 
             this.date = new Date();
-            // this.start = null;
-            // this.end = null;
         }
 
         yearDropdown(){
@@ -141,6 +145,14 @@ document.getElementById("logo2-img").addEventListener("click", function() {
             this.show(changeMonth, changeYear);
         }
 
+        getThisMonth() {
+            return parseInt(this.monthChoose.value);
+        }
+
+        getThisYear() {
+            return parseInt(this.yearChoose.value);
+        }
+
         prev(){
             let year = parseInt(this.yearChoose.value);
             let prevmonth = parseInt(this.monthChoose.value);
@@ -155,6 +167,7 @@ document.getElementById("logo2-img").addEventListener("click", function() {
                     prevmonth = 11;
                 }
                 this.show(prevmonth, year);
+
             }
     
         }
@@ -173,6 +186,7 @@ document.getElementById("logo2-img").addEventListener("click", function() {
                     nextmonth = 0;
                 }
                 this.show(nextmonth, yearnext);
+
             }
         }
 
@@ -183,6 +197,24 @@ document.getElementById("logo2-img").addEventListener("click", function() {
       ];
     let first_date = null;
     let snd_date = null; 
+    
+
+    function showUnavailable() {
+        document.querySelectorAll('.date').forEach(date => {
+            const dateEl = new Date(date.dataset.date);
+            if(takenDates.includes(dateEl.toLocaleDateString("en-GB"))){
+                date.classList.add('unavailable');
+            }
+    
+        });
+    }
+
+    function select() {
+        document.querySelectorAll('.date:not(.inactive):not(.unavailable)').forEach(date => {
+            date.addEventListener('click', () => selectDate(date));
+        });
+        highlightSelectedDates();
+    }
 
     function selectDate(day){        
         const selectedDate = new Date(day.dataset.date);
@@ -212,7 +244,6 @@ document.getElementById("logo2-img").addEventListener("click", function() {
     function highlightSelectedDates() {
         document.querySelectorAll('.date').forEach(el => {
             el.classList.remove('range-start', 'in-range', 'range-end');
-            // const date = new Date(el.dataset.date);
             if(!el.classList.contains('inactive')){
                 const date = new Date(el.dataset.date);
                 if (first_date && date.getTime() === first_date.getTime()) {
@@ -226,12 +257,6 @@ document.getElementById("logo2-img").addEventListener("click", function() {
                     console.log(el.className);
                 }
             }
-            // if (first_date && date.getTime() === first_date.getTime()) {
-            //         el.classList.add('range-start');
-            // }
-            // if (snd_date && date.getTime() === snd_date.getTime()) {
-            //         el.classList.add('range-end');
-            // }
             else{
                 const date = new Date(el.dataset.date);
                 if (first_date && snd_date && date > first_date && date < snd_date) {
@@ -239,10 +264,7 @@ document.getElementById("logo2-img").addEventListener("click", function() {
                     console.log(el.className);
                 }
             }
-            // if (first_date && snd_date && date > first_date && date < snd_date) {
-            //         el.classList.add('in-range');
-            //         console.log(el.className);
-            // }
+
         });
 
     }
@@ -262,24 +284,55 @@ document.getElementById("logo2-img").addEventListener("click", function() {
 
     
     document.getElementById('nextmonth').addEventListener('click', ()=>{
-            cal1.next();
             cal2.next();
+            cal1.next();
+            select();
+            showUnavailable();
+    });
+    cal1.monthChoose.addEventListener('change', () =>{
+        const firstMonth = cal1.getThisMonth();
+        const firstYear = cal1.getThisYear();
+
+        cal2.show(firstMonth + 1, firstYear);
+        select();
+        showUnavailable();
     });
 
+    cal1.yearChoose.addEventListener('change', () =>{
+        const firstMonth = cal1.getThisMonth();
+        const firstYear = cal1.getThisYear();
+
+        cal2.show(firstMonth + 1, firstYear);
+        select();
+        showUnavailable();
+    });
+
+    cal2.monthChoose.addEventListener('change', () =>{
+        const firstMonth = cal2.getThisMonth();
+        const firstYear = cal2.getThisYear();
+
+        cal1.show(firstMonth - 1, firstYear);
+        select();
+        showUnavailable();
+    });
+
+    cal2.yearChoose.addEventListener('change', () =>{
+        const firstMonth = cal2.getThisMonth();
+        const firstYear = cal2.getThisYear();
+
+        cal1.show(firstMonth - 1, firstYear);
+        select();
+        showUnavailable();
+    });
     document.getElementById('prevmonth').addEventListener('click', ()=>{
         cal1.prev();
         cal2.prev();
-    })
-    
-    
-    document.querySelectorAll('.date').forEach(date => {
-        const dateEl = new Date(date.dataset.date);
-        if(takenDates.includes(dateEl.toLocaleDateString("en-GB"))){
-            date.classList.add('unavailable');
-        }
-
-        date.addEventListener('click', () => selectDate(date));
+        select();
+        showUnavailable();
     });
+    
+    select();
+    showUnavailable();
 
 
 });
