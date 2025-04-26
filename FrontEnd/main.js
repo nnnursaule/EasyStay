@@ -25,7 +25,7 @@ function viewCard(evt, cityName) {
     evt.currentTarget.className += " active";
 }
 
-document.getElementById("defaultLink").click();
+// document.getElementById("defaultLink").click();
 
 function menuLanguage(){
     const lang_btn = document.getElementById("languageButton");
