@@ -25,17 +25,15 @@ function viewCard(evt, cityName) {
     evt.currentTarget.className += " active";
 }
 
-// document.getElementById("defaultLink").click();
 
 function menuLanguage(){
     const lang_btn = document.getElementById("languageButton");
     lang_btn.classList.toggle("hidden");
-    
 }
 
 
 document.getElementById("logo2-img").addEventListener("click", function() {
-    window.location.href = "main.daycont_html";
+    window.location.href = "main.html";
   });
 
   
@@ -59,9 +57,9 @@ document.getElementById("logo2-img").addEventListener("click", function() {
   }
 
 
-//   function toggleDropdown(dropdown) {
-//     document.getElementById(dropdown).classList.toggle("active");
-//   }
+  function toggleDropdown(dropdown) {
+    document.getElementById(dropdown).classList.toggle("active");
+  }
 
   
 
