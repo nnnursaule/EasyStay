@@ -65,17 +65,17 @@
       </section>
     <section class="announcements">
         <h2>More announcements</h2>
-        {% for complex in complexes %}
+        {% for apartment in apartments %}
             <div class="cards-container">
                 <div class="card">
-                    <img src="{{ complex.image.url }}" alt="Apartment">
+                    <img src="{{ apartment.image.url }}" alt="Apartment">
                     <div class="card-info">
-                        <h3>{{ complex.name }}</h3>
-                        <p>{{ complex.city }}</p>
+                        <h3>{{ apartment.name }}</h3>
+                        <p>{{ apartment.city }}</p>
                     </div>
                     <div class="card-hover">
-                        <p>{{ complex.description }}</p>
-                        <a href="{% url 'booking:complex_detail' complex.id %}" class="view-project">VIEW PROJECT</a>
+                        <p>{{ apartment.description }}</p>
+                        <a href="{% url 'booking:apartment_detail' apartment.id %}" class="view-project">VIEW PROJECT</a>
                     </div>
                 </div>
             </div>

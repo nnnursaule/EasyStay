@@ -3,13 +3,16 @@ from django.urls import path
 
 app_name = 'booking'
 urlpatterns = [
-    path("", views.ResidentialComplexListView.as_view(), name='index'),
+    path("", views.ApartmentListView.as_view(), name='index'),
     path("main/<int:pk>/", views.main_page, name='main'),
-    path("complex/<int:pk>/", views.ResidentialComplexDetailView.as_view(), name="complex_detail"),
+    path("complex/<int:pk>/", views.ApartmentDetailView.as_view(), name="apartment_detail"),
     path("share", views.share_with_others, name="share"),
     path("landlord_apartments/<int:pk>/", views.landlord_apartments, name="landlord_apartments"),
     path('apartments/new/', views.ApartmentCreateView.as_view(), name='apartment_create'),
     path('apartments/<int:pk>/edit/', views.ApartmentUpdateView.as_view(), name='apartment_update'),
     path('apartments/<int:pk>/delete/', views.ApartmentDeleteView.as_view(), name='apartment_delete'),
     path('delete_apartment/<int:pk>/', views.delete_apartment, name='delete_apartment'),
+    path('favourites/remove/<int:apartment_id>/', views.remove_from_favourites, name='remove_from_favourites'),
+    path('favourites/', views.favourites_view, name='favourites'),
+    path('favourite/<int:apartment_id>/', views.toggle_favourite, name='toggle_favourite'),
 ]
