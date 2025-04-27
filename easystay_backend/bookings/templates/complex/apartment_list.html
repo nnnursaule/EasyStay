@@ -63,24 +63,29 @@
             </div>
         </div>
       </section>
-    <section class="announcements">
-        <h2>More announcements</h2>
+<section class="announcements">
+    <h2>More announcements</h2>
+    <div class="cards-container">  <!-- ВНЕ ЦИКЛА -->
         {% for apartment in apartments %}
-            <div class="cards-container">
-                <div class="card">
+            <div class="card">
+                {% if apartment.image %}
                     <img src="{{ apartment.image.url }}" alt="Apartment">
-                    <div class="card-info">
-                        <h3>{{ apartment.name }}</h3>
-                        <p>{{ apartment.city }}</p>
-                    </div>
-                    <div class="card-hover">
-                        <p>{{ apartment.description }}</p>
-                        <a href="{% url 'booking:apartment_detail' apartment.id %}" class="view-project">VIEW PROJECT</a>
-                    </div>
+                {% else %}
+                    <img src="{% static 'img/placeholder.png' %}" alt="No Image">
+                {% endif %}
+                <div class="card-info">
+                    <h3>{{ apartment.title }}</h3>
+                    <p>{{ apartment.address }}</p>
+                </div>
+                <div class="card-hover">
+                    <p>{{ apartment.description }}</p>
+                    <a href="{% url 'booking:apartment_detail' apartment.id %}" class="view-project">View details</a>
                 </div>
             </div>
         {% endfor %}
-    </section>
+    </div>
+</section>
+
 
     {% block extra_js %}
         <script>

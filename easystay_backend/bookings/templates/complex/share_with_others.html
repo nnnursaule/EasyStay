@@ -74,7 +74,7 @@
     </div>
     <script>
         function closeModal() {
-            document.getElementById('shareModal').style.display = 'none';
+            window.location.href = "{% url 'booking:apartment_detail' apartment.id %}";
         }
         function share(url) {
             window.open(url, '_blank');

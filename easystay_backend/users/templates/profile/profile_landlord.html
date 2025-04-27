@@ -625,8 +625,8 @@ footer {
 
 <section class="favorites-section">
   <h3>{{ user.username }}: all apartments</h3>
+  <div class="favorites-container">
   {% for apartment in apartments %}
-    <div class="favorites-container">
       <div class="favorite-card">
         <div class="favorite-image">
           <img src="{{ apartment.image.url }}" alt="Exclusive Opera">
@@ -640,8 +640,8 @@ footer {
           <span>{{ apartment.price_per_month }}</span>
         </div>
       </div>
-    </div>
   {% endfor %}
+    </div>
 </section>
 
 <footer class="footer">
