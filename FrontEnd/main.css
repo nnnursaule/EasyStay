@@ -3,7 +3,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Ubuntu';
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     text-align: center;
     
 }
@@ -119,8 +119,9 @@ body {
     position: absolute;
     top: 14px;
     left: 96px;
-    width: 180px;
+    width: 250px;
     height: 32px;
+    text-align: left;
     font-size: 20px;
     line-height: 160%;
     font-weight: 700px;
@@ -136,7 +137,7 @@ body {
     align-items: center;
   }
   
-  .action-profile .menu ul li svg {
+  .action-profile .menu ul li svg, .action-profile .menu ul li img {
     max-width: 20px;
     margin-right: 20px;
     transition: 0.5s;
@@ -153,7 +154,7 @@ body {
     line-height: 160%;
     transition: 0.5s;
     height: 32px;
-    width: 120px;
+    width: 300px;
     text-align: left;
     
   }
@@ -310,8 +311,8 @@ h1 {
 
 }
 
-.search-container input, .search-container select {
-    border-radius: 20px;
+ .search-container select {
+    border-radius: 8px;
     border: none;
     margin-right: 1%;
     height: 62px;
@@ -321,15 +322,7 @@ h1 {
     text-align: left;
     padding-left: 40px;
 }
-.search-container input::placeholder{
-    color:#22222261;
-}
-.search-container input{
-    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAACXBIWXMAAAsTAAALEwEAmpwYAAABaUlEQVR4nO2Wz0pCQRjFf2i6ydop9ArZO1T7FhrlK0TSH+spxNcw61GCaJMFJZn71rqolfHBufBtwjtzLxLkgYELM+ecud98cxhY4Q+hDLSAW+ANmGnY90BztiZXHAIfwHzBGAPNPAwLQM8JPwEXwDawrlEHLoGhW9cVNxo9CX0BJwvEbO5UaxPz6PLOJbQbwNtz5o1Q07I7U/vTULTFfQdKIcSWO9OYsyoCz9I4CiHeiXROPDrSuAkhjUSy7o1FXRp2z1NjKlIlg/GGNKbLNt6MMR7lUOod19mpMRDJEikW19Lox1ynYYbr9CKN49AAGYtoMRiKM3EnwFooueki02IwLfaBb3EPiETXmbdVwt9Q1J8mpp9ANda44MznisGOwqGiYd175c40MU3W18iAhq7FoofAROWtuqzObF5S4Fv2vioYZtpQX93rG6mWp3koqu5lYpvd4r+Y11zZH5ZpnJg/AvfLNl4Bww/dcoIlpDH7/gAAAABJRU5ErkJggg==');
-    background-repeat: no-repeat;
-    background-position: right 20px center;
-    background-size: 20px;
-}
+
 
 .search-container select{
     appearance: none;
@@ -355,6 +348,99 @@ h1 {
 .search-btn , .search-container #rental{
     margin-top: 30px;
 }
+
+.dropdown {
+    position: relative;
+    width: 30%;;
+    margin-top: 30px;
+    margin-right: auto;
+    margin-left: 2%;
+
+  }
+
+.dropdown-toggle {
+    background-color: #ffffff;
+    color: #22222261;
+    
+    width: 100%;
+    height: 62px;
+    font-size: 20px;
+    
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    padding-left: 40px;
+    align-items: center;
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAvklEQVR4nO3RwQqDMBCE4aGHYt92j75XD7ZPZxEUSsCmarKZ1flhbznMRwCllFJKKeXZDSfYeAfwBNCDNwPwAvDIIcb5elLEON97DZNC2DCWbJsg3dpjVoxtQbBibA+CDWNHECwYK4FojbGSiFYYq4HwxlhNhBfGBVEb44qohWmCKI1piiiFoUAcxVAh9mIoEVsx1Ih/MSEQOUwoxNI0cEiGf98QAfHrZ8L8RA4TEpFiQiOWujMglFJKKaWu3AfcdLEudXvTswAAAABJRU5ErkJggg==');
+    background-repeat: no-repeat;
+    background-position: right 20px center;
+    background-size: 20px;
+  }
+
+.dropdown-content {
+    display: none;    
+    position: absolute;
+    background-color: #fff;
+    padding: 25px;
+    margin-top: -10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    /* border-radius: 8px; */
+    z-index: 1;
+    width: 100%;
+    color: #000000;
+  }
+
+.dropdown.active .dropdown-content {
+    display: block;
+  }
+
+.dropdown-content label {
+    display: block;
+    margin-top: 10px;
+    font-size: 24px;
+    font-weight: 600;
+  }
+
+input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    height: 40px;
+    margin-top: 4px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+.gender-options {
+    display: flex;
+    gap: 20px;
+  }
+
+.gender-options input {
+    font-weight: normal;
+    display: flex;
+  }
+
+  .gender-options label {
+    font-weight: normal;
+    display: flex;
+    flex-direction: row;
+    font-size: 24px;
+    font-weight: 600;
+    height: 20px;
+    align-items: center;
+    gap: 10px;
+    width: 100px;
+  }
+
+  
+
+  input[type="radio"] {
+    accent-color: black; 
+  }
+
+  input[type="radio"]:checked {
+    accent-color: #FF5A30; 
+  }
 
 .search-container button.search-btn {
     box-sizing: border-box;
@@ -385,6 +471,7 @@ h1 {
     flex-grow: 0;
 
 }
+
 .search-container button::after{
     background: linear-gradient(to left,  #FDD836 100%,#FF5A30 19%);
 }
