@@ -45,7 +45,7 @@
                                     <path d="M3.45067 10.9082L10.4033 17.4395C10.6428 17.6644 10.7625 17.7769 10.9037 17.8046C10.9673 17.8171 11.0327 17.8171 11.0963 17.8046C11.2375 17.7769 11.3572 17.6644 11.5967 17.4395L18.5493 10.9082C20.5055 9.07059 20.743 6.0466 19.0978 3.92607L18.7885 3.52734C16.8203 0.99058 12.8696 1.41601 11.4867 4.31365C11.2913 4.72296 10.7087 4.72296 10.5133 4.31365C9.13037 1.41601 5.17972 0.990584 3.21154 3.52735L2.90219 3.92607C1.25695 6.0466 1.4945 9.07059 3.45067 10.9082Z" stroke="#33363F" stroke-width="2"/>
                                 </svg>
 
-                                <a href="#">Favourites</a>
+                                <a href="favourites.html">Favourites</a>
                               </li>
                               <li>
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -85,6 +85,11 @@
                                 <a href="#">FAQ</a>
                               </li>
                               <li>
+                                <img width="24" height="24" src="https://img.icons8.com/ios/50/1A1A1A/ball-point-pen.png" alt="ball-point-pen"/>
+                                    
+                                <a href="#">Request for booking</a>
+                              </li>
+                              <li>
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M2 12L1.21913 11.3753L0.719375 12L1.21913 12.6247L2 12ZM11 13C11.5523 13 12 12.5523 12 12C12 11.4477 11.5523 11 11 11V13ZM5.21913 6.3753L1.21913 11.3753L2.78087 12.6247L6.78087 7.6247L5.21913 6.3753ZM1.21913 12.6247L5.21913 17.6247L6.78087 16.3753L2.78087 11.3753L1.21913 12.6247ZM2 13H11V11H2V13Z" fill="#33363F"/>
                                     <path d="M10 8.13193V7.38851C10 5.77017 10 4.961 10.474 4.4015C10.9479 3.84201 11.7461 3.70899 13.3424 3.44293L15.0136 3.1644C18.2567 2.62388 19.8782 2.35363 20.9391 3.25232C22 4.15102 22 5.79493 22 9.08276V14.9172C22 18.2051 22 19.849 20.9391 20.7477C19.8782 21.6464 18.2567 21.3761 15.0136 20.8356L13.3424 20.5571C11.7461 20.291 10.9479 20.158 10.474 19.5985C10 19.039 10 18.2298 10 16.6115V16.066" stroke="#33363F" stroke-width="2"/>
@@ -95,7 +100,7 @@
                         </div>
                     </div>
 
-                    <a href="wishlist.html" class="heart-btn">
+                    <!-- <a href="wishlist.html" class="heart-btn">
                         <svg width="34" height="36" viewBox="0 0 34 36" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g filter="url(#filter0_d_133_1279)">
                             <path d="M7.56335 17.3853L16.3153 25.6068C16.6398 25.9116 16.802 26.064 17 26.064C17.198 26.064 17.3602 25.9116 17.6847 25.6068L17.6847 25.6068L26.4367 17.3853C28.8819 15.0882 29.1788 11.3082 27.1223 8.65758L26.7356 8.15918C24.2753 4.98822 19.337 5.52002 17.6083 9.14206C17.3641 9.6537 16.6359 9.6537 16.3917 9.14206C14.663 5.52002 9.72465 4.98823 7.26443 8.15918L6.87773 8.65759C4.82118 11.3083 5.11813 15.0882 7.56335 17.3853Z" stroke="white" stroke-opacity="0.75" stroke-width="3"/>
@@ -113,7 +118,7 @@
                             </filter>
                             </defs>
                             </svg>
-                    </a>
+                    </a> -->
                     <div class="language-container">
                         <button id="languageButton" class="language-btn" onclick="">
                             <img src="img/translate.png">        
@@ -134,14 +139,60 @@
         <!-- <div class="overlay"></div> -->
         <h1>Hi, Madina! <br>Welcome to the <span class="highlight">EASYSTAY!</span></h1>
         <div class="search-container">
-            <input type="search" placeholder="Search by regions" class="select1">
-            <select class="select1"><option>Residential complex</option></select>
-            <select class="select2"><option>Price</option></select>
-            <select class="select2">
-                <option>People</option>
-                <option>1st</option>
+            <select class="select1">
+                <option value="" disabled selected hidden>Search by regions</option>
+                <option value="1">Alatau region</option>
+                <option value="2">Almaly region</option>
+                <option value="3">Auezov region</option>
+                <option value="4">Bostandyk region</option>
+                <option value="5">Medeu region</option>
+                <option value="6">Nauryzbay region</option>
+                <option value="7">Turksib region</option>
+                <option value="8">Zhetysu region</option>
             </select>
-            <select class="select1" id="rental"><option>Rental type</option></select>
+            <select class="select1">
+                <option value="" disabled selected hidden>Residental complex</option>
+                <option value="1">Sensata City</option>
+                <option value="2">Koktobe City</option>
+            </select>
+            <select class="select2">
+                <option value="" disabled selected hidden>Price</option>
+                <option value="1">50-100k</option>
+                <option value="2">100-150k</option>
+                <option value="3">150-200k</option>
+                <option value="4">200-250k</option>
+            </select>
+            <select class="select2">
+                <option value="" disabled selected hidden>Room</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+            </select>
+            <select class="select1" id="rental">
+                <option value="" disabled selected hidden>Rental type</option>
+                <option value="1">Short-term</option>
+                <option value="2">Long-term</option>
+            </select>
+
+            <div class="dropdown" id="dropdown2">
+                <div class="dropdown-toggle" onclick="toggleDropdown('dropdown2')">
+                    Check in </span>
+                  </div>>
+
+                <div class="dropdown-content">
+                    <div class="gender-options">
+                      <label><input type="radio" name="gender" value="male"> Male</label>
+                      <label><input type="radio" name="gender" value="female"> Female</label>
+                    </div>
+                    
+                    <label for="major">Your major</label>
+                    <input type="text" id="major" placeholder="Input major">
+                
+                    <label for="age">Your age</label>
+                    <input type="text" id="age" placeholder="Input age">
+                  </div>
+            </div>
             <button class="search-btn"><img width="24" height="24" src="https://img.icons8.com/fluency/48/sparkling.png" alt="sparkling"/>  Search</button>
 
         </div>
