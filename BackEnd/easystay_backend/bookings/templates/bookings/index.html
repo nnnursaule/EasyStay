@@ -13,6 +13,22 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 </head>
+<style>
+.price-range {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 10px;
+    max-width: 400px;
+}
+.price-range input[type="range"] {
+    width: 100%;
+}
+.price-range span {
+    font-size: 14px;
+    font-weight: bold;
+}
+</style>
 <body>
     <header>
         <header>
@@ -51,7 +67,7 @@
                                     <path d="M3.45067 10.9082L10.4033 17.4395C10.6428 17.6644 10.7625 17.7769 10.9037 17.8046C10.9673 17.8171 11.0327 17.8171 11.0963 17.8046C11.2375 17.7769 11.3572 17.6644 11.5967 17.4395L18.5493 10.9082C20.5055 9.07059 20.743 6.0466 19.0978 3.92607L18.7885 3.52734C16.8203 0.99058 12.8696 1.41601 11.4867 4.31365C11.2913 4.72296 10.7087 4.72296 10.5133 4.31365C9.13037 1.41601 5.17972 0.990584 3.21154 3.52735L2.90219 3.92607C1.25695 6.0466 1.4945 9.07059 3.45067 10.9082Z" stroke="#33363F" stroke-width="2"/>
                                 </svg>
 
-                                <a href="#">Favourites</a>
+                                <a href="{% url 'booking:favourites' %}">Favourites</a>
                               </li>
                               <li>
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -137,44 +153,102 @@
 
 
     <section class="hero">
-        <!-- <div class="overlay"></div> -->
-        <h1>Hi, {{ user.first_name }}! <br>Welcome to the <span class="highlight">EASYSTAY!</span></h1>
+    <h1>Hi, {{ user.first_name }}! <br>Welcome to the <span class="highlight">EASYSTAY!</span></h1>
+    <form method="get" action="{% url 'booking:main' user.id %}">
         <div class="search-container">
-            <input type="search" placeholder="Search by regions" class="select1">
-            <select class="select1"><option>Residential complex</option></select>
-            <select class="select2"><option>Price</option></select>
-            <select class="select2">
-                <option>People</option>
-                <option>1st</option>
-            </select>
-            <select class="select1" id="rental"><option>Rental type</option></select>
-            <button class="search-btn"><img width="24" height="24" src="https://img.icons8.com/fluency/48/sparkling.png" alt="sparkling"/>  Search</button>
 
+            <!-- Город -->
+            <select class="select1" name="region">
+                <option value="">Choose Region</option>
+                <option value="almaly">Алмалинский</option>
+                <option value="auyezov">Ауэзовский</option>
+                <option value="bostandyk">Бостандыкский</option>
+                <option value="medeu">Медеуский</option>
+                <option value="nauryzbay">Наурызбайский</option>
+                <option value="turksib">Турксибский</option>
+                <option value="zhetysu">Жетысуский</option>
+                <option value="alatau">Алатауский</option>
+            </select>
+
+            <!-- ЖК -->
+            <select name="complex_id" class="select1">
+                <option value="">Residential complex</option>
+                {% for complex in complexes %}
+                    <option value="{{ complex.id }}">{{ complex.name }}</option>
+                {% endfor %}
+            </select>
+
+            <!-- Цена -->
+            <div class="price-range">
+                <label for="price_min">₸ Min</label>
+                <input type="range" id="price_min" name="price_min" min="0" max="1000000" step="10000" value="0" oninput="updatePriceLabel()">
+                <span id="min_price_val">0</span>
+
+                <label for="price_max">₸ Max</label>
+                <input type="range" id="price_max" name="price_max" min="0" max="1000000" step="10000" value="1000000" oninput="updatePriceLabel()">
+                <span id="max_price_val">1 000 000</span>
+            </div>
+
+            <!-- Люди (по количеству комнат) -->
+            <select name="room_count" class="select2">
+                <option value="">Rooms</option>
+                <option value="1">1 room</option>
+                <option value="2">2 rooms</option>
+                <option value="3">3 rooms</option>
+                <option value="4">4+ rooms</option>
+            </select>
+
+            <!-- Тип аренды -->
+            <select name="rental_type" class="select1" id="rental">
+                <option value="">Rental type</option>
+                <option value="day">Daily</option>
+                <option value="month">Monthly</option>
+            </select>
+
+            <!-- Кнопка -->
+            <button type="submit" class="search-btn">
+                <img width="24" height="24" src="https://img.icons8.com/fluency/48/sparkling.png" alt="sparkling"/> Search
+            </button>
         </div>
-    </section>
+    </form>
+</section>
+
 
     <section class="announcements">
         <h2>Recommendations</h2>
-        {% for complex in complexes %}
-            <div class="cards-container">
-                <div class="card">
-                    <img src="{{ complex.image.url }}" alt="Apartment">
-                    <div class="card-info">
-                        <h3>{{ complex.name }}</h3>
-                        <p>{{ complex.city }}</p>
-                    </div>
-                    <div class="card-hover">
-                        <p>{{ complex.description }}</p>
-                        <a href="{% url 'booking:complex_detail' complex.id %}" class="view-project">VIEW PROJECT</a>
-                    </div>
-                </div>
-            </div>
+    <div class="card-container">
+    {% for apartment in apartments %}
+    <div class="card">
+        <img src="{{ apartment.image.url }}" alt="Apartment">
+        <svg class="heart-icon" width="42" height="37" viewBox="0 0 42 37" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- SVG как у тебя -->
+        </svg>
+        <div class="card-info">
+            <h3>{{ apartment.complex.name }}</h3>
+            <p>
+                {% if apartment.rental_type == "month" %}
+                    {{ apartment.price_per_month }}₸ in month
+                {% else %}
+                    {{ apartment.price_per_day }}₸ per day
+                {% endif %}
+            </p>
+        </div>
+        <div class="card-hover">
+            <p>{{ apartment.description|truncatechars:100 }}</p>
+            <button>
+                <a href="{% url 'booking:apartment_detail' apartment.id %}" class="view-details">View details</a>
+            </button>
+        </div>
+    </div>
+        {% empty %}
+            <p>No apartments found.</p>
         {% endfor %}
+    </div>
     </section>
 
     <section class="map">
         <div class="map-container">
-            <img src="img/mapofkz.png" alt="Map of Kz">
+            <img src="{% static 'vendor/img/products/mapofkz.png' %}" alt="Map of Kz">
         </div>
     </section>
 
@@ -601,6 +675,14 @@
 
         document.getElementById("defaultLink").click();
     </script> -->
+        <script>
+            function updatePriceLabel() {
+                const min = document.getElementById('price_min').value;
+                const max = document.getElementById('price_max').value;
+                document.getElementById('min_price_val').innerText = parseInt(min).toLocaleString();
+                document.getElementById('max_price_val').innerText = parseInt(max).toLocaleString();
+            }
+        </script>
 
 </body>
 </html>

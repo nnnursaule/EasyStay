@@ -100,7 +100,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'booking_db',
-        'USER': 'booking_username',
+        'USER': 'booking_user',
         'PASSWORD': 'era72934',
         'HOST': 'localhost',  # Or your database server's hostname
         'PORT': '5432',       # Default PostgreSQL port

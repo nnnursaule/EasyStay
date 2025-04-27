@@ -40,7 +40,7 @@
                         <div class="menu">
                             <h5>
                                 <!-- <div class="profile-image">  -->
-                                    <img src="img/photo.png" alt="EasyStay">
+                                    <img src="{% if user.image %}{{ user.image.url }}{% else %}{% static 'vendor/img/users/default_avatar.jpg' %}{% endif %}" alt="EasyStay">
                                 <!-- </div> -->
                                 <div class="name"><strong>{{ user.first_name }} {{ user.last_name }}</strong> <p>210103373@stu.sdu.edu.kz</p> </div>
                             </h5>
@@ -228,73 +228,65 @@
     </section>
 
     <section class="description">
-            <p class="head">{{ complex.name }}</p>
-            <div class="stars-complain">
-                <img src="{% static 'vendor/img/products/stars.png' %}" alt="" >
+    <p class="head">{{ apartment.title }}</p>
+    <div class="stars-complain">
+        <img src="{% static 'vendor/img/products/stars.png' %}" alt="" >
 
-                <div class="complain">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M8.85 5H6C5.44772 5 5 5.44771 5 6V12C5 12.5523 5.44772 13 6 13H8.85C8.93284 13 9 12.9328 9 12.85V5.15C9 5.06716 8.93284 5 8.85 5Z" stroke="#222222" stroke-width="2" stroke-linecap="round"/>
-                        <path d="M9 13L10.8321 15.7481C10.9416 15.9123 11 16.1054 11 16.3028V19C11 19.5523 11.4477 20 12 20H13C14.1046 20 15 19.1046 15 18V13" stroke="#222222" stroke-width="2" stroke-linecap="round"/>
-                        <path d="M13 13H17.7655C18.9575 13 19.8849 11.9639 19.7532 10.7791L19.1977 5.77914C19.0851 4.76627 18.229 4 17.2099 4H13.4142C13.149 4 12.8946 4.10536 12.7071 4.29289L12.2929 4.70711C12.1054 4.89464 11.851 5 11.5858 5H9" stroke="#222222" stroke-width="2" stroke-linecap="round"/>
-                    </svg>
+        <div class="complain">
+            <!-- SVG оставляем как есть -->
+            <span>Complain</span>
+        </div>
+    </div>
 
-                    <span>Complain</span>
-                </div>
-            </div>
+    <div class="desc-price">
+        <img src="{% static 'vendor/img/products/price.png' %}" alt="" width="31px" height="31px">
+        <span>{{ apartment.created_at|date:"Y" }}</span> <!-- Или apartment.complex.built_year если есть -->
+    </div>
 
-            <div class="desc-price">
-                <img src="{% static 'vendor/img/products/price.png' %}" alt="" width="31px" height="31px">
+    <div class="desc-loc">
+        <!-- SVG оставляем -->
+        <span>{{ apartment.address }}</span>
+    </div>
 
-                <span>{{ complex.built_year}}</span>
-            </div>
+    <div class="desc-features">
+        <p class="features" id="room-type">Rooms: {{ apartment.rooms }}</p>
+        <p class="features" id="bed-area">Area: {{ apartment.area }} m²</p>
+        <p class="features" id="property">Floor: {{ apartment.floor }}</p>
+        <p class="features" id="furnished">Furnished</p> <!-- Здесь можно динамически подставить -->
+        <p class="features" id="numperson">{{ apartment.bathrooms }} bathroom </p>
+    </div>
 
-            <div class="desc-loc">
-                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M20.3963 33.1426C22.4377 32.1223 31.6663 27.0287 31.6663 18.3334C31.6663 11.8901 26.443 6.66675 19.9997 6.66675C13.5564 6.66675 8.33301 11.8901 8.33301 18.3334C8.33301 27.0287 17.5617 32.1223 19.6031 33.1426C19.8579 33.27 20.1415 33.27 20.3963 33.1426ZM19.9997 23.3334C22.7611 23.3334 24.9997 21.0948 24.9997 18.3334C24.9997 15.572 22.7611 13.3334 19.9997 13.3334C17.2383 13.3334 14.9997 15.572 14.9997 18.3334C14.9997 21.0948 17.2383 23.3334 19.9997 23.3334Z" fill="black" fill-opacity="0.6"/>
-                </svg>
-                <span>Dostyk Avenue and Abay Avenue</span>
-            </div>
+    <div class="descofapartment">
+        <p class="desc-head">Description</p>
+        <p class="desc-text">{{ apartment.description }}</p>
+    </div>
 
-            <div class="desc-features">
-                <p class="features" id="room-type">Private room</p>
-                <p class="features" id="bed-area">Bedroom: 11 m²</p>
-                <p class="features" id="property">Property: 35 m²</p>
-                <p class="features" id="furnished">Furnished</p>
-                <p class="features" id="numperson">for 2 persons</p>
-            </div>
+    <div class="facilities">
+        <p class="fac-head">Facilities and Amenities</p>
+        <ul class="fac-list">
+            {% for amenity in existing_amenities %}
+                <li style="color: green;">✔ {{ amenity }}</li>
+            {% endfor %}
+            {% for amenity in missing_amenities %}
+                <li style="color: red;">❌ {{ amenity }}</li>
+            {% endfor %}
+        </ul>
+    </div>
 
-            <div class="descofapartment">
-                <p class="desc-head">Description</p>
-                <p class="desc-text">{{ complex.description }}</p>
-            </div>
+    <div class="rules-pref">
+        <p class="rule-head">Rules and preferences</p>
+        <ul class="rule-list">
+            <li><strong>Age:</strong> {{ apartment.min_age }} - {{ apartment.max_age }}</li>
+            <li><strong>Musical instruments:</strong> {{ apartment.get_musical_instruments_display }}</li>
+            <li><strong>Gender preference:</strong> {{ apartment.get_gender_preference_display }}</li>
+            <li><strong>Pets allowed:</strong> {% if apartment.pets_allowed %}Yes{% else %}No{% endif %}</li>
+            <li><strong>Tenant type:</strong> {{ apartment.get_tenant_type_display }}</li>
+            <li><strong>Smoking policy:</strong> {{ apartment.get_smoking_policy_display }}</li>
+            <li><strong>Guest policy:</strong> {{ apartment.get_guest_policy_display }}</li>
+        </ul>
+    </div>
+</section>
 
-            <div class="facilities">
-                <p class="fac-head">Facilities and Amenities</p>
-                <ul class="fac-list">
-                    {% for amenity in existing_amenities %}
-                        <li style="color: green;">✔ {{ amenity }}</li>
-                    {% endfor %}
-                    {% for amenity in missing_amenities %}
-                        <li style="color: red;">❌ {{ amenity }}</li>
-                    {% endfor %}
-                </ul>
-            </div>
-
-            <div class="rules-pref">
-                <p class="rule-head">Rules and preferences</p>
-                <ul class="rule-list">
-                    <li><strong>Age:</strong> {{ complex.min_age }} - {{ complex.max_age }}</li>
-                    <li><strong>Musical instruments:</strong> {{ complex.get_musical_instruments_display }}</li>
-                    <li><strong>Gender preference:</strong> {{ complex.get_gender_preference_display }}</li>
-                    <li><strong>Pets allowed:</strong> {% if complex.pets_allowed %}Yes{% else %}No{% endif %}</li>
-                    <li><strong>Tenant type:</strong> {{ complex.get_tenant_type_display }}</li>
-                    <li><strong>Smoking policy:</strong> {{ complex.get_smoking_policy_display }}</li>
-                    <li><strong>Guest policy:</strong> {{ complex.get_guest_policy_display }}</li>
-                    <li><strong>Quiet hours:</strong> {{ complex.quiet_hours_start }} - {{ complex.quiet_hours_end }}</li>
-                </ul>
-            </div>
-    </section>
 
     <section class="documents-desc">
         <div class="documents">
@@ -320,7 +312,7 @@
         <div>
             <p id="loc-text">Location</p>
             <div class="loc-img">
-                <img src="img/location.png">
+                <img src="{% static 'vendor/img/products/location.png' %}">
             </div>
         </div>
     </section>
@@ -650,8 +642,8 @@
 
 
 
-    <script src="main.js"></script>
-    <script src="script.js"></script>
+    <script src="{% static 'vendor/main.js' %}"></script>
+    <script src="{% static 'vendor/script.js' %}"></script>
 
 </body>
 

@@ -25,8 +25,8 @@ class User(AbstractUser):
     gender = models.CharField(max_length=6, choices=GENDER_CHOICES, null=True, blank=True)
 
     about = models.TextField(blank=True, null=True)  # Описание арендатора
-    favourites = models.ManyToManyField('bookings.Apartment', related_name='favourited_by', blank=True)  # Избранное
     experience = models.IntegerField(default=0, null=True)
+    
     def __str__(self):
         return self.email
 
