@@ -7,6 +7,7 @@ from users.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
+from django.http import JsonResponse
 
 class ApartmentListView(ListView):
     model = Apartment
@@ -37,8 +38,9 @@ class ApartmentDetailView(DetailView):
         return context
 
 
-def share_with_others(request):
-    return render(request, "complex/share_with_others.html")
+def share_with_others(request, apartment_id):
+    apartment = get_object_or_404(Apartment, id=apartment_id)
+    return render(request, "complex/share_with_others.html", {"apartment": apartment})
 
 
 def main_page(request, pk):
@@ -49,7 +51,7 @@ def main_page(request, pk):
     city = request.GET.get("city")
     complex_id = request.GET.get("complex_id")
     max_price = request.GET.get("max_price")
-    room_count = request.GET.get("room_count")
+    room_count = request.GET.get("rooms")
     rental_type = request.GET.get("rental_type")
 
     # Применяем фильтры
@@ -69,15 +71,22 @@ def main_page(request, pk):
         if room_count == "4":
             apartments = apartments.filter(room_count__gte=4)
         else:
-            apartments = apartments.filter(rooms=room_count)
+            apartments = apartments.filter(room_count=room_count)
 
     complexes = ResidentialComplex.objects.all()
+
+    # Добавляем список ID избранных квартир
+    favourite_ids = []
+    if request.user.is_authenticated:
+        favourite_ids = Favourite.objects.filter(user=request.user).values_list("apartment_id", flat=True)
 
     return render(request, "bookings/index.html", {
         "user": user,
         "apartments": apartments,
         "complexes": complexes,
+        "favourite_ids": favourite_ids,
     })
+
 
 
 
@@ -143,15 +152,21 @@ def favourites_view(request):
     return render(request, 'bookings/favourites.html', {'favourites': favourites})
 
 def add_to_favourites(request, apartment_id):
-    apartment = Apartment.objects.get(id=apartment_id)
-    if not Favourite.objects.filter(user=request.user, apartment=apartment).exists():
-        Favourite.objects.create(user=request.user, apartment=apartment)
-    return redirect('all_apartments')
+    apartment = get_object_or_404(Apartment, id=apartment_id)
+    Favourite.objects.get_or_create(user=request.user, apartment=apartment)
+    return redirect(request.META.get('HTTP_REFERER', 'booking:index'))
 
 def toggle_favourite(request, apartment_id):
     apartment = get_object_or_404(Apartment, id=apartment_id)
     fav, created = Favourite.objects.get_or_create(user=request.user, apartment=apartment)
 
     if not created:
-        fav.delete()  # Если уже в избранном — удаляем
-    return redirect(request.META.get('HTTP_REFERER', 'favourites'))
+        fav.delete()
+        is_favourite = False
+    else:
+        is_favourite = True
+
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+        return JsonResponse({'is_favourite': is_favourite})
+    else:
+        return redirect(request.META.get('HTTP_REFERER', 'favourites'))

@@ -35,7 +35,9 @@
             <nav class="navbar">
                 <div class="left-nav">
                     <div class="logo">
-                        <img src="{% static 'vendor/img/products/logo2.png' %}" alt="EasyStay">
+                        <a href="{% url 'booking:index' %}">
+                            <img src="{% static 'vendor/img/products/logo2.png' %}" alt="EasyStay">
+                        </a>
                     </div>
                     <ul class="nav-links">
                         <li><a href="#">Services</a></li>
@@ -215,36 +217,52 @@
 
 
     <section class="announcements">
-        <h2>Recommendations</h2>
-    <div class="card-container">
-    {% for apartment in apartments %}
-    <div class="card">
-        <img src="{{ apartment.image.url }}" alt="Apartment">
-        <svg class="heart-icon" width="42" height="37" viewBox="0 0 42 37" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- SVG как у тебя -->
-        </svg>
-        <div class="card-info">
-            <h3>{{ apartment.complex.name }}</h3>
-            <p>
-                {% if apartment.rental_type == "month" %}
-                    {{ apartment.price_per_month }}₸ in month
-                {% else %}
-                    {{ apartment.price_per_day }}₸ per day
-                {% endif %}
-            </p>
+    <h2>Recommendations</h2>
+    <div class="cards-container">
+        {% for apartment in apartments %}
+        <div class="card">
+            <img src="{{ apartment.image.url }}" alt="Apartment">
+
+            <form method="post" action="{% url 'booking:add_to_favourites' apartment.id %}">
+                {% csrf_token %}
+                <button type="submit" class="heart-button" style="background: none; border: none;">
+                    {% if apartment.id in favourite_ids %}
+                        <!-- Красное сердечко (уже в избранных) -->
+                        <svg class="heart-icon" width="42" height="37" viewBox="0 0 42 37" fill="red" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M8.41714 23.1803L20.3147 34.3568C20.6391 34.6616 20.8013 34.8139 20.9993 34.8139C21.1974 34.8139 21.3596 34.6616 21.684 34.3568L33.5816 23.1803C36.8418 20.1176 37.2378 15.0776 34.4957 11.5434L33.9801 10.8789C30.6998 6.65093 24.1154 7.35998 21.8105 12.1894C21.4849 12.8716 20.5138 12.8716 20.1882 12.1894C17.8833 7.35998 11.2989 6.65093 8.01859 10.8789L7.50299 11.5434C4.76093 15.0776 5.15684 20.1176 8.41714 23.1803Z"/>
+                        </svg>
+                    {% else %}
+                        <!-- Белое сердечко (еще не в избранных) -->
+                        <svg class="heart-icon" width="42" height="37" viewBox="0 0 42 37" fill="white" stroke="black" stroke-width="2" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M8.41714 23.1803L20.3147 34.3568C20.6391 34.6616 20.8013 34.8139 20.9993 34.8139C21.1974 34.8139 21.3596 34.6616 21.684 34.3568L33.5816 23.1803C36.8418 20.1176 37.2378 15.0776 34.4957 11.5434L33.9801 10.8789C30.6998 6.65093 24.1154 7.35998 21.8105 12.1894C21.4849 12.8716 20.5138 12.8716 20.1882 12.1894C17.8833 7.35998 11.2989 6.65093 8.01859 10.8789L7.50299 11.5434C4.76093 15.0776 5.15684 20.1176 8.41714 23.1803Z"/>
+                        </svg>
+                    {% endif %}
+                </button>
+            </form>
+
+            <div class="card-info">
+                <h3>{{ apartment.complex.name }}</h3>
+                <p>
+                    {% if apartment.rental_type == "month" %}
+                        {{ apartment.price_per_month }}₸ in month
+                    {% else %}
+                        {{ apartment.price_per_day }}₸ per day
+                    {% endif %}
+                </p>
+            </div>
+            <div class="card-hover">
+                <p>{{ apartment.description|truncatechars:100 }}</p>
+                <button>
+                    <a href="{% url 'booking:apartment_detail' apartment.id %}" class="view-details">View details</a>
+                </button>
+            </div>
         </div>
-        <div class="card-hover">
-            <p>{{ apartment.description|truncatechars:100 }}</p>
-            <button>
-                <a href="{% url 'booking:apartment_detail' apartment.id %}" class="view-details">View details</a>
-            </button>
-        </div>
-    </div>
         {% empty %}
             <p>No apartments found.</p>
         {% endfor %}
     </div>
-    </section>
+</section>
+
 
     <section class="map">
         <div class="map-container">
