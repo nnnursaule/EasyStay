@@ -66,20 +66,20 @@
 <section class="announcements">
     <h2>More announcements</h2>
     <div class="cards-container">  <!-- ВНЕ ЦИКЛА -->
-        {% for apartment in apartments %}
+        {% for complex in complexes %}
             <div class="card">
-                {% if apartment.image %}
-                    <img src="{{ apartment.image.url }}" alt="Apartment">
+                {% if complex.image %}
+                    <img src="{{ complex.image.url }}" alt="Apartment">
                 {% else %}
                     <img src="{% static 'img/placeholder.png' %}" alt="No Image">
                 {% endif %}
                 <div class="card-info">
-                    <h3>{{ apartment.title }}</h3>
-                    <p>{{ apartment.address }}</p>
+                    <h3>{{ complex.name }}</h3>
+                    <p>{{ complex.address }}</p>
                 </div>
                 <div class="card-hover">
-                    <p>{{ apartment.description }}</p>
-                    <a href="{% url 'booking:apartment_detail' apartment.id %}" class="view-project">View details</a>
+                    <p>{{ complex.description }}</p>
+                    <a href="{% url 'booking:complex_details' complex.id %}" class="view-project">View details</a>
                 </div>
             </div>
         {% endfor %}

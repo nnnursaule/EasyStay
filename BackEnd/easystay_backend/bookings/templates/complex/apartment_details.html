@@ -197,10 +197,10 @@
 
             <div class="owner">
                 <div class="owner-top">
-                    <img src="img/landlord.ava.png">
+                    <img src="{% if landlord.image %}{{ landlord.image.url }}{% else %}{% static 'vendor/img/users/default_avatar.jpg' %}{% endif %}" alt="EasyStay">
                     <div class="text">
                         <p >Advertised by</p>
-                        <span>Kelly</span>
+                        <span>{{ apartment.landlord.username }}</span>
                     </div>
                 </div>
 

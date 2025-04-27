@@ -9,9 +9,38 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.http import JsonResponse
 
+class ResidentialComplexView(DetailView):
+    model = ResidentialComplex
+    template_name = "complex/complex_details.html"  # You can customize this template name
+    context_object_name = "complex"  # Object name for the context
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        residential_complex = self.object
+
+        existing_amenities = residential_complex.get_existing_amenities()
+
+        # Translate amenities to Russian (if needed)
+        all_amenities_ru = [AMENITIES_TRANSLATION.get(amenity, amenity) for amenity in ALL_AMENITIES]
+        existing_amenities_ru = [AMENITIES_TRANSLATION.get(amenity, amenity) for amenity in existing_amenities]
+
+        # Find missing amenities
+        missing_amenities = [amenity for amenity in all_amenities_ru if amenity not in existing_amenities_ru]
+
+        context["existing_amenities"] = existing_amenities_ru
+        context["missing_amenities"] = missing_amenities
+        context["available_apartments_count"] = residential_complex.available_apartments_count()  # Number of available apartments
+
+
+class ResidentalComplexListView(ListView):
+    model = ResidentialComplex
+    template_name = "complex/complex_list.html"
+    context_object_name = "complexes"
+
+
 class ApartmentListView(ListView):
     model = Apartment
-    template_name = "complex/apartment_list.html"
+    template_name = "complex/complex_list.html"
     context_object_name = "apartments"
 
 
@@ -19,6 +48,7 @@ class ApartmentDetailView(DetailView):
     model = Apartment
     template_name = "complex/apartment_details.html"
     context_object_name = "apartment"  # Изменил название на apartment, чтобы было понятно, что это квартира
+
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -35,6 +65,7 @@ class ApartmentDetailView(DetailView):
 
         context["existing_amenities"] = existing_amenities_ru
         context["missing_amenities"] = missing_amenities
+        context["landlord"] = apartment.landlord
         return context
 
 
@@ -170,3 +201,4 @@ def toggle_favourite(request, apartment_id):
         return JsonResponse({'is_favourite': is_favourite})
     else:
         return redirect(request.META.get('HTTP_REFERER', 'favourites'))
+
