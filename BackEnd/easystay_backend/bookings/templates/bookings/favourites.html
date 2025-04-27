@@ -1,0 +1,203 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EasyStay</title>
+    <link rel="stylesheet" href="{% static 'vendor/main.css' %}">
+    <link rel="stylesheet" href="{% static 'vendor/details.css' %}">
+    <link rel="stylesheet" href="{% static 'vendor/favourites.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+</head>
+<body>
+        <header>
+             <nav class="navbar">
+                <div class="left-nav">
+                    <div class="logo">
+                        <img src="{% static 'vendor/img/products/logo2.png' %}" alt="EasyStay">
+                    </div>
+                    <ul class="nav-links">
+                        <li><a href="#">Services</a></li>
+                        <li><a href="#">Interesting</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                    </ul>
+                </div>
+
+                <div class="right-nav">
+                    <a href="{% url 'booking:landlord_apartments' user.id %}">
+                         <button class="landlord-btn">For a landlord</button>
+                    </a>
+
+                    <div class="action-profile" onclick="menuProfile();">
+                        <div class="profile-image">
+                            <img src="{% if user.image %}{{ user.image.url }}{% else %}{% static 'vendor/img/users/default_avatar.jpg' %}{% endif %}" alt="EasyStay">
+                        </div>
+
+
+                        <div class="menu">
+                            <h5>
+                                <!-- <div class="profile-image">  -->
+                                    <img src="{% if user.image %}{{ user.image.url }}{% else %}{% static 'vendor/img/users/default_avatar.jpg' %}{% endif %}" alt="EasyStay">
+                                <!-- </div> -->
+                                <div class="name"><strong>{{ user.first_name }} {{ user.last_name }}</strong> <p>{{ user.email }}z</p> </div>
+                            </h5>
+                            <ul>
+                              <li>
+                                <svg width="22" height="19" viewBox="0 0 22 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M3.45067 10.9082L10.4033 17.4395C10.6428 17.6644 10.7625 17.7769 10.9037 17.8046C10.9673 17.8171 11.0327 17.8171 11.0963 17.8046C11.2375 17.7769 11.3572 17.6644 11.5967 17.4395L18.5493 10.9082C20.5055 9.07059 20.743 6.0466 19.0978 3.92607L18.7885 3.52734C16.8203 0.99058 12.8696 1.41601 11.4867 4.31365C11.2913 4.72296 10.7087 4.72296 10.5133 4.31365C9.13037 1.41601 5.17972 0.990584 3.21154 3.52735L2.90219 3.92607C1.25695 6.0466 1.4945 9.07059 3.45067 10.9082Z" stroke="#33363F" stroke-width="2"/>
+                                </svg>
+
+                                <a href="{% url 'booking:favourites' %}">Favourites</a>
+                              </li>
+                              <li>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M6.44784 7.96942C6.76219 5.14032 9.15349 3 12 3V3C14.8465 3 17.2378 5.14032 17.5522 7.96942L17.804 10.2356C17.8072 10.2645 17.8088 10.279 17.8104 10.2933C17.9394 11.4169 18.3051 12.5005 18.8836 13.4725C18.8909 13.4849 18.8984 13.4973 18.9133 13.5222L19.4914 14.4856C20.0159 15.3599 20.2782 15.797 20.2216 16.1559C20.1839 16.3946 20.061 16.6117 19.8757 16.7668C19.5971 17 19.0873 17 18.0678 17H5.93223C4.91268 17 4.40291 17 4.12434 16.7668C3.93897 16.6117 3.81609 16.3946 3.77841 16.1559C3.72179 15.797 3.98407 15.3599 4.50862 14.4856L5.08665 13.5222C5.10161 13.4973 5.10909 13.4849 5.11644 13.4725C5.69488 12.5005 6.06064 11.4169 6.18959 10.2933C6.19123 10.279 6.19283 10.2645 6.19604 10.2356L6.44784 7.96942Z" stroke="#33363F" stroke-width="2"/>
+                                    <path d="M8 17C8 17.5253 8.10346 18.0454 8.30448 18.5307C8.5055 19.016 8.80014 19.457 9.17157 19.8284C9.54301 20.1999 9.98396 20.4945 10.4693 20.6955C10.9546 20.8965 11.4747 21 12 21C12.5253 21 13.0454 20.8965 13.5307 20.6955C14.016 20.4945 14.457 20.1999 14.8284 19.8284C15.1999 19.457 15.4945 19.016 15.6955 18.5307C15.8965 18.0454 16 17.5253 16 17" stroke="#33363F" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                                <a href="#">Alerts</a>
+                              </li>
+                              <li>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="12" cy="7" r="4" stroke="#33363F" stroke-width="2" stroke-linecap="round"/>
+                                    <path d="M5.33788 18.3206C5.99897 15.5269 8.77173 14 11.6426 14H12.3574C15.2283 14 18.001 15.5269 18.6621 18.3206C18.79 18.8611 18.8917 19.4268 18.9489 20.0016C19.0036 20.5512 18.5523 21 18 21H6C5.44772 21 4.99642 20.5512 5.0511 20.0016C5.1083 19.4268 5.20997 18.8611 5.33788 18.3206Z" stroke="#33363F" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                                <a href="{% url 'users:landlord_profile' user.id %}">Account</a>
+                              </li>
+                              <li>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="12" cy="12" r="9" stroke="#33363F" stroke-width="2"/>
+                                    <circle cx="12" cy="18" r="0.5" fill="#33363F" stroke="#33363F"/>
+                                    <path d="M12 16V14.5811C12 13.6369 12.6042 12.7986 13.5 12.5V12.5C14.3958 12.2014 15 11.3631 15 10.4189V9.90569C15 8.30092 13.6991 7 12.0943 7H12C10.3431 7 9 8.34315 9 10V10" stroke="#33363F" stroke-width="2"/>
+                                </svg>
+                                <a href="#">How it work?</a>
+                              </li>
+                              <li>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="12" cy="12" r="9" stroke="#33363F" stroke-width="2"/>
+                                    <path d="M12.5 7.5C12.5 7.77614 12.2761 8 12 8C11.7239 8 11.5 7.77614 11.5 7.5C11.5 7.22386 11.7239 7 12 7C12.2761 7 12.5 7.22386 12.5 7.5Z" fill="#33363F" stroke="#33363F"/>
+                                    <path d="M12 17V10" stroke="#33363F" stroke-width="2"/>
+                                </svg>
+                                <a href="#">Help</a></li>
+                              <li>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="12" cy="12" r="9" stroke="#33363F" stroke-width="2"/>
+                                    <path d="M12 15L12 9" stroke="#33363F" stroke-width="2" stroke-linecap="square"/>
+                                    <path d="M15 12L9 12" stroke="#33363F" stroke-width="2" stroke-linecap="square"/>
+                                </svg>
+                                <a href="#">FAQ</a>
+                              </li>
+                              <li>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M2 12L1.21913 11.3753L0.719375 12L1.21913 12.6247L2 12ZM11 13C11.5523 13 12 12.5523 12 12C12 11.4477 11.5523 11 11 11V13ZM5.21913 6.3753L1.21913 11.3753L2.78087 12.6247L6.78087 7.6247L5.21913 6.3753ZM1.21913 12.6247L5.21913 17.6247L6.78087 16.3753L2.78087 11.3753L1.21913 12.6247ZM2 13H11V11H2V13Z" fill="#33363F"/>
+                                    <path d="M10 8.13193V7.38851C10 5.77017 10 4.961 10.474 4.4015C10.9479 3.84201 11.7461 3.70899 13.3424 3.44293L15.0136 3.1644C18.2567 2.62388 19.8782 2.35363 20.9391 3.25232C22 4.15102 22 5.79493 22 9.08276V14.9172C22 18.2051 22 19.849 20.9391 20.7477C19.8782 21.6464 18.2567 21.3761 15.0136 20.8356L13.3424 20.5571C11.7461 20.291 10.9479 20.158 10.474 19.5985C10 19.039 10 18.2298 10 16.6115V16.066" stroke="#33363F" stroke-width="2"/>
+                                </svg>
+                                <a href="{% url 'users:logout_page' %}">Logout</a>
+                              </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <a href="wishlist.html" class="heart-btn">
+                        <svg width="34" height="36" viewBox="0 0 34 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g filter="url(#filter0_d_133_1279)">
+                            <path d="M7.56335 17.3853L16.3153 25.6068C16.6398 25.9116 16.802 26.064 17 26.064C17.198 26.064 17.3602 25.9116 17.6847 25.6068L17.6847 25.6068L26.4367 17.3853C28.8819 15.0882 29.1788 11.3082 27.1223 8.65758L26.7356 8.15918C24.2753 4.98822 19.337 5.52002 17.6083 9.14206C17.3641 9.6537 16.6359 9.6537 16.3917 9.14206C14.663 5.52002 9.72465 4.98823 7.26443 8.15918L6.87773 8.65759C4.82118 11.3083 5.11813 15.0882 7.56335 17.3853Z" stroke="white" stroke-opacity="0.75" stroke-width="3"/>
+                            </g>
+                            <defs>
+                            <filter id="filter0_d_133_1279" x="-2" y="0" width="38" height="38" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                            <feOffset dy="4"/>
+                            <feGaussianBlur stdDeviation="2"/>
+                            <feComposite in2="hardAlpha" operator="out"/>
+                            <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+                            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_133_1279"/>
+                            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_133_1279" result="shape"/>
+                            </filter>
+                            </defs>
+                            </svg>
+                    </a>
+                    <div class="language-container">
+                        <button id="languageButton" class="language-btn" onclick="">
+                            <img src="{% static 'vendor/img/products/translate.png' %}">
+                        </button>
+                        <div id="languageDropdown" class="language-dropdown hidden">
+                            <a href="main.html" data-lang="en">English</a>
+                            <a href="main_ru.html" data-lang="ru">Русский</a>
+                            <a href="main_kk.html" data-lang="kk">Қазақша</a>
+                        </div>
+
+                    </div>
+                </div>
+            </nav>
+    </header>
+
+
+    <section class="hero">
+
+    </section>
+
+
+    <section class="favourites">
+        <h2>All favourites</h2>
+
+            <div class="cards-container">
+        {% for favourite in favourites %}
+        <div class="card">
+            <img src="{{ favourite.apartment.image.url }}" alt="{{ favourite.apartment.title }}">
+
+            <form method="post" action="{% url 'booking:remove_from_favourites' favourite.apartment.id %}">
+                {% csrf_token %}
+                <button type="submit" class="heart-button">
+                    <svg class="heart-icon" width="42" height="44" viewBox="0 0 42 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g filter="url(#filter0_d_634_2162)">
+                            <path d="M8.41714 23.1803L20.3147 34.3568C20.6391 34.6616 20.8013 34.8139 20.9993 34.8139C21.1974 34.8139 21.3596 34.6616 21.684 34.3568L33.5816 23.1803C36.8418 20.1176 37.2378 15.0776 34.4957 11.5434L33.9801 10.8789C30.6998 6.65093 24.1154 7.35998 21.8105 12.1894C21.4849 12.8716 20.5138 12.8716 20.1882 12.1894C17.8833 7.35998 11.2989 6.65093 8.01859 10.8789L7.50299 11.5434C4.76093 15.0776 5.15684 20.1176 8.41714 23.1803Z" fill="#FF5A30"/>
+                            <path d="M8.41714 23.1803L20.3147 34.3568C20.6391 34.6616 20.8013 34.8139 20.9993 34.8139C21.1974 34.8139 21.3596 34.6616 21.684 34.3568L33.5816 23.1803C36.8418 20.1176 37.2378 15.0776 34.4957 11.5434L33.9801 10.8789C30.6998 6.65093 24.1154 7.35998 21.8105 12.1894C21.4849 12.8716 20.5138 12.8716 20.1882 12.1894C17.8833 7.35998 11.2989 6.65093 8.01859 10.8789L7.50299 11.5434C4.76093 15.0776 5.15684 20.1176 8.41714 23.1803Z" stroke="black" stroke-width="2"/>
+                        </g>
+                        <defs>
+                            <filter id="filter0_d_634_2162" x="0.681641" y="7.09546" width="40.6348" height="36.7185" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                                <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                                <feOffset dy="4"/>
+                                <feGaussianBlur stdDeviation="2"/>
+                                <feComposite in2="hardAlpha" operator="out"/>
+                                <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+                                <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_634_2162"/>
+                                <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_634_2162" result="shape"/>
+                            </filter>
+                        </defs>
+                    </svg>
+                </button>
+            </form>
+
+            <div class="card-info">
+                <h3>{{ favourite.apartment.title }}</h3>
+                <p>{{ favourite.apartment.price_per_month }} in month</p>
+            </div>
+
+            <div class="card-hover">
+                <p>Description of apartment: {{ favourite.apartment.description|truncatewords:10 }}</p>
+                <button><a href="{% url 'booking:apartment_detail' favourite.apartment.id %}" class="view-details">View details</a></button>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+
+
+
+        </div>
+    </section>
+
+
+
+
+
+
+
+
+        <script src="{% static 'vendor/main.js' %}"></script>
+        <script src="{% static 'vendor/script.js' %}"></script>
+
+</body>

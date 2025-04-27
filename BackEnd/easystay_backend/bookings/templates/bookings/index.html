@@ -1,0 +1,708 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EasyStay</title>
+    <script src="{% static 'vendor/main.js' %}"></script>
+    <script src="{% static 'vendor/script.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'vendor/main.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+</head>
+<style>
+.price-range {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 10px;
+    max-width: 400px;
+}
+.price-range input[type="range"] {
+    width: 100%;
+}
+.price-range span {
+    font-size: 14px;
+    font-weight: bold;
+}
+</style>
+<body>
+    <header>
+        <header>
+            <nav class="navbar">
+                <div class="left-nav">
+                    <div class="logo">
+                        <a href="{% url 'booking:index' %}">
+                            <img src="{% static 'vendor/img/products/logo2.png' %}" alt="EasyStay">
+                        </a>
+                    </div>
+                    <ul class="nav-links">
+                        <li><a href="#">Services</a></li>
+                        <li><a href="#">Interesting</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                    </ul>
+                </div>
+
+                <div class="right-nav">
+                    <a href="{% url 'booking:landlord_apartments' user.id %}">
+                         <button class="landlord-btn">For a landlord</button>
+                    </a>
+
+                    <div class="action-profile" onclick="menuProfile();">
+                        <div class="profile-image">
+                            <img src="{% if user.image %}{{ user.image.url }}{% else %}{% static 'vendor/img/users/default_avatar.jpg' %}{% endif %}" alt="EasyStay">
+                        </div>
+
+                        <div class="menu">
+                            <h5>
+                                <!-- <div class="profile-image">  -->
+                                    <img src="{% if user.image %}{{ user.image.url }}{% else %}{% static 'vendor/img/users/default_avatar.jpg' %}{% endif %}" alt="EasyStay">
+                                <!-- </div> -->
+                                <div class="name"><strong>{{ user.first_name }} {{ user.last_name }}</strong> <p>{{ user.email }}z</p> </div>
+                            </h5>
+                            <ul>
+                              <li>
+                                <svg width="22" height="19" viewBox="0 0 22 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M3.45067 10.9082L10.4033 17.4395C10.6428 17.6644 10.7625 17.7769 10.9037 17.8046C10.9673 17.8171 11.0327 17.8171 11.0963 17.8046C11.2375 17.7769 11.3572 17.6644 11.5967 17.4395L18.5493 10.9082C20.5055 9.07059 20.743 6.0466 19.0978 3.92607L18.7885 3.52734C16.8203 0.99058 12.8696 1.41601 11.4867 4.31365C11.2913 4.72296 10.7087 4.72296 10.5133 4.31365C9.13037 1.41601 5.17972 0.990584 3.21154 3.52735L2.90219 3.92607C1.25695 6.0466 1.4945 9.07059 3.45067 10.9082Z" stroke="#33363F" stroke-width="2"/>
+                                </svg>
+
+                                <a href="{% url 'booking:favourites' %}">Favourites</a>
+                              </li>
+                              <li>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M6.44784 7.96942C6.76219 5.14032 9.15349 3 12 3V3C14.8465 3 17.2378 5.14032 17.5522 7.96942L17.804 10.2356C17.8072 10.2645 17.8088 10.279 17.8104 10.2933C17.9394 11.4169 18.3051 12.5005 18.8836 13.4725C18.8909 13.4849 18.8984 13.4973 18.9133 13.5222L19.4914 14.4856C20.0159 15.3599 20.2782 15.797 20.2216 16.1559C20.1839 16.3946 20.061 16.6117 19.8757 16.7668C19.5971 17 19.0873 17 18.0678 17H5.93223C4.91268 17 4.40291 17 4.12434 16.7668C3.93897 16.6117 3.81609 16.3946 3.77841 16.1559C3.72179 15.797 3.98407 15.3599 4.50862 14.4856L5.08665 13.5222C5.10161 13.4973 5.10909 13.4849 5.11644 13.4725C5.69488 12.5005 6.06064 11.4169 6.18959 10.2933C6.19123 10.279 6.19283 10.2645 6.19604 10.2356L6.44784 7.96942Z" stroke="#33363F" stroke-width="2"/>
+                                    <path d="M8 17C8 17.5253 8.10346 18.0454 8.30448 18.5307C8.5055 19.016 8.80014 19.457 9.17157 19.8284C9.54301 20.1999 9.98396 20.4945 10.4693 20.6955C10.9546 20.8965 11.4747 21 12 21C12.5253 21 13.0454 20.8965 13.5307 20.6955C14.016 20.4945 14.457 20.1999 14.8284 19.8284C15.1999 19.457 15.4945 19.016 15.6955 18.5307C15.8965 18.0454 16 17.5253 16 17" stroke="#33363F" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                                <a href="#">Alerts</a>
+                              </li>
+                              <li>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="12" cy="7" r="4" stroke="#33363F" stroke-width="2" stroke-linecap="round"/>
+                                    <path d="M5.33788 18.3206C5.99897 15.5269 8.77173 14 11.6426 14H12.3574C15.2283 14 18.001 15.5269 18.6621 18.3206C18.79 18.8611 18.8917 19.4268 18.9489 20.0016C19.0036 20.5512 18.5523 21 18 21H6C5.44772 21 4.99642 20.5512 5.0511 20.0016C5.1083 19.4268 5.20997 18.8611 5.33788 18.3206Z" stroke="#33363F" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                                <a href="{% url 'users:landlord_profile' user.id %}">Account</a>
+                              </li>
+                              <li>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="12" cy="12" r="9" stroke="#33363F" stroke-width="2"/>
+                                    <circle cx="12" cy="18" r="0.5" fill="#33363F" stroke="#33363F"/>
+                                    <path d="M12 16V14.5811C12 13.6369 12.6042 12.7986 13.5 12.5V12.5C14.3958 12.2014 15 11.3631 15 10.4189V9.90569C15 8.30092 13.6991 7 12.0943 7H12C10.3431 7 9 8.34315 9 10V10" stroke="#33363F" stroke-width="2"/>
+                                </svg>
+                                <a href="#">How it work?</a>
+                              </li>
+                              <li>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="12" cy="12" r="9" stroke="#33363F" stroke-width="2"/>
+                                    <path d="M12.5 7.5C12.5 7.77614 12.2761 8 12 8C11.7239 8 11.5 7.77614 11.5 7.5C11.5 7.22386 11.7239 7 12 7C12.2761 7 12.5 7.22386 12.5 7.5Z" fill="#33363F" stroke="#33363F"/>
+                                    <path d="M12 17V10" stroke="#33363F" stroke-width="2"/>
+                                </svg>
+                                <a href="#">Help</a></li>
+                              <li>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="12" cy="12" r="9" stroke="#33363F" stroke-width="2"/>
+                                    <path d="M12 15L12 9" stroke="#33363F" stroke-width="2" stroke-linecap="square"/>
+                                    <path d="M15 12L9 12" stroke="#33363F" stroke-width="2" stroke-linecap="square"/>
+                                </svg>
+                                <a href="#">FAQ</a>
+                              </li>
+                              <li>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M2 12L1.21913 11.3753L0.719375 12L1.21913 12.6247L2 12ZM11 13C11.5523 13 12 12.5523 12 12C12 11.4477 11.5523 11 11 11V13ZM5.21913 6.3753L1.21913 11.3753L2.78087 12.6247L6.78087 7.6247L5.21913 6.3753ZM1.21913 12.6247L5.21913 17.6247L6.78087 16.3753L2.78087 11.3753L1.21913 12.6247ZM2 13H11V11H2V13Z" fill="#33363F"/>
+                                    <path d="M10 8.13193V7.38851C10 5.77017 10 4.961 10.474 4.4015C10.9479 3.84201 11.7461 3.70899 13.3424 3.44293L15.0136 3.1644C18.2567 2.62388 19.8782 2.35363 20.9391 3.25232C22 4.15102 22 5.79493 22 9.08276V14.9172C22 18.2051 22 19.849 20.9391 20.7477C19.8782 21.6464 18.2567 21.3761 15.0136 20.8356L13.3424 20.5571C11.7461 20.291 10.9479 20.158 10.474 19.5985C10 19.039 10 18.2298 10 16.6115V16.066" stroke="#33363F" stroke-width="2"/>
+                                </svg>
+                                <a href="{% url 'users:logout_page' %}">Logout</a>
+                              </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <a href="wishlist.html" class="heart-btn">
+                        <svg width="34" height="36" viewBox="0 0 34 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g filter="url(#filter0_d_133_1279)">
+                            <path d="M7.56335 17.3853L16.3153 25.6068C16.6398 25.9116 16.802 26.064 17 26.064C17.198 26.064 17.3602 25.9116 17.6847 25.6068L17.6847 25.6068L26.4367 17.3853C28.8819 15.0882 29.1788 11.3082 27.1223 8.65758L26.7356 8.15918C24.2753 4.98822 19.337 5.52002 17.6083 9.14206C17.3641 9.6537 16.6359 9.6537 16.3917 9.14206C14.663 5.52002 9.72465 4.98823 7.26443 8.15918L6.87773 8.65759C4.82118 11.3083 5.11813 15.0882 7.56335 17.3853Z" stroke="white" stroke-opacity="0.75" stroke-width="3"/>
+                            </g>
+                            <defs>
+                            <filter id="filter0_d_133_1279" x="-2" y="0" width="38" height="38" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                            <feOffset dy="4"/>
+                            <feGaussianBlur stdDeviation="2"/>
+                            <feComposite in2="hardAlpha" operator="out"/>
+                            <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+                            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_133_1279"/>
+                            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_133_1279" result="shape"/>
+                            </filter>
+                            </defs>
+                            </svg>
+                    </a>
+                    <div class="language-container">
+                        <button id="languageButton" class="language-btn" onclick="">
+                            <img src="{% static 'vendor/img/products/translate.png' %}">
+                        </button>
+                        <div id="languageDropdown" class="language-dropdown hidden">
+                            <a href="main.html" data-lang="en">English</a>
+                            <a href="main_ru.html" data-lang="ru">Русский</a>
+                            <a href="main_kk.html" data-lang="kk">Қазақша</a>
+                        </div>
+
+                    </div>
+                </div>
+            </nav>
+    </header>
+
+
+    <section class="hero">
+    <h1>Hi, {{ user.first_name }}! <br>Welcome to the <span class="highlight">EASYSTAY!</span></h1>
+    <form method="get" action="{% url 'booking:main' user.id %}">
+        <div class="search-container">
+
+            <!-- Город -->
+            <select class="select1" name="region">
+                <option value="">Choose Region</option>
+                <option value="almaly">Алмалинский</option>
+                <option value="auyezov">Ауэзовский</option>
+                <option value="bostandyk">Бостандыкский</option>
+                <option value="medeu">Медеуский</option>
+                <option value="nauryzbay">Наурызбайский</option>
+                <option value="turksib">Турксибский</option>
+                <option value="zhetysu">Жетысуский</option>
+                <option value="alatau">Алатауский</option>
+            </select>
+
+            <!-- ЖК -->
+            <select name="complex_id" class="select1">
+                <option value="">Residential complex</option>
+                {% for complex in complexes %}
+                    <option value="{{ complex.id }}">{{ complex.name }}</option>
+                {% endfor %}
+            </select>
+
+            <!-- Цена -->
+            <div class="price-range">
+                <label for="price_min">₸ Min</label>
+                <input type="range" id="price_min" name="price_min" min="0" max="1000000" step="10000" value="0" oninput="updatePriceLabel()">
+                <span id="min_price_val">0</span>
+
+                <label for="price_max">₸ Max</label>
+                <input type="range" id="price_max" name="price_max" min="0" max="1000000" step="10000" value="1000000" oninput="updatePriceLabel()">
+                <span id="max_price_val">1 000 000</span>
+            </div>
+
+            <!-- Люди (по количеству комнат) -->
+            <select name="room_count" class="select2">
+                <option value="">Rooms</option>
+                <option value="1">1 room</option>
+                <option value="2">2 rooms</option>
+                <option value="3">3 rooms</option>
+                <option value="4">4+ rooms</option>
+            </select>
+
+            <!-- Тип аренды -->
+            <select name="rental_type" class="select1" id="rental">
+                <option value="">Rental type</option>
+                <option value="day">Daily</option>
+                <option value="month">Monthly</option>
+            </select>
+
+            <!-- Кнопка -->
+            <button type="submit" class="search-btn">
+                <img width="24" height="24" src="https://img.icons8.com/fluency/48/sparkling.png" alt="sparkling"/> Search
+            </button>
+        </div>
+    </form>
+</section>
+
+
+    <section class="announcements">
+    <h2>Recommendations</h2>
+    <div class="cards-container">
+        {% for apartment in apartments %}
+        <div class="card">
+            <img src="{{ apartment.image.url }}" alt="Apartment">
+
+            <form method="post" action="{% url 'booking:add_to_favourites' apartment.id %}">
+                {% csrf_token %}
+                <button type="submit" class="heart-button" style="background: none; border: none;">
+                    {% if apartment.id in favourite_ids %}
+                        <!-- Красное сердечко (уже в избранных) -->
+                        <svg class="heart-icon" width="42" height="37" viewBox="0 0 42 37" fill="red" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M8.41714 23.1803L20.3147 34.3568C20.6391 34.6616 20.8013 34.8139 20.9993 34.8139C21.1974 34.8139 21.3596 34.6616 21.684 34.3568L33.5816 23.1803C36.8418 20.1176 37.2378 15.0776 34.4957 11.5434L33.9801 10.8789C30.6998 6.65093 24.1154 7.35998 21.8105 12.1894C21.4849 12.8716 20.5138 12.8716 20.1882 12.1894C17.8833 7.35998 11.2989 6.65093 8.01859 10.8789L7.50299 11.5434C4.76093 15.0776 5.15684 20.1176 8.41714 23.1803Z"/>
+                        </svg>
+                    {% else %}
+                        <!-- Белое сердечко (еще не в избранных) -->
+                        <svg class="heart-icon" width="42" height="37" viewBox="0 0 42 37" fill="white" stroke="black" stroke-width="2" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M8.41714 23.1803L20.3147 34.3568C20.6391 34.6616 20.8013 34.8139 20.9993 34.8139C21.1974 34.8139 21.3596 34.6616 21.684 34.3568L33.5816 23.1803C36.8418 20.1176 37.2378 15.0776 34.4957 11.5434L33.9801 10.8789C30.6998 6.65093 24.1154 7.35998 21.8105 12.1894C21.4849 12.8716 20.5138 12.8716 20.1882 12.1894C17.8833 7.35998 11.2989 6.65093 8.01859 10.8789L7.50299 11.5434C4.76093 15.0776 5.15684 20.1176 8.41714 23.1803Z"/>
+                        </svg>
+                    {% endif %}
+                </button>
+            </form>
+
+            <div class="card-info">
+                <h3>{{ apartment.complex.name }}</h3>
+                <p>
+                    {% if apartment.rental_type == "month" %}
+                        {{ apartment.price_per_month }}₸ in month
+                    {% else %}
+                        {{ apartment.price_per_day }}₸ per day
+                    {% endif %}
+                </p>
+            </div>
+            <div class="card-hover">
+                <p>{{ apartment.description|truncatechars:100 }}</p>
+                <button>
+                    <a href="{% url 'booking:apartment_detail' apartment.id %}" class="view-details">View details</a>
+                </button>
+            </div>
+        </div>
+        {% empty %}
+            <p>No apartments found.</p>
+        {% endfor %}
+    </div>
+</section>
+
+
+    <section class="map">
+        <div class="map-container">
+            <img src="{% static 'vendor/img/products/mapofkz.png' %}" alt="Map of Kz">
+        </div>
+    </section>
+
+    <section class="sim-places">
+        <div class="links-2">
+            <a href="#similar" onclick="viewCard(event, 'similar')" class="link-2" id="defaultLink">Similar places</a>
+            <a href="#recently-viewed" onclick="viewCard(event, 'recently-viewed')" class="link-2">Recently viewed</a>
+        </div>
+        <div id ="similar" class="cards">
+            <div class="card">
+                <img src="img/4.png" alt="Apartment">
+                <svg class="heart-icon" width="42" height="37" viewBox="0 0 42 37" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g filter="url(#filter0_d_595_721)">
+                    <path d="M8.41811 16.1804L20.3156 27.3569C20.6401 27.6617 20.8023 27.8141 21.0003 27.8141C21.1983 27.8141 21.3606 27.6617 21.685 27.3569L33.5825 16.1804C36.8428 13.1177 37.2387 8.07775 34.4967 4.54353L33.9811 3.87899C30.7008 -0.34895 24.1164 0.360106 21.8114 5.1895C21.4858 5.87168 20.5148 5.87168 20.1892 5.1895C17.8843 0.360106 11.2999 -0.348948 8.01956 3.87899L7.50397 4.54353C4.7619 8.07775 5.15782 13.1177 8.41811 16.1804Z" fill="white" fill-opacity="0.27" shape-rendering="crispEdges"/>
+                    <path d="M8.41811 16.1804L20.3156 27.3569C20.6401 27.6617 20.8023 27.8141 21.0003 27.8141C21.1983 27.8141 21.3606 27.6617 21.685 27.3569L33.5825 16.1804C36.8428 13.1177 37.2387 8.07775 34.4967 4.54353L33.9811 3.87899C30.7008 -0.34895 24.1164 0.360106 21.8114 5.1895C21.4858 5.87168 20.5148 5.87168 20.1892 5.1895C17.8843 0.360106 11.2999 -0.348948 8.01956 3.87899L7.50397 4.54353C4.7619 8.07775 5.15782 13.1177 8.41811 16.1804Z" stroke="black" stroke-width="2" shape-rendering="crispEdges"/>
+                    </g>
+                    <defs>
+                    <filter id="filter0_d_595_721" x="0.683594" y="0.095459" width="40.6338" height="36.7185" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                    <feOffset dy="4"/>
+                    <feGaussianBlur stdDeviation="2"/>
+                    <feComposite in2="hardAlpha" operator="out"/>
+                    <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_595_721"/>
+                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_595_721" result="shape"/>
+                    </filter>
+                    </defs>
+                </svg>
+                <div class="card-info">
+                    <h3>mkr Zhazira</h3>
+                    <p>150k in month</p>
+                </div>
+                <div class="card-hover">
+                    <p>Description of apartment: просторная, современная.</p>
+                    <button><a href="#" class="view-details">View details</a></button>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="img/4.png" alt="Apartment">
+                <svg class="heart-icon" width="42" height="37" viewBox="0 0 42 37" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g filter="url(#filter0_d_595_721)">
+                    <path d="M8.41811 16.1804L20.3156 27.3569C20.6401 27.6617 20.8023 27.8141 21.0003 27.8141C21.1983 27.8141 21.3606 27.6617 21.685 27.3569L33.5825 16.1804C36.8428 13.1177 37.2387 8.07775 34.4967 4.54353L33.9811 3.87899C30.7008 -0.34895 24.1164 0.360106 21.8114 5.1895C21.4858 5.87168 20.5148 5.87168 20.1892 5.1895C17.8843 0.360106 11.2999 -0.348948 8.01956 3.87899L7.50397 4.54353C4.7619 8.07775 5.15782 13.1177 8.41811 16.1804Z" fill="white" fill-opacity="0.27" shape-rendering="crispEdges"/>
+                    <path d="M8.41811 16.1804L20.3156 27.3569C20.6401 27.6617 20.8023 27.8141 21.0003 27.8141C21.1983 27.8141 21.3606 27.6617 21.685 27.3569L33.5825 16.1804C36.8428 13.1177 37.2387 8.07775 34.4967 4.54353L33.9811 3.87899C30.7008 -0.34895 24.1164 0.360106 21.8114 5.1895C21.4858 5.87168 20.5148 5.87168 20.1892 5.1895C17.8843 0.360106 11.2999 -0.348948 8.01956 3.87899L7.50397 4.54353C4.7619 8.07775 5.15782 13.1177 8.41811 16.1804Z" stroke="black" stroke-width="2" shape-rendering="crispEdges"/>
+                    </g>
+                    <defs>
+                    <filter id="filter0_d_595_721" x="0.683594" y="0.095459" width="40.6338" height="36.7185" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                    <feOffset dy="4"/>
+                    <feGaussianBlur stdDeviation="2"/>
+                    <feComposite in2="hardAlpha" operator="out"/>
+                    <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_595_721"/>
+                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_595_721" result="shape"/>
+                    </filter>
+                    </defs>
+                </svg>
+                <div class="card-info">
+                    <h3>mkr Zhazira</h3>
+                    <p>150k in month</p>
+                </div>
+                <div class="card-hover">
+                    <p>Description of apartment: просторная, современная.</p>
+                    <button><a href="#" class="view-details">View details</a></button>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="img/4.png" alt="Apartment">
+                <svg class="heart-icon" width="42" height="37" viewBox="0 0 42 37" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g filter="url(#filter0_d_595_721)">
+                    <path d="M8.41811 16.1804L20.3156 27.3569C20.6401 27.6617 20.8023 27.8141 21.0003 27.8141C21.1983 27.8141 21.3606 27.6617 21.685 27.3569L33.5825 16.1804C36.8428 13.1177 37.2387 8.07775 34.4967 4.54353L33.9811 3.87899C30.7008 -0.34895 24.1164 0.360106 21.8114 5.1895C21.4858 5.87168 20.5148 5.87168 20.1892 5.1895C17.8843 0.360106 11.2999 -0.348948 8.01956 3.87899L7.50397 4.54353C4.7619 8.07775 5.15782 13.1177 8.41811 16.1804Z" fill="white" fill-opacity="0.27" shape-rendering="crispEdges"/>
+                    <path d="M8.41811 16.1804L20.3156 27.3569C20.6401 27.6617 20.8023 27.8141 21.0003 27.8141C21.1983 27.8141 21.3606 27.6617 21.685 27.3569L33.5825 16.1804C36.8428 13.1177 37.2387 8.07775 34.4967 4.54353L33.9811 3.87899C30.7008 -0.34895 24.1164 0.360106 21.8114 5.1895C21.4858 5.87168 20.5148 5.87168 20.1892 5.1895C17.8843 0.360106 11.2999 -0.348948 8.01956 3.87899L7.50397 4.54353C4.7619 8.07775 5.15782 13.1177 8.41811 16.1804Z" stroke="black" stroke-width="2" shape-rendering="crispEdges"/>
+                    </g>
+                    <defs>
+                    <filter id="filter0_d_595_721" x="0.683594" y="0.095459" width="40.6338" height="36.7185" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                    <feOffset dy="4"/>
+                    <feGaussianBlur stdDeviation="2"/>
+                    <feComposite in2="hardAlpha" operator="out"/>
+                    <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_595_721"/>
+                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_595_721" result="shape"/>
+                    </filter>
+                    </defs>
+                </svg>
+                <div class="card-info">
+                    <h3>mkr Zhazira</h3>
+                    <p>150k in month</p>
+                </div>
+                <div class="card-hover">
+                    <p>Description of apartment: просторная, современная.</p>
+                    <button><a href="#" class="view-details">View details</a></button>
+                </div>
+            </div>
+        </div>
+
+        <div id="recently-viewed" class="cards">
+            <div class="card">
+                <img src="img/4.png" alt="Apartment">
+                <svg class="heart-icon" width="42" height="37" viewBox="0 0 42 37" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g filter="url(#filter0_d_595_721)">
+                    <path d="M8.41811 16.1804L20.3156 27.3569C20.6401 27.6617 20.8023 27.8141 21.0003 27.8141C21.1983 27.8141 21.3606 27.6617 21.685 27.3569L33.5825 16.1804C36.8428 13.1177 37.2387 8.07775 34.4967 4.54353L33.9811 3.87899C30.7008 -0.34895 24.1164 0.360106 21.8114 5.1895C21.4858 5.87168 20.5148 5.87168 20.1892 5.1895C17.8843 0.360106 11.2999 -0.348948 8.01956 3.87899L7.50397 4.54353C4.7619 8.07775 5.15782 13.1177 8.41811 16.1804Z" fill="white" fill-opacity="0.27" shape-rendering="crispEdges"/>
+                    <path d="M8.41811 16.1804L20.3156 27.3569C20.6401 27.6617 20.8023 27.8141 21.0003 27.8141C21.1983 27.8141 21.3606 27.6617 21.685 27.3569L33.5825 16.1804C36.8428 13.1177 37.2387 8.07775 34.4967 4.54353L33.9811 3.87899C30.7008 -0.34895 24.1164 0.360106 21.8114 5.1895C21.4858 5.87168 20.5148 5.87168 20.1892 5.1895C17.8843 0.360106 11.2999 -0.348948 8.01956 3.87899L7.50397 4.54353C4.7619 8.07775 5.15782 13.1177 8.41811 16.1804Z" stroke="black" stroke-width="2" shape-rendering="crispEdges"/>
+                    </g>
+                    <defs>
+                    <filter id="filter0_d_595_721" x="0.683594" y="0.095459" width="40.6338" height="36.7185" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                    <feOffset dy="4"/>
+                    <feGaussianBlur stdDeviation="2"/>
+                    <feComposite in2="hardAlpha" operator="out"/>
+                    <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_595_721"/>
+                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_595_721" result="shape"/>
+                    </filter>
+                    </defs>
+                </svg>
+                <div class="card-info">
+                    <h3>mkr Zhazira</h3>
+                    <p>150k in month</p>
+                </div>
+                <div class="card-hover">
+                    <p>Description of apartment: просторная, современная.</p>
+                    <button><a href="#" class="view-details">View details</a></button>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="img/4.png" alt="Apartment">
+                <svg class="heart-icon" width="42" height="37" viewBox="0 0 42 37" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g filter="url(#filter0_d_595_721)">
+                    <path d="M8.41811 16.1804L20.3156 27.3569C20.6401 27.6617 20.8023 27.8141 21.0003 27.8141C21.1983 27.8141 21.3606 27.6617 21.685 27.3569L33.5825 16.1804C36.8428 13.1177 37.2387 8.07775 34.4967 4.54353L33.9811 3.87899C30.7008 -0.34895 24.1164 0.360106 21.8114 5.1895C21.4858 5.87168 20.5148 5.87168 20.1892 5.1895C17.8843 0.360106 11.2999 -0.348948 8.01956 3.87899L7.50397 4.54353C4.7619 8.07775 5.15782 13.1177 8.41811 16.1804Z" fill="white" fill-opacity="0.27" shape-rendering="crispEdges"/>
+                    <path d="M8.41811 16.1804L20.3156 27.3569C20.6401 27.6617 20.8023 27.8141 21.0003 27.8141C21.1983 27.8141 21.3606 27.6617 21.685 27.3569L33.5825 16.1804C36.8428 13.1177 37.2387 8.07775 34.4967 4.54353L33.9811 3.87899C30.7008 -0.34895 24.1164 0.360106 21.8114 5.1895C21.4858 5.87168 20.5148 5.87168 20.1892 5.1895C17.8843 0.360106 11.2999 -0.348948 8.01956 3.87899L7.50397 4.54353C4.7619 8.07775 5.15782 13.1177 8.41811 16.1804Z" stroke="black" stroke-width="2" shape-rendering="crispEdges"/>
+                    </g>
+                    <defs>
+                    <filter id="filter0_d_595_721" x="0.683594" y="0.095459" width="40.6338" height="36.7185" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                    <feOffset dy="4"/>
+                    <feGaussianBlur stdDeviation="2"/>
+                    <feComposite in2="hardAlpha" operator="out"/>
+                    <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_595_721"/>
+                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_595_721" result="shape"/>
+                    </filter>
+                    </defs>
+                </svg>
+                <div class="card-info">
+                    <h3>mkr Zhazira</h3>
+                    <p>150k in month</p>
+                </div>
+                <div class="card-hover">
+                    <p>Description of apartment: просторная, современная.</p>
+                    <button><a href="#" class="view-details">View details</a></button>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="img/6.png" alt="Apartment">
+                <svg class="heart-icon" width="42" height="37" viewBox="0 0 42 37" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g filter="url(#filter0_d_595_721)">
+                    <path d="M8.41811 16.1804L20.3156 27.3569C20.6401 27.6617 20.8023 27.8141 21.0003 27.8141C21.1983 27.8141 21.3606 27.6617 21.685 27.3569L33.5825 16.1804C36.8428 13.1177 37.2387 8.07775 34.4967 4.54353L33.9811 3.87899C30.7008 -0.34895 24.1164 0.360106 21.8114 5.1895C21.4858 5.87168 20.5148 5.87168 20.1892 5.1895C17.8843 0.360106 11.2999 -0.348948 8.01956 3.87899L7.50397 4.54353C4.7619 8.07775 5.15782 13.1177 8.41811 16.1804Z" fill="white" fill-opacity="0.27" shape-rendering="crispEdges"/>
+                    <path d="M8.41811 16.1804L20.3156 27.3569C20.6401 27.6617 20.8023 27.8141 21.0003 27.8141C21.1983 27.8141 21.3606 27.6617 21.685 27.3569L33.5825 16.1804C36.8428 13.1177 37.2387 8.07775 34.4967 4.54353L33.9811 3.87899C30.7008 -0.34895 24.1164 0.360106 21.8114 5.1895C21.4858 5.87168 20.5148 5.87168 20.1892 5.1895C17.8843 0.360106 11.2999 -0.348948 8.01956 3.87899L7.50397 4.54353C4.7619 8.07775 5.15782 13.1177 8.41811 16.1804Z" stroke="black" stroke-width="2" shape-rendering="crispEdges"/>
+                    </g>
+                    <defs>
+                    <filter id="filter0_d_595_721" x="0.683594" y="0.095459" width="40.6338" height="36.7185" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                    <feOffset dy="4"/>
+                    <feGaussianBlur stdDeviation="2"/>
+                    <feComposite in2="hardAlpha" operator="out"/>
+                    <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_595_721"/>
+                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_595_721" result="shape"/>
+                    </filter>
+                    </defs>
+            </svg>
+                <div class="card-info">
+                    <h3>Sensata City</h3>
+                    <p>260k in month</p>
+                </div>
+                <div class="card-hover">
+                    <p>Description of apartment: шикарный вид, большая кухня.</p>
+                    <button><a href="#" class="view-details">View details</a></button>
+                </div>
+            </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <section id="faq" class="faq">
+        <div class="container">
+            <div class="faq-item active">
+                <div class="faq-header">
+                    <span class="faq-number">01</span>
+                    <h3>How do I register on the platform?</h3>
+                    <button class="faq-toggle">✖</button>
+                </div>
+                <div class="faq-content">
+                    <p>On the main page, click "Sign up". First, enter your address, password, first name and last name. Then, provide your phone number.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-header">
+                    <span class="faq-number">02</span>
+                    <h3>How do I add a rental ad?</h3>
+                    <button class="faq-toggle">+</button>
+                </div>
+                <div class="faq-content">
+                    <p>On the main page, click "Sign up". First, enter your address, password, first name and last name. Then, provide your phone number.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-header">
+                    <span class="faq-number">03</span>
+                    <h3>How do I recover y password if i forget it?</h3>
+                    <button class="faq-toggle">+</button>
+                </div>
+                <div class="faq-content">
+                    <p>Answer text.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-header">
+                    <span class="faq-number">04</span>
+                    <h3>If it possible to save ads to favorites?</h3>
+                    <button class="faq-toggle">+</button>
+                </div>
+                <div class="faq-content">
+                    <p>Answer text.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="team-section">
+        <div class="section-header">
+            <h2>What our clients are saying</h2>
+        </div>
+
+        <div class="team-container">
+            <div class="profile-card">
+                <div class="profile-image">
+                    <img src="{% static 'vendor/img/users/cl1.png' %}" alt="Team Member">
+                </div>
+                <div class="profile-content">
+                    <p>
+                        Nibh quisque suscipit fermentum netus nulla cras porttitor euismod nulla.
+                        Orci, dictumst nec aliquet id.
+                    </p>
+                    <p class="name">Asem Anuarbek</p>
+                </div>
+            </div>
+
+            <div class="profile-card">
+                <div class="profile-image">
+                    <img src="{% static 'vendor/img/users/cl2.png' %}" alt="Team Member">
+                </div>
+                <div class="profile-content">
+                    <p>
+                        Nibh quisque suscipit fermentum netus nulla cras porttitor euismod nulla.
+                        Orci, dictumst nec aliquet id.
+                    </p>
+                    <p class="name">Asem Anuarbek</p>
+                </div>
+            </div>
+
+            <div class="profile-card">
+                <div class="profile-image">
+                    <img src="{% static 'vendor/img/users/cl3.png' %}" alt="Team Member">
+                </div>
+                <div class="profile-content">
+                    <p>
+                        Nibh quisque suscipit fermentum netus nulla cras porttitor euismod nulla.
+                        Orci, dictumst nec aliquet id.
+                    </p>
+                    <p class="name">Asem Anuarbek</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="hero-section">
+        <div class="overlay"></div>
+        <div class="hero-content">
+            <h2>We only have the most comfortable <br> and safe housing near the university</h2>
+        </div>
+    </section>
+
+    <section class="review-section">
+        <h2>Leave feedback</h2>
+        <div class="form-container">
+            <form class="review-form">
+                <div class="form-column">
+                    <label for="name">Name</label>
+                    <input type="text" placeholder="Your name" name="name">
+                </div>
+                <div class="form-column">
+                    <label for="phone">Phone</label>
+                    <input type="text" placeholder="Your phone" name="phone">
+                </div>
+                <div class="form-column">
+                    <label for="message">Message</label>
+                    <input type="text" placeholder="Your message" name="message">
+                </div>
+                <button type="submit">SEND</button>
+            </form>
+        </div>
+    </section>
+
+
+    <footer class="footer">
+        <div class="footer-top">
+          <div class="footer-left">
+            <div class="logo-and-icons">
+                <div class="footer-logo">
+                  <img src="img/logo.png" alt="EASYSTAY" />
+                </div>
+                <div class="logo-icons">
+                  <a href="#" target="_blank"><i class="bi bi-whatsapp"></i></a>
+                  <a href="#" target="_blank"><i class="bi bi-messenger"></i></a>
+                  <a href="#" target="_blank"><i class="bi bi-facebook"></i></a>
+                  <a href="#" target="_blank"><i class="bi bi-twitter"></i></a>
+                  <a href="#" target="_blank"><i class="bi bi-youtube"></i></a>
+                </div>
+              </div>
+
+            <p class="footer-description">
+              EasyStay is a modern solution for SDU students to find housing easily and safely.
+              We create a convenient rental environment by providing up-to-date listings,
+              search filters and the ability to communicate with landlords.
+              Our main goal is to make the housing search process fast, transparent and convenient.
+            </p>
+          </div>
+
+          <div class="footer-right">
+            <div class="stay-in-touch">
+                <h2>Let's stay in touch!</h2>
+            </div>
+            <form class="subscribe-form">
+              <input type="email" placeholder="Your email address" />
+              <button type="submit">Subscribe</button>
+            </form>
+            <p class="subscribe-info">
+                Register to learn more and receive the latest news from EasyStay.
+            </p>
+          </div>
+        </div>
+        <div class="footer-mid">
+            <div class="footer-col">
+              <h3>HEAD OFFICE</h3>
+              <p><span>Address:</span> Ablyai Khan Avenue, 1/1</p>
+              <p><span>Call:</span> <a href="tel:+77273019565">+7 (727) 301-95-65</a></p>
+              <p><span>Email:</span> <a href="mailto:sdu.edu.kz">sdu.edu.kz</a></p>
+            </div>
+            <div class="footer-col">
+              <h3>WHO WE ARE</h3>
+              <p>About Us</p>
+              <p>FAQ</p>
+              <p>Contacts</p>
+            </div>
+            <div class="footer-col">
+              <h3>OUR EXPERIENCE</h3>
+              <p>Services</p>
+              <p>Work</p>
+              <p>Interesting</p>
+            </div>
+          </div>
+
+
+        <div class="footer-bottom">
+            <p>
+              © All rights reserved. Made with
+              <i class="bi bi-heart-fill" style="color:red;"></i> by EASYSTAY
+            </p>
+            <div class="go-top-group">
+              <span class="go-top-text">GO TO TOP</span>
+              <button class="go-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">
+                <i class="bi bi-chevron-up"></i>
+              </button>
+            </div>
+          </div>
+
+      </footer>
+
+
+
+
+
+
+
+    <!-- <script>
+        document.querySelectorAll(".heart-icon").forEach(heart => {
+            heart.addEventListener("click", function() {
+                heart.classList.toggle('active');
+            });
+        });
+
+        function menuToggle() {
+            const toggleMenu = document.querySelector(".menu");
+            toggleMenu.classList.toggle("active");
+      }
+
+      function viewCard(evt, cityName) {
+
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("cards");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("link-2");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(cityName).style.display = "grid";
+            evt.currentTarget.className += " active";
+        }
+
+        document.getElementById("defaultLink").click();
+    </script> -->
+        <script>
+            function updatePriceLabel() {
+                const min = document.getElementById('price_min').value;
+                const max = document.getElementById('price_max').value;
+                document.getElementById('min_price_val').innerText = parseInt(min).toLocaleString();
+                document.getElementById('max_price_val').innerText = parseInt(max).toLocaleString();
+            }
+        </script>
+
+</body>
+</html>
+
+
