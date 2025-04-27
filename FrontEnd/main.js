@@ -5,6 +5,12 @@ document.querySelectorAll(".heart-icon").forEach(heart => {
     });
 });
 
+document.querySelectorAll(".heart-icon.fav").forEach(heart => {
+    heart.addEventListener("click", function() {
+        heart.classList.toggle('inactive');
+    });
+});
+
 function menuProfile() {
     const profileMenu = document.querySelector(".menu");
     profileMenu.classList.toggle("active");
