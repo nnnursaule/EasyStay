@@ -29,3 +29,11 @@
     text-align: left;
 
 }
+.heart-icon.fav{
+    fill: #FF5A30;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+.heart-icon.fav.inactive{
+    fill: none;
+}
