@@ -5,7 +5,6 @@ app_name = "users"
 urlpatterns = [
     path('registration/', views.UserCreationView.as_view(), name='registration'),
     path("login", views.UserLoginView.as_view(), name='login'),
-    path("logout/", auth_views.LogoutView.as_view(next_page="users:logout_page"), name="logout"),
     path("logout_page/", views.logout_page, name="logout_page"),  # Страница подтверждения выхода
     path('verify-email', views.EmailVerificationView.as_view(), name='verify-email'),
     path("landlord_profile_info/<int:pk>/", views.landlord_reviews, name='landlord_profile'),
