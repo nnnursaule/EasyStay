@@ -233,3 +233,25 @@ class Favourite(models.Model):
 
     def __str__(self):
         return f"{self.user} -> {self.apartment}"
+
+
+class Complaint(models.Model):
+    REASONS = [
+        ('incorrect_info', 'The ad contains incorrect information'),
+        ('fake_home', 'This is not a real home'),
+        ('scam', 'This is a scam'),
+        ('offensive', 'This is offensive'),
+        ('other', 'The problem is different'),
+    ]
+
+    user = models.ForeignKey("users.User", on_delete=models.CASCADE)
+    apartment = models.ForeignKey('bookings.Apartment', on_delete=models.CASCADE)
+    reason = models.CharField(max_length=50, choices=REASONS)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('user', 'apartment')  # 👈 ограничение на уникальность жалобы
+
+    def __str__(self):
+        return f"{self.user} - {self.get_reason_display()}"
+

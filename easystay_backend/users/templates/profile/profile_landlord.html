@@ -564,15 +564,22 @@ footer {
     }
   }
 
+  .main_home{
+    text-decoration:none;
+  }
+
 </style>
 </head>
 <body>
   <header class="top-nav">
-    <div class="logo"><a href="{% url 'booking:main' user.id %}">EASYSTAY</a></div>
+    <a href="{% url 'booking:main' user.id %}" class="main_home">
+      <div class="logo">EASYSTAY</div>
+    </a>
     <div class="nav-icons">
       <img src="{% if user.image %}{{ user.image.url }}{% else %}{% static 'vendor/img/users/default_avatar.jpg' %}{% endif %}" alt="Аватар" class="nav-ava">
-      <i class="bi bi-heart"></i>
-      <i class="bi bi-globe"></i>
+      <a href="{% url 'booking:favourites' %}">
+        <i class="bi bi-heart"></i>
+      </a>
     </div>
   </header>
 
@@ -613,6 +620,14 @@ footer {
             <strong>{{ review.author.username }}</strong>
             <span>{{ review.created_at|date:"F Y" }}</span>
           </div>
+          <div class="review-actions">
+            <a href="{% url 'users:delete_review' review.id %}" class="delete-icon" style="cursor: pointer;">
+              <i class="bi bi-trash"></i>
+            </a>
+            <a href="{% url 'users:edit_review' review.id %}" class="edit-icon" style="cursor: pointer; margin-left: 8px;">
+              <i class="bi bi-pencil"></i>
+            </a>
+          </div>
         </div>
       </div>
     {% empty %}
@@ -642,6 +657,10 @@ footer {
       </div>
   {% endfor %}
     </div>
+  <a href="{% url 'booking:apartment_create' user.id %}">
+    Add new
+  </a>
+
 </section>
 
 <footer class="footer">

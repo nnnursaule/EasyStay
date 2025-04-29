@@ -321,3 +321,23 @@ def successful_view(request):
     return render(request, "users/successfull.html")
 
 
+def delete_review(request, pk):
+    review = get_object_or_404(Review, pk=pk)
+    author = review.author  # Сохраняем объект автора до удаления
+    review.delete()
+
+    if author.is_landlord:
+        return redirect('users:landlord_profile', pk=author.id)
+    else:
+        return redirect('users:tenant_profile', pk=author.id)
+
+class ReviewUpdateView(UpdateView):
+    model = Review
+    fields = ['text']  # только текст можно изменить
+    template_name = 'profile/edit_review.html'
+
+    def get_success_url(self):
+        if self.object.author.is_landlord:
+            return reverse('users:landlord_profile', kwargs={'pk': self.object.author.id})
+        else:
+            return reverse('users:tenant_profile', kwargs={'pk': self.object.author.id})

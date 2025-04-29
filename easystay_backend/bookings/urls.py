@@ -8,7 +8,7 @@ urlpatterns = [
     path("apartment/<int:pk>/", views.ApartmentDetailView.as_view(), name="apartment_detail"),
     path("share/<int:apartment_id>/", views.share_with_others, name="share"),
     path("landlord_apartments/<int:pk>/", views.landlord_apartments, name="landlord_apartments"),
-    path('apartments/new/', views.ApartmentCreateView.as_view(), name='apartment_create'),
+    path('apartments/<int:pk>/new/', views.ApartmentCreateView.as_view(), name='apartment_create'),
     path('apartments/<int:pk>/edit/', views.ApartmentUpdateView.as_view(), name='apartment_update'),
     path('apartments/<int:pk>/delete/', views.ApartmentDeleteView.as_view(), name='apartment_delete'),
     path('delete_apartment/<int:pk>/', views.delete_apartment, name='delete_apartment'),
@@ -17,6 +17,7 @@ urlpatterns = [
     path('favourite/<int:apartment_id>/', views.toggle_favourite, name='toggle_favourite'),
     path('favourites/add/<int:apartment_id>/', views.add_to_favourites, name='add_to_favourites'),
     path('residential-complex/<int:pk>/', views.ResidentialComplexView.as_view(), name='complex_details'),
+    path('complaint/<int:apartment_id>/', views.submit_complaint, name='submit_complaint'),
 
 
 ]
