@@ -1,4 +1,4 @@
-{% load static %}
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -113,28 +113,44 @@
   </style>
 </head>
 <body>
+  <form method="POST" action="{% url 'booking:submit_complaint' apartment.id %}">
+    {% csrf_token %}
+    <div class="modal">
+      <span class="close-btn" onclick="alert('Closed')">&times;</span>
+      <h2>Why are you complaining about this housing?</h2>
+      <p class="description">The owner will not see this information.</p>
 
-<form method="POST" action="{% url 'booking:submit_complaint' apartment.id %}">
-  {% csrf_token %}
-  <div class="option">
-    <label><input type="radio" name="reason" value="incorrect"> The ad contains incorrect information</label>
-  </div>
-  <div class="option">
-    <label><input type="radio" name="reason" value="fake"> This is not a real home</label>
-  </div>
-  <div class="option">
-    <label><input type="radio" name="reason" value="scam"> This is a scam</label>
-  </div>
-  <div class="option">
-    <label><input type="radio" name="reason" value="offensive"> This is offensive</label>
-  </div>
-  <div class="option">
-    <label><input type="radio" name="reason" value="other"> The problem is different</label>
-  </div>
+      <div class="option">
+        <label for="r1">The ad contains incorrect information</label>
+        <input type="radio" name="reason" id="r1" value="incorrect">
+      </div>
 
-  <button class="submit-btn" type="submit">Submit</button>
-</form>
+      <div class="option">
+        <label for="r2">This is not a real home</label>
+        <input type="radio" name="reason" id="r2" value="fake">
+      </div>
 
+      <div class="option">
+        <label for="r3">This is a scam</label>
+        <input type="radio" name="reason" id="r3" value="scam">
+      </div>
 
+      <div class="option">
+        <label for="r4">This is offensive</label>
+        <input type="radio" name="reason" id="r4" value="offensive">
+      </div>
+
+      <div class="option">
+        <label for="r5">The problem is different</label>
+        <input type="radio" name="reason" id="r5" value="other">
+      </div>
+
+      <button class="submit-btn" type="submit">
+        Submit
+        <!-- тут можно вставить вашу SVG-иконку, если надо -->
+      </button>
+    </div>
+  </form>
 </body>
+
 </html>

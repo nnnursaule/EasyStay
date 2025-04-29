@@ -237,7 +237,7 @@ def submit_complaint(request, apartment_id):
         # Проверка на уже существующую жалобу от пользователя
         if Complaint.objects.filter(user=request.user, apartment=apartment).exists():
             messages.error(request, 'Вы уже отправили жалобу на это объявление.')
-            return redirect('apartment_detail', apartment_id=apartment_id)
+            return redirect('booking:apartment_detail', pk=apartment_id)
 
         # Создание жалобы
         Complaint.objects.create(
@@ -246,7 +246,7 @@ def submit_complaint(request, apartment_id):
             reason=reason
         )
         messages.success(request, 'Жалоба успешно отправлена.')
-        return redirect('apartment_detail', apartment_id=apartment_id)
+        return redirect('booking:apartment_detail', pk=apartment_id)
 
     # GET-запрос — показываем форму
     return render(request, 'profile/complaint.html', {'apartment': apartment})
