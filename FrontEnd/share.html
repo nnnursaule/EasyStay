@@ -3,81 +3,176 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Share Modal</title>
+    <title>Share page</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background: #f0f0f0;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            text-align: center;
+            padding: 50px;
+            background: rgba(0, 0, 0, 0.6);
         }
+
         .modal {
             display: flex;
+            justify-content: center;
+            align-items: center;
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            justify-content: center;
-            align-items: center;
         }
+
         .modal-content {
-            background: #d3d3d3;
+            background: #D9D9D9;
             padding: 20px;
             border-radius: 12px;
-            width: 350px;
-            text-align: center;
+            text-align: left;
+            width: 50%;
+            height: auto;
             position: relative;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
         }
-        .close-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            column-gap: normal;
+
+        }
+
+        .close {
+            font-size: 30px;
             cursor: pointer;
-            font-size: 20px;
         }
-        .share-options {
+
+        h3 {
+            font-size: 25px;
+            margin: 0;
+        }
+
+        p {
+            color: gray;
+            font-size: 18px;
+            margin-top: 5px;
+        }
+
+        .social-icons {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
+            gap: 20px;
             justify-items: center;
-            padding: 10px;
+            margin-top: 20px;
         }
-        .share-option {
+
+        .icon {
             display: flex;
-            flex-direction: column;
             align-items: center;
-            cursor: pointer;
+            gap: 8px;
+            padding: 15px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: black;
+            font-size: 24px;
+            width: 140px;
+            justify-content: center;
+            transition: background 0.3s;
+            flex-direction: column;
         }
-        .share-option img {
-            width: 50px;
-            height: 50px;
-            margin-bottom: 5px;
+
+        .icon img {
+            width: 33px;
+            height: 33px;
         }
+
+        .icon:hover {
+            background: #ddd;
+        }
+
+        @media (max-width: 768px) {
+    .modal-content {
+        width: 50%; 
+        padding: 15px; 
+    }
+
+    .social-icons {
+        grid-template-columns: repeat(2, 1fr); 
+        gap: 15px;
+    }
+
+    .icon {
+        width: 120px; 
+        font-size: 20px;
+        padding: 12px 15px;
+    }
+
+    h3 {
+        font-size: 20px;
+    }
+
+    p {
+        font-size: 16px;
+    }
+
+    .close {
+        font-size: 25px;
+    }
+}
+
     </style>
 </head>
 <body>
-    <div class="modal" id="shareModal">
+    <div id="shareModal" class="modal">
         <div class="modal-content">
-            <span class="close-btn" onclick="closeModal()">&times;</span>
-            <h3>Share with others</h3>
+            <div class="header">
+                <h3>Share with others</h3>
+                <span class="close">&times;</span>
+            </div>
             <p>Choose one option here</p>
-            <div class="share-options">
-                <div class="share-option" onclick="share('https://www.facebook.com')"><img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook"> Facebook</div>
-                <div class="share-option" onclick="share('https://www.instagram.com')"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram"> Instagram</div>
-                <div class="share-option" onclick="share('https://web.whatsapp.com')"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp"> WhatsApp</div>
-                <div class="share-option" onclick="share('https://twitter.com/')"><img src="https://upload.wikimedia.org/wikipedia/commons/6/60/Twitter_Logo_2023.svg" alt="Twitter"> Twitter</div>
-                <div class="share-option" onclick="share('sms:')"><img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/IMessage_logo.svg" alt="Message"> Message</div>
-                <div class="share-option" onclick="share('https://www.pinterest.com')"><img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Pinterest-logo.png" alt="Pinterest"> Pinterest</div>
+            <div class="social-icons">
+                <a href="#" class="icon">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook">
+                    <span>Facebook</span>
+                </a>
+                <a href="#" class="icon">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram">
+                    <span>Instagram</span>
+                </a>
+                <a href="#" class="icon">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+                    <span>WhatsApp</span>
+                </a>
+                <a href="#" class="icon">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram">
+                    <span>Telegram</span>
+                </a>
+                <a href="#" class="icon">
+                    <img src="img/IMessage.png" alt="Message">
+                    <span>Message</span>
+                </a>
+                <a href="#" class="icon">
+                    <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Gmail">
+                    <span>Gmail</span>
+                </a>
             </div>
         </div>
     </div>
     <script>
-        function closeModal() {
-            document.getElementById('shareModal').style.display = 'none';
-        }
-        function share(url) {
-            window.open(url, '_blank');
-        }
+        document.addEventListener("DOMContentLoaded", function () {
+            const modal = document.getElementById("shareModal");
+            const closeBtn = document.querySelector(".close");
+
+            closeBtn.addEventListener("click", () => {
+                modal.style.display = "none";
+            });
+
+            window.addEventListener("click", (e) => {
+                if (e.target === modal) {
+                    modal.style.display = "none";
+                }
+            });
+        });
     </script>
 </body>
 </html>

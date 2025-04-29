@@ -1,11 +1,11 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    box-sizing: border-box;  
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 body {
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     text-align: center;
     background-color: #fafafa;
 }
@@ -33,14 +33,9 @@ body {
 .nav-links {
     list-style: none;
     display: flex;
-    gap: 20px;
-}
-
-.nav-links {
-    list-style: none;
-    display: flex;
     margin-right: auto; 
     padding-left: 0;
+    gap: 27px;
 }
 
 .nav-links a {
@@ -167,7 +162,7 @@ body {
     align-items: center;
     background: white;
     padding: 12px 20px;
-    border-radius: 10px;
+    border-radius: 8px;
     position: relative;
     margin-top: 20px;
     z-index: 1;
@@ -241,7 +236,7 @@ body {
 /* Cards */
 .about-card {
     background-color: #fff;
-    border: 1px solid #eee;
+    box-shadow: 0 4px 7px rgba(0, 0, 0, 0.2);
     border-radius: 8px;
     padding: 20px;
     display: flex;
@@ -299,7 +294,7 @@ body {
     width: 100%;
     padding-bottom: 56.25%; 
     overflow: hidden;
-    border-radius: 12px;
+    border-radius: 5px;
     background-color: #000; 
 }
   
@@ -311,7 +306,6 @@ body {
     height: 100%;
     border: none;
 }
-
 
 .announcements {
     background-color: #fafafa;
@@ -327,7 +321,7 @@ body {
 .cards-container {
     display: grid;
     grid-template-columns: repeat(4, 1fr); 
-    gap: 20px; 
+    gap: 30px; 
     justify-content: center; 
     padding: 20px;
 }
@@ -335,13 +329,13 @@ body {
 .card {
     position: relative;
     overflow: hidden;
-    border-radius: 10px;
-    box-shadow: 0 4px 7px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease-in-out;
     background: #fff;
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: 400px;
+    box-shadow: 0 4px 7px rgba(0, 0, 0, 0.2);
 }
 
 .card img {
@@ -350,7 +344,6 @@ body {
     object-fit: cover;
     display: block;
 }
-
 .card-hover {
     position: absolute;
     top: 0;
@@ -383,13 +376,9 @@ body {
     border-radius: 5px;
 }
 
-.view-project:hover {
-    background: #FF5A30;
-}
-
 .how-we-work {
     position: relative;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), 
                 url('img/wework.jpg') center/cover no-repeat;
     color: white;
     padding: 100px 0;
@@ -411,17 +400,11 @@ body {
 }
 
 .step {
-    background: rgba(255, 255, 255, 0.15);
     padding: 20px;
     border-radius: 10px;
     width: 18%;
     text-align: center;
     transition: 0.3s;
-}
-
-.step:hover {
-    background: rgba(255, 255, 255, 0.25);
-    transform: translateY(-5px);
 }
 
 .step-icon {
@@ -431,8 +414,10 @@ body {
   }
 
 .step-number {
-    font-size: 16px;
-    font-weight: bold;
+    font-size: 22px;
+    color: #FFFFFF;
+    font-style: italic;
+    margin-bottom: 10px;
 }
 
 h3 {
@@ -449,9 +434,10 @@ p {
     background: #FF5A30;
     color: white;
     font-size: 18px;
+    font-weight: 600;
     padding: 12px 25px;
     border: none;
-    border-radius: 25px;
+    border-radius: 8px;
     cursor: pointer;
     transition: 0.3s;
 }
@@ -462,65 +448,69 @@ p {
 }
 
 .faq {
-    max-width: 900px;
+    max-width: 1180px;
     margin: 50px auto;
     background: white;
-    padding: 40px;
-    border-radius: 10px;
+    padding: 30px;
+
 }
 
 .faq-item {
     border-bottom: 1px solid #ccc;
-    padding: 25px 0;
+    padding: 10px 0;
 }
 
 .faq-header {
     display: flex;
     align-items: center;
-    justify-content: space-between;
     cursor: pointer;
-    padding: 15px 20px; 
-    font-size: 22px;
+    gap: 40px;
+    justify-content: space-between;
 }
 
 .faq-number {
-    font-size: 25px;
-    font-weight: bold;
+    font-size: 47px;
     color: #FF5A30;
-    margin-right: 10px;
+    font-weight: 700;
+    flex-shrink: 0;
+    width: 60px;
 }
 
-.faq-header h3 {
-    font-size: 24px;
-    font-weight: bold;
+
+.faq-content-container {
     flex: 1;
-}
+    text-align: left;
+  }
 
-.faq-toggle {
+  .faq-content-container h3 {
+    font-size: 26px;
+    font-weight: bold;
+    margin: 10px 0 10px 0;
+    text-align: left;
+  }
+
+  .faq-content {
+    display: none;
+    font-size: 20px;
+    color: #3C3C43D9;
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+
+  .faq-item.active .faq-content {
+    display: block;
+  }
+
+  .faq-toggle {
+    margin-left: auto;
+    font-size: 24px;
     background: #f5f5f5;
     border: none;
-    font-size: 24px;
-    width: 30px;
-    height: 30px;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
     cursor: pointer;
-}
-
-.faq-toggle:hover {
-    background: #ddd;
-}
-
-.faq-content {
-    display: none;
-    padding: 20px;
-    font-size: 18px; 
-    color: #666;
-    line-height: 1.6;
-}
-
-.faq-item.active .faq-content {
-    display: block;
-}
+  }
 
 .faq-item.active .faq-toggle {
     background: #000;
@@ -533,7 +523,7 @@ p {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 100px 20px;
+    padding: 100px 0;
     color: white;
     min-height: 50vh;
 }
@@ -577,7 +567,6 @@ p {
 
 .team-container::before {
     content: "";
-
     width: 100%;
     height: calc(50% + 100px); 
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6),);
@@ -586,14 +575,14 @@ p {
 
 .profile-card {
     background: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     text-align: center;
-    width: 320px;
+    width: 340px;
+    height: 440px;
     padding-bottom: 20px;
     position: relative;
     z-index: 1;
+    box-shadow: 0 4px 7px rgba(0, 0, 0, 0.2);
 }
 
 .profile-image {
@@ -603,32 +592,33 @@ p {
 
 .profile-image img {
     width: 100%;
-    height: 200px;
+    height: 195px;
     object-fit: cover;
-    border-radius: 5px;
 }
 
-/* Мәтін бөлігі */
 .profile-content {
     padding: 20px;
+    text-align: left;
 }
 
 .profile-content p {
-    font-size: 15px;
+    font-size: 20px;
     color: #333;
-    margin-bottom: 15px;
+    margin-bottom: 25px;
 }
 
 .profile-content .name {
     font-weight: bold;
-    font-size: 16px;
+    font-size: 20px;
 }
 
 .hero-section {
     position: relative;
     width: 100%;
-    height: 300px; 
-    background: url('img/feedback.png') center/cover no-repeat; 
+    height: 400px; 
+    margin-top: -50px;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), 
+    url('img/feedback.png') center/cover no-repeat;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -657,25 +647,106 @@ p {
     line-height: 1.4;
 }
 
-.review-section {
-    background: white;
-    padding: 50px 20px;
+.feedback-section {
+    background: #FFFFFF;
+    margin: 80px auto;
+    border-radius: 2px;
+    max-width: 1200px;
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.1);
     text-align: center;
-}
+    margin-top: 10px;
+    margin-bottom: 40px;
+  }
 
-.review-section h2 {
-    font-size: 24px;
-    margin-bottom: 20px;
-}
+  .feedback-section h2 {
+    font-size: 30px;
+    font-weight: 700;
+    margin-bottom: 50px;
+    color: #1E212C;
+  }
 
-.review-form {
+  .feedback-form {
     display: flex;
     justify-content: center;
-    gap: 15px;
-    max-width: 800px;
-    margin: 0 auto;
+    align-items: flex-end;
+    gap: 20px;
     flex-wrap: wrap;
-}
+    margin-bottom: 20px;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+    text-align: left;
+  }
+
+  .form-group.large {
+    width: 450px;
+  }
+
+  label {
+    font-weight: 400;
+    color: #424551;
+    margin-bottom: 8px;
+    font-size: 15px;
+  }
+
+  .feedback-form input {
+    padding: 15px;
+    font-size: 14px;
+    border: 1px solid #D7DADD;
+    border-radius: 6px;
+    background: #F4F5F6;
+    transition: border 0.2s;
+    height: 50px;
+  }
+
+  .feedback-form input:focus {
+    border-color: #888;
+    outline: none;
+  }
+
+  .send-btn {
+    background: #FF5A30;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 0 30px;
+    height: 50px;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+    margin-top: 20px;
+  }
+
+  .send-btn:hover {
+    background: #FF5A30;
+  }
+
+  .stars {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+    flex-direction: row-reverse;
+  }
+
+  .stars input {
+    display: none;
+  }
+
+  .stars label {
+    font-size: 30px;
+    color: #ccc;
+    cursor: pointer;
+  }
+
+  .stars input:checked ~ label,
+  .stars input:hover ~ label {
+    color: #FF5A30;
+  }
 
 .review-form input, .review-form button {
     padding: 12px;
@@ -756,7 +827,7 @@ p {
   
 .logo-icons a {
     color: #c2bfbf;         
-    font-size: 20px;     
+    font-size: 24px;     
     transition: color 0.3s;
 }
   
@@ -922,36 +993,6 @@ p {
   
   
 @media (max-width: 768px) {
-        * {
-            box-sizing: border-box;
-        }
-    
-        body, html {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            overflow-x: hidden;
-        }
-    
-        .container {
-            width: 100%;
-            padding: 0 15px; 
-        }
-    
-        .content {
-            margin: 0 auto; 
-            max-width: 100%;
-        }
-    
-        .cards-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); 
-            gap: 10px;
-        }
-    
-        .card {
-            width: 100%;
-        }
          .navbar {
             flex-direction: row;
             align-items: center;
@@ -963,6 +1004,10 @@ p {
             align-items: center;
             gap: 10px;
         }
+
+        .nav-links a {
+            font-size: 14px;
+        }
     
         .hero {
             height: auto;
@@ -970,7 +1015,7 @@ p {
         }
     
         .title {
-            font-size: 2rem;
+            font-size: 1.75rem;
             text-align: center;
         }
     
@@ -982,8 +1027,8 @@ p {
     
         .search-bar {
             flex-direction: row;
-            width: 60%;
-            height: 30%;
+            width: 55%;
+            height: 25%;
             padding: 10px;
             justify-content: center;
             margin: 0 auto;
@@ -993,33 +1038,96 @@ p {
             width: 100%;
             margin-bottom: 10px;
         }
-    
+
+        .about-card {
+            height: 50%;
+        }
         .about-content {
             flex-direction: column;
             align-items: center;
         }
-    
-        .cards-container {
-            grid-template-columns: repeat(2, 1fr);
-        }
-    
-        .steps {
+
+        .left-cards {
+            width: 50%;
             flex-direction: row;
             align-items: center;
+            margin-right: 70px;
+        }
+
+        .right-video {
+            width: 65%;
         }
     
-        .step {
-            width: 30%;
+        .cards-container {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    
+        .card {
+            height: 300px;
         }
     
         .card img {
-            height: 250px;
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
         }
     
-        .right-video {
-            max-width: 100%;
+        .how-we-work {
+            padding: 9px 5px;
+        }
+        
+        .how-we-work h2 {
+            font-size: 28px;
+        }
+        
+        .steps {
+            gap: 10px;
+        }
+        
+        .step-icon {
+            font-size: 1.7rem;
+            margin-bottom: 10px;
+            color: #ffffff; 
+          }
+        
+        .step-number {
+            font-size: 18px;
         }
 
+.team-section .section-header h2 {
+    font-size: 1.8rem;
+}
+
+.team-container {
+    gap: 30px;
+    width: 100%;
+    padding: 8px 0;
+}
+
+.profile-card {
+    width: 210px;
+    height: 390px;
+    padding-bottom: 20px;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 4px 7px rgba(0, 0, 0, 0.2);
+}
+
+.profile-image img {
+    width: 100%;
+    height: 170px;
+}
+
+.profile-content p {
+    font-size: 14px;
+}
+
+.profile-content .name {
+    font-size: 18px;
+}
+
+        
 
         .footer-top,
         .footer-mid,

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Delete Modal</title>
+    <title>Edit photo</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
         body {
@@ -28,14 +28,13 @@
             position: relative;
         }
         .line {
-            width: 493px;
+            width: 495px;
             height: 14px;
             background: #FF5722;
             position: absolute;
             top: -40px;
-            left: -39px;
+            left: -38px;
             border-radius: 10px 10px 0 0;
-            border: 2px solid #d84315;
         }
         .icon-wrapper {
             position: absolute;
@@ -44,15 +43,14 @@
             transform: translateX(-50%);
             background: #FF5722;
             border-radius: 50%;
-            width: 70px;
-            height: 70px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-size: 26px;
-            border: 3px solid white;
+            width: 50px;
+            height: 50px;
+            fill: #fff;
         }
+       
         .modal-body {
             margin-top: 10px;
         }
@@ -69,7 +67,7 @@
             border-radius: 5px;
             font-size: 16px;
         }
-        .btn.cancel {
+        .btn.add {
             background: white;
             border: 1px solid #333;
         }
@@ -84,21 +82,23 @@
         <div class="modal-header">
             <div class="line"></div>
             <div class="icon-wrapper">
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
-                    <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5"/>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="29" height="29">
+                    <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 
+                    7.04a1.003 1.003 0 0 0 0-1.42l-2.34-2.34a1.003 
+                    1.003 0 0 0-1.42 0l-1.83 1.83 3.75 3.75 1.84-1.82z"/>
                   </svg>
-                    </svg>
                     
             </div>
         </div>
         <div class="modal-body">
-            <h2>Delete</h2>
-            <p>Are you going to delete?<br>Are you sure?</p>
+            <h2>Edit photo</h2>
+            <p>Are you going to edit your profile photo<br>Are you sure?</p>
         </div>
         <div class="modal-footer">
-            <button class="btn cancel">Cancel</button>
+            <button class="btn add">Add new photo</button>
             <button class="btn delete">Delete</button>
         </div>
     </div>
+
 </body>
 </html>

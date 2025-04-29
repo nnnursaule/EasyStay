@@ -29,9 +29,23 @@
             width: 350px;
             text-align: center;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            position: relative;
         }
+
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 27px;
+            cursor: pointer;
+        }
+
         h2 {
             margin-bottom: 10px;
+            text-align: left;
+            margin-top: 0%;
+            color: #1E212C;
+
         }
         .tabs {
             display: flex;
@@ -45,9 +59,9 @@
             padding-bottom: 5px;
         }
         .tabs .active {
-            color: #ff5722;
-            border-bottom: 2px solid #ff5722;
+            color: #FF5A30;
         }
+
         form {
             display: flex;
             flex-direction: column;
@@ -79,8 +93,9 @@
         button {
             width: 100%;
             padding: 10px;
-            background: #ff5722;
+            background: #FF5A30;
             color: white;
+            font-size: 15px;
             border: none;
             border-radius: 5px;
             cursor: not-allowed;
@@ -93,8 +108,9 @@
         .forgot-password {
             display: block;
             margin-top: 10px;
-            font-size: 14px;
-            color: #ff5722;
+            font-size: 15px;
+            color: #FF5A30;
+            font-weight: 600;
             text-decoration: none;
         }
 
@@ -106,14 +122,14 @@
     }
     
     form input {
-        width: 96%; 
+        width: 95%; 
         padding: 8px; 
-        font-size: 14px; 
+        font-size: 13px; 
     }
 
     button {
         padding: 11px;
-        font-size: 14px; 
+        font-size: 13px; 
     }
 
     .checkbox-group label {
@@ -130,6 +146,7 @@
 <body>
     <div class="container">
         <div class="modal">
+            <span class="close">&times;</span>
             <h2>Sign up</h2>
             <div class="tabs">
                 <span class="active" id="email-tab">E-mail address</span>
@@ -156,6 +173,23 @@
     </div>
 
     <script>
+document.addEventListener("DOMContentLoaded", function () {
+  const closeBtn = document.querySelector(".close");
+  const modal = document.querySelector(".modal");
+
+  // close btn
+  closeBtn.addEventListener("click", () => {
+    history.back();
+  });
+
+  window.addEventListener("click", (e) => {
+    if (!modal.contains(e.target)) {
+      history.back();
+    }
+  });
+});
+
+
         document.addEventListener("DOMContentLoaded", function () {
             const termsCheckbox = document.getElementById("termsCheckbox");
             const signupBtn = document.getElementById("signupBtn");
@@ -176,13 +210,11 @@
             });
 
             signupBtn.addEventListener("click", function (event) {
-            event.preventDefault(); // Форма жіберілмес үшін алдын ала болдырмау
+            event.preventDefault(); 
             if (!signupBtn.disabled) {
-                window.location.href = "successful.html"; // Өткізілетін беттің атауын өзгертіңіз
+                window.location.href = "successful.html"; 
             }
         });
-
-        
         });
     </script>
 </body>
