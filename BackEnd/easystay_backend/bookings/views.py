@@ -1,13 +1,14 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic.list import ListView
-from .models import Apartment, ResidentialComplex, ALL_AMENITIES, AMENITIES_TRANSLATION, Favourite
-from .forms import ApartmentForm
+from .models import Apartment, ResidentialComplex, ALL_AMENITIES, AMENITIES_TRANSLATION, Favourite, Complaint
+from .forms import ApartmentForm, ApartmentCreateForm
 from django.views.generic import DetailView
 from users.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.http import JsonResponse
+from django.contrib import messages
 
 class ResidentialComplexView(DetailView):
     model = ResidentialComplex
@@ -123,13 +124,18 @@ def main_page(request, pk):
 
 class ApartmentCreateView(LoginRequiredMixin, CreateView):
     model = Apartment
-    form_class = ApartmentForm
-    template_name = 'apartments/advertisement.html'
+    form_class = ApartmentCreateForm  # меняем на новую форму
+    template_name = 'apartments/add_advertisement.html'
     success_url = reverse_lazy('apartment_list')
 
     def form_valid(self, form):
-        form.instance.landlord = self.request.user
+        form.instance.landlord = self.request.user  # Привязываем хозяина
         return super().form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['user_pk'] = self.request.user.pk  # Передаем ID пользователя
+        return context
 
 
 
@@ -146,6 +152,8 @@ class ApartmentUpdateView(LoginRequiredMixin, UpdateView):
         context = super().get_context_data(**kwargs)
         context['user_pk'] = self.request.user.pk  # Передаем ID пользователя
         return context
+
+
 class ApartmentDeleteView(LoginRequiredMixin, DeleteView):
     model = Apartment
     template_name = 'apartments/advertisement.html'
@@ -153,6 +161,8 @@ class ApartmentDeleteView(LoginRequiredMixin, DeleteView):
 
     def get_queryset(self):
         return Apartment.objects.filter(landlord=self.request.user)
+
+
 
 def landlord_apartments(request, pk):
     apartments = Apartment.objects.filter(landlord_id=pk)
@@ -172,20 +182,27 @@ def delete_apartment(request, pk):
     return render(request, 'apartments/delete.html', {'apartment': apartment})
 
 
+
 def remove_from_favourites(request, apartment_id):
     apartment = Apartment.objects.get(id=apartment_id)
     Favourite.objects.filter(user=request.user, apartment=apartment).delete()
     return redirect('booking:favourites')  # Перенаправление на страницу избранных квартир
+
+
 
 def favourites_view(request):
     # Получаем все избранные квартиры текущего пользователя
     favourites = Favourite.objects.filter(user=request.user)
     return render(request, 'bookings/favourites.html', {'favourites': favourites})
 
+
+
 def add_to_favourites(request, apartment_id):
     apartment = get_object_or_404(Apartment, id=apartment_id)
     Favourite.objects.get_or_create(user=request.user, apartment=apartment)
     return redirect(request.META.get('HTTP_REFERER', 'booking:index'))
+
+
 
 def toggle_favourite(request, apartment_id):
     apartment = get_object_or_404(Apartment, id=apartment_id)
@@ -201,4 +218,37 @@ def toggle_favourite(request, apartment_id):
         return JsonResponse({'is_favourite': is_favourite})
     else:
         return redirect(request.META.get('HTTP_REFERER', 'favourites'))
+
+
+def complain_clients(request, pk):
+    apartment = get_object_or_404(Apartment, id=pk)
+
+
+def submit_complaint(request, apartment_id):
+    apartment = get_object_or_404(Apartment, id=apartment_id)
+
+    if request.method == 'POST':
+        reason = request.POST.get('reason')
+
+        if not reason:
+            messages.error(request, 'Пожалуйста, выберите причину жалобы.')
+            return redirect('submit_complaint', apartment_id=apartment_id)
+
+        # Проверка на уже существующую жалобу от пользователя
+        if Complaint.objects.filter(user=request.user, apartment=apartment).exists():
+            messages.error(request, 'Вы уже отправили жалобу на это объявление.')
+            return redirect('apartment_detail', apartment_id=apartment_id)
+
+        # Создание жалобы
+        Complaint.objects.create(
+            user=request.user,
+            apartment=apartment,
+            reason=reason
+        )
+        messages.success(request, 'Жалоба успешно отправлена.')
+        return redirect('apartment_detail', apartment_id=apartment_id)
+
+    # GET-запрос — показываем форму
+    return render(request, 'profile/complaint.html', {'apartment': apartment})
+
 

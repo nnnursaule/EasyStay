@@ -15,6 +15,8 @@ urlpatterns = [
     path("digit_code/", views.verify_code, name='digit_code'),
     path("set_new_password/<uidb64>/<token>/", views.SetNewPasswordView.as_view(), name='set_new_password'),
     path("success/", views.successful_view, name="success"),
+    path('reviews/<int:pk>/delete/', views.delete_review, name='delete_review'),
+    path('reviews/<int:pk>/edit/', views.ReviewUpdateView.as_view(), name='edit_review'),
 
 
 ]
