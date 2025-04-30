@@ -10,47 +10,23 @@
 </head>
 <body>
     <header>
-        <nav class="navbar">
-            <div class="logo">
-                <img src="img/logo.png" alt="EasyStay Logo">
-            </div>
-            <ul class="nav-links">
-                <li><a href="#hero">Services</a></li>
-                <li><a href="#">Interesting</a></li>
-                <li><a href="#faq">FAQ</a></li>
-                <li><a href="login.html">Log in</a></li>
-                <li><a href="signup.html">Sign up</a></li>
-            </ul>
-            <button class="landlord-btn">For a landlord</button>
-            <a href="login.html">
-                    <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M5.56335 17.3853L14.3153 25.6068C14.6398 25.9116 14.802 26.064 15 26.064C15.198 26.064 15.3602 25.9116 15.6847 25.6068L15.6847 25.6068L24.4367 17.3853C26.8819 15.0882 27.1788 11.3082 25.1223 8.65758L24.7356 8.15918C22.2753 4.98822 17.337 5.52002 15.6083 9.14206C15.3641 9.6537 14.6359 9.6537 14.3917 9.14206C12.663 5.52002 7.72465 4.98823 5.26443 8.15918L4.87773 8.65759C2.82118 11.3083 3.11813 15.0882 5.56335 17.3853Z" stroke="white" stroke-opacity="0.77" stroke-width="3"/>
-                        </svg>         
-            </a>
-            <div class="language-container">
-                <button id="languageButton" class="language-btn">
-                    <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                    <rect width="30" height="30" fill="url(#pattern0_1_791)"/>
-                    <defs>
-                    <pattern id="pattern0_1_791" patternContentUnits="objectBoundingBox" width="1" height="1">
-                    <use xlink:href="#image0_1_791" transform="scale(0.00195312)"/>
-                    </pattern>
-                    <image id="image0_1_791" width="512" height="512" preserveAspectRatio="none" xlink:href="data:image/png;base64,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"/>
-                    </defs>
-                    </svg>                            
-                </button>
-                <div id="languageDropdown" class="language-dropdown hidden">
-                    <a href="index.html" data-lang="en">English</a>
-                    <a href="index_ru.html" data-lang="ru">Русский</a>
-                    <a href="index_kk.html" data-lang="kk">Қазақша</a>
-                </div>
-            </div>         
+            <nav class="navbar">
+                <div class="logo">
+                    <img src="img/logo.png" alt="EasyStay Logo">
+                </div>            
+                <ul class="nav-links">
+                    <li><a href="#hero">Services</a></li>
+                    <li><a href="#announcements">Interesting</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                    <li><a href="login.html">Log in</a></li>
+                    <li><a href="signup.html">Sign up</a></li>
+                </ul>
     </header>
-    <section class="hero">
+    <section id="hero" class="hero">
         <div class="overlay"></div>
         <div class="content">
         <span class="title">Platform for SDU students where <br>renting is made <span class="highlight">EASY!</span></span>
- 
+        
         <div class="search-bar">
             <input type="text" placeholder="Search by regions, residential complex">
             <button class="search-btn">
@@ -66,7 +42,6 @@
         </div>
     </section>
 
-    <!-- About Us -->
     <section id="about-us" class="about-us">
         <div class="container">
           <h2>About us</h2>
@@ -99,7 +74,12 @@
     
             <div class="right-video">
               <div class="video-content">
-                <iframe src="https://www.youtube.com/embed/Wvm77W0FcLw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>  
+                <iframe 
+                        src="https://www.youtube.com/embed/Wvm77W0FcLw" 
+                        title="YouTube video player" frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                        </iframe>  
                </div>
             </div>
         </div>
@@ -108,98 +88,184 @@
       <section id="announcements" class="announcements">
         <h2>More announcements</h2>
         <div class="cards-container">
-            <div class="card">
-                <img src="img/1.png" alt="Apartment">
-                <div class="card-info">
-                    <h3>Koktobe City</h3>
-                    <p>230k for month</p>
-                </div>
-                <div class="card-hover">
-                    <p>Описание квартиры: 50м², уютная, хороший ремонт.</p>
-                    <a href="login.html" class="view-project">View details</a>
-                </div>
+          <div class="card">
+            <img src="img/1.png" alt="Apartment">
+            <svg class="heart-icon" width="42" height="37" viewBox="0 0 42 37" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g filter="url(#filter0_d_595_721)">
+                        <path d="M8.41811 16.1804L20.3156 27.3569C20.6401 27.6617 20.8023 27.8141 21.0003 27.8141C21.1983 27.8141 21.3606 27.6617 21.685 27.3569L33.5825 16.1804C36.8428 13.1177 37.2387 8.07775 34.4967 4.54353L33.9811 3.87899C30.7008 -0.34895 24.1164 0.360106 21.8114 5.1895C21.4858 5.87168 20.5148 5.87168 20.1892 5.1895C17.8843 0.360106 11.2999 -0.348948 8.01956 3.87899L7.50397 4.54353C4.7619 8.07775 5.15782 13.1177 8.41811 16.1804Z" fill="white" fill-opacity="0.27" shape-rendering="crispEdges"/>
+                        <path d="M8.41811 16.1804L20.3156 27.3569C20.6401 27.6617 20.8023 27.8141 21.0003 27.8141C21.1983 27.8141 21.3606 27.6617 21.685 27.3569L33.5825 16.1804C36.8428 13.1177 37.2387 8.07775 34.4967 4.54353L33.9811 3.87899C30.7008 -0.34895 24.1164 0.360106 21.8114 5.1895C21.4858 5.87168 20.5148 5.87168 20.1892 5.1895C17.8843 0.360106 11.2999 -0.348948 8.01956 3.87899L7.50397 4.54353C4.7619 8.07775 5.15782 13.1177 8.41811 16.1804Z" stroke="black" stroke-width="2" shape-rendering="crispEdges"/>
+                        </g>
+                        <defs>
+                        <filter id="filter0_d_595_721" x="0.683594" y="0.095459" width="40.6338" height="36.7185" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                        <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                        <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                        <feOffset dy="4"/>
+                        <feGaussianBlur stdDeviation="2"/>
+                        <feComposite in2="hardAlpha" operator="out"/>
+                        <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+                        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_595_721"/>
+                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_595_721" result="shape"/>
+                        </filter>
+                        </defs>
+            </svg>
+            <div class="card-info">
+                <h3>Koktobe City</h3>
+                <p>230k in month</p>
             </div>
-            <div class="card">
-                <img src="img/2.png" alt="Apartment">
-                <div class="card-info">
-                    <h3>Koktobe City</h3>
-                    <p>230k for month</p>
-                </div>
-                <div class="card-hover">
-                    <p>Описание квартиры: светлая, удобное расположение.</p>
-                    <a href="login.html" class="view-project">View details</a>
-                </div>
+            <div class="card-hover">
+                <p>Description of apartment</p>
+                <button><a href="details.html" class="view-details">View details</a></button>
             </div>
-            <div class="card">
-                <img src="img/3.png" alt="Apartment">
-                <div class="card-info">
-                    <h3>Dostyk plaza</h3>
-                    <p>400k for month</p>
-                </div>
-                <div class="card-hover">
-                    <p>Описание квартиры: современный дизайн, вид на город.</p>
-                    <a href="login.html" class="view-project">View details</a>
-                </div>
+        </div>
+        <div class="card">
+            <img src="img/1.png" alt="Apartment">
+            <svg class="heart-icon" width="42" height="37" viewBox="0 0 42 37" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g filter="url(#filter0_d_595_721)">
+                <path d="M8.41811 16.1804L20.3156 27.3569C20.6401 27.6617 20.8023 27.8141 21.0003 27.8141C21.1983 27.8141 21.3606 27.6617 21.685 27.3569L33.5825 16.1804C36.8428 13.1177 37.2387 8.07775 34.4967 4.54353L33.9811 3.87899C30.7008 -0.34895 24.1164 0.360106 21.8114 5.1895C21.4858 5.87168 20.5148 5.87168 20.1892 5.1895C17.8843 0.360106 11.2999 -0.348948 8.01956 3.87899L7.50397 4.54353C4.7619 8.07775 5.15782 13.1177 8.41811 16.1804Z" fill="white" fill-opacity="0.27" shape-rendering="crispEdges"/>
+                <path d="M8.41811 16.1804L20.3156 27.3569C20.6401 27.6617 20.8023 27.8141 21.0003 27.8141C21.1983 27.8141 21.3606 27.6617 21.685 27.3569L33.5825 16.1804C36.8428 13.1177 37.2387 8.07775 34.4967 4.54353L33.9811 3.87899C30.7008 -0.34895 24.1164 0.360106 21.8114 5.1895C21.4858 5.87168 20.5148 5.87168 20.1892 5.1895C17.8843 0.360106 11.2999 -0.348948 8.01956 3.87899L7.50397 4.54353C4.7619 8.07775 5.15782 13.1177 8.41811 16.1804Z" stroke="black" stroke-width="2" shape-rendering="crispEdges"/>
+                </g>
+                <defs>
+                <filter id="filter0_d_595_721" x="0.683594" y="0.095459" width="40.6338" height="36.7185" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                <feOffset dy="4"/>
+                <feGaussianBlur stdDeviation="2"/>
+                <feComposite in2="hardAlpha" operator="out"/>
+                <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+                <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_595_721"/>
+                <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_595_721" result="shape"/>
+                </filter>
+                </defs>
+        </svg>
+            <div class="card-info">
+                <h3>Koktobe City</h3>
+                <p>230k in month</p>
             </div>
-            <div class="card">
-                <img src="img/4.png" alt="Apartment">
-                <div class="card-info">
-                    <h3>мкр Жазира</h3>
-                    <p>150k for month</p>
-                </div>
-                <div class="card-hover">
-                    <p>Описание квартиры: просторная, современная.</p>
-                    <a href="login.html" class="view-project">View details</a>
-                </div>
+            <div class="card-hover">
+                <p>Description of apartment</p>
+                <button><a href="details.html" class="view-details">View details</a></button>
             </div>
-            <div class="card">
-                <img src="img/5.png" alt="Apartment">
-                <div class="card-info">
-                    <h3>Almaty Towers</h3>
-                    <p>200k for month</p>
-                </div>
-                <div class="card-hover">
-                    <p>Описание квартиры: рядом с парком, уютная.</p>
-                    <a href="login.html" class="view-project">View details</a>
-                </div>
+        </div>
+        <div class="card">
+            <img src="img/3.png" alt="Apartment">
+            <svg class="heart-icon" width="42" height="37" viewBox="0 0 42 37" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g filter="url(#filter0_d_595_721)">
+                <path d="M8.41811 16.1804L20.3156 27.3569C20.6401 27.6617 20.8023 27.8141 21.0003 27.8141C21.1983 27.8141 21.3606 27.6617 21.685 27.3569L33.5825 16.1804C36.8428 13.1177 37.2387 8.07775 34.4967 4.54353L33.9811 3.87899C30.7008 -0.34895 24.1164 0.360106 21.8114 5.1895C21.4858 5.87168 20.5148 5.87168 20.1892 5.1895C17.8843 0.360106 11.2999 -0.348948 8.01956 3.87899L7.50397 4.54353C4.7619 8.07775 5.15782 13.1177 8.41811 16.1804Z" fill="white" fill-opacity="0.27" shape-rendering="crispEdges"/>
+                <path d="M8.41811 16.1804L20.3156 27.3569C20.6401 27.6617 20.8023 27.8141 21.0003 27.8141C21.1983 27.8141 21.3606 27.6617 21.685 27.3569L33.5825 16.1804C36.8428 13.1177 37.2387 8.07775 34.4967 4.54353L33.9811 3.87899C30.7008 -0.34895 24.1164 0.360106 21.8114 5.1895C21.4858 5.87168 20.5148 5.87168 20.1892 5.1895C17.8843 0.360106 11.2999 -0.348948 8.01956 3.87899L7.50397 4.54353C4.7619 8.07775 5.15782 13.1177 8.41811 16.1804Z" stroke="black" stroke-width="2" shape-rendering="crispEdges"/>
+                </g>
+                <defs>
+                <filter id="filter0_d_595_721" x="0.683594" y="0.095459" width="40.6338" height="36.7185" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                <feOffset dy="4"/>
+                <feGaussianBlur stdDeviation="2"/>
+                <feComposite in2="hardAlpha" operator="out"/>
+                <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+                <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_595_721"/>
+                <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_595_721" result="shape"/>
+                </filter>
+                </defs>
+        </svg>
+            <div class="card-info">
+                <h3>Dostyk Plaza</h3>
+                <p>400k in month</p>
             </div>
-            <div class="card">
-                <img src="img/6.png" alt="Apartment">
-                <div class="card-info">
-                    <h3>Sensata City</h3>
-                    <p>260k for month</p>
-                </div>
-                <div class="card-hover">
-                    <p>Описание квартиры: шикарный вид, большая кухня.</p>
-                    <a href="login.html" class="view-project">View details</a>
-                </div>
+            <div class="card-hover">
+                <p>Description of apartment: современный дизайн, вид на город.</p>
+                <button><a href="details.html" class="view-details">View details</a></button>
             </div>
-            <div class="card">
-                <img src="img/2.png" alt="Apartment">
-                <div class="card-info">
-                    <h3>ЖК аты</h3>
-                    <p>1 комн</p>
-                </div>
-                <div class="card-hover">
-                    <p>Описание квартиры: светлая, удобное расположение.</p>
-                    <a href="login.html" class="view-project">View details</a>
-                </div>
+        </div>
+        <div class="card">
+            <img src="img/4.png" alt="Apartment">
+            <svg class="heart-icon" width="42" height="37" viewBox="0 0 42 37" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g filter="url(#filter0_d_595_721)">
+                <path d="M8.41811 16.1804L20.3156 27.3569C20.6401 27.6617 20.8023 27.8141 21.0003 27.8141C21.1983 27.8141 21.3606 27.6617 21.685 27.3569L33.5825 16.1804C36.8428 13.1177 37.2387 8.07775 34.4967 4.54353L33.9811 3.87899C30.7008 -0.34895 24.1164 0.360106 21.8114 5.1895C21.4858 5.87168 20.5148 5.87168 20.1892 5.1895C17.8843 0.360106 11.2999 -0.348948 8.01956 3.87899L7.50397 4.54353C4.7619 8.07775 5.15782 13.1177 8.41811 16.1804Z" fill="white" fill-opacity="0.27" shape-rendering="crispEdges"/>
+                <path d="M8.41811 16.1804L20.3156 27.3569C20.6401 27.6617 20.8023 27.8141 21.0003 27.8141C21.1983 27.8141 21.3606 27.6617 21.685 27.3569L33.5825 16.1804C36.8428 13.1177 37.2387 8.07775 34.4967 4.54353L33.9811 3.87899C30.7008 -0.34895 24.1164 0.360106 21.8114 5.1895C21.4858 5.87168 20.5148 5.87168 20.1892 5.1895C17.8843 0.360106 11.2999 -0.348948 8.01956 3.87899L7.50397 4.54353C4.7619 8.07775 5.15782 13.1177 8.41811 16.1804Z" stroke="black" stroke-width="2" shape-rendering="crispEdges"/>
+                </g>
+                <defs>
+                <filter id="filter0_d_595_721" x="0.683594" y="0.095459" width="40.6338" height="36.7185" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                <feOffset dy="4"/>
+                <feGaussianBlur stdDeviation="2"/>
+                <feComposite in2="hardAlpha" operator="out"/>
+                <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+                <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_595_721"/>
+                <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_595_721" result="shape"/>
+                </filter>
+                </defs>
+            </svg>
+            <div class="card-info">
+                <h3>mkr Zhazira</h3>
+                <p>150k in month</p>
             </div>
-            <div class="card">
-                <img src="img/2.png" alt="Apartment">
-                <div class="card-info">
-                    <h3>ЖК аты</h3>
-                    <p>1 комн</p>
-                </div>
-                <div class="card-hover">
-                    <p>Описание квартиры: светлая, удобное расположение.</p>
-                    <a href="login.html" class="view-project">View details</a>
-                </div>
+            <div class="card-hover">
+                <p>Description of apartment: просторная, современная.</p>
+                <button><a href="details.html" class="view-details">View details</a></button>
             </div>
+        </div>
+        <div class="card">
+            <img src="img/5.png" alt="Apartment">
+            <svg class="heart-icon" width="42" height="37" viewBox="0 0 42 37" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g filter="url(#filter0_d_595_721)">
+                <path d="M8.41811 16.1804L20.3156 27.3569C20.6401 27.6617 20.8023 27.8141 21.0003 27.8141C21.1983 27.8141 21.3606 27.6617 21.685 27.3569L33.5825 16.1804C36.8428 13.1177 37.2387 8.07775 34.4967 4.54353L33.9811 3.87899C30.7008 -0.34895 24.1164 0.360106 21.8114 5.1895C21.4858 5.87168 20.5148 5.87168 20.1892 5.1895C17.8843 0.360106 11.2999 -0.348948 8.01956 3.87899L7.50397 4.54353C4.7619 8.07775 5.15782 13.1177 8.41811 16.1804Z" fill="white" fill-opacity="0.27" shape-rendering="crispEdges"/>
+                <path d="M8.41811 16.1804L20.3156 27.3569C20.6401 27.6617 20.8023 27.8141 21.0003 27.8141C21.1983 27.8141 21.3606 27.6617 21.685 27.3569L33.5825 16.1804C36.8428 13.1177 37.2387 8.07775 34.4967 4.54353L33.9811 3.87899C30.7008 -0.34895 24.1164 0.360106 21.8114 5.1895C21.4858 5.87168 20.5148 5.87168 20.1892 5.1895C17.8843 0.360106 11.2999 -0.348948 8.01956 3.87899L7.50397 4.54353C4.7619 8.07775 5.15782 13.1177 8.41811 16.1804Z" stroke="black" stroke-width="2" shape-rendering="crispEdges"/>
+                </g>
+                <defs>
+                <filter id="filter0_d_595_721" x="0.683594" y="0.095459" width="40.6338" height="36.7185" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                <feOffset dy="4"/>
+                <feGaussianBlur stdDeviation="2"/>
+                <feComposite in2="hardAlpha" operator="out"/>
+                <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+                <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_595_721"/>
+                <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_595_721" result="shape"/>
+                </filter>
+                </defs>
+        </svg>
+            <div class="card-info">
+                <h3>Almaty Towers</h3>
+                <p>200k in month</p>
+            </div>
+            <div class="card-hover">
+                <p>Description of apartment: рядом с парком, уютная.</p>
+                <button><a href="details.html" class="view-details">View details</a></button>
+            </div>
+        </div>
+        <div class="card">
+            <img src="img/6.png" alt="Apartment">
+            <svg class="heart-icon" width="42" height="37" viewBox="0 0 42 37" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g filter="url(#filter0_d_595_721)">
+                <path d="M8.41811 16.1804L20.3156 27.3569C20.6401 27.6617 20.8023 27.8141 21.0003 27.8141C21.1983 27.8141 21.3606 27.6617 21.685 27.3569L33.5825 16.1804C36.8428 13.1177 37.2387 8.07775 34.4967 4.54353L33.9811 3.87899C30.7008 -0.34895 24.1164 0.360106 21.8114 5.1895C21.4858 5.87168 20.5148 5.87168 20.1892 5.1895C17.8843 0.360106 11.2999 -0.348948 8.01956 3.87899L7.50397 4.54353C4.7619 8.07775 5.15782 13.1177 8.41811 16.1804Z" fill="white" fill-opacity="0.27" shape-rendering="crispEdges"/>
+                <path d="M8.41811 16.1804L20.3156 27.3569C20.6401 27.6617 20.8023 27.8141 21.0003 27.8141C21.1983 27.8141 21.3606 27.6617 21.685 27.3569L33.5825 16.1804C36.8428 13.1177 37.2387 8.07775 34.4967 4.54353L33.9811 3.87899C30.7008 -0.34895 24.1164 0.360106 21.8114 5.1895C21.4858 5.87168 20.5148 5.87168 20.1892 5.1895C17.8843 0.360106 11.2999 -0.348948 8.01956 3.87899L7.50397 4.54353C4.7619 8.07775 5.15782 13.1177 8.41811 16.1804Z" stroke="black" stroke-width="2" shape-rendering="crispEdges"/>
+                </g>
+                <defs>
+                <filter id="filter0_d_595_721" x="0.683594" y="0.095459" width="40.6338" height="36.7185" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                <feOffset dy="4"/>
+                <feGaussianBlur stdDeviation="2"/>
+                <feComposite in2="hardAlpha" operator="out"/>
+                <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+                <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_595_721"/>
+                <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_595_721" result="shape"/>
+                </filter>
+                </defs>
+        </svg>
+            <div class="card-info">
+                <h3>Sensata City</h3>
+                <p>260k in month</p>
+            </div>
+            <div class="card-hover">
+                <p>Description of apartment: шикарный вид, большая кухня.</p>
+                <button><a href="details.html" class="view-details">View details</a></button>
+            </div>
+        </div>
         </div>
     </section>
 
-    <section class="how-we-work">
+    <section id="how-we-work" class="how-we-work">
         <div class="container">
             <h2>How we work</h2>
             <div class="steps">
@@ -255,7 +321,7 @@
                         </svg>
                         </div>
                     <h3>Search and filtering</h3>
-                    <p>Students find housing using convenient filters(by price, location, conditions).</p>
+                    <p>Students find housing using convenient filters (by price, location, conditions).</p>
                 </div>
                 <div class="step">
                     <p class="step-number">Step 04.</p>
@@ -295,7 +361,6 @@
                 </div>
             </div>
             <button class="cta-button" onclick="window.location.href='signup.html'">Sign up for free</button>
-
         </div>
     </section>
     
@@ -307,13 +372,13 @@
       <div class="faq-content-container">
         <h3>How do I register on the platform?</h3>
         <div class="faq-content">
-          On the main page, click "Sign up". First, enter your email address, password, first name and last name. Then, provide your phone number.
+          To register on EasyStay, click on the "Sign Up" button on the main page. Fill in your email address, create a password, and provide basic personal information. After submitting the form, confirm your registration via the verification code sent to your email.
         </div>
       </div>
       <button class="faq-toggle">✖</button>
     </div>
   </div>
-  
+
   <!-- 02 -->
   <div class="faq-item">
     <div class="faq-header">
@@ -321,7 +386,7 @@
       <div class="faq-content-container">
         <h3>How do I add a rental ad?</h3>
         <div class="faq-content">
-            Answer text.
+          First, register and log in as a landlord. In your personal account, click "Add New Ad," fill out the required information (photos, description, location, price), and submit the ad. After moderation, your listing will become visible to all users.
         </div>
       </div>
       <button class="faq-toggle">+</button>
@@ -335,7 +400,7 @@
       <div class="faq-content-container">
         <h3>How do I recover my password if I forget it?</h3>
         <div class="faq-content">
-         Answer text.
+          On the login page, click on "Forgot Password." Enter your registered email address, and we will send you a 4-digit verification code. After verifying the code, you will be able to set a new password and regain access to your account.
         </div>
       </div>
       <button class="faq-toggle">+</button>
@@ -349,7 +414,7 @@
       <div class="faq-content-container">
         <h3>Is it possible to save ads to favorites?</h3>
         <div class="faq-content">
-            Answer text.
+          Yes! When browsing ads, click the heart icon on any listing you like. It will automatically be added to your Favorites section in your profile. You can view and manage your saved ads at any time.
         </div>
       </div>
       <button class="faq-toggle">+</button>
@@ -428,20 +493,20 @@
         </form>
     
           <div class="stars">
-            <input type="radio" id="star1" name="rating" value="1" />
+            <input type="radio" id="star1" name="rating" value="1">
             <label for="star1">★</label>
-            <input type="radio" id="star2" name="rating" value="2" />
+            <input type="radio" id="star2" name="rating" value="2">
             <label for="star2">★</label>
-            <input type="radio" id="star3" name="rating" value="3" />
+            <input type="radio" id="star3" name="rating" value="3">
             <label for="star3">★</label>
-            <input type="radio" id="star4" name="rating" value="4" />
+            <input type="radio" id="star4" name="rating" value="4">
             <label for="star4">★</label>
-            <input type="radio" id="star5" name="rating" value="5" />
+            <input type="radio" id="star5" name="rating" value="5">
             <label for="star5">★</label>
           </div>
       </section>
 
-    <footer class="footer">
+      <footer class="footer">
         <div class="footer-top">
           <div class="footer-left">
             <div class="logo-and-icons">
@@ -456,7 +521,6 @@
                   <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
                 </div>
               </div>
-              
             <p class="footer-description">
               EasyStay is a modern solution for SDU students to find housing easily and safely. 
               We create a convenient rental environment by providing up-to-date listings, 
@@ -481,23 +545,23 @@
         </div>
         <div class="footer-mid">
             <div class="footer-col">
-                <h3>HEAD OFFICE</h3>
+                <h4>HEAD OFFICE</h4>
                 <p><span>Address:</span> Ablyai Khan Avenue, 1/1</p>
                 <p><span>Call:</span> <a href="tel:+77273019565">+7 (727) 301-95-65</a></p>
                 <p><span>Email:</span> <a href="mailto:sdu.edu.kz">sdu.edu.kz</a></p>          
             </div>
             
             <div class="footer-col">
-                <h3>WHO WE ARE</h3>
+                <h4>WHO WE ARE</h4>
                 <p><a href="#about-us" class="footer-btn">About Us</a></p>
                 <p><a href="#faq" class="footer-btn">FAQ</a></p>
-                <p><a href="#" class="footer-btn">Contacts</a></p>
+                <p><a href="#footer" class="footer-btn">Contacts</a></p>
             </div>
             
             <div class="footer-col">
-                <h3>OUR EXPERIENCE</h3>
+                <h4>OUR EXPERIENCE</h4>
                 <p><a href="#about-us" class="footer-btn">Services</a></p>
-                <p><a href="work.html" class="footer-btn">Work</a></p>
+                <p><a href="#how-we-work" class="footer-btn">Work</a></p>
                 <p><a href="#announcements" class="footer-btn">Interesting</a></p>
             </div>
           </div>
@@ -515,7 +579,6 @@
             </div>
           </div>    
       </footer>
-
     <script src="script.js"></script>
 </body>
 </html>
