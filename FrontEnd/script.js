@@ -8,21 +8,10 @@ function changeImage(index) {
     });
 }
 
-document.getElementById("languageButton").addEventListener("click", function () {
-    document.getElementById("languageDropdown").classList.toggle("hidden");
-});
-
-document.querySelectorAll("#languageDropdown a").forEach(item => {
-    item.addEventListener("click", function (e) {
-        e.preventDefault();
-        window.location.href = this.getAttribute("href");
+document.querySelectorAll(".heart-icon").forEach(heart => {
+    heart.addEventListener("click", function() {
+        heart.classList.toggle('active');
     });
-});
-
-document.addEventListener("click", function (event) {
-    if (!document.querySelector(".language-container").contains(event.target)) {
-        document.getElementById("languageDropdown").classList.add("hidden");
-    }
 });
 document.querySelectorAll(".faq-header").forEach((item) => {
     item.addEventListener("click", function () {
@@ -35,15 +24,35 @@ document.querySelectorAll(".faq-header").forEach((item) => {
 document.getElementById("goToTop").addEventListener("click", function () {
     window.scrollTo({ top: 0, behavior: "smooth" });
 });
+// raiting
+document.getElementById("feedbackForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    const name = document.getElementById("name").value;
+    const phone = document.getElementById("phone").value;
+    const message = document.getElementById("message").value;
+    const rating = document.querySelector('input[name="rating"]:checked');
 
+    if (!name || !phone || !message) {
+      alert("Please fill out all the fields.");
+      return;
+    }
+
+    if (!rating) {
+      alert("Please select a rating.");
+      return;
+    }
+
+    alert("Feedback sent successfully! Rating: " + rating.value);
+  });
+  
 // login
 
 document.getElementById("openModal").addEventListener("click", function() {
-    document.getElementById("loginModal").style.display = "flex";
+document.getElementById("loginModal").style.display = "flex";
 });
 
 document.querySelector(".close").addEventListener("click", function() {
-    document.getElementById("loginModal").style.display = "none";
+document.getElementById("loginModal").style.display = "none";
 });
 
 function openTab(evt, tabName) {
