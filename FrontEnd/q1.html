@@ -7,7 +7,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
         body {
-             font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; 
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; 
             background-image: url(img/ex.png);
             background-repeat: no-repeat;
             background-size: cover;
@@ -17,13 +17,21 @@
             height: 100vh;
         }
         .modal {
+            position: relative;
             background: white;
             padding: 20px;
-            border-radius: 10px;
             text-align: center;
-            width: 350px;
+            width: 400px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
         }
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 30px;
+            cursor: pointer;
+        }
+
         .progress {
             display: flex;
             justify-content: center;
@@ -40,7 +48,7 @@
         }
         .question {
             margin-bottom: 20px;
-            font-size: 18px;
+            font-size: 20px;
             font-weight: bold;
         }
         .btn {
@@ -48,89 +56,102 @@
             padding: 10px;
             margin: 10px 0;
             width: 100%;
+            height: 50px;
             border-radius: 5px;
             border: 1px solid black;
             background: white;
-            font-size: 16px;
+            font-size: 18px;
             cursor: pointer;
         }
         .btn:hover {
-            background: #eee;
+            border: 2px solid #FF5A30;
+            background: #f6d5cd;
         }
-        .btn.selected {
-            background: #FF5722;
-            color: white;
-            border-color: #FF5722;
+        
+        .login {
+            margin-top: 20px;
+            font-size: 16px;
         }
-        .signin {
-            margin-top: 10px;
-            font-size: 14px;
-        }
-        .signin a {
-            color: #FF5722;
+        .login a {
+            color: #FF5A30;
             font-weight: bold;
             text-decoration: none;
         }
 
 
-        @media (max-width: 768px) {
-    body {
-        background-size: cover;
-        padding: 20px;
-        height: 100Ғ;
-        align-items: flex-start;
-    }
-
+    @media (max-width: 768px) {
     
-    .modal {
-    width: 100%;
-    max-width: 400px;
-    padding: 15px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
+        .modal {
+            width: 50%
+        }
+        .close {
+            font-size: 28px;
+        
+        }
+        .question {
+            font-size: 18px;
+        }
 
+        .btn {
+            font-size: 14px;
+            padding: 8px;
+        }
 
-    .question {
-        font-size: 16px;
+        .progress div {
+            width: 25px;
+            height: 3px;
+        }
+
+        .signin {
+            font-size: 13px;
+        }
     }
-
-    .btn {
-        font-size: 14px;
-        padding: 8px;
-    }
-
-    .progress div {
-        width: 25px;
-        height: 3px;
-    }
-
-    .signin {
-        font-size: 13px;
-    }
-}
-
     </style>
 </head>
 <body>
     <div class="modal">
+        <span class="close">&times;</span>
         <div class="progress">
             <div class="active"></div>
             <div></div>
-            <div></div>
+            <div></div>   
         </div>
-        <div class="question">Do you need a roommate?</div>
+        <div class="question">Lets us help you with your search!</div>
+        <h4 style="font-size: 18px;">Do you need a roommate?</h4>
         <button class="btn" onclick="nextStep()">Yes</button>
         <button class="btn" onclick="nextStep()">No</button>
         <button class="btn" onclick="nextStep()">I already have one</button>
-        <div class="signin">Been here before? <a href="signup.html">Sign in</a></div>
+        <div class="login">Been here before? <a href="login.html">Log in</a></div>
     </div>
     <script>
         function nextStep() {
             window.location.href = 'q2.html';
         }
+
+        // Close button  
+        document.addEventListener("DOMContentLoaded", function () {
+        const modal = document.querySelector(".modal");
+        const closeBtn = document.querySelector(".close");
+
+        if (closeBtn) {
+            closeBtn.addEventListener("click", () => {
+                if (modal) {
+                    modal.style.display = "none";
+                }
+                history.back(); 
+            });
+        }
+
+        if (modal) {
+            window.addEventListener("click", (e) => {
+                if (e.target === modal) {
+                    modal.style.display = "none";
+                    history.back();
+                }
+            });
+        }
+    });
+
     </script>
 </body>
 </html>
