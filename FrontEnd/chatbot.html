@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>EASYSTAY Chat</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+
+    body {
+      display: flex;
+      height: 100vh;
+      background-color: #ffffff;
+    }
+
+    .sidebar {
+      background-color: #02203B;
+      color: white;
+      width: 300px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 20px;
+    }
+
+    .sidebar h1 {
+      font-size: 25px;
+      color: #FF5A30;
+      margin-bottom: 30px;
+    }
+
+    .new-chat-btn, .logout-btn {
+      background-color: #FF5A30;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      padding: 12px;
+      width: 100%;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .logout-btn {
+      margin-top: auto;
+    }
+
+    .chat-history {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .chat-history-item {
+      background-color: #1e2a3a;
+      color: white;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .main {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .topbar {
+      background-color: #011936;
+      padding: 10px 30px;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+    }
+
+    .topbar img {
+      border-radius: 50%;
+      width: 35px;
+      margin-left: 10px;
+    }
+
+    .content {
+      flex-grow: 1;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding-top: 30px;
+      position: relative;
+    }
+
+    .chat-container {
+      max-width: 700px;
+      width: 100%;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    #chat-window {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      overflow-y: auto;
+      flex-grow: 1;
+    }
+
+    .question-box {
+      display: flex;
+      gap: 10px;
+      padding-top: 10px;
+    }
+
+    .question-box input {
+      flex-grow: 1;
+      padding: 10px;
+      border-radius: 8px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      outline: none;
+    }
+
+    .question-box input:focus {
+      border-color: #FF5A30;
+      box-shadow: 0 0 0 2px rgba(255, 114, 94, 0.2); 
+    }
+
+    .question-box button {
+      padding: 0 12px;
+      border: none;
+      background: #FF5A30;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .message {
+      padding: 12px;
+      border-radius: 10px;
+      max-width: 90%;
+      position: relative;
+    }
+
+    .message.user {
+      background-color: #e3f2fd;
+      align-self: flex-end;
+    }
+
+    .message.bot {
+      background-color: #fff7f1;
+      border-left: 5px solid #FF5A30;
+      align-self: flex-start;
+    }
+
+    .edit-icon {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      font-size: 14px;
+      background: #FF5A30;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 2px 6px;
+      cursor: pointer;
+      display: none;
+    }
+
+    .message.user:hover .edit-icon {
+      display: inline-block;
+    }
+
+    @media (max-width: 768px) {
+        .sidebar {
+            width: 220px;
+        }
+        
+    }
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <div>
+      <h1 onclick="window.location.href='index.html'" style="cursor: pointer;">EASYSTAY</h1>
+      <button class="new-chat-btn">+ New Chat</button>
+      <div id="chat-history" class="chat-history"></div>
+    </div>
+    <button class="logout-btn" onclick="window.location.href='logout.html';">Log out</button>
+  </div>
+
+  <div class="main">
+    <div class="topbar">
+      <img src="img" alt="avatar" />
+    </div>
+    <div class="content">
+      <div class="chat-container">
+        <div id="chat-window"></div>
+        <div class="question-box">
+          <input type="text" id="user-input" placeholder="Ask something..." />
+          <button id="send-button">➤</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let currentChat = [];
+    let chatHistory = [];
+
+    const chatWindow = document.getElementById('chat-window');
+    const userInput = document.getElementById('user-input');
+    const sendButton = document.getElementById('send-button');
+    const chatHistoryElement = document.getElementById('chat-history');
+    const newChatButton = document.querySelector('.new-chat-btn');
+    const logoutButton = document.querySelector('.logout-btn');
+
+    function botResponse(input) {
+      const responses = [
+        "Thanks for asking. Here's what I found for you.",
+        "Let me look that up... Done!",
+    
+      ];
+      return responses[Math.floor(Math.random() * responses.length)];
+    }
+
+    function createMessageElement(text, sender = 'user', index = -1) {
+      const msg = document.createElement('div');
+      msg.classList.add('message', sender);
+      msg.textContent = text;
+
+      if (sender === 'user') {
+        const editBtn = document.createElement('button');
+        editBtn.innerHTML = '✎';
+        editBtn.className = 'edit-icon';
+        editBtn.onclick = () => {
+          const newText = prompt("Edit your message:", msg.textContent);
+          if (newText) {
+            msg.firstChild.textContent = newText;
+            currentChat[index].user = newText;
+          }
+        };
+        msg.appendChild(editBtn);
+      }
+
+      return msg;
+    }
+
+    function displayMessage(text, sender = 'user') {
+      const index = sender === 'user' ? currentChat.length : -1;
+      const msgElement = createMessageElement(text, sender, index);
+      chatWindow.appendChild(msgElement);
+      chatWindow.scrollTop = chatWindow.scrollHeight;
+    }
+
+    function updateChatHistory(newMessage) {
+      if (currentChat.length === 1) {
+        const topic = newMessage;
+        const historyItem = document.createElement('div');
+        historyItem.classList.add('chat-history-item');
+        historyItem.textContent = topic;
+        historyItem.setAttribute('data-topic', topic);
+        chatHistoryElement.appendChild(historyItem);
+        chatHistory.push({ topic: topic, history: [...currentChat] });
+      } else if (currentChat.length > 1) {
+        chatHistory[chatHistory.length - 1].history = [...currentChat];
+      }
+    }
+
+    sendButton.addEventListener('click', () => {
+      const message = userInput.value.trim();
+      if (!message) return;
+
+      displayMessage(message, 'user');
+
+      const response = botResponse(message);
+      setTimeout(() => {
+        displayMessage(response, 'bot');
+      }, 500);
+
+      currentChat.push({ user: message, bot: response });
+      updateChatHistory(message);
+      userInput.value = '';
+    });
+
+    userInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') sendButton.click();
+    });
+
+    newChatButton.addEventListener('click', () => {
+      currentChat = [];
+      userInput.value = '';
+      chatWindow.innerHTML = '';
+    });
+
+    chatHistoryElement.addEventListener('click', (e) => {
+      if (e.target.classList.contains('chat-history-item')) {
+        const topic = e.target.getAttribute('data-topic');
+        const selectedChat = chatHistory.find(chat => chat.topic === topic);
+
+        chatWindow.innerHTML = '';
+        if (selectedChat) {
+          selectedChat.history.forEach(entry => {
+            displayMessage(entry.user, 'user');
+            displayMessage(entry.bot, 'bot');
+          });
+          currentChat = [...selectedChat.history];
+        }
+      }
+    });
+
+  </script>
+</body>
+</html>
