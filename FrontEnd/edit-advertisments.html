@@ -187,6 +187,46 @@
       .icons i:hover {
         color: #fa6400;
       }
+      .top-question {
+        margin-top: 26px;
+        font-size: 18px;
+        margin-left: 15px;
+      }
+
+      .radio-option {
+        display: inline-flex;
+        align-items: center;
+        margin-right: 30px;
+        cursor: pointer;
+        font-weight: 500;
+        position: relative;
+      }
+
+      .radio-option input[type="radio"] {
+        display: none;
+      }
+
+      .custom-radio {
+        width: 18px;
+        height: 18px;
+        border: 2px solid #ccc;
+        border-radius: 50%;
+        margin-right: 8px;
+        display: inline-block;
+        position: relative;
+        transition: border-color 0.2s ease;
+      }
+
+      .radio-option input[type="radio"]:checked + .custom-radio::after {
+        content: "";
+        width: 8px;
+        height: 8px;
+        background-color: #FF5A30; 
+        border-radius: 50%;
+        position: absolute;
+        top: 3px;
+        left: 3px;
+      }
 
       .form-group {
         margin-bottom: 12px;
@@ -836,6 +876,20 @@ footer {
           </div>
         </div>
       </div>
+      <div class="top-question">
+        <p>Do you want to add where the top ?</p>
+        <label class="radio-option">
+          <input type="radio" name="addTop" value="no" checked>
+          <span class="custom-radio"></span> Nope
+        </label>
+      
+        <label class="radio-option">
+          <input type="radio" name="addTop" value="yes">
+          <span class="custom-radio"></span> Yeah
+        </label>
+      </div>
+      
+      
     </div>
 
     <!-- right -->
