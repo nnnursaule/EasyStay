@@ -402,7 +402,7 @@ ul.fac-list li.x{
     text-align: left;
     font-size: 30px;
     font-weight: 700;
-    width: 318px;
+    width: 900px;
     height: 48px;
     vertical-align: middle;
     line-height: 160%;
@@ -415,16 +415,17 @@ ul.fac-list li.x{
     display: grid;
     grid-template-columns: repeat(2, 1fr); 
     justify-items: start;
+    gap: 10px;
 
 }
 
 .rules-pref ul.rule-list li{
     font-size: 20px;
     font-weight: 500;
-    height: 32px;
     padding-left: 23px;
     vertical-align: middle;
     color: #00000094;
+    margin-right: 150px;
 
 }
 
