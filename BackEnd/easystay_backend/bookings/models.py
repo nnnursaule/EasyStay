@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.postgres.fields import ArrayField
+from datetime import timedelta
+from django.utils import timezone
 
 ALL_AMENITIES = [
     "Parking", "WiFi", "Gym", "Swimming Pool", "Playground", "Elevator",
@@ -109,6 +111,7 @@ class ResidentialComplex(models.Model):  # ЖК
 
 class Apartment(models.Model):
     landlord = models.ForeignKey('users.User', on_delete=models.CASCADE, related_name="apartments")
+    is_top = models.BooleanField(default=False)
     title = models.CharField(max_length=255)  # Название ЖК или квартиры
     address = models.CharField(max_length=255, null=True)
     complex = models.ForeignKey(ResidentialComplex, on_delete=models.CASCADE, related_name="apartments", null=True)  # ЖК
@@ -218,6 +221,8 @@ class Review(models.Model):
     apartment = models.ForeignKey(Apartment, on_delete=models.CASCADE, related_name="reviews")  # Отзыв о квартире
     text = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
+    rating = models.PositiveSmallIntegerField()
+    image = models.ImageField(upload_to='users_images/', blank=True, null=True)
 
     def __str__(self):
         return f"Review by {self.author} for {self.apartment}"
@@ -255,3 +260,49 @@ class Complaint(models.Model):
     def __str__(self):
         return f"{self.user} - {self.get_reason_display()}"
 
+
+
+class Feedback(models.Model):
+    name = models.CharField(max_length=100)
+    phone = models.CharField(max_length=20)
+    message = models.TextField()
+    rating = models.PositiveSmallIntegerField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    image = models.ImageField(upload_to='users_images/', blank=True, null=True)
+
+    def __str__(self):
+        return f"Feedback from {self.name} ({self.rating} stars)"
+
+class Booking(models.Model):
+    STATUS_CHOICES = [
+        ('student', 'Student'),
+        ('landlord', 'Landlord'),
+    ]
+
+    TYPE_CHOICES = [
+        ('single', 'Один'),
+        ('shared', 'С подселением'),
+    ]
+
+    apartment = models.ForeignKey(Apartment, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES)
+    type_of_booking = models.CharField(max_length=10, choices=TYPE_CHOICES)
+    comment = models.TextField(blank=True)
+    start_date = models.DateField()
+    end_date = models.DateField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Booking by {self.name} for {self.apartment}"
+
+class TopPromotion(models.Model):
+    apartment = models.OneToOneField(Apartment, on_delete=models.CASCADE, related_name='top_promotion')
+    start_date = models.DateTimeField(auto_now_add=True)
+    end_date = models.DateTimeField()
+
+    def is_active(self):
+        return self.end_date >= timezone.now()
+
+    def __str__(self):
+        return f"TOP: {self.apartment.title} до {self.end_date}"

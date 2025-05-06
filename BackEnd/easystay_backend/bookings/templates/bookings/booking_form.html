@@ -1,0 +1,12 @@
+<h2>Booking for {{ apartment.name }}</h2>
+<p>From {{ start_date }} to {{ end_date }}</p>
+
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+
+  <input type="hidden" name="start_date" value="{{ start_date }}">
+  <input type="hidden" name="end_date" value="{{ end_date }}">
+
+  <button type="submit">Submit Booking</button>
+</form>

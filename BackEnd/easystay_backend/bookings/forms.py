@@ -1,5 +1,5 @@
 from django import forms
-from .models import Apartment
+from .models import Apartment, Booking
 
 class ApartmentForm(forms.ModelForm):
     class Meta:
@@ -19,3 +19,13 @@ class ApartmentCreateForm(forms.ModelForm):
             'gender_preference', 'pets_allowed', 'tenant_type',
             'smoking_policy', 'guest_policy', 'amenities'
         ]
+
+
+class BookingForm(forms.ModelForm):
+    class Meta:
+        model = Booking
+        fields = ['name', 'status', 'type_of_booking', 'comment']
+        widgets = {
+            'status': forms.RadioSelect,
+            'type_of_booking': forms.RadioSelect,
+        }

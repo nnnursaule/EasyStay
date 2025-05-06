@@ -1,7 +1,9 @@
+from datetime import timedelta
+
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic.list import ListView
-from .models import Apartment, ResidentialComplex, ALL_AMENITIES, AMENITIES_TRANSLATION, Favourite, Complaint
-from .forms import ApartmentForm, ApartmentCreateForm
+from .models import Apartment, ResidentialComplex, ALL_AMENITIES, AMENITIES_TRANSLATION, Favourite, Complaint, Feedback, Review, Booking
+from .forms import ApartmentForm, ApartmentCreateForm, BookingForm
 from django.views.generic import DetailView
 from users.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -9,7 +11,9 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.http import JsonResponse
 from django.contrib import messages
-
+from django.views.decorators.csrf import csrf_exempt
+import json
+from django.http import HttpResponse
 class ResidentialComplexView(DetailView):
     model = ResidentialComplex
     template_name = "complex/complex_details.html"  # You can customize this template name
@@ -38,6 +42,11 @@ class ResidentalComplexListView(ListView):
     template_name = "complex/complex_list.html"
     context_object_name = "complexes"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['latest_feedbacks'] = Feedback.objects.order_by('-created_at')[:3]
+        return context
+
 
 class ApartmentListView(ListView):
     model = Apartment
@@ -47,26 +56,37 @@ class ApartmentListView(ListView):
 
 class ApartmentDetailView(DetailView):
     model = Apartment
-    template_name = "complex/apartment_details.html"
-    context_object_name = "apartment"  # Изменил название на apartment, чтобы было понятно, что это квартира
-
+    template_name = "complex/apartment_details_new.html"
+    context_object_name = "apartment"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         apartment = self.object
 
-        existing_amenities = apartment.amenities or []
+        # --- Занятые даты ---
+        bookings = Booking.objects.filter(apartment=apartment)
+        taken_dates = []
+        for booking in bookings:
+            current_date = booking.start_date
+            while current_date <= booking.end_date:
+                taken_dates.append(current_date.strftime("%Y-%m-%d"))
+                current_date += timedelta(days=1)
 
-        # Переводим ALL_AMENITIES в русский
+        context["taken_dates"] = taken_dates
+        context["taken_dates_json"] = json.dumps(taken_dates)  # для JS
+
+
+        # --- Удобства ---
+        existing_amenities = apartment.amenities or []
         all_amenities_ru = [AMENITIES_TRANSLATION.get(amenity, amenity) for amenity in ALL_AMENITIES]
         existing_amenities_ru = [AMENITIES_TRANSLATION.get(amenity, amenity) for amenity in existing_amenities]
-
-        # Определяем отсутствующие удобства
         missing_amenities = [amenity for amenity in all_amenities_ru if amenity not in existing_amenities_ru]
 
         context["existing_amenities"] = existing_amenities_ru
         context["missing_amenities"] = missing_amenities
         context["landlord"] = apartment.landlord
+        context["user"] = self.request.user
+
         return context
 
 
@@ -252,3 +272,84 @@ def submit_complaint(request, apartment_id):
     return render(request, 'profile/complaint.html', {'apartment': apartment})
 
 
+
+@csrf_exempt
+def submit_site_feedback(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        name = data.get('name')
+        phone = data.get('phone')
+        message = data.get('message')
+        rating = data.get('rating')
+
+        if not all([name, phone, message, rating]):
+            return JsonResponse({'error': 'Все поля обязательны.'}, status=400)
+
+        Feedback.objects.create(
+            name=name,
+            phone=phone,
+            message=message,
+            rating=int(rating)
+        )
+        return JsonResponse({'success': 'Фидбек успешно отправлен.'})
+    return JsonResponse({'error': 'Только POST-запросы разрешены.'}, status=405)
+
+
+@csrf_exempt
+def submit_apartment_review(request, apartment_id):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        user = request.user
+        text = data.get('text')
+        rating = data.get('rating')
+
+        if not text or not rating:
+            return JsonResponse({'error': 'Все поля обязательны.'}, status=400)
+
+        apartment = Apartment.objects.get(id=apartment_id)
+
+        Review.objects.create(
+            author=user,
+            apartment=apartment,
+            text=text,
+            rating=int(rating)
+        )
+        return JsonResponse({'success': 'Отзыв добавлен.'})
+    return JsonResponse({'error': 'Только POST-запросы разрешены.'}, status=405)
+
+
+def confirm_booking(request, apartment_id):
+    apartment = get_object_or_404(Apartment, id=apartment_id)
+
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        status = request.POST.get('status')
+        type_of_booking = request.POST.get('type_of_booking')
+        comment = request.POST.get('comment')
+        start_date = request.POST.get('start_date')
+        end_date = request.POST.get('end_date')
+
+        # Сохраняем данные в модель Booking
+        Booking.objects.create(
+            apartment=apartment,
+            name=name,
+            status=status,
+            type_of_booking=type_of_booking,
+            comment=comment,
+            start_date=start_date,
+            end_date=end_date
+        )
+        return redirect('booking:success', apartment_id=apartment.id)  # после отправки формы
+
+    # Если GET-запрос (например, открытие шаблона), рендерим форму
+    start_date = request.GET.get('start_date')
+    end_date = request.GET.get('end_date')
+    return render(request, 'bookings/confirm_booking.html', {
+        'apartment': apartment,
+        'start_date': start_date,
+        'end_date': end_date
+    })
+
+
+def successful_after_booking(request, apartment_id):
+    return render(request, "bookings/successfull_booking.html", {'apartment_id': apartment_id})
