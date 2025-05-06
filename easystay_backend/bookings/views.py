@@ -1,5 +1,5 @@
 from datetime import timedelta
-
+import stripe
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic.list import ListView
 from .models import Apartment, ResidentialComplex, ALL_AMENITIES, AMENITIES_TRANSLATION, Favourite, Complaint, Feedback, Review, Booking
@@ -13,7 +13,12 @@ from django.http import JsonResponse
 from django.contrib import messages
 from django.views.decorators.csrf import csrf_exempt
 import json
+from django.conf import settings
+from django.shortcuts import get_object_or_404
 from django.http import HttpResponse
+
+
+stripe.api_key = settings.STRIPE_SECRET_KEY
 class ResidentialComplexView(DetailView):
     model = ResidentialComplex
     template_name = "complex/complex_details.html"  # You can customize this template name
@@ -353,3 +358,33 @@ def confirm_booking(request, apartment_id):
 
 def successful_after_booking(request, apartment_id):
     return render(request, "bookings/successfull_booking.html", {'apartment_id': apartment_id})
+
+
+def promote_apartment(request, apartment_id):
+    apartment = get_object_or_404(Apartment, id=apartment_id)
+
+    if request.method == "POST" and not apartment.is_top:
+        # Здесь будет Stripe логика позже
+        # Сейчас просто временно делаем ТОП
+        apartment.is_top = True
+        apartment.save()
+
+        # можно добавить TopPromotion с 7 днями
+        from datetime import timedelta
+        from django.utils import timezone
+        from .models import TopPromotion
+
+        TopPromotion.objects.create(
+            apartment=apartment,
+            end_date=timezone.now() + timedelta(days=7)
+        )
+
+    return redirect('users:landlord_profile', pk=apartment.landlord.id)  # замени на свой URL
+
+
+@csrf_exempt
+def promotion_success(request, apartment_id):
+    apartment = get_object_or_404(Apartment, id=apartment_id)
+    apartment.is_top = True
+    apartment.save()
+    return redirect('users:landlord_profile', pk=apartment.landlord.pk)
