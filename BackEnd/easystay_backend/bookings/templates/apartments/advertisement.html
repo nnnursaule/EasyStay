@@ -627,8 +627,7 @@
     </div>
       {% if not form.instance.is_top %}
           <p>Do you want to add to the top?</p>
-          <form action="{% url 'booking:promote_apartment' form.instance.id %}" method="POST">
-            {% csrf_token %}
+          <form action="{% url 'booking:choose_promotion_plan' form.instance.id %}" method="GET">
             <button type="submit">Yes</button>
             <button type="button" onclick="alert('Canceled')">No</button>
           </form>

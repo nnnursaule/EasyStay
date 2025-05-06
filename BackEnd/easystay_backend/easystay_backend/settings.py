@@ -184,3 +184,7 @@ SESSION_COOKIE_SECURE = False  # Для локальной разработки,
 ADMIN_SESSION_COOKIE_NAME = "sessionid_admin"
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
+
+STRIPE_PUBLIC_KEY = 'pk_test_51QTlQJ2M12mHHypXMTp1nsuuM19QWMtnk1LwZp6dX4cdRYFyRPQ9d3C0wsrxrl04XQvnAGXSFxad4zMJwQ06Nfed00XNhGAOtJ'
+STRIPE_SECRET_KEY = 'sk_test_51QTlQJ2M12mHHypXWweWYuuk4Xl27aFw5yKQ09byI8bGabaldX6x1A4GVtrFvev12IbWaFczDIr1X4tqH5ePOhMr00etLeTxyc'
+STRIPE_WEBHOOK_SECRET = 'whsec_3741637a54820085ac255f236abc6d94bafb09308462b46b9ccfe80c1e5e5669'
