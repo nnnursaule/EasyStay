@@ -132,45 +132,35 @@
         </div>
 
         <div class="team-container">
-            <div class="profile-card">
-                <div class="profile-image">
-                    <img src="{% static 'vendor/img/users/cl1.png' %}" alt="Team Member">
-                </div>
-                <div class="profile-content">
-                    <p>
-                        Nibh quisque suscipit fermentum netus nulla cras porttitor euismod nulla.
-                        Orci, dictumst nec aliquet id.
-                    </p>
-                    <p class="name">Asem Anuarbek</p>
-                </div>
+    {% for feedback in latest_feedbacks %}
+        <div class="profile-card">
+            <div class="profile-image">
+                {% if feedback.image %}
+                    <img src="{{ feedback.image.url }}" alt="User">
+                {% else %}
+                    <img src="{% static 'vendor/img/users/default_avatar.jpg' %}" alt="User">
+                {% endif %}
             </div>
 
-            <div class="profile-card">
-                <div class="profile-image">
-                    <img src="{% static 'vendor/img/users/cl2.png' %}" alt="Team Member">
+            <div class="profile-content">
+                <p>{{ feedback.message }}</p>
+                <p class="name">{{ feedback.name }}</p>
+                <div class="stars">
+                  {% for i in "12345" %}
+                    {% if forloop.counter <= feedback.rating %}
+                      <span style="color: gold;">★</span>
+                    {% else %}
+                      <span style="color: lightgray;">★</span>
+                    {% endif %}
+                  {% endfor %}
                 </div>
-                <div class="profile-content">
-                    <p>
-                        Nibh quisque suscipit fermentum netus nulla cras porttitor euismod nulla.
-                        Orci, dictumst nec aliquet id.
-                    </p>
-                    <p class="name">Asem Anuarbek</p>
-                </div>
-            </div>
 
-            <div class="profile-card">
-                <div class="profile-image">
-                    <img src="{% static 'vendor/img/users/cl3.png' %}" alt="Team Member">
-                </div>
-                <div class="profile-content">
-                    <p>
-                        Nibh quisque suscipit fermentum netus nulla cras porttitor euismod nulla.
-                        Orci, dictumst nec aliquet id.
-                    </p>
-                    <p class="name">Asem Anuarbek</p>
-                </div>
             </div>
         </div>
+    {% empty %}
+        <p>Нет отзывов.</p>
+    {% endfor %}
+</div>
     </section>
 
     <section class="hero-section">
@@ -180,17 +170,44 @@
         </div>
     </section>
 
-    <section class="review-section">
-        <h2>Leave feedback</h2>
-        <div class="form-container">
-            <form class="review-form">
-                <input type="text" placeholder="Your name">
-                <input type="text" placeholder="Your phone">
-                <input type="text" placeholder="Your message">
-                <button type="submit">SEND</button>
-            </form>
+    <section class="feedback-section">
+          <h2>Leave feedback</h2>
+          <form class="feedback-form" id="feedbackForm">
+            {% csrf_token %}
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" id="name" placeholder="Your name" required />
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone</label>
+              <input type="tel" id="phone" placeholder="Your phone" required />
+            </div>
+            <div class="form-group large">
+              <label for="message">Message</label>
+              <input type="text" id="message" placeholder="Your message" required />
+            </div>
+
+            <button type="submit" class="send-btn">SEND</button>
+          </form>
+
+        <div class="stars">
+          <input type="radio" id="star5" name="rating" value="5" />
+          <label for="star5">★</label>
+
+          <input type="radio" id="star4" name="rating" value="4" />
+          <label for="star4">★</label>
+
+          <input type="radio" id="star3" name="rating" value="3" />
+          <label for="star3">★</label>
+
+          <input type="radio" id="star2" name="rating" value="2" />
+          <label for="star2">★</label>
+
+          <input type="radio" id="star1" name="rating" value="1" />
+          <label for="star1">★</label>
         </div>
     </section>
+
 
     <footer class="footer">
         <div class="footer-top">
@@ -263,6 +280,49 @@
 
 
 </body>
+
+<script>
+document.getElementById('feedbackForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const name = document.getElementById('name').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const message = document.getElementById('message').value.trim();
+    const rating = document.querySelector('input[name="rating"]:checked')?.value;
+
+    if (!rating) {
+        alert("Please select a rating.");
+        return;
+    }
+
+    const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+    const response = await fetch("{% url 'booking:submit_site_feedback' %}", {
+        method: "POST",
+        headers: {
+            "X-CSRFToken": csrfToken,
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            name: name,
+            phone: phone,
+            message: message,
+            rating: rating
+        }),
+    });
+
+    if (response.ok) {
+        alert("Thank you for your feedback!");
+        document.getElementById('feedbackForm').reset();
+        document.querySelectorAll('input[name="rating"]').forEach(el => el.checked = false);
+    } else {
+        alert("Something went wrong. Please try again later.");
+    }
+});
+</script>
+
+
+
 
 </html>
 
