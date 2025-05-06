@@ -22,6 +22,8 @@ urlpatterns = [
     path('apartments/<int:apartment_id>/review/', views.submit_apartment_review, name='submit_apartment_review'),
     path('apartment/<int:apartment_id>/booking/', views.confirm_booking, name='confirm_booking'),
     path('success/<int:apartment_id>/', views.successful_after_booking, name='success'),
+    path('promote/<int:apartment_id>/', views.promote_apartment, name='promote_apartment'),
+    path('promotion_success/<int:apartment_id>/', views.promotion_success, name='promotion_success'),
 
 
 ]

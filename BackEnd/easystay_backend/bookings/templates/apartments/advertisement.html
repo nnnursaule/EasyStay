@@ -609,7 +609,7 @@
 <section class="advertisement-section">
   <!-- left -->
   <div class="left-section">
-    <div class="title">Kelly: all advertisements</div>
+    <div class="title">{{ user.username }}: all advertisements</div>
     <div class="advert-card">
       <img src="{{ form.instance.image.url }}" alt="{{ form.instance.title }}">
       <div class="advert-details">
@@ -621,8 +621,20 @@
             <i class="bi bi-trash" onclick="window.location.href='{% url 'booking:delete_apartment' pk=apartment.id %}'" style="cursor: pointer;"></i>
             <i class="bi bi-box-arrow-up-right"></i>
         </div>
+
       </div>
+
     </div>
+      {% if not form.instance.is_top %}
+          <p>Do you want to add to the top?</p>
+          <form action="{% url 'booking:promote_apartment' form.instance.id %}" method="POST">
+            {% csrf_token %}
+            <button type="submit">Yes</button>
+            <button type="button" onclick="alert('Canceled')">No</button>
+          </form>
+        {% else %}
+          <p style="color: green;">This apartment is already in TOP</p>
+        {% endif %}
   </div>
 
   <!-- right -->
