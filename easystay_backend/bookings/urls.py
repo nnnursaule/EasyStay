@@ -23,7 +23,10 @@ urlpatterns = [
     path('apartment/<int:apartment_id>/booking/', views.confirm_booking, name='confirm_booking'),
     path('success/<int:apartment_id>/', views.successful_after_booking, name='success'),
     path('promote/<int:apartment_id>/', views.promote_apartment, name='promote_apartment'),
-    path('promotion_success/<int:apartment_id>/', views.promotion_success, name='promotion_success'),
+    path('promotion_success/<int:apartment_id>/', views.promote_success, name='promotion_success'),
+    path('apartment/<int:apartment_id>/promotion/', views.choose_promotion_plan, name='choose_promotion_plan'),
+    path('promote/<int:apartment_id>/pay/', views.create_checkout_session, name='create_checkout'),
+    path('promote/cancel/', views.promote_cancel, name='promote_cancel'),
 
 
 ]

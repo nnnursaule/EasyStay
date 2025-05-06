@@ -306,3 +306,13 @@ class TopPromotion(models.Model):
 
     def __str__(self):
         return f"TOP: {self.apartment.title} до {self.end_date}"
+
+
+class PromotionOption(models.Model):
+    duration = models.IntegerField(choices=[(3, '3 дня'), (15, '15 дней'), (30, '30 дней')])
+    original_price = models.PositiveIntegerField()
+    discounted_price = models.PositiveIntegerField()
+    discount_percent = models.PositiveIntegerField()
+
+    def __str__(self):
+        return f"{self.duration} дней – {self.discounted_price}₸"

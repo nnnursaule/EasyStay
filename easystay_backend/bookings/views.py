@@ -2,7 +2,7 @@ from datetime import timedelta
 import stripe
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic.list import ListView
-from .models import Apartment, ResidentialComplex, ALL_AMENITIES, AMENITIES_TRANSLATION, Favourite, Complaint, Feedback, Review, Booking
+from .models import Apartment, ResidentialComplex, ALL_AMENITIES, AMENITIES_TRANSLATION, Favourite, Complaint, Feedback, Review, Booking, TopPromotion, PromotionOption
 from .forms import ApartmentForm, ApartmentCreateForm, BookingForm
 from django.views.generic import DetailView
 from users.models import User
@@ -16,6 +16,8 @@ import json
 from django.conf import settings
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponse
+from django.utils import timezone
+from django.urls import reverse
 
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
@@ -360,31 +362,63 @@ def successful_after_booking(request, apartment_id):
     return render(request, "bookings/successfull_booking.html", {'apartment_id': apartment_id})
 
 
-def promote_apartment(request, apartment_id):
-    apartment = get_object_or_404(Apartment, id=apartment_id)
 
-    if request.method == "POST" and not apartment.is_top:
-        # Здесь будет Stripe логика позже
-        # Сейчас просто временно делаем ТОП
+
+def promote_success(request, apartment_id):
+    apartment = get_object_or_404(Apartment, id=apartment_id)
+    option_id = request.GET.get("option_id")
+    option = get_object_or_404(PromotionOption, id=option_id)
+
+    if not apartment.is_top:
         apartment.is_top = True
         apartment.save()
-
-        # можно добавить TopPromotion с 7 днями
-        from datetime import timedelta
-        from django.utils import timezone
-        from .models import TopPromotion
-
         TopPromotion.objects.create(
             apartment=apartment,
-            end_date=timezone.now() + timedelta(days=7)
+            end_date=timezone.now() + timedelta(days=option.duration)
         )
 
-    return redirect('users:landlord_profile', pk=apartment.landlord.id)  # замени на свой URL
+    return redirect('users:landlord_profile', pk=apartment.landlord.id)
+
+def promote_cancel(request):
+    return HttpResponse("Оплата отменена.")
 
 
-@csrf_exempt
-def promotion_success(request, apartment_id):
+def choose_promotion_plan(request, apartment_id):
     apartment = get_object_or_404(Apartment, id=apartment_id)
-    apartment.is_top = True
-    apartment.save()
-    return redirect('users:landlord_profile', pk=apartment.landlord.pk)
+    options = PromotionOption.objects.all()
+    return render(request, 'payment/payment_choose.html', {
+        'apartment': apartment,
+        'options': options,
+    })
+
+
+def create_checkout_session(request, apartment_id):
+    apartment = get_object_or_404(Apartment, id=apartment_id)
+
+    # Пример: цена — 1000 тенге (Stripe принимает в тыйын/копейках)
+    option_id = request.GET.get("option_id")
+    option = get_object_or_404(PromotionOption, id=option_id)
+    price = option.discounted_price * 100
+
+    session = stripe.checkout.Session.create(
+        payment_method_types=['card'],
+        line_items=[{
+            'price_data': {
+                'currency': 'kzt',
+                'product_data': {
+                    'name': f'Top Promotion for {apartment.title}',
+                },
+                'unit_amount': price,
+            },
+            'quantity': 1,
+        }],
+        mode='payment',
+        success_url=request.build_absolute_uri(
+            reverse('booking:promote_success', args=[apartment_id])
+        ),
+        cancel_url=request.build_absolute_uri(
+            reverse('booking:promote_cancel')
+        ),
+    )
+
+    return redirect(session.url, code=303)
