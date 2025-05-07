@@ -365,60 +365,74 @@ def successful_after_booking(request, apartment_id):
 
 
 def promote_success(request, apartment_id):
-    apartment = get_object_or_404(Apartment, id=apartment_id)
-    option_id = request.GET.get("option_id")
-    option = get_object_or_404(PromotionOption, id=option_id)
+    apartment = get_object_or_404(Apartment, pk=apartment_id)
+    option_id = request.GET.get('option_id')
 
-    if not apartment.is_top:
-        apartment.is_top = True
-        apartment.save()
-        TopPromotion.objects.create(
+    if option_id:
+        option = get_object_or_404(PromotionOption, pk=option_id)
+
+        # Проверка: есть ли уже активная промо
+        active_promo = TopPromotion.objects.filter(
             apartment=apartment,
-            end_date=timezone.now() + timedelta(days=option.duration)
-        )
+            end_date__gt=timezone.now()
+        ).first()
 
-    return redirect('users:landlord_profile', pk=apartment.landlord.id)
+        if not active_promo:
+            apartment.is_top = True
+            apartment.save()
+
+            TopPromotion.objects.create(
+                apartment=apartment,
+                end_date=timezone.now() + timedelta(days=option.duration)
+            )
+
+    return redirect('apartment_create', pk=apartment_id)
 
 def promote_cancel(request):
-    return HttpResponse("Оплата отменена.")
+    return render(request, 'promotion/promotion_cancel.html')
 
 
 def choose_promotion_plan(request, apartment_id):
-    apartment = get_object_or_404(Apartment, id=apartment_id)
+    apartment = get_object_or_404(Apartment, pk=apartment_id)
     options = PromotionOption.objects.all()
     return render(request, 'payment/payment_choose.html', {
         'apartment': apartment,
-        'options': options,
+        'options': options
     })
 
 
+
+
+
 def create_checkout_session(request, apartment_id):
-    apartment = get_object_or_404(Apartment, id=apartment_id)
+    if request.method == 'POST':
+        option_id = request.POST.get('option_id')
+        option = get_object_or_404(PromotionOption, pk=option_id)
+        apartment = get_object_or_404(Apartment, pk=apartment_id)
 
-    # Пример: цена — 1000 тенге (Stripe принимает в тыйын/копейках)
-    option_id = request.GET.get("option_id")
-    option = get_object_or_404(PromotionOption, id=option_id)
-    price = option.discounted_price * 100
-
-    session = stripe.checkout.Session.create(
-        payment_method_types=['card'],
-        line_items=[{
-            'price_data': {
-                'currency': 'kzt',
-                'product_data': {
-                    'name': f'Top Promotion for {apartment.title}',
+        session = stripe.checkout.Session.create(
+            payment_method_types=['card'],
+            line_items=[{
+                'price_data': {
+                    'currency': 'usd',
+                    'unit_amount': int(option.discounted_price * 100),
+                    'product_data': {
+                        'name': f'Promotion: {option.duration} дней',
+                    },
                 },
-                'unit_amount': price,
-            },
-            'quantity': 1,
-        }],
-        mode='payment',
-        success_url=request.build_absolute_uri(
-            reverse('booking:promote_success', args=[apartment_id])
-        ),
-        cancel_url=request.build_absolute_uri(
-            reverse('booking:promote_cancel')
-        ),
-    )
+                'quantity': 1,
+            }],
+            mode='payment',
+            success_url=request.build_absolute_uri(
+                reverse('booking:promotion_success', args=[apartment_id]) + f'?option_id={option.id}'
+            ),
+            cancel_url=request.build_absolute_uri(
+                reverse('booking:promotion_cancel')
+            ),
+        )
+        return redirect(session.url, code=303)
 
-    return redirect(session.url, code=303)
+    return redirect('booking:choose_promotion_plan', apartment_id=apartment_id)
+
+
+

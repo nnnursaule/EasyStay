@@ -634,6 +634,9 @@
         {% else %}
           <p style="color: green;">This apartment is already in TOP</p>
         {% endif %}
+      {% if apartment.top_promotion %}
+        <p>Продвижение активно до: {{ apartment.top_promotion.end_date }}</p>
+    {% endif %}
   </div>
 
   <!-- right -->
