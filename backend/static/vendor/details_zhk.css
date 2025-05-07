@@ -1,6 +1,4 @@
-.images{
-    background-image:  url('img/sensata1.png') no-repeat center center/cover;
-}
+
 .img-show .owner .owner-top .text{
     display: flex;
     flex-direction: column;

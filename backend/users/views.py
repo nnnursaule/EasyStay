@@ -188,12 +188,9 @@ def landlord_reviews(request, pk):
 def tenant_reviews(request, pk):
     tenant = get_object_or_404(User, id=pk, is_landlord=False)
     reviews = Review.objects.filter(author=tenant).select_related("apartment")
-    apartments = tenant.favourites.all()
-    print(apartments)
     return render(request, "profile/profile_tenant.html", {
         "user": tenant,
         "reviews": reviews,
-        "apartments": apartments,
     })
 
 

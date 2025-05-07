@@ -18,6 +18,7 @@ urlpatterns = [
     path('favourites/add/<int:apartment_id>/', views.add_to_favourites, name='add_to_favourites'),
     path('residential-complex/<int:pk>/', views.ResidentialComplexView.as_view(), name='complex_details'),
     path('complaint/<int:apartment_id>/', views.submit_complaint, name='submit_complaint'),
+    path('complaint/<int:complex_id>/', views.submit_complaint_zhk, name='submit_complaint_zhk'),
     path('submit-site-feedback/', views.submit_site_feedback, name='submit_site_feedback'),
     path('apartments/<int:apartment_id>/review/', views.submit_apartment_review, name='submit_apartment_review'),
     path('apartment/<int:apartment_id>/booking/', views.confirm_booking, name='confirm_booking'),

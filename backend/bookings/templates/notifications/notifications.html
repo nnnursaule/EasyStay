@@ -187,29 +187,32 @@
     </div>
 
     <div class="notification-list">
-        {% for notification in notifications %}
-            <div class="notification-item">
-                <img src="img/user1.png" alt="User 1"> <!-- здесь можешь динамически вставлять фото -->
-                <div class="notification-text">
-                    <div class="notification-details">
-                        <strong>{{ notification.sender.username }}</strong>
-                        {% if notification.type == 'favourite' %}
-                            Saved your apartment to favourites
-                        {% elif notification.type == 'booking' %}
-                            Requested to book your apartment
-                        {% endif %}
-                    </div>
-                    <span>{{ notification.created_at|date:"l jS F Y h:i A" }}</span>
+    {% for notification in notifications %}
+        <div class="notification-item">
+            <img src="img/user1.png" alt="User 1">
+            <div class="notification-text">
+                <div class="notification-details">
+                    <strong>{{ notification.sender.username }}</strong>
+                    {% if notification.type == 'favourite' %}
+                        Saved your apartment to favourites
+                    {% elif notification.type == 'booking' %}
+                        Requested to book your apartment
+                    {% elif notification.type == 'review' %}
+                        Left a review on your apartment
+                    {% endif %}
                 </div>
-                <div class="time-ago-container">
-                    <div class="dot"></div>
-                    <span class="time-ago">{{ notification.created_at|timesince }} ago</span>
-                </div>
+                <span>{{ notification.created_at|date:"l jS F  h:i A" }}</span>
             </div>
-        {% empty %}
-            <p>No notifications yet.</p>
-        {% endfor %}
-    </div>
+            <div class="time-ago-container">
+                <div class="dot"></div>
+                <span class="time-ago">{{ notification.created_at|timesince }} ago</span>
+            </div>
+        </div>
+    {% empty %}
+        <p>No notifications yet.</p>
+    {% endfor %}
+</div>
+
 </div>
 
 <script>

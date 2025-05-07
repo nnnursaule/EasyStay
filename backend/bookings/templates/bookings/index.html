@@ -47,7 +47,7 @@
                 </div>
 
                 <div class="right-nav">
-                    <a href="{% url 'booking:landlord_apartments' user.id %}">
+                    <a href="{% url 'users:landlord_profile' user.id %}">
                          <button class="landlord-btn">For a landlord</button>
                     </a>
 
@@ -129,64 +129,79 @@
 
     <section class="hero">
     <h1>Hi, {{ user.first_name }}! <br>Welcome to the <span class="highlight">EASYSTAY!</span></h1>
+
     <form method="get" action="{% url 'booking:main' user.id %}">
         <div class="search-container">
 
-            <!-- Город -->
-            <select class="select1" name="region">
-                <option value="">Choose Region</option>
-                <option value="almaly">Алмалинский</option>
-                <option value="auyezov">Ауэзовский</option>
-                <option value="bostandyk">Бостандыкский</option>
-                <option value="medeu">Медеуский</option>
-                <option value="nauryzbay">Наурызбайский</option>
-                <option value="turksib">Турксибский</option>
-                <option value="zhetysu">Жетысуский</option>
-                <option value="alatau">Алатауский</option>
+            <!-- Регион -->
+            <select class="select1" name="city">
+                <option value="" disabled selected hidden>Search by regions</option>
+                <option value="alatau">Alatau region</option>
+                <option value="almaly">Almaly region</option>
+                <option value="auezov">Auezov region</option>
+                <option value="bostandyk">Bostandyk region</option>
+                <option value="medeu">Medeu region</option>
+                <option value="nauryzbay">Nauryzbay region</option>
+                <option value="turksib">Turksib region</option>
+                <option value="zhetysu">Zhetysu region</option>
             </select>
 
             <!-- ЖК -->
             <select name="complex_id" class="select1">
-                <option value="">Residential complex</option>
+                <option value="" disabled selected hidden>Residential complex</option>
                 {% for complex in complexes %}
                     <option value="{{ complex.id }}">{{ complex.name }}</option>
                 {% endfor %}
             </select>
 
             <!-- Цена -->
-            <div class="price-range">
-                <label for="price_min">₸ Min</label>
-                <input type="range" id="price_min" name="price_min" min="0" max="1000000" step="10000" value="0" oninput="updatePriceLabel()">
-                <span id="min_price_val">0</span>
+            <select class="select2" name="max_price">
+                <option value="" disabled selected hidden>Price</option>
+                <option value="100000">до 100 000</option>
+                <option value="150000">до 150 000</option>
+                <option value="200000">до 200 000</option>
+                <option value="250000">до 250 000</option>
+            </select>
 
-                <label for="price_max">₸ Max</label>
-                <input type="range" id="price_max" name="price_max" min="0" max="1000000" step="10000" value="1000000" oninput="updatePriceLabel()">
-                <span id="max_price_val">1 000 000</span>
-            </div>
-
-            <!-- Люди (по количеству комнат) -->
-            <select name="room_count" class="select2">
-                <option value="">Rooms</option>
-                <option value="1">1 room</option>
-                <option value="2">2 rooms</option>
-                <option value="3">3 rooms</option>
-                <option value="4">4+ rooms</option>
+            <!-- Комнаты -->
+            <select class="select2" name="rooms">
+                <option value="" disabled selected hidden>Room</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4+</option>
             </select>
 
             <!-- Тип аренды -->
-            <select name="rental_type" class="select1" id="rental">
-                <option value="">Rental type</option>
-                <option value="day">Daily</option>
-                <option value="month">Monthly</option>
+            <select class="select1" id="rental" name="rental_type">
+                <option value="" disabled selected hidden>Rental type</option>
+                <option value="day">Short-term</option>
+                <option value="month">Long-term</option>
             </select>
 
-            <!-- Кнопка -->
+            <!-- Дополнительные поля -->
+            <div class="dropdown" id="dropdown2">
+                <div class="dropdown-toggle" onclick="toggleDropdown('dropdown2')">Check in</div>
+                <div class="dropdown-content">
+                    <div class="gender-options">
+                        <label><input type="radio" name="gender" value="male"> Male</label>
+                        <label><input type="radio" name="gender" value="female"> Female</label>
+                    </div>
+                    <label for="major">Your major</label>
+                    <input type="text" id="major" placeholder="Input major">
+                    <label for="age">Your age</label>
+                    <input type="text" id="age" placeholder="Input age">
+                </div>
+            </div>
+
             <button type="submit" class="search-btn">
                 <img width="24" height="24" src="https://img.icons8.com/fluency/48/sparkling.png" alt="sparkling"/> Search
             </button>
+
         </div>
     </form>
 </section>
+
 
 
     <section class="announcements">
@@ -214,7 +229,8 @@
             </form>
 
             <div class="card-info">
-                <h3>{{ apartment.complex.name }}</h3>
+                <h3>{{ apartment.title }}</h3>
+                <h6>{{ apartment.complex.name }}</h6>
                 <p>
                     {% if apartment.rental_type == "month" %}
                         {{ apartment.price_per_month }}₸ in month

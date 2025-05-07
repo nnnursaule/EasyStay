@@ -42,17 +42,40 @@ class ResidentialComplexView(DetailView):
         context["existing_amenities"] = existing_amenities_ru
         context["missing_amenities"] = missing_amenities
         context["available_apartments_count"] = residential_complex.available_apartments_count()  # Number of available apartments
+        context["apartments"] = Apartment.objects.filter(complex=residential_complex, status="available")
 
+        return context
 
 class ResidentalComplexListView(ListView):
     model = ResidentialComplex
     template_name = "complex/complex_list.html"
     context_object_name = "complexes"
 
+    ALMATY_REGIONS = [
+        ("almaly", "Алмалинский"),
+        ("auyezov", "Ауэзовский"),
+        ("bostandyk", "Бостандыкский"),
+        ("medeu", "Медеуский"),
+        ("nauryzbay", "Наурызбайский"),
+        ("turksib", "Турксибский"),
+        ("zhetysu", "Жетысуский"),
+        ("alatau", "Алатауский"),
+    ]
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        region = self.request.GET.get("region")
+        if region:
+            queryset = queryset.filter(region=region)
+        return queryset
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['latest_feedbacks'] = Feedback.objects.order_by('-created_at')[:3]
+        context['residential_complex_regions'] = self.ALMATY_REGIONS
+        context['selected_region'] = self.request.GET.get("region", "")
         return context
+
 
 
 class ApartmentListView(ListView):
@@ -127,16 +150,12 @@ def main_page(request, pk):
     user = get_object_or_404(User, id=pk)
     apartments = Apartment.objects.filter(status="available")  # Только доступные
 
-    # Забираем фильтры из формы
-    city = request.GET.get("city")
+
     complex_id = request.GET.get("complex_id")
     max_price = request.GET.get("max_price")
     room_count = request.GET.get("rooms")
     rental_type = request.GET.get("rental_type")
 
-    # Применяем фильтры
-    if city:
-        apartments = apartments.filter(complex__city__icontains=city)
 
     if complex_id:
         apartments = apartments.filter(complex_id=complex_id)
@@ -160,7 +179,7 @@ def main_page(request, pk):
     if request.user.is_authenticated:
         favourite_ids = Favourite.objects.filter(user=request.user).values_list("apartment_id", flat=True)
 
-    return render(request, "bookings/index.html", {
+    return render(request, "complex/testing_index.html", {
         "user": user,
         "apartments": apartments,
         "complexes": complexes,
@@ -353,6 +372,15 @@ def submit_apartment_review(request, apartment_id):
             text=text,
             rating=int(rating)
         )
+
+        if apartment.landlord != user:
+            Notification.objects.create(
+                recipient=apartment.owner,
+                sender=user,
+                apartment=apartment,
+                type='review',
+                message=f'{user.username} оставил отзыв под вашей квартирой "{apartment.title}".'
+            )
         return JsonResponse({'success': 'Отзыв добавлен.'})
     return JsonResponse({'error': 'Только POST-запросы разрешены.'}, status=405)
 
@@ -506,3 +534,32 @@ def submit_review(request, apartment_id):
 
         return JsonResponse({'success': True, 'message': 'Review submitted successfully!'})
     return JsonResponse({'success': False, 'message': 'Invalid request method!'})
+
+
+
+def submit_complaint_zhk(request, complex_id):
+    complex = get_object_or_404(ResidentialComplex, id=complex_id)
+
+    if request.method == 'POST':
+        reason = request.POST.get('reason')
+
+        if not reason:
+            messages.error(request, 'Пожалуйста, выберите причину жалобы.')
+            return redirect('submit_complaint', apartment_id=complex_id)
+
+        # Проверка на уже существующую жалобу от пользователя
+        if Complaint.objects.filter(user=request.user, complex=complex).exists():
+            messages.error(request, 'Вы уже отправили жалобу на это объявление.')
+            return redirect('booking:apartment_detail', pk=complex_id)
+
+        # Создание жалобы
+        Complaint.objects.create(
+            user=request.user,
+            complex=complex,
+            reason=reason
+        )
+        messages.success(request, 'Жалоба успешно отправлена.')
+        return redirect('booking:apartment_detail', pk=complex_id)
+
+    # GET-запрос — показываем форму
+    return render(request, 'profile/complaint_zhk.html', {'complex': complex})

@@ -2,6 +2,8 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/EasyStay" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/backend/EasyStay" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/nursaule-repo" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/ov-repo" vcs="Git" />
   </component>
 </project>

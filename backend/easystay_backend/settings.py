@@ -103,7 +103,7 @@ DATABASES = {
         'NAME': os.getenv('POSTGRES_DB'),
         'USER': os.getenv('POSTGRES_USER'),
         'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
-        'HOST': os.getenv("DB_HOST"),  # Or your database server's hostname
+        'HOST': "localhost",  # Or your database server's hostname
         'PORT': '5432',       # Default PostgreSQL port
     }
 }
@@ -160,7 +160,7 @@ DOMAIN_NAME = 'http://localhost:8039'
 AUTH_USER_MODEL = 'users.User'
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / "backend" / "media"
+MEDIA_ROOT = BASE_DIR /"media"
 
 
 EMAIL_HOST = 'smtp.yandex.com'

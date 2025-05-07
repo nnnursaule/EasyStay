@@ -603,7 +603,7 @@
         </p>
       </section>
     <div class="profile-actions">
-        <button class="page-profile" onclick="window.location.href='{% url 'users:landlord_profile' pk=user_pk %}';">Profile page</button>
+        <button class="page-profile" onclick="window.location.href='{% url 'users:landlord_profile' pk=request.user.pk %}';">Profile page</button>
     </div>
 
 <section class="advertisement-section">

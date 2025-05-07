@@ -43,6 +43,8 @@ class ResidentialComplex(models.Model):  # ЖК
         ("alatau", "Алатауский"),
     ]
     name = models.CharField(max_length=255, unique=True)  # Название ЖК
+    technical_specifications = models.TextField(blank=True, null=True)
+    apartment_features = models.TextField(blank=True, null=True)
     address = models.CharField(max_length=255)  # Адрес ЖК
     region = models.CharField(max_length=50, choices=ALMATY_REGIONS, default="almaly", null=True)
     description = models.TextField(blank=True, null=True)  # Описание ЖК
@@ -326,6 +328,7 @@ class Notification(models.Model):
     NOTIFICATION_TYPES = (
         ('favourite', 'Favourite'),
         ('booking', 'Booking Request'),
+        ('review', 'Review'),
     )
 
     recipient = models.ForeignKey(User, on_delete=models.CASCADE, related_name='notifications', null=True)
