@@ -395,9 +395,14 @@ def promote_cancel(request):
 def choose_promotion_plan(request, apartment_id):
     apartment = get_object_or_404(Apartment, pk=apartment_id)
     options = PromotionOption.objects.all()
+    descriptions = [
+        "Do you want your ad to be the first? Your offer will be displayed in the top positions within 3 days!",
+        "Ads marked as 'Premium' have been in the top for 15 days. These stand out and guarantee visibility.",
+        "Ads marked as 'Most Premium' are in the top for 30 days and are the most visible on the platform."
+    ]
     return render(request, 'payment/payment_choose.html', {
         'apartment': apartment,
-        'options': options
+        'options': zip(options, descriptions)
     })
 
 
@@ -414,7 +419,7 @@ def create_checkout_session(request, apartment_id):
             payment_method_types=['card'],
             line_items=[{
                 'price_data': {
-                    'currency': 'usd',
+                    'currency': 'kzt',
                     'unit_amount': int(option.discounted_price * 100),
                     'product_data': {
                         'name': f'Promotion: {option.duration} дней',

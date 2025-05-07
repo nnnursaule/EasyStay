@@ -102,52 +102,56 @@
         font-size: 25px;
     }
 
+
+
   </style>
 </head>
 <body>
   <h1>Promote your ad to the top!</h1>
+
+<form method="POST" action="{% url 'booking:create_checkout' apartment.id %}">
   <div class="cards">
-    <!-- 3 Days -->
-<!--    <div class="card">-->
-<!--      <div class="title"><svg width="122" height="153" viewBox="0 0 122 153" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">-->
-<!--        <path d="M13.2866 87.36C11.8266 87.36 10.3766 87.17 8.93664 86.79C7.49664 86.39 6.27664 85.83 5.27664 85.11L7.16664 81.39C7.96664 81.97 8.89664 82.43 9.95664 82.77C11.0166 83.11 12.0866 83.28 13.1666 83.28C14.3866 83.28 15.3466 83.04 16.0466 82.56C16.7466 82.08 17.0966 81.42 17.0966 80.58C17.0966 79.78 16.7866 79.15 16.1666 78.69C15.5466 78.23 14.5466 78 13.1666 78H10.9466V74.79L16.7966 68.16L17.3366 69.9H6.32664V66H21.0266V69.15L15.2066 75.78L12.7466 74.37H14.1566C16.7366 74.37 18.6866 74.95 20.0066 76.11C21.3266 77.27 21.9866 78.76 21.9866 80.58C21.9866 81.76 21.6766 82.87 21.0566 83.91C20.4366 84.93 19.4866 85.76 18.2066 86.4C16.9266 87.04 15.2866 87.36 13.2866 87.36ZM34.0466 87V66H43.5866C45.8666 66 47.8766 66.44 49.6166 67.32C51.3566 68.18 52.7166 69.39 53.6966 70.95C54.6766 72.51 55.1666 74.36 55.1666 76.5C55.1666 78.62 54.6766 80.47 53.6966 82.05C52.7166 83.61 51.3566 84.83 49.6166 85.71C47.8766 86.57 45.8666 87 43.5866 87H34.0466ZM38.9066 83.01H43.3466C44.7466 83.01 45.9566 82.75 46.9766 82.23C48.0166 81.69 48.8166 80.93 49.3766 79.95C49.9566 78.97 50.2466 77.82 50.2466 76.5C50.2466 75.16 49.9566 74.01 49.3766 73.05C48.8166 72.07 48.0166 71.32 46.9766 70.8C45.9566 70.26 44.7466 69.99 43.3466 69.99H38.9066V83.01ZM55.7788 87L65.1388 66H69.9388L79.3288 87H74.2288L66.5488 68.46H68.4688L60.7588 87H55.7788ZM60.4588 82.5L61.7488 78.81H72.5488L73.8688 82.5H60.4588ZM85.4385 87V78.42L86.5485 81.36L77.3085 66H82.4685L89.5485 77.79H86.5785L93.6885 66H98.4585L89.2185 81.36L90.2985 78.42V87H85.4385ZM106.953 87.36C105.273 87.36 103.663 87.14 102.123 86.7C100.583 86.24 99.3425 85.65 98.4025 84.93L100.053 81.27C100.953 81.91 102.013 82.44 103.233 82.86C104.473 83.26 105.723 83.46 106.983 83.46C107.943 83.46 108.713 83.37 109.293 83.19C109.893 82.99 110.333 82.72 110.613 82.38C110.893 82.04 111.033 81.65 111.033 81.21C111.033 80.65 110.813 80.21 110.373 79.89C109.933 79.55 109.353 79.28 108.633 79.08C107.913 78.86 107.113 78.66 106.233 78.48C105.373 78.28 104.503 78.04 103.623 77.76C102.763 77.48 101.973 77.12 101.253 76.68C100.533 76.24 99.9425 75.66 99.4825 74.94C99.0425 74.22 98.8225 73.3 98.8225 72.18C98.8225 70.98 99.1425 69.89 99.7825 68.91C100.443 67.91 101.423 67.12 102.723 66.54C104.043 65.94 105.693 65.64 107.673 65.64C108.993 65.64 110.293 65.8 111.573 66.12C112.853 66.42 113.983 66.88 114.963 67.5L113.463 71.19C112.483 70.63 111.503 70.22 110.523 69.96C109.543 69.68 108.583 69.54 107.643 69.54C106.703 69.54 105.933 69.65 105.333 69.87C104.733 70.09 104.303 70.38 104.043 70.74C103.783 71.08 103.653 71.48 103.653 71.94C103.653 72.48 103.873 72.92 104.313 73.26C104.753 73.58 105.333 73.84 106.053 74.04C106.773 74.24 107.563 74.44 108.423 74.64C109.303 74.84 110.173 75.07 111.033 75.33C111.913 75.59 112.713 75.94 113.433 76.38C114.153 76.82 114.733 77.4 115.173 78.12C115.633 78.84 115.863 79.75 115.863 80.85C115.863 82.03 115.533 83.11 114.873 84.09C114.213 85.07 113.223 85.86 111.903 86.46C110.603 87.06 108.953 87.36 106.953 87.36Z" fill="#1E212C"/>-->
-<!--        <rect x="16" y="92" width="92" height="61" fill="url(#pattern0_1792_2730)"/>-->
-<!--        <rect x="17" width="92" height="61" fill="url(#pattern1_1792_2730)"/>-->
-<!--        <defs>-->
-<!--        <pattern id="pattern0_1792_2730" patternContentUnits="objectBoundingBox" width="1" height="1">-->
-<!--        <use xlink:href="#image0_1792_2730" transform="matrix(0.0021645 0 0 0.00326449 0 -0.508197)"/>-->
-<!--        </pattern>-->
-<!--        <pattern id="pattern1_1792_2730" patternContentUnits="objectBoundingBox" width="1" height="1">-->
-<!--        <use xlink:href="#image0_1792_2730" transform="matrix(0.0021645 0 0 0.00326449 0.00574507 0.520151)"/>-->
-<!--        </pattern>-->
-<!--        </defs>-->
-<!--        </svg>-->
-<!--    </div>-->
-<!--    <div class="price-row">-->
-<!--      <div class="original-price">5000 tg</div>-->
-<!--      <div class="discount">-60%</div>-->
-<!--    </div>-->
-<!--      <div class="price">3000 tg</div>-->
-<!--      <p class="desc">Do you want your ad to be the first? Your offer will be displayed in the top positions within 3 days!</p>-->
-<!--      <button class="choose-btn" onclick="window.location.href='payment.methods.html';">Choose</button>-->
-<!--    </div>-->
-    <form method="POST" action="{% url 'booking:create_checkout' apartment.id %}">
-    {% csrf_token %}
-    <div>
-        <label for="option_id">Выберите срок продвижения:</label>
-        <select name="option_id" id="option_id">
-            {% for option in options %}
-                <option value="{{ option.id }}">
-                    {{ option.duration }} — {{ option.discounted_price }}₸
-                </option>
-            {% endfor %}
-        </select>
+  {% csrf_token %}
+
+  {% for option, description in options %}
+  <div class="card">
+    <div class="title">
+      <h2 class="duration">{{ option.duration }} DAYS</h2>
     </div>
-    <button type="submit">Выбрать</button>
+    <div class="price-row">
+      <div class="original-price">{{ option.original_price }} tg</div>
+      <div class="discount">-{{ option.discount_percent }}%</div>
+    </div>
+    <div class="price">{{ option.discounted_price }} tg</div>
+    <p class="desc">{{ description }}</p>
+
+
+    <!-- Уникальный option_id для каждой кнопки -->
+    <button type="submit" name="option_id" value="{{ option.id }}" class="choose-btn">
+      Choose
+    </button>
+  </div>
+  {% endfor %}
+     </div>
 </form>
 
+<!--    <form method="POST" action="{% url 'booking:create_checkout' apartment.id %}">-->
+<!--    {% csrf_token %}-->
+<!--    <div>-->
+<!--        <label for="option_id">Выберите срок продвижения:</label>-->
+<!--        <select name="option_id" id="option_id">-->
+<!--            {% for option in options %}-->
+<!--                <option value="{{ option.id }}">-->
+<!--                    {{ option.duration }} — {{ option.discounted_price }}₸-->
+<!--                </option>-->
+<!--            {% endfor %}-->
+<!--        </select>-->
+<!--    </div>-->
+<!--    <button type="submit">Выбрать</button>-->
+<!--</form>-->
 
 
-  </div>
+
+
 </body>
 </html>
