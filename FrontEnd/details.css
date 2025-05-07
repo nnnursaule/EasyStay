@@ -639,6 +639,8 @@ ul.fac-list li.x{
 
 .availability .calendar-check{
     width:30%;
+    min-width: 280px;
+    max-width: 100%;
     height: 444px;
     gap: 10px;
     /* padding: 24px; */
@@ -649,12 +651,13 @@ ul.fac-list li.x{
     justify-content: flex-start;
 }
 .availability .calendar-check .cal-components{
+    position: relative;
     width: 90%;
     gap: 12px;
     height: 90%;
     position: absolute;
     top: 0px;
-    margin: 24px;
+    margin: 4%;
 }
 .availability #cal-1{
     top: 202px;
@@ -749,10 +752,8 @@ ul.fac-list li.x{
     gap: 10px;
 }
 select.month-year{
-    /* width: 95px; */
     height: 44px;
     border-radius: 6px;
-    /* gap: 10px; */
     padding: 10px 12px 10px 12px;
     font-size: 20px;
     font-family: 'Lexend';
@@ -765,7 +766,7 @@ select.month-year{
     border-color: transparent;
 }
 select#month-c1, select#month-c2{
-    width: 120px;
+    width: 140px;
 }
 select#year-c1, select#year-c2{
     width: 90px;
@@ -795,6 +796,7 @@ select.month-year::after{
     top: 0px;
     left: 0px;
     width: 100%;
+    margin: 0 5%;
     height: 44px;
     border-radius: 6px;
     padding:  13px 20px 13px 20px;
@@ -1051,4 +1053,57 @@ top: 623.98px;
     width: 100%;
 }
 
-
+@media (max-width: 1600px) {
+    .availability .calendar-check {
+      width: 30%;
+    }
+  
+    .availability #cal-2 {
+      left: 60%;
+    }
+  
+    .cal-components {
+      width: 90%;
+    }
+  
+    .cal-components .w-days,
+    .cal-components .cal-dates {
+      width: 90%;
+    }
+  
+    .cal-components .cal-dates {
+        width: 80%;
+      }
+    .cal-components .w-days div,
+    .cal-dates .date {
+      width: 48px;
+      font-size: 16px;
+    }
+  
+    .cal-components .cal-header .month-year-div {
+      width: 220px;
+      left: 25%;
+    }
+  
+    select#month-c1, select#month-c2 {
+      width: 120px;
+    }
+  
+    select#year-c1, select#year-c2 {
+      width: 80px;
+    }
+    select.month-year{
+        font-size: 16px;
+    }
+    .availability #cal-2 button#nextmonth{
+        position: absolute;
+        right: 2.5%;
+        
+    }
+    button#check-dates{
+        font-size: 12px;
+    }
+    
+  }
+  
+  
