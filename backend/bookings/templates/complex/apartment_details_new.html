@@ -242,7 +242,12 @@
                     </svg>
                 </div>
 
-                <div class="owner-bottom"><button class="contact-btn">Contact</button></div>
+                <div class="owner-bottom">
+                    <button class="contact-btn"
+                        onclick="window.location.href='{% url 'users:landlord_profile' apartment.landlord.id %}'">
+                        Contact
+                    </button>
+                </div>
             </div>
         </div>
 
@@ -289,17 +294,18 @@
         <p class="desc-text">{{ apartment.description }}</p>
     </div>
 
-    <div class="facilities">
-        <p class="fac-head">Facilities and Amenities</p>
-        <ul class="fac-list">
-            {% for amenity in existing_amenities %}
-                <li style="color: green;">✔ {{ amenity }}</li>
-            {% endfor %}
-            {% for amenity in missing_amenities %}
-                <li style="color: red;">❌ {{ amenity }}</li>
-            {% endfor %}
-        </ul>
-    </div>
+            <div class="facilities">
+                <p class="fac-head">Facilities and Amenities</p>
+                <ul class="fac-list">
+                    {% for amenity in existing_amenities %}
+                    <li class="checkmark"><img src="{% static 'vendor/img/products/checkmark.png' %}" alt=""><span>Unisex bathroom</span></li>
+                    {% endfor %}
+                    {% for amenity in missing_amenities %}
+                    <li class="x"><img src="{% static 'vendor/img/products/x.png' %}" alt=""><span>TV</span></li>
+                    {% endfor %}
+                </ul>
+            </div>
+
 
     <div class="rules-pref">
         <p class="rule-head">Rules and preferences</p>
@@ -315,7 +321,7 @@
     </div>
 </section>
 
-    <section class="documents-desc">
+        <section class="documents-desc">
         <div class="documents">
             <div class="doc-left">
                 <p id="doc-text">Documents required to book</p>
@@ -329,8 +335,8 @@
                 </button>
             </div>
             <div class="doc-right">
-                <img src="img/details-doc.png" alt="">
-                <figure></figure>                 
+                <img src="{% static 'vendor/img/products/details-doc.png' %}" alt="">
+                <figure></figure>
             </div>
             <!-- <div class="doc-bottom">
                 <button class="upload">Upload</button>
@@ -339,7 +345,6 @@
         <div class="doc-bottom">
             <button class="upload">Upload</button>
         </div>
-
     </section>
 
     <section class="location-desc">
@@ -475,187 +480,22 @@
             <a href="#similar" onclick="viewCard(event, 'similar')" class="link-2" id="defaultLink">Similar places</a>
             <a href="#recently-viewed" onclick="viewCard(event, 'recently-viewed')" class="link-2">Recently viewed</a>
         </div>
-        <div id ="similar" class="cards">
-            <div class="card">
-                <img src="img/4.png" alt="Apartment">
-                <svg class="heart-icon" width="42" height="37" viewBox="0 0 42 37" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <g filter="url(#filter0_d_595_721)">
-                    <path d="M8.41811 16.1804L20.3156 27.3569C20.6401 27.6617 20.8023 27.8141 21.0003 27.8141C21.1983 27.8141 21.3606 27.6617 21.685 27.3569L33.5825 16.1804C36.8428 13.1177 37.2387 8.07775 34.4967 4.54353L33.9811 3.87899C30.7008 -0.34895 24.1164 0.360106 21.8114 5.1895C21.4858 5.87168 20.5148 5.87168 20.1892 5.1895C17.8843 0.360106 11.2999 -0.348948 8.01956 3.87899L7.50397 4.54353C4.7619 8.07775 5.15782 13.1177 8.41811 16.1804Z" fill="white" fill-opacity="0.27" shape-rendering="crispEdges"/>
-                    <path d="M8.41811 16.1804L20.3156 27.3569C20.6401 27.6617 20.8023 27.8141 21.0003 27.8141C21.1983 27.8141 21.3606 27.6617 21.685 27.3569L33.5825 16.1804C36.8428 13.1177 37.2387 8.07775 34.4967 4.54353L33.9811 3.87899C30.7008 -0.34895 24.1164 0.360106 21.8114 5.1895C21.4858 5.87168 20.5148 5.87168 20.1892 5.1895C17.8843 0.360106 11.2999 -0.348948 8.01956 3.87899L7.50397 4.54353C4.7619 8.07775 5.15782 13.1177 8.41811 16.1804Z" stroke="black" stroke-width="2" shape-rendering="crispEdges"/>
-                    </g>
-                    <defs>
-                    <filter id="filter0_d_595_721" x="0.683594" y="0.095459" width="40.6338" height="36.7185" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-                    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-                    <feOffset dy="4"/>
-                    <feGaussianBlur stdDeviation="2"/>
-                    <feComposite in2="hardAlpha" operator="out"/>
-                    <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
-                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_595_721"/>
-                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_595_721" result="shape"/>
-                    </filter>
-                    </defs>
-                </svg>
-                <div class="card-info">
-                    <h3>mkr Zhazira</h3>
-                    <p>150k in month</p>
-                </div>
-                <div class="card-hover">
-                    <p>Description of apartment: просторная, современная.</p>
-                    <button><a href="details.html" class="view-details">View details</a></button>
-                </div>
+        <div id="similar" class="cards">
+    {% for apt in similar_apartments %}
+        <div class="card">
+            <img src="{{ apt.image.url }}" alt="Apartment">
+            <!-- Здесь добавь иконку избранного, если нужно -->
+            <div class="card-info">
+                <h3>{{ apt.address }}</h3>
+                <p>{{ apt.price_per_month }} in month</p>
             </div>
-
-            <div class="card">
-                <img src="img/4.png" alt="Apartment">
-                <svg class="heart-icon" width="42" height="37" viewBox="0 0 42 37" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <g filter="url(#filter0_d_595_721)">
-                    <path d="M8.41811 16.1804L20.3156 27.3569C20.6401 27.6617 20.8023 27.8141 21.0003 27.8141C21.1983 27.8141 21.3606 27.6617 21.685 27.3569L33.5825 16.1804C36.8428 13.1177 37.2387 8.07775 34.4967 4.54353L33.9811 3.87899C30.7008 -0.34895 24.1164 0.360106 21.8114 5.1895C21.4858 5.87168 20.5148 5.87168 20.1892 5.1895C17.8843 0.360106 11.2999 -0.348948 8.01956 3.87899L7.50397 4.54353C4.7619 8.07775 5.15782 13.1177 8.41811 16.1804Z" fill="white" fill-opacity="0.27" shape-rendering="crispEdges"/>
-                    <path d="M8.41811 16.1804L20.3156 27.3569C20.6401 27.6617 20.8023 27.8141 21.0003 27.8141C21.1983 27.8141 21.3606 27.6617 21.685 27.3569L33.5825 16.1804C36.8428 13.1177 37.2387 8.07775 34.4967 4.54353L33.9811 3.87899C30.7008 -0.34895 24.1164 0.360106 21.8114 5.1895C21.4858 5.87168 20.5148 5.87168 20.1892 5.1895C17.8843 0.360106 11.2999 -0.348948 8.01956 3.87899L7.50397 4.54353C4.7619 8.07775 5.15782 13.1177 8.41811 16.1804Z" stroke="black" stroke-width="2" shape-rendering="crispEdges"/>
-                    </g>
-                    <defs>
-                    <filter id="filter0_d_595_721" x="0.683594" y="0.095459" width="40.6338" height="36.7185" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-                    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-                    <feOffset dy="4"/>
-                    <feGaussianBlur stdDeviation="2"/>
-                    <feComposite in2="hardAlpha" operator="out"/>
-                    <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
-                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_595_721"/>
-                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_595_721" result="shape"/>
-                    </filter>
-                    </defs>
-                </svg>
-                <div class="card-info">
-                    <h3>mkr Zhazira</h3>
-                    <p>150k in month</p>
-                </div>
-                <div class="card-hover">
-                    <p>Description of apartment: просторная, современная.</p>
-                    <button><a href="details.html" class="view-details">View details</a></button>
-                </div>
-            </div>
-
-            <div class="card">
-                <img src="img/4.png" alt="Apartment">
-                <svg class="heart-icon" width="42" height="37" viewBox="0 0 42 37" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <g filter="url(#filter0_d_595_721)">
-                    <path d="M8.41811 16.1804L20.3156 27.3569C20.6401 27.6617 20.8023 27.8141 21.0003 27.8141C21.1983 27.8141 21.3606 27.6617 21.685 27.3569L33.5825 16.1804C36.8428 13.1177 37.2387 8.07775 34.4967 4.54353L33.9811 3.87899C30.7008 -0.34895 24.1164 0.360106 21.8114 5.1895C21.4858 5.87168 20.5148 5.87168 20.1892 5.1895C17.8843 0.360106 11.2999 -0.348948 8.01956 3.87899L7.50397 4.54353C4.7619 8.07775 5.15782 13.1177 8.41811 16.1804Z" fill="white" fill-opacity="0.27" shape-rendering="crispEdges"/>
-                    <path d="M8.41811 16.1804L20.3156 27.3569C20.6401 27.6617 20.8023 27.8141 21.0003 27.8141C21.1983 27.8141 21.3606 27.6617 21.685 27.3569L33.5825 16.1804C36.8428 13.1177 37.2387 8.07775 34.4967 4.54353L33.9811 3.87899C30.7008 -0.34895 24.1164 0.360106 21.8114 5.1895C21.4858 5.87168 20.5148 5.87168 20.1892 5.1895C17.8843 0.360106 11.2999 -0.348948 8.01956 3.87899L7.50397 4.54353C4.7619 8.07775 5.15782 13.1177 8.41811 16.1804Z" stroke="black" stroke-width="2" shape-rendering="crispEdges"/>
-                    </g>
-                    <defs>
-                    <filter id="filter0_d_595_721" x="0.683594" y="0.095459" width="40.6338" height="36.7185" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-                    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-                    <feOffset dy="4"/>
-                    <feGaussianBlur stdDeviation="2"/>
-                    <feComposite in2="hardAlpha" operator="out"/>
-                    <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
-                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_595_721"/>
-                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_595_721" result="shape"/>
-                    </filter>
-                    </defs>
-                </svg>
-                <div class="card-info">
-                    <h3>mkr Zhazira</h3>
-                    <p>150k in month</p>
-                </div>
-                <div class="card-hover">
-                    <p>Description of apartment: просторная, современная.</p>
-                    <button><a href="details.html" class="view-details">View details</a></button>
-                </div>
-            </div>
-
-            <div class="card">
-                <img src="img/6.png" alt="Apartment">
-                <svg class="heart-icon" width="42" height="37" viewBox="0 0 42 37" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <g filter="url(#filter0_d_595_721)">
-                    <path d="M8.41811 16.1804L20.3156 27.3569C20.6401 27.6617 20.8023 27.8141 21.0003 27.8141C21.1983 27.8141 21.3606 27.6617 21.685 27.3569L33.5825 16.1804C36.8428 13.1177 37.2387 8.07775 34.4967 4.54353L33.9811 3.87899C30.7008 -0.34895 24.1164 0.360106 21.8114 5.1895C21.4858 5.87168 20.5148 5.87168 20.1892 5.1895C17.8843 0.360106 11.2999 -0.348948 8.01956 3.87899L7.50397 4.54353C4.7619 8.07775 5.15782 13.1177 8.41811 16.1804Z" fill="white" fill-opacity="0.27" shape-rendering="crispEdges"/>
-                    <path d="M8.41811 16.1804L20.3156 27.3569C20.6401 27.6617 20.8023 27.8141 21.0003 27.8141C21.1983 27.8141 21.3606 27.6617 21.685 27.3569L33.5825 16.1804C36.8428 13.1177 37.2387 8.07775 34.4967 4.54353L33.9811 3.87899C30.7008 -0.34895 24.1164 0.360106 21.8114 5.1895C21.4858 5.87168 20.5148 5.87168 20.1892 5.1895C17.8843 0.360106 11.2999 -0.348948 8.01956 3.87899L7.50397 4.54353C4.7619 8.07775 5.15782 13.1177 8.41811 16.1804Z" stroke="black" stroke-width="2" shape-rendering="crispEdges"/>
-                    </g>
-                    <defs>
-                    <filter id="filter0_d_595_721" x="0.683594" y="0.095459" width="40.6338" height="36.7185" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-                    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-                    <feOffset dy="4"/>
-                    <feGaussianBlur stdDeviation="2"/>
-                    <feComposite in2="hardAlpha" operator="out"/>
-                    <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
-                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_595_721"/>
-                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_595_721" result="shape"/>
-                    </filter>
-                    </defs>
-            </svg>
-                <div class="card-info">
-                    <h3>Sensata City</h3>
-                    <p>260k in month</p>
-                </div>
-                <div class="card-hover">
-                    <p>Description of apartment: шикарный вид, большая кухня.</p>
-                    <button><a href="details.html" class="view-details">View details</a></button>
-                </div>
-            </div>
-
-            <div class="card">
-                <img src="img/6.png" alt="Apartment">
-                <svg class="heart-icon" width="42" height="37" viewBox="0 0 42 37" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <g filter="url(#filter0_d_595_721)">
-                    <path d="M8.41811 16.1804L20.3156 27.3569C20.6401 27.6617 20.8023 27.8141 21.0003 27.8141C21.1983 27.8141 21.3606 27.6617 21.685 27.3569L33.5825 16.1804C36.8428 13.1177 37.2387 8.07775 34.4967 4.54353L33.9811 3.87899C30.7008 -0.34895 24.1164 0.360106 21.8114 5.1895C21.4858 5.87168 20.5148 5.87168 20.1892 5.1895C17.8843 0.360106 11.2999 -0.348948 8.01956 3.87899L7.50397 4.54353C4.7619 8.07775 5.15782 13.1177 8.41811 16.1804Z" fill="white" fill-opacity="0.27" shape-rendering="crispEdges"/>
-                    <path d="M8.41811 16.1804L20.3156 27.3569C20.6401 27.6617 20.8023 27.8141 21.0003 27.8141C21.1983 27.8141 21.3606 27.6617 21.685 27.3569L33.5825 16.1804C36.8428 13.1177 37.2387 8.07775 34.4967 4.54353L33.9811 3.87899C30.7008 -0.34895 24.1164 0.360106 21.8114 5.1895C21.4858 5.87168 20.5148 5.87168 20.1892 5.1895C17.8843 0.360106 11.2999 -0.348948 8.01956 3.87899L7.50397 4.54353C4.7619 8.07775 5.15782 13.1177 8.41811 16.1804Z" stroke="black" stroke-width="2" shape-rendering="crispEdges"/>
-                    </g>
-                    <defs>
-                    <filter id="filter0_d_595_721" x="0.683594" y="0.095459" width="40.6338" height="36.7185" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-                    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-                    <feOffset dy="4"/>
-                    <feGaussianBlur stdDeviation="2"/>
-                    <feComposite in2="hardAlpha" operator="out"/>
-                    <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
-                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_595_721"/>
-                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_595_721" result="shape"/>
-                    </filter>
-                    </defs>
-            </svg>
-                <div class="card-info">
-                    <h3>Sensata City</h3>
-                    <p>260k in month</p>
-                </div>
-                <div class="card-hover">
-                    <p>Description of apartment: шикарный вид, большая кухня.</p>
-                    <button><a href="details.html" class="view-details">View details</a></button>
-                </div>
-            </div>
-
-            <div class="card">
-                <img src="img/6.png" alt="Apartment">
-                <svg class="heart-icon" width="42" height="37" viewBox="0 0 42 37" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <g filter="url(#filter0_d_595_721)">
-                    <path d="M8.41811 16.1804L20.3156 27.3569C20.6401 27.6617 20.8023 27.8141 21.0003 27.8141C21.1983 27.8141 21.3606 27.6617 21.685 27.3569L33.5825 16.1804C36.8428 13.1177 37.2387 8.07775 34.4967 4.54353L33.9811 3.87899C30.7008 -0.34895 24.1164 0.360106 21.8114 5.1895C21.4858 5.87168 20.5148 5.87168 20.1892 5.1895C17.8843 0.360106 11.2999 -0.348948 8.01956 3.87899L7.50397 4.54353C4.7619 8.07775 5.15782 13.1177 8.41811 16.1804Z" fill="white" fill-opacity="0.27" shape-rendering="crispEdges"/>
-                    <path d="M8.41811 16.1804L20.3156 27.3569C20.6401 27.6617 20.8023 27.8141 21.0003 27.8141C21.1983 27.8141 21.3606 27.6617 21.685 27.3569L33.5825 16.1804C36.8428 13.1177 37.2387 8.07775 34.4967 4.54353L33.9811 3.87899C30.7008 -0.34895 24.1164 0.360106 21.8114 5.1895C21.4858 5.87168 20.5148 5.87168 20.1892 5.1895C17.8843 0.360106 11.2999 -0.348948 8.01956 3.87899L7.50397 4.54353C4.7619 8.07775 5.15782 13.1177 8.41811 16.1804Z" stroke="black" stroke-width="2" shape-rendering="crispEdges"/>
-                    </g>
-                    <defs>
-                    <filter id="filter0_d_595_721" x="0.683594" y="0.095459" width="40.6338" height="36.7185" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-                    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-                    <feOffset dy="4"/>
-                    <feGaussianBlur stdDeviation="2"/>
-                    <feComposite in2="hardAlpha" operator="out"/>
-                    <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
-                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_595_721"/>
-                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_595_721" result="shape"/>
-                    </filter>
-                    </defs>
-            </svg>
-                <div class="card-info">
-                    <h3>Sensata City</h3>
-                    <p>260k in month</p>
-                </div>
-                <div class="card-hover">
-                    <p>Description of apartment: шикарный вид, большая кухня.</p>
-                    <button><a href="details.html" class="view-details">View details</a></button>
-                </div>
+            <div class="card-hover">
+                <p>Description of apartment: {{ apt.description }}</p>
+                <button><a href="{% url 'booking:apartment_detail' apt.pk %}" class="view-details">View details</a></button>
             </div>
         </div>
+    {% endfor %}
+</div>
 
         <div id="recently-viewed" class="cards">
             <div class="card">
@@ -842,42 +682,258 @@
         </div>
     </section>
 
-    <section class="clients">
+       <section class="clients">
         <p class="question-p">What our clients are saying?</p>
         <div class="commentsofclients">
             <div>
                 <div class="comment-row">
-                    {% for review in reviews %}
-                      <div class="comment">
-                          <div class="stars">
-                          {% for i in "12345" %}
-                            {% if forloop.counter <= review.rating %}
-                              <span style="color: #FFC247;">★</span>
-                            {% else %}
-                              <span style="color: #ccc;">★</span>
-                            {% endif %}
-                          {% endfor %}
-                        </div>
-                        <p class="text">{{ review.text }}</p>
-                        <p class="username">{{ review.author.username }}</p>
+                    <div class="comment">
+                        <svg width="328" height="26" viewBox="0 0 328 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g clip-path="url(#clip0_324_2838)">
+                            <path d="M10.25 17.6522L16.58 21.4722L14.9 14.2622L20.49 9.42219L13.12 8.78219L10.25 1.99219L7.37 8.79219L0 9.42219L5.59 14.2622L3.91 21.4722L10.25 17.6522Z" fill="#FFC247"/>
+                            </g>
+                            <g clip-path="url(#clip1_324_2838)">
+                            <path d="M37.8438 17.6522L44.1737 21.4722L42.4937 14.2622L48.0837 9.42219L40.7137 8.78219L37.8438 1.99219L34.9637 8.79219L27.5938 9.42219L33.1838 14.2622L31.5038 21.4722L37.8438 17.6522Z" fill="#FFC247"/>
+                            </g>
+                            <g clip-path="url(#clip2_324_2838)">
+                            <path d="M65.4375 17.6522L71.7675 21.4722L70.0875 14.2622L75.6775 9.42219L68.3075 8.78219L65.4375 1.99219L62.5575 8.79219L55.1875 9.42219L60.7775 14.2622L59.0975 21.4722L65.4375 17.6522Z" fill="#FFC247"/>
+                            </g>
+                            <g clip-path="url(#clip3_324_2838)">
+                            <path d="M93.0312 17.6522L99.3612 21.4722L97.6812 14.2622L103.271 9.42219L95.9012 8.78219L93.0312 1.99219L90.1512 8.79219L82.7812 9.42219L88.3713 14.2622L86.6913 21.4722L93.0312 17.6522Z" fill="#FFC247"/>
+                            </g>
+                            <g clip-path="url(#clip4_324_2838)">
+                            <path d="M120.625 17.6522L126.955 21.4722L125.275 14.2622L130.865 9.42219L123.495 8.78219L120.625 1.99219L117.745 8.79219L110.375 9.42219L115.965 14.2622L114.285 21.4722L120.625 17.6522Z" fill="#FFC247"/>
+                            </g>
+                            <defs>
+                            <clipPath id="clip0_324_2838">
+                            <rect width="24" height="24" fill="white" transform="translate(0 1.99219)"/>
+                            </clipPath>
+                            <clipPath id="clip1_324_2838">
+                            <rect width="24" height="24" fill="white" transform="translate(27.5938 1.99219)"/>
+                            </clipPath>
+                            <clipPath id="clip2_324_2838">
+                            <rect width="24" height="24" fill="white" transform="translate(55.1875 1.99219)"/>
+                            </clipPath>
+                            <clipPath id="clip3_324_2838">
+                            <rect width="24" height="24" fill="white" transform="translate(82.7812 1.99219)"/>
+                            </clipPath>
+                            <clipPath id="clip4_324_2838">
+                            <rect width="24" height="24" fill="white" transform="translate(110.375 1.99219)"/>
+                            </clipPath>
+                            </defs>
+                        </svg>
 
-                      </div>
-                    {% empty %}
-                      <p>No reviews yet.</p>
+                        <p class="text">My son who works in IT suggested I try this app after I was getting lots of strange messages and things happening on my phone. Since running it once a week I have had no viruses or malware problems. I also got a VPN app so I think with both I’m all set!</p>
+                        <p class="username"></p>
+
+                    </div>
+                    <div class="comment">
+                        <svg width="328" height="26" viewBox="0 0 328 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g clip-path="url(#clip0_324_2838)">
+                            <path d="M10.25 17.6522L16.58 21.4722L14.9 14.2622L20.49 9.42219L13.12 8.78219L10.25 1.99219L7.37 8.79219L0 9.42219L5.59 14.2622L3.91 21.4722L10.25 17.6522Z" fill="#FFC247"/>
+                            </g>
+                            <g clip-path="url(#clip1_324_2838)">
+                            <path d="M37.8438 17.6522L44.1737 21.4722L42.4937 14.2622L48.0837 9.42219L40.7137 8.78219L37.8438 1.99219L34.9637 8.79219L27.5938 9.42219L33.1838 14.2622L31.5038 21.4722L37.8438 17.6522Z" fill="#FFC247"/>
+                            </g>
+                            <g clip-path="url(#clip2_324_2838)">
+                            <path d="M65.4375 17.6522L71.7675 21.4722L70.0875 14.2622L75.6775 9.42219L68.3075 8.78219L65.4375 1.99219L62.5575 8.79219L55.1875 9.42219L60.7775 14.2622L59.0975 21.4722L65.4375 17.6522Z" fill="#FFC247"/>
+                            </g>
+                            <g clip-path="url(#clip3_324_2838)">
+                            <path d="M93.0312 17.6522L99.3612 21.4722L97.6812 14.2622L103.271 9.42219L95.9012 8.78219L93.0312 1.99219L90.1512 8.79219L82.7812 9.42219L88.3713 14.2622L86.6913 21.4722L93.0312 17.6522Z" fill="#FFC247"/>
+                            </g>
+                            <g clip-path="url(#clip4_324_2838)">
+                            <path d="M120.625 17.6522L126.955 21.4722L125.275 14.2622L130.865 9.42219L123.495 8.78219L120.625 1.99219L117.745 8.79219L110.375 9.42219L115.965 14.2622L114.285 21.4722L120.625 17.6522Z" fill="#FFC247"/>
+                            </g>
+                            <defs>
+                            <clipPath id="clip0_324_2838">
+                            <rect width="24" height="24" fill="white" transform="translate(0 1.99219)"/>
+                            </clipPath>
+                            <clipPath id="clip1_324_2838">
+                            <rect width="24" height="24" fill="white" transform="translate(27.5938 1.99219)"/>
+                            </clipPath>
+                            <clipPath id="clip2_324_2838">
+                            <rect width="24" height="24" fill="white" transform="translate(55.1875 1.99219)"/>
+                            </clipPath>
+                            <clipPath id="clip3_324_2838">
+                            <rect width="24" height="24" fill="white" transform="translate(82.7812 1.99219)"/>
+                            </clipPath>
+                            <clipPath id="clip4_324_2838">
+                            <rect width="24" height="24" fill="white" transform="translate(110.375 1.99219)"/>
+                            </clipPath>
+                            </defs>
+                        </svg>
+
+                        <p class="text">The perfect platform for finding roommates! Thanks to EasyStay I found guys with whom I rent housing cheaper and more comfortably.</p>
+                        <p class="username">colinandmandy94</p>
+                    </div>
+                    <div class="comment">
+                        <svg width="328" height="26" viewBox="0 0 328 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g clip-path="url(#clip0_324_2838)">
+                            <path d="M10.25 17.6522L16.58 21.4722L14.9 14.2622L20.49 9.42219L13.12 8.78219L10.25 1.99219L7.37 8.79219L0 9.42219L5.59 14.2622L3.91 21.4722L10.25 17.6522Z" fill="#FFC247"/>
+                            </g>
+                            <g clip-path="url(#clip1_324_2838)">
+                            <path d="M37.8438 17.6522L44.1737 21.4722L42.4937 14.2622L48.0837 9.42219L40.7137 8.78219L37.8438 1.99219L34.9637 8.79219L27.5938 9.42219L33.1838 14.2622L31.5038 21.4722L37.8438 17.6522Z" fill="#FFC247"/>
+                            </g>
+                            <g clip-path="url(#clip2_324_2838)">
+                            <path d="M65.4375 17.6522L71.7675 21.4722L70.0875 14.2622L75.6775 9.42219L68.3075 8.78219L65.4375 1.99219L62.5575 8.79219L55.1875 9.42219L60.7775 14.2622L59.0975 21.4722L65.4375 17.6522Z" fill="#FFC247"/>
+                            </g>
+                            <g clip-path="url(#clip3_324_2838)">
+                            <path d="M93.0312 17.6522L99.3612 21.4722L97.6812 14.2622L103.271 9.42219L95.9012 8.78219L93.0312 1.99219L90.1512 8.79219L82.7812 9.42219L88.3713 14.2622L86.6913 21.4722L93.0312 17.6522Z" fill="#FFC247"/>
+                            </g>
+                            <g clip-path="url(#clip4_324_2838)">
+                            <path d="M120.625 17.6522L126.955 21.4722L125.275 14.2622L130.865 9.42219L123.495 8.78219L120.625 1.99219L117.745 8.79219L110.375 9.42219L115.965 14.2622L114.285 21.4722L120.625 17.6522Z" fill="#FFC247"/>
+                            </g>
+                            <defs>
+                            <clipPath id="clip0_324_2838">
+                            <rect width="24" height="24" fill="white" transform="translate(0 1.99219)"/>
+                            </clipPath>
+                            <clipPath id="clip1_324_2838">
+                            <rect width="24" height="24" fill="white" transform="translate(27.5938 1.99219)"/>
+                            </clipPath>
+                            <clipPath id="clip2_324_2838">
+                            <rect width="24" height="24" fill="white" transform="translate(55.1875 1.99219)"/>
+                            </clipPath>
+                            <clipPath id="clip3_324_2838">
+                            <rect width="24" height="24" fill="white" transform="translate(82.7812 1.99219)"/>
+                            </clipPath>
+                            <clipPath id="clip4_324_2838">
+                            <rect width="24" height="24" fill="white" transform="translate(110.375 1.99219)"/>
+                            </clipPath>
+                            </defs>
+                        </svg>
+
+                        <p class="text">Posted an advert for renting an apartment – ​​found tenants in a couple of days. Everything is simple and convenient, you can easily update the information.</p>
+                        <p class="username">Jennifer Black</p>
+                    </div>
+                    <div class="comment">
+                        <svg width="328" height="26" viewBox="0 0 328 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g clip-path="url(#clip0_324_2838)">
+                            <path d="M10.25 17.6522L16.58 21.4722L14.9 14.2622L20.49 9.42219L13.12 8.78219L10.25 1.99219L7.37 8.79219L0 9.42219L5.59 14.2622L3.91 21.4722L10.25 17.6522Z" fill="#FFC247"/>
+                            </g>
+                            <g clip-path="url(#clip1_324_2838)">
+                            <path d="M37.8438 17.6522L44.1737 21.4722L42.4937 14.2622L48.0837 9.42219L40.7137 8.78219L37.8438 1.99219L34.9637 8.79219L27.5938 9.42219L33.1838 14.2622L31.5038 21.4722L37.8438 17.6522Z" fill="#FFC247"/>
+                            </g>
+                            <g clip-path="url(#clip2_324_2838)">
+                            <path d="M65.4375 17.6522L71.7675 21.4722L70.0875 14.2622L75.6775 9.42219L68.3075 8.78219L65.4375 1.99219L62.5575 8.79219L55.1875 9.42219L60.7775 14.2622L59.0975 21.4722L65.4375 17.6522Z" fill="#FFC247"/>
+                            </g>
+                            <g clip-path="url(#clip3_324_2838)">
+                            <path d="M93.0312 17.6522L99.3612 21.4722L97.6812 14.2622L103.271 9.42219L95.9012 8.78219L93.0312 1.99219L90.1512 8.79219L82.7812 9.42219L88.3713 14.2622L86.6913 21.4722L93.0312 17.6522Z" fill="#FFC247"/>
+                            </g>
+                            <g clip-path="url(#clip4_324_2838)">
+                            <path d="M120.625 17.6522L126.955 21.4722L125.275 14.2622L130.865 9.42219L123.495 8.78219L120.625 1.99219L117.745 8.79219L110.375 9.42219L115.965 14.2622L114.285 21.4722L120.625 17.6522Z" fill="#FFC247"/>
+                            </g>
+                            <defs>
+                            <clipPath id="clip0_324_2838">
+                            <rect width="24" height="24" fill="white" transform="translate(0 1.99219)"/>
+                            </clipPath>
+                            <clipPath id="clip1_324_2838">
+                            <rect width="24" height="24" fill="white" transform="translate(27.5938 1.99219)"/>
+                            </clipPath>
+                            <clipPath id="clip2_324_2838">
+                            <rect width="24" height="24" fill="white" transform="translate(55.1875 1.99219)"/>
+                            </clipPath>
+                            <clipPath id="clip3_324_2838">
+                            <rect width="24" height="24" fill="white" transform="translate(82.7812 1.99219)"/>
+                            </clipPath>
+                            <clipPath id="clip4_324_2838">
+                            <rect width="24" height="24" fill="white" transform="translate(110.375 1.99219)"/>
+                            </clipPath>
+                            </defs>
+                        </svg>
+
+                        <p class="text">Posted an advert for renting an apartment – ​​found tenants in a couple of days. Everything is simple and convenient, you can easily update the information.</p>
+                        <p class="username">Jennifer Black</p>
+                    </div>
+                    <div class="comment">
+                        <svg width="328" height="26" viewBox="0 0 328 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g clip-path="url(#clip0_324_2838)">
+                            <path d="M10.25 17.6522L16.58 21.4722L14.9 14.2622L20.49 9.42219L13.12 8.78219L10.25 1.99219L7.37 8.79219L0 9.42219L5.59 14.2622L3.91 21.4722L10.25 17.6522Z" fill="#FFC247"/>
+                            </g>
+                            <g clip-path="url(#clip1_324_2838)">
+                            <path d="M37.8438 17.6522L44.1737 21.4722L42.4937 14.2622L48.0837 9.42219L40.7137 8.78219L37.8438 1.99219L34.9637 8.79219L27.5938 9.42219L33.1838 14.2622L31.5038 21.4722L37.8438 17.6522Z" fill="#FFC247"/>
+                            </g>
+                            <g clip-path="url(#clip2_324_2838)">
+                            <path d="M65.4375 17.6522L71.7675 21.4722L70.0875 14.2622L75.6775 9.42219L68.3075 8.78219L65.4375 1.99219L62.5575 8.79219L55.1875 9.42219L60.7775 14.2622L59.0975 21.4722L65.4375 17.6522Z" fill="#FFC247"/>
+                            </g>
+                            <g clip-path="url(#clip3_324_2838)">
+                            <path d="M93.0312 17.6522L99.3612 21.4722L97.6812 14.2622L103.271 9.42219L95.9012 8.78219L93.0312 1.99219L90.1512 8.79219L82.7812 9.42219L88.3713 14.2622L86.6913 21.4722L93.0312 17.6522Z" fill="#FFC247"/>
+                            </g>
+                            <g clip-path="url(#clip4_324_2838)">
+                            <path d="M120.625 17.6522L126.955 21.4722L125.275 14.2622L130.865 9.42219L123.495 8.78219L120.625 1.99219L117.745 8.79219L110.375 9.42219L115.965 14.2622L114.285 21.4722L120.625 17.6522Z" fill="#FFC247"/>
+                            </g>
+                            <defs>
+                            <clipPath id="clip0_324_2838">
+                            <rect width="24" height="24" fill="white" transform="translate(0 1.99219)"/>
+                            </clipPath>
+                            <clipPath id="clip1_324_2838">
+                            <rect width="24" height="24" fill="white" transform="translate(27.5938 1.99219)"/>
+                            </clipPath>
+                            <clipPath id="clip2_324_2838">
+                            <rect width="24" height="24" fill="white" transform="translate(55.1875 1.99219)"/>
+                            </clipPath>
+                            <clipPath id="clip3_324_2838">
+                            <rect width="24" height="24" fill="white" transform="translate(82.7812 1.99219)"/>
+                            </clipPath>
+                            <clipPath id="clip4_324_2838">
+                            <rect width="24" height="24" fill="white" transform="translate(110.375 1.99219)"/>
+                            </clipPath>
+                            </defs>
+                        </svg>
+
+                        <p class="text">Very convenient site! Found myself a place to live near campus in just a couple of days. Filters helped sort options quickly, and the ability to contact the owner directly is super!</p>
+                        <p class="username">Phillip Colligan</p>
+                    </div>
+                    <div class="comment">
+                        <svg width="328" height="26" viewBox="0 0 328 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g clip-path="url(#clip0_324_2838)">
+                            <path d="M10.25 17.6522L16.58 21.4722L14.9 14.2622L20.49 9.42219L13.12 8.78219L10.25 1.99219L7.37 8.79219L0 9.42219L5.59 14.2622L3.91 21.4722L10.25 17.6522Z" fill="#FFC247"/>
+                            </g>
+                            <g clip-path="url(#clip1_324_2838)">
+                            <path d="M37.8438 17.6522L44.1737 21.4722L42.4937 14.2622L48.0837 9.42219L40.7137 8.78219L37.8438 1.99219L34.9637 8.79219L27.5938 9.42219L33.1838 14.2622L31.5038 21.4722L37.8438 17.6522Z" fill="#FFC247"/>
+                            </g>
+                            <g clip-path="url(#clip2_324_2838)">
+                            <path d="M65.4375 17.6522L71.7675 21.4722L70.0875 14.2622L75.6775 9.42219L68.3075 8.78219L65.4375 1.99219L62.5575 8.79219L55.1875 9.42219L60.7775 14.2622L59.0975 21.4722L65.4375 17.6522Z" fill="#FFC247"/>
+                            </g>
+                            <g clip-path="url(#clip3_324_2838)">
+                            <path d="M93.0312 17.6522L99.3612 21.4722L97.6812 14.2622L103.271 9.42219L95.9012 8.78219L93.0312 1.99219L90.1512 8.79219L82.7812 9.42219L88.3713 14.2622L86.6913 21.4722L93.0312 17.6522Z" fill="#FFC247"/>
+                            </g>
+                            <g clip-path="url(#clip4_324_2838)">
+                            <path d="M120.625 17.6522L126.955 21.4722L125.275 14.2622L130.865 9.42219L123.495 8.78219L120.625 1.99219L117.745 8.79219L110.375 9.42219L115.965 14.2622L114.285 21.4722L120.625 17.6522Z" fill="#FFC247"/>
+                            </g>
+                            <defs>
+                            <clipPath id="clip0_324_2838">
+                            <rect width="24" height="24" fill="white" transform="translate(0 1.99219)"/>
+                            </clipPath>
+                            <clipPath id="clip1_324_2838">
+                            <rect width="24" height="24" fill="white" transform="translate(27.5938 1.99219)"/>
+                            </clipPath>
+                            <clipPath id="clip2_324_2838">
+                            <rect width="24" height="24" fill="white" transform="translate(55.1875 1.99219)"/>
+                            </clipPath>
+                            <clipPath id="clip3_324_2838">
+                            <rect width="24" height="24" fill="white" transform="translate(82.7812 1.99219)"/>
+                            </clipPath>
+                            <clipPath id="clip4_324_2838">
+                            <rect width="24" height="24" fill="white" transform="translate(110.375 1.99219)"/>
+                            </clipPath>
+                            </defs>
+                        </svg>
+
+                        <p class="text">I wish they had a VPN, I’d be signing up for that too. Apart from that the app is top notch. I had Certo on my last phone and it was the first app I put on this phone when I got it from the store. The scanner and other parts of the app are really easy and simple to use, even for a non-techie like me</p>
+                        <p class="username">Leslie Carrillo</p>
+                    </div>
                 </div>
-                {% endfor %}
             </div>
-
         </div>
 
         <div id="clients-bottom">
             <rect></rect>
             <div>
-                <img src="img/sdu2.png">
-                <img src="img/sdu2.png">
-                <img src="img/sdu2.png">
-                <img src="img/sdu2.png">
-                <img src="img/sdu2.png">
+                <img src="{% static 'vendor/img/products/sdu2.png' %}">
+                <img src="{% static 'vendor/img/products/sdu2.png' %}">
+                <img src="{% static 'vendor/img/products/sdu2.png' %}">
+                <img src="{% static 'vendor/img/products/sdu2.png' %}">
+                <img src="{% static 'vendor/img/products/sdu2.png' %}">
             </div>
         </div>
     </section>
@@ -1114,10 +1170,49 @@ document.getElementById('check-dates').addEventListener('click', function (e) {
         });
     });
 });
+        // UPLOAD DOCUMENTS FOR BOOKING
+        document.addEventListener("DOMContentLoaded", function () {
+    document.querySelector(".upload").addEventListener("click", function () {
+        const idDocInput = document.createElement("input");
+        idDocInput.type = "file";
+        idDocInput.accept = ".pdf,.jpg,.png";
+        idDocInput.click();
+
+        idDocInput.onchange = function () {
+            const studentCardInput = document.createElement("input");
+            studentCardInput.type = "file";
+            studentCardInput.accept = ".pdf,.jpg,.png";
+            studentCardInput.click();
+
+            studentCardInput.onchange = function () {
+                const formData = new FormData();
+                formData.append("id_doc", idDocInput.files[0]);
+                formData.append("student_card", studentCardInput.files[0]);
+
+                fetch("{% url 'booking:upload_documents' apartment.pk %}", {
+                    method: "POST",
+                    headers: {
+                        "X-CSRFToken": "{{ csrf_token }}"
+                    },
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert(data.success);
+                    } else {
+                        alert(data.error || "Ошибка при загрузке");
+                    }
+                });
+            };
+        };
+    });
+});
 
 </script>
 <script src="{% static 'vendor/main.js' %}"></script>
     <script src="{% static 'vendor/script.js' %}"></script>
+        <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCpdRS9dSsHk_wzAB4KDpsv3FvLXB0jHFM&loading=async&callback=initMap"></script>
 
 
 

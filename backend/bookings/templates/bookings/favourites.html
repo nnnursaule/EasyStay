@@ -16,7 +16,9 @@
              <nav class="navbar">
                 <div class="left-nav">
                     <div class="logo">
-                        <img src="{% static 'vendor/img/products/logo2.png' %}" alt="EasyStay">
+                        <a href="{% url 'booking:main' user.id %}">
+                            <img src="{% static 'vendor/img/products/logo2.png' %}" alt="EasyStay">
+                        </a>
                     </div>
                     <ul class="nav-links">
                         <li><a href="#">Services</a></li>
@@ -26,9 +28,11 @@
                 </div>
 
                 <div class="right-nav">
-                    <a href="{% url 'booking:landlord_apartments' user.id %}">
-                         <button class="landlord-btn">For a landlord</button>
-                    </a>
+                    {% if user.is_landlord %}
+                      <a href="{% url 'users:landlord_profile' user.id %}">
+                        <button class="landlord-btn">For a landlord</button>
+                      </a>
+                    {% endif %}
 
                     <div class="action-profile" onclick="menuProfile();">
                         <div class="profile-image">
@@ -56,14 +60,18 @@
                                     <path d="M6.44784 7.96942C6.76219 5.14032 9.15349 3 12 3V3C14.8465 3 17.2378 5.14032 17.5522 7.96942L17.804 10.2356C17.8072 10.2645 17.8088 10.279 17.8104 10.2933C17.9394 11.4169 18.3051 12.5005 18.8836 13.4725C18.8909 13.4849 18.8984 13.4973 18.9133 13.5222L19.4914 14.4856C20.0159 15.3599 20.2782 15.797 20.2216 16.1559C20.1839 16.3946 20.061 16.6117 19.8757 16.7668C19.5971 17 19.0873 17 18.0678 17H5.93223C4.91268 17 4.40291 17 4.12434 16.7668C3.93897 16.6117 3.81609 16.3946 3.77841 16.1559C3.72179 15.797 3.98407 15.3599 4.50862 14.4856L5.08665 13.5222C5.10161 13.4973 5.10909 13.4849 5.11644 13.4725C5.69488 12.5005 6.06064 11.4169 6.18959 10.2933C6.19123 10.279 6.19283 10.2645 6.19604 10.2356L6.44784 7.96942Z" stroke="#33363F" stroke-width="2"/>
                                     <path d="M8 17C8 17.5253 8.10346 18.0454 8.30448 18.5307C8.5055 19.016 8.80014 19.457 9.17157 19.8284C9.54301 20.1999 9.98396 20.4945 10.4693 20.6955C10.9546 20.8965 11.4747 21 12 21C12.5253 21 13.0454 20.8965 13.5307 20.6955C14.016 20.4945 14.457 20.1999 14.8284 19.8284C15.1999 19.457 15.4945 19.016 15.6955 18.5307C15.8965 18.0454 16 17.5253 16 17" stroke="#33363F" stroke-width="2" stroke-linecap="round"/>
                                 </svg>
-                                <a href="#">Alerts</a>
+                                <a href="{% url 'booking:notifications' %}">Alerts</a>
                               </li>
                               <li>
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <circle cx="12" cy="7" r="4" stroke="#33363F" stroke-width="2" stroke-linecap="round"/>
                                     <path d="M5.33788 18.3206C5.99897 15.5269 8.77173 14 11.6426 14H12.3574C15.2283 14 18.001 15.5269 18.6621 18.3206C18.79 18.8611 18.8917 19.4268 18.9489 20.0016C19.0036 20.5512 18.5523 21 18 21H6C5.44772 21 4.99642 20.5512 5.0511 20.0016C5.1083 19.4268 5.20997 18.8611 5.33788 18.3206Z" stroke="#33363F" stroke-width="2" stroke-linecap="round"/>
                                 </svg>
-                                <a href="{% url 'users:landlord_profile' user.id %}">Account</a>
+                                {% if user.is_landlord %}
+                                        <a href="{% url 'users:landlord_profile' user.id %}">Account</a>
+                                    {% else %}
+                                        <a href="{% url 'users:tenant_profile' user.id %}">Account</a>
+                                    {% endif %}
                               </li>
                               <li>
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -97,37 +105,6 @@
                               </li>
                             </ul>
                         </div>
-                    </div>
-
-                    <a href="wishlist.html" class="heart-btn">
-                        <svg width="34" height="36" viewBox="0 0 34 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <g filter="url(#filter0_d_133_1279)">
-                            <path d="M7.56335 17.3853L16.3153 25.6068C16.6398 25.9116 16.802 26.064 17 26.064C17.198 26.064 17.3602 25.9116 17.6847 25.6068L17.6847 25.6068L26.4367 17.3853C28.8819 15.0882 29.1788 11.3082 27.1223 8.65758L26.7356 8.15918C24.2753 4.98822 19.337 5.52002 17.6083 9.14206C17.3641 9.6537 16.6359 9.6537 16.3917 9.14206C14.663 5.52002 9.72465 4.98823 7.26443 8.15918L6.87773 8.65759C4.82118 11.3083 5.11813 15.0882 7.56335 17.3853Z" stroke="white" stroke-opacity="0.75" stroke-width="3"/>
-                            </g>
-                            <defs>
-                            <filter id="filter0_d_133_1279" x="-2" y="0" width="38" height="38" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-                            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-                            <feOffset dy="4"/>
-                            <feGaussianBlur stdDeviation="2"/>
-                            <feComposite in2="hardAlpha" operator="out"/>
-                            <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
-                            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_133_1279"/>
-                            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_133_1279" result="shape"/>
-                            </filter>
-                            </defs>
-                            </svg>
-                    </a>
-                    <div class="language-container">
-                        <button id="languageButton" class="language-btn" onclick="">
-                            <img src="{% static 'vendor/img/products/translate.png' %}">
-                        </button>
-                        <div id="languageDropdown" class="language-dropdown hidden">
-                            <a href="main.html" data-lang="en">English</a>
-                            <a href="main_ru.html" data-lang="ru">Русский</a>
-                            <a href="main_kk.html" data-lang="kk">Қазақша</a>
-                        </div>
-
                     </div>
                 </div>
             </nav>

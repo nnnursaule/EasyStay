@@ -296,15 +296,18 @@ body {
   color: #fff;
 }
 
+  .main_home{
+    text-decoration:none;
+  }
 
 </style>
 </head>
 <body>
   <!-- Navifation -->
   <header class="top-nav">
-    <div class="logo">
-      <a href="{% url 'booking:index' %}">EASYSTAY</a>
-    </div>
+      <a href="{% url 'booking:main' user.id %}" class="main_home">
+      <div class="logo">EASYSTAY</div>
+    </a>
     <div class="nav-icons">
       <i class="bi bi-heart"></i>
       <i class="bi bi-globe"></i>
@@ -321,8 +324,6 @@ body {
             <span class="profile-info">{{ user.age }} y.o, landlord in Almaty</span><br>
             <span class="profile-date">Registration date: {{ user.date_joined|date:"d.m.Y" }}</span>
         </p>
-
-        <button class="view-profile-btn">View profile</button>
     </section>
 
     <section class="form-section">
@@ -336,6 +337,7 @@ body {
                 <label for="lastName">Last Name</label>
                 {{ form.last_name }}
             </div>
+
         </div>
 
         <div class="form-row">
@@ -385,6 +387,10 @@ body {
                     <input type="password" id="confirmPassword" placeholder="">
                     <i class="bi bi-eye-slash toggle-password"></i>
                 </div>
+            </div>
+            <div class="form-group">
+                <label for="about">About</label>
+                {{ form.about }}
             </div>
         </div>
 

@@ -2,7 +2,8 @@ from datetime import timedelta
 import stripe
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic.list import ListView
-from .models import Apartment, ResidentialComplex, ALL_AMENITIES, AMENITIES_TRANSLATION, Favourite, Complaint, Feedback, Review, Booking, TopPromotion, PromotionOption, Notification
+from .models import (Apartment, ResidentialComplex, ALL_AMENITIES, AMENITIES_TRANSLATION, Favourite, Complaint, Feedback,
+                     Review, Booking, TopPromotion, PromotionOption, Notification, BookingDocument)
 from .forms import ApartmentForm, ApartmentCreateForm, BookingForm
 from django.views.generic import DetailView
 from users.models import User
@@ -18,6 +19,7 @@ from django.shortcuts import get_object_or_404
 from django.http import HttpResponse
 from django.utils import timezone
 from django.urls import reverse
+from django.views.decorators.http import require_POST
 
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
@@ -121,6 +123,9 @@ class ApartmentDetailView(DetailView):
         context["landlord"] = apartment.landlord
         context["user"] = self.request.user
 
+        # Похожие квартиры (кроме текущей)
+        context["similar_apartments"] = Apartment.objects.exclude(pk=apartment.pk).order_by("?")[:6]
+
         return context
 
     def post(self, request, *args, **kwargs):
@@ -148,14 +153,21 @@ def share_with_others(request, apartment_id):
 
 def main_page(request, pk):
     user = get_object_or_404(User, id=pk)
-    apartments = Apartment.objects.filter(status="available")  # Только доступные
 
+    # Последние 3 отзыва
+    latest_feedbacks = Feedback.objects.order_by('-created_at')[:3]
 
+    # Топ квартиры (максимум 3)
+    top_apartments = Apartment.objects.filter(is_top=True)[:3]
+    other_apartments = Apartment.objects.exclude(id__in=top_apartments.values_list('id', flat=True))
+
+    # Фильтрация
     complex_id = request.GET.get("complex_id")
     max_price = request.GET.get("max_price")
     room_count = request.GET.get("rooms")
     rental_type = request.GET.get("rental_type")
 
+    apartments = other_apartments
 
     if complex_id:
         apartments = apartments.filter(complex_id=complex_id)
@@ -174,17 +186,24 @@ def main_page(request, pk):
 
     complexes = ResidentialComplex.objects.all()
 
-    # Добавляем список ID избранных квартир
     favourite_ids = []
     if request.user.is_authenticated:
         favourite_ids = Favourite.objects.filter(user=request.user).values_list("apartment_id", flat=True)
 
-    return render(request, "complex/testing_index.html", {
+    # Похожие варианты: 3 случайные квартиры
+    similar_apartments = Apartment.objects.order_by('?')[:3]
+
+    return render(request, "bookings/index.html", {
         "user": user,
         "apartments": apartments,
+        "top_apartments": top_apartments,
         "complexes": complexes,
         "favourite_ids": favourite_ids,
+        "latest_feedbacks": latest_feedbacks,
+        "similar_apartments": similar_apartments,
     })
+
+
 
 
 
@@ -210,8 +229,10 @@ class ApartmentUpdateView(LoginRequiredMixin, UpdateView):
     model = Apartment
     form_class = ApartmentForm
     template_name = 'apartments/advertisement.html'
-    success_url = reverse_lazy('booking:index')
 
+
+    def get_success_url(self):
+        return reverse('users:landlord_profile', kwargs={'pk': self.request.user.id})
     def get_queryset(self):
         return Apartment.objects.filter(landlord=self.request.user)
 
@@ -563,3 +584,45 @@ def submit_complaint_zhk(request, complex_id):
 
     # GET-запрос — показываем форму
     return render(request, 'profile/complaint_zhk.html', {'complex': complex})
+
+
+
+def booking_requests_view(request):
+    # Показываем заявки, полученные владельцем (текущим пользователем)
+    booking_requests = Booking.objects.filter(apartment__landlord=request.user).order_by('-created_at')
+    print("USER:", request.user, type(request.user))
+
+    return render(request, 'notifications/booking_requests.html', {
+        'booking_requests': booking_requests,
+    })
+
+def handle_booking_action(request, booking_id):
+    booking = get_object_or_404(Booking, id=booking_id, apartment__landlord=request.user)
+    if request.method == 'POST':
+        action = request.POST.get('action')
+        if action == 'approve':
+            booking.desicion = 'approved'
+        elif action == 'decline':
+            booking.desicion = 'declined'
+        booking.save()
+    return redirect('booking:booking_requests')
+
+
+
+@require_POST
+def upload_documents(request, pk):
+    apartment = get_object_or_404(Apartment, pk=pk)
+
+    id_doc = request.FILES.get("id_doc")
+    student_card = request.FILES.get("student_card")
+
+    if not (id_doc and student_card):
+        return JsonResponse({"error": "Both files are required."}, status=400)
+
+    BookingDocument.objects.create(
+        user=request.user,
+        apartment=apartment,
+        id_document=id_doc,
+        student_card=student_card
+    )
+    return JsonResponse({"success": "Documents uploaded successfully."})

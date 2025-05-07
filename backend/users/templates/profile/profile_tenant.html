@@ -547,11 +547,17 @@ footer {
     }
   }
 
+  .main_home{
+    text-decoration:none;
+  }
+
 </style>
 </head>
 <body>
   <header class="top-nav">
-    <div class="logo"><a href="{% url 'booking:main' user.id %}">EASYSTAY</a></div>
+    <a href="{% url 'booking:main' user.id %}" class="main_home">
+      <div class="logo">EASYSTAY</div>
+    </a>
     <div class="nav-icons">
       <img src="{% if user.image %}{{ user.image.url }}{% else %}{% static 'vendor/img/users/default_avatar.jpg' %}{% endif %}" alt="Аватар" class="nav-ava">
       <i class="bi bi-heart"></i>
@@ -589,12 +595,36 @@ footer {
     {% for review in reviews %}
       <div class="review-card">
         <p>{{ review.text }}</p>
+        <div class="review-rating">
+          {% for i in "12345"|make_list %}
+            {% if forloop.counter <= review.rating %}
+              <span style="color: gold;">★</span>
+            {% else %}
+              <span style="color: lightgray;">★</span>
+            {% endif %}
+          {% endfor %}
+        </div>
         <div class="review-footer">
-          <img src="{{ review.author.image.url }}" alt="Author" class="review-avatar">
+          {% if review.author.image %}
+              <img src="{{ review.author.image.url }}" alt="Author" class="review-avatar">
+          {% else %}
+              <img src="{% static 'vendor/img/users/default_avatar.jpg' %}" alt="Author" class="review-avatar">
+          {% endif %}
           <div class="review-info">
             <strong>{{ review.author.username }}</strong>
             <span>{{ review.created_at|date:"F Y" }}</span>
           </div>
+
+          {% if request.user == review.author %}
+            <div class="review-actions">
+              <a href="{% url 'users:delete_review' review.id %}" class="delete-icon" style="cursor: pointer;">
+                <i class="bi bi-trash"></i>
+              </a>
+              <a href="{% url 'users:edit_review' review.id %}" class="edit-icon" style="cursor: pointer; margin-left: 8px;">
+                <i class="bi bi-pencil"></i>
+              </a>
+            </div>
+          {% endif %}
         </div>
       </div>
     {% empty %}

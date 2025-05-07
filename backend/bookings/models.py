@@ -290,6 +290,13 @@ class Booking(models.Model):
         ('shared', 'С подселением'),
     ]
 
+    DECISION_CHOICES = [
+        ('new', 'New'),
+        ('approved', 'Approved'),
+        ('declined', 'Declined'),
+    ]
+
+    decision = models.CharField(max_length=10, choices=DECISION_CHOICES, default='new')
     apartment = models.ForeignKey(Apartment, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES)
@@ -341,3 +348,14 @@ class Notification(models.Model):
 
     def __str__(self):
         return f'{self.type} for {self.recipient.username} from {self.sender.username}'
+
+
+class BookingDocument(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    apartment = models.ForeignKey(Apartment, on_delete=models.CASCADE)
+    id_document = models.FileField(upload_to="documents/id/")
+    student_card = models.FileField(upload_to="documents/student_cards/")
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.user.username} documents for {self.apartment.title}"

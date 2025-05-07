@@ -47,9 +47,11 @@
                 </div>
 
                 <div class="right-nav">
-                    <a href="{% url 'users:landlord_profile' user.id %}">
-                         <button class="landlord-btn">For a landlord</button>
-                    </a>
+                    {% if user.is_landlord %}
+                      <a href="{% url 'users:landlord_profile' user.id %}">
+                        <button class="landlord-btn">For a landlord</button>
+                      </a>
+                    {% endif %}
 
                     <div class="action-profile" onclick="menuProfile();">
                         <div class="profile-image">
@@ -207,6 +209,9 @@
     <section class="announcements">
     <h2>Recommendations</h2>
     <div class="cards-container">
+            {% for apartment in top_apartments %}
+                {% include "partials/apartment_top.html" %}
+            {% endfor %}
         {% for apartment in apartments %}
         <div class="card">
             <img src="{{ apartment.image.url }}" alt="Apartment">
@@ -265,95 +270,19 @@
             <a href="#recently-viewed" onclick="viewCard(event, 'recently-viewed')" class="link-2">Recently viewed</a>
         </div>
         <div id ="similar" class="cards">
-            <div class="card">
-                <img src="img/4.png" alt="Apartment">
-                <svg class="heart-icon" width="42" height="37" viewBox="0 0 42 37" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <g filter="url(#filter0_d_595_721)">
-                    <path d="M8.41811 16.1804L20.3156 27.3569C20.6401 27.6617 20.8023 27.8141 21.0003 27.8141C21.1983 27.8141 21.3606 27.6617 21.685 27.3569L33.5825 16.1804C36.8428 13.1177 37.2387 8.07775 34.4967 4.54353L33.9811 3.87899C30.7008 -0.34895 24.1164 0.360106 21.8114 5.1895C21.4858 5.87168 20.5148 5.87168 20.1892 5.1895C17.8843 0.360106 11.2999 -0.348948 8.01956 3.87899L7.50397 4.54353C4.7619 8.07775 5.15782 13.1177 8.41811 16.1804Z" fill="white" fill-opacity="0.27" shape-rendering="crispEdges"/>
-                    <path d="M8.41811 16.1804L20.3156 27.3569C20.6401 27.6617 20.8023 27.8141 21.0003 27.8141C21.1983 27.8141 21.3606 27.6617 21.685 27.3569L33.5825 16.1804C36.8428 13.1177 37.2387 8.07775 34.4967 4.54353L33.9811 3.87899C30.7008 -0.34895 24.1164 0.360106 21.8114 5.1895C21.4858 5.87168 20.5148 5.87168 20.1892 5.1895C17.8843 0.360106 11.2999 -0.348948 8.01956 3.87899L7.50397 4.54353C4.7619 8.07775 5.15782 13.1177 8.41811 16.1804Z" stroke="black" stroke-width="2" shape-rendering="crispEdges"/>
-                    </g>
-                    <defs>
-                    <filter id="filter0_d_595_721" x="0.683594" y="0.095459" width="40.6338" height="36.7185" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-                    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-                    <feOffset dy="4"/>
-                    <feGaussianBlur stdDeviation="2"/>
-                    <feComposite in2="hardAlpha" operator="out"/>
-                    <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
-                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_595_721"/>
-                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_595_721" result="shape"/>
-                    </filter>
-                    </defs>
-                </svg>
-                <div class="card-info">
-                    <h3>mkr Zhazira</h3>
-                    <p>150k in month</p>
+            {% for apartment in similar_apartments %}
+                <div class="card">
+                  <img src="{{ apartment.image.url }}" alt="Apartment">
+                  <div class="card-info">
+                    <h3>{{ apartment.complex.name }}</h3>
+                    <p>{{ apartment.price_per_month }} in month</p>
+                  </div>
+                  <div class="card-hover">
+                    <p>Description of apartment: {{ apartment.description|truncatewords:10 }}</p>
+                    <button><a href="{% url 'booking:apartment_detail' apartment.id %}" class="view-details">View details</a></button>
+                  </div>
                 </div>
-                <div class="card-hover">
-                    <p>Description of apartment: просторная, современная.</p>
-                    <button><a href="#" class="view-details">View details</a></button>
-                </div>
-            </div>
-
-            <div class="card">
-                <img src="img/4.png" alt="Apartment">
-                <svg class="heart-icon" width="42" height="37" viewBox="0 0 42 37" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <g filter="url(#filter0_d_595_721)">
-                    <path d="M8.41811 16.1804L20.3156 27.3569C20.6401 27.6617 20.8023 27.8141 21.0003 27.8141C21.1983 27.8141 21.3606 27.6617 21.685 27.3569L33.5825 16.1804C36.8428 13.1177 37.2387 8.07775 34.4967 4.54353L33.9811 3.87899C30.7008 -0.34895 24.1164 0.360106 21.8114 5.1895C21.4858 5.87168 20.5148 5.87168 20.1892 5.1895C17.8843 0.360106 11.2999 -0.348948 8.01956 3.87899L7.50397 4.54353C4.7619 8.07775 5.15782 13.1177 8.41811 16.1804Z" fill="white" fill-opacity="0.27" shape-rendering="crispEdges"/>
-                    <path d="M8.41811 16.1804L20.3156 27.3569C20.6401 27.6617 20.8023 27.8141 21.0003 27.8141C21.1983 27.8141 21.3606 27.6617 21.685 27.3569L33.5825 16.1804C36.8428 13.1177 37.2387 8.07775 34.4967 4.54353L33.9811 3.87899C30.7008 -0.34895 24.1164 0.360106 21.8114 5.1895C21.4858 5.87168 20.5148 5.87168 20.1892 5.1895C17.8843 0.360106 11.2999 -0.348948 8.01956 3.87899L7.50397 4.54353C4.7619 8.07775 5.15782 13.1177 8.41811 16.1804Z" stroke="black" stroke-width="2" shape-rendering="crispEdges"/>
-                    </g>
-                    <defs>
-                    <filter id="filter0_d_595_721" x="0.683594" y="0.095459" width="40.6338" height="36.7185" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-                    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-                    <feOffset dy="4"/>
-                    <feGaussianBlur stdDeviation="2"/>
-                    <feComposite in2="hardAlpha" operator="out"/>
-                    <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
-                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_595_721"/>
-                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_595_721" result="shape"/>
-                    </filter>
-                    </defs>
-                </svg>
-                <div class="card-info">
-                    <h3>mkr Zhazira</h3>
-                    <p>150k in month</p>
-                </div>
-                <div class="card-hover">
-                    <p>Description of apartment: просторная, современная.</p>
-                    <button><a href="#" class="view-details">View details</a></button>
-                </div>
-            </div>
-
-            <div class="card">
-                <img src="img/4.png" alt="Apartment">
-                <svg class="heart-icon" width="42" height="37" viewBox="0 0 42 37" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <g filter="url(#filter0_d_595_721)">
-                    <path d="M8.41811 16.1804L20.3156 27.3569C20.6401 27.6617 20.8023 27.8141 21.0003 27.8141C21.1983 27.8141 21.3606 27.6617 21.685 27.3569L33.5825 16.1804C36.8428 13.1177 37.2387 8.07775 34.4967 4.54353L33.9811 3.87899C30.7008 -0.34895 24.1164 0.360106 21.8114 5.1895C21.4858 5.87168 20.5148 5.87168 20.1892 5.1895C17.8843 0.360106 11.2999 -0.348948 8.01956 3.87899L7.50397 4.54353C4.7619 8.07775 5.15782 13.1177 8.41811 16.1804Z" fill="white" fill-opacity="0.27" shape-rendering="crispEdges"/>
-                    <path d="M8.41811 16.1804L20.3156 27.3569C20.6401 27.6617 20.8023 27.8141 21.0003 27.8141C21.1983 27.8141 21.3606 27.6617 21.685 27.3569L33.5825 16.1804C36.8428 13.1177 37.2387 8.07775 34.4967 4.54353L33.9811 3.87899C30.7008 -0.34895 24.1164 0.360106 21.8114 5.1895C21.4858 5.87168 20.5148 5.87168 20.1892 5.1895C17.8843 0.360106 11.2999 -0.348948 8.01956 3.87899L7.50397 4.54353C4.7619 8.07775 5.15782 13.1177 8.41811 16.1804Z" stroke="black" stroke-width="2" shape-rendering="crispEdges"/>
-                    </g>
-                    <defs>
-                    <filter id="filter0_d_595_721" x="0.683594" y="0.095459" width="40.6338" height="36.7185" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-                    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-                    <feOffset dy="4"/>
-                    <feGaussianBlur stdDeviation="2"/>
-                    <feComposite in2="hardAlpha" operator="out"/>
-                    <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
-                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_595_721"/>
-                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_595_721" result="shape"/>
-                    </filter>
-                    </defs>
-                </svg>
-                <div class="card-info">
-                    <h3>mkr Zhazira</h3>
-                    <p>150k in month</p>
-                </div>
-                <div class="card-hover">
-                    <p>Description of apartment: просторная, современная.</p>
-                    <button><a href="#" class="view-details">View details</a></button>
-                </div>
-            </div>
+              {% endfor %}
         </div>
 
         <div id="recently-viewed" class="cards">
@@ -503,45 +432,35 @@
         </div>
 
         <div class="team-container">
-            <div class="profile-card">
-                <div class="profile-image">
-                    <img src="{% static 'vendor/img/users/cl1.png' %}" alt="Team Member">
-                </div>
-                <div class="profile-content">
-                    <p>
-                        Nibh quisque suscipit fermentum netus nulla cras porttitor euismod nulla.
-                        Orci, dictumst nec aliquet id.
-                    </p>
-                    <p class="name">Asem Anuarbek</p>
-                </div>
+    {% for feedback in latest_feedbacks %}
+        <div class="profile-card">
+            <div class="profile-image">
+                {% if feedback.image %}
+                    <img src="{{ feedback.image.url }}" alt="User">
+                {% else %}
+                    <img src="{% static 'vendor/img/users/default_avatar.jpg' %}" alt="User">
+                {% endif %}
             </div>
 
-            <div class="profile-card">
-                <div class="profile-image">
-                    <img src="{% static 'vendor/img/users/cl2.png' %}" alt="Team Member">
+            <div class="profile-content">
+                <p>{{ feedback.message }}</p>
+                <p class="name">{{ feedback.name }}</p>
+                <div class="stars">
+                  {% for i in "12345" %}
+                    {% if forloop.counter <= feedback.rating %}
+                      <span style="color: gold;">★</span>
+                    {% else %}
+                      <span style="color: lightgray;">★</span>
+                    {% endif %}
+                  {% endfor %}
                 </div>
-                <div class="profile-content">
-                    <p>
-                        Nibh quisque suscipit fermentum netus nulla cras porttitor euismod nulla.
-                        Orci, dictumst nec aliquet id.
-                    </p>
-                    <p class="name">Asem Anuarbek</p>
-                </div>
-            </div>
 
-            <div class="profile-card">
-                <div class="profile-image">
-                    <img src="{% static 'vendor/img/users/cl3.png' %}" alt="Team Member">
-                </div>
-                <div class="profile-content">
-                    <p>
-                        Nibh quisque suscipit fermentum netus nulla cras porttitor euismod nulla.
-                        Orci, dictumst nec aliquet id.
-                    </p>
-                    <p class="name">Asem Anuarbek</p>
-                </div>
             </div>
         </div>
+    {% empty %}
+        <p>Нет отзывов.</p>
+    {% endfor %}
+</div>
     </section>
 
     <section class="hero-section">
@@ -551,24 +470,41 @@
         </div>
     </section>
 
-    <section class="review-section">
-        <h2>Leave feedback</h2>
-        <div class="form-container">
-            <form class="review-form">
-                <div class="form-column">
-                    <label for="name">Name</label>
-                    <input type="text" placeholder="Your name" name="name">
-                </div>
-                <div class="form-column">
-                    <label for="phone">Phone</label>
-                    <input type="text" placeholder="Your phone" name="phone">
-                </div>
-                <div class="form-column">
-                    <label for="message">Message</label>
-                    <input type="text" placeholder="Your message" name="message">
-                </div>
-                <button type="submit">SEND</button>
-            </form>
+    <section class="feedback-section">
+          <h2>Leave feedback</h2>
+          <form class="feedback-form" id="feedbackForm">
+            {% csrf_token %}
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" id="name" placeholder="Your name" required />
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone</label>
+              <input type="tel" id="phone" placeholder="Your phone" required />
+            </div>
+            <div class="form-group large">
+              <label for="message">Message</label>
+              <input type="text" id="message" placeholder="Your message" required />
+            </div>
+
+            <button type="submit" class="send-btn">SEND</button>
+          </form>
+
+        <div class="stars">
+          <input type="radio" id="star5" name="rating" value="5" />
+          <label for="star5">★</label>
+
+          <input type="radio" id="star4" name="rating" value="4" />
+          <label for="star4">★</label>
+
+          <input type="radio" id="star3" name="rating" value="3" />
+          <label for="star3">★</label>
+
+          <input type="radio" id="star2" name="rating" value="2" />
+          <label for="star2">★</label>
+
+          <input type="radio" id="star1" name="rating" value="1" />
+          <label for="star1">★</label>
         </div>
     </section>
 
@@ -578,12 +514,12 @@
           <div class="footer-left">
             <div class="logo-and-icons">
                 <div class="footer-logo">
-                  <img src="img/logo.png" alt="EASYSTAY" />
+                  <img src="{% static 'vendor/img/products/logo.png' %}" alt="EASYSTAY" />
                 </div>
                 <div class="logo-icons">
-                  <a href="#" target="_blank"><i class="bi bi-whatsapp"></i></a>
-                  <a href="#" target="_blank"><i class="bi bi-messenger"></i></a>
                   <a href="#" target="_blank"><i class="bi bi-facebook"></i></a>
+                  <a href="#" target="_blank"><i class="bi bi-messenger"></i></a>
+                  <a href="#" target="_blank"><i class="bi bi-instagram"></i></a>
                   <a href="#" target="_blank"><i class="bi bi-twitter"></i></a>
                   <a href="#" target="_blank"><i class="bi bi-youtube"></i></a>
                 </div>
@@ -598,39 +534,34 @@
           </div>
 
           <div class="footer-right">
-            <div class="stay-in-touch">
-                <h2>Let's stay in touch!</h2>
-            </div>
+            <h2>Let's stay in touch!</h2>
             <form class="subscribe-form">
               <input type="email" placeholder="Your email address" />
               <button type="submit">Subscribe</button>
             </form>
-            <p class="subscribe-info">
-                Register to learn more and receive the latest news from EasyStay.
-            </p>
+            <p>Register to learn more and receive the latest news from EasyStay.</p>
           </div>
         </div>
         <div class="footer-mid">
-            <div class="footer-col">
-              <h3>HEAD OFFICE</h3>
-              <p><span>Address:</span> Ablyai Khan Avenue, 1/1</p>
-              <p><span>Call:</span> <a href="tel:+77273019565">+7 (727) 301-95-65</a></p>
-              <p><span>Email:</span> <a href="mailto:sdu.edu.kz">sdu.edu.kz</a></p>
-            </div>
-            <div class="footer-col">
-              <h3>WHO WE ARE</h3>
-              <p>About Us</p>
-              <p>FAQ</p>
-              <p>Contacts</p>
-            </div>
-            <div class="footer-col">
-              <h3>OUR EXPERIENCE</h3>
-              <p>Services</p>
-              <p>Work</p>
-              <p>Interesting</p>
-            </div>
+          <div class="footer-col">
+            <h3>HEAD OFFICE</h3>
+            <p>Ablyai Khan Avenue, 1/1</p>
+            <p>Call: +7 (727) 301-95-65</p>
+            <p>Email: sdu.edu.kz</p>
           </div>
-
+          <div class="footer-col">
+            <h3>WHO WE ARE</h3>
+            <p>About Us</p>
+            <p>FAQ</p>
+            <p>Contacts</p>
+          </div>
+          <div class="footer-col">
+            <h3>OUR EXPERIENCE</h3>
+            <p>Services</p>
+            <p>Work</p>
+            <p>Interesting</p>
+          </div>
+        </div>
 
         <div class="footer-bottom">
             <p>

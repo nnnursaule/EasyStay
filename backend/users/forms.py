@@ -148,9 +148,11 @@ class ProfileForm(UserChangeForm):
         label="Новый пароль"
     )
 
+    about = forms.CharField(widget=forms.Textarea(attrs={'rows': 4, 'class': 'form-control'}), required=False)
+
     class Meta:
         model = User
-        fields = ("first_name", "last_name", "image", "delete_image", "username", "age", "gender", "phone_number")
+        fields = ("first_name", "last_name", "image", "delete_image", "username", "age", "gender", "phone_number", "about")
 
     def clean(self):
         cleaned_data = super().clean()

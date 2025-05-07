@@ -23,6 +23,7 @@
                 <li><a href="#faq">FAQ</a></li>
                 {% if user.is_authenticated %}
                 <li><a href="{% url 'users:logout_page' %}">Logout</a></li>
+                 <li><a href="{% url 'booking:main' user.id %}">Main page</a></li>
                     {% if user.is_landlord %}
                         <li><a href="{% url 'users:landlord_profile' user.id %}">Profile</a></li>
                     {% else %}
@@ -146,7 +147,7 @@
                 <p>{{ feedback.message }}</p>
                 <p class="name">{{ feedback.name }}</p>
                 <div class="stars">
-                  {% for i in "12345" %}
+                  {% for i in "54321"|make_list %}
                     {% if forloop.counter <= feedback.rating %}
                       <span style="color: gold;">★</span>
                     {% else %}
@@ -154,7 +155,6 @@
                     {% endif %}
                   {% endfor %}
                 </div>
-
             </div>
         </div>
     {% empty %}

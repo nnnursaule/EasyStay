@@ -594,10 +594,24 @@ footer {
     </p>
   </section>
   <div class="profile-actions">
-    <a href="#" class="report-profile"><i class="bi bi-flag"></i> Report this profile</a>
-    <a href="{% url 'users:edit_profile' user.id %}">
-      <button class="edit-profile" onclick="window.location.href='profile.tenant.edit.html';">Edit profile</button>
-    </a>
+    {% if request.user.id == user.id %}
+      <a href="#" class="report-profile" style="pointer-events: none; opacity: 0.5; cursor: not-allowed;" title="You can't report your own profile">
+        <i class="bi bi-flag"></i> Report this profile
+      </a>
+    {% else %}
+      <a href="#" class="report-profile">
+        <i class="bi bi-flag"></i> Report this profile
+      </a>
+    {% endif %}
+
+      {% if request.user.id == user.id %}
+  <a href="{% url 'users:edit_profile' user.id %}">
+    <button class="edit-profile">Edit profile</button>
+  </a>
+{% else %}
+  <button class="edit-profile" disabled style="opacity: 0.5; cursor: not-allowed;">Edit profile</button>
+{% endif %}
+
 
 </div>
 
@@ -614,6 +628,15 @@ footer {
     {% for review in reviews %}
       <div class="review-card">
         <p>{{ review.text }}</p>
+        <div class="review-rating">
+          {% for i in "12345"|make_list %}
+            {% if forloop.counter <= review.rating %}
+              <span style="color: gold;">★</span>
+            {% else %}
+              <span style="color: lightgray;">★</span>
+            {% endif %}
+          {% endfor %}
+        </div>
         <div class="review-footer">
           {% if review.author.image %}
               <img src="{{ review.author.image.url }}" alt="Author" class="review-avatar">
@@ -624,14 +647,16 @@ footer {
             <strong>{{ review.author.username }}</strong>
             <span>{{ review.created_at|date:"F Y" }}</span>
           </div>
-          <div class="review-actions">
-            <a href="{% url 'users:delete_review' review.id %}" class="delete-icon" style="cursor: pointer;">
-              <i class="bi bi-trash"></i>
-            </a>
-            <a href="{% url 'users:edit_review' review.id %}" class="edit-icon" style="cursor: pointer; margin-left: 8px;">
-              <i class="bi bi-pencil"></i>
-            </a>
-          </div>
+          {% if request.user == review.author %}
+            <div class="review-actions">
+              <a href="{% url 'users:delete_review' review.id %}" class="delete-icon" style="cursor: pointer;">
+                <i class="bi bi-trash"></i>
+              </a>
+              <a href="{% url 'users:edit_review' review.id %}" class="edit-icon" style="cursor: pointer; margin-left: 8px;">
+                <i class="bi bi-pencil"></i>
+              </a>
+            </div>
+          {% endif %}
         </div>
       </div>
     {% empty %}
@@ -648,12 +673,14 @@ footer {
   {% for apartment in apartments %}
       <div class="favorite-card">
         <div class="favorite-image">
-          <img src="{{ apartment.image.url }}" alt="Exclusive Opera">
-          <span class="heart-icon" data-id="1">🤍</span>
+    <img src="{{ apartment.image.url }}" alt="Exclusive Opera">
 
-          <!-- Кнопка редактировать -->
-          <a href="{% url 'booking:apartment_update' apartment.pk %}" class="edit-button">Update</a>
-        </div>
+    {% if request.user == apartment.landlord %}
+        <!-- Показываем только владельцу -->
+        <span class="heart-icon" data-id="1">🤍</span>
+        <a href="{% url 'booking:apartment_update' apartment.pk %}" class="edit-button">Update</a>
+    {% endif %}
+    </div>
         <div class="favorite-info">
           <h4>{{ apartment.title }}</h4>
           <span>{{ apartment.price_per_month }}</span>
@@ -661,9 +688,11 @@ footer {
       </div>
   {% endfor %}
     </div>
+  {% if request.user.id == user.id %}
   <a href="{% url 'booking:apartment_create' user.id %}">
     Add new
   </a>
+{% endif %}
 
 </section>
 

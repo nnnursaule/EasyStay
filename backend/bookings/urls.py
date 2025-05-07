@@ -29,6 +29,9 @@ urlpatterns = [
     path('promote/cancel/', views.promote_cancel, name='promotion_cancel'),
     path('notifications/', views.notifications_view, name='notifications'),
     path('apartments/<int:apartment_id>/reviews/', views.submit_review, name='submit_review'),
+    path('booking-requests/', views.booking_requests_view, name='booking_requests'),
+    path('requests/<int:booking_id>/action/', views.handle_booking_action, name='handle_booking_action'),
+    path("apartments/<int:pk>/upload-documents/", views.upload_documents, name="upload_documents"),
 
 
 ]

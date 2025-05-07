@@ -189,7 +189,7 @@
     <div class="notification-list">
     {% for notification in notifications %}
         <div class="notification-item">
-            <img src="img/user1.png" alt="User 1">
+            <img src="{% if notification.sender.image %}{{ notification.sender.image.url }}{% else %}{% static 'vendor/img/users/default_avatar.jpg' %}{% endif %}" alt="EasyStay">
             <div class="notification-text">
                 <div class="notification-details">
                     <strong>{{ notification.sender.username }}</strong>
