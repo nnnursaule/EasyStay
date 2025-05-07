@@ -26,6 +26,8 @@ urlpatterns = [
     path('apartment/<int:apartment_id>/promotion/', views.choose_promotion_plan, name='choose_promotion_plan'),
     path('promote/<int:apartment_id>/pay/', views.create_checkout_session, name='create_checkout'),
     path('promote/cancel/', views.promote_cancel, name='promotion_cancel'),
+    path('notifications/', views.notifications_view, name='notifications'),
+    path('apartments/<int:apartment_id>/reviews/', views.submit_review, name='submit_review'),
 
 
 ]

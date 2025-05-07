@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import Apartment, ResidentialComplex, Review, Favourite, Complaint, Feedback, Booking, TopPromotion, PromotionOption
+from .models import Apartment, ResidentialComplex, Review, Favourite, Complaint, Feedback, Booking, TopPromotion, PromotionOption, Notification
 
 admin.site.register(Apartment)
 admin.site.register(ResidentialComplex)
@@ -10,6 +10,7 @@ admin.site.register(Complaint)
 admin.site.register(Feedback)
 admin.site.register(Booking)
 admin.site.register(TopPromotion)
+admin.site.register(Notification)
 
 @admin.register(PromotionOption)
 class PromotionOptionAdmin(admin.ModelAdmin):

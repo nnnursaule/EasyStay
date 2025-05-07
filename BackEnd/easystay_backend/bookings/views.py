@@ -2,7 +2,7 @@ from datetime import timedelta
 import stripe
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic.list import ListView
-from .models import Apartment, ResidentialComplex, ALL_AMENITIES, AMENITIES_TRANSLATION, Favourite, Complaint, Feedback, Review, Booking, TopPromotion, PromotionOption
+from .models import Apartment, ResidentialComplex, ALL_AMENITIES, AMENITIES_TRANSLATION, Favourite, Complaint, Feedback, Review, Booking, TopPromotion, PromotionOption, Notification
 from .forms import ApartmentForm, ApartmentCreateForm, BookingForm
 from django.views.generic import DetailView
 from users.models import User
@@ -70,7 +70,10 @@ class ApartmentDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         apartment = self.object
 
-        # --- Занятые даты ---
+        # Отзывы
+        context["reviews"] = apartment.reviews.select_related('author').order_by('-created_at')
+
+        # Занятые даты
         bookings = Booking.objects.filter(apartment=apartment)
         taken_dates = []
         for booking in bookings:
@@ -80,10 +83,9 @@ class ApartmentDetailView(DetailView):
                 current_date += timedelta(days=1)
 
         context["taken_dates"] = taken_dates
-        context["taken_dates_json"] = json.dumps(taken_dates)  # для JS
+        context["taken_dates_json"] = json.dumps(taken_dates)
 
-
-        # --- Удобства ---
+        # Удобства
         existing_amenities = apartment.amenities or []
         all_amenities_ru = [AMENITIES_TRANSLATION.get(amenity, amenity) for amenity in ALL_AMENITIES]
         existing_amenities_ru = [AMENITIES_TRANSLATION.get(amenity, amenity) for amenity in existing_amenities]
@@ -91,10 +93,29 @@ class ApartmentDetailView(DetailView):
 
         context["existing_amenities"] = existing_amenities_ru
         context["missing_amenities"] = missing_amenities
+
+        # Владелец и пользователь
         context["landlord"] = apartment.landlord
         context["user"] = self.request.user
 
         return context
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        apartment = self.object
+
+        text = request.POST.get("message")
+        rating = request.POST.get("rating")
+
+        if request.user.is_authenticated and text and rating:
+            Review.objects.create(
+                author=request.user,
+                apartment=apartment,
+                text=text,
+                rating=int(rating)
+            )
+
+        return redirect(apartment.get_absolute_url())
 
 
 def share_with_others(request, apartment_id):
@@ -226,7 +247,18 @@ def favourites_view(request):
 
 def add_to_favourites(request, apartment_id):
     apartment = get_object_or_404(Apartment, id=apartment_id)
-    Favourite.objects.get_or_create(user=request.user, apartment=apartment)
+    favourite, created = Favourite.objects.get_or_create(user=request.user, apartment=apartment)
+
+    if created:
+        # Отправим уведомление владельцу квартиры
+        Notification.objects.create(
+            recipient=apartment.landlord,  # предполагаем, что есть поле owner
+            sender=request.user,
+            apartment=apartment,
+            type='favourite',
+            message=f"{request.user.username} added your apartment to favourites."
+        )
+
     return redirect(request.META.get('HTTP_REFERER', 'booking:index'))
 
 
@@ -440,4 +472,37 @@ def create_checkout_session(request, apartment_id):
     return redirect('booking:choose_promotion_plan', apartment_id=apartment_id)
 
 
+def notifications_view(request):
+    # Получаем все уведомления текущего пользователя
+    notifications = Notification.objects.filter(recipient=request.user).order_by('-created_at')
+    notifications.update(is_read=True)
+    return render(request, 'notifications/notifications.html', {
+        'notifications': notifications,
+        'user_id': request.user.pk
+    })
 
+
+@csrf_exempt  # Применяется, чтобы обойти CSRF на момент тестирования (для улучшения безопасности уберем это позже)
+def submit_review(request, apartment_id):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        name = data.get('name')
+        phone = data.get('phone')
+        message = data.get('message')
+        rating = int(data.get('rating'))
+        apartment = Apartment.objects.get(id=apartment_id)
+
+        if not name or not phone or not message:
+            return JsonResponse({'success': False, 'message': 'All fields are required!'})
+
+        # Создание отзыва
+        user, created = User.objects.get_or_create(username=name, email=phone)  # Примерно, можно улучшить логику
+        review = Review.objects.create(
+            author=user,
+            apartment=apartment,
+            text=message,
+            rating=rating
+        )
+
+        return JsonResponse({'success': True, 'message': 'Review submitted successfully!'})
+    return JsonResponse({'success': False, 'message': 'Invalid request method!'})

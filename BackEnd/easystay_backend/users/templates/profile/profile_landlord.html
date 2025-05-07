@@ -615,7 +615,11 @@ footer {
       <div class="review-card">
         <p>{{ review.text }}</p>
         <div class="review-footer">
-          <img src="{{ review.author.image.url }}" alt="Author" class="review-avatar">
+          {% if review.author.image %}
+              <img src="{{ review.author.image.url }}" alt="Author" class="review-avatar">
+          {% else %}
+              <img src="{% static 'vendor/img/users/default_avatar.jpg' %}" alt="Author" class="review-avatar">
+          {% endif %}
           <div class="review-info">
             <strong>{{ review.author.username }}</strong>
             <span>{{ review.created_at|date:"F Y" }}</span>

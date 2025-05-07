@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.postgres.fields import ArrayField
 from datetime import timedelta
 from django.utils import timezone
+from users.models import User
+from django.urls import reverse
 
 ALL_AMENITIES = [
     "Parking", "WiFi", "Gym", "Swimming Pool", "Playground", "Elevator",
@@ -184,6 +186,8 @@ class Apartment(models.Model):
         help_text="Удобства квартиры (например: WiFi, Parking)"
     )
 
+    def get_absolute_url(self):
+        return reverse("apartment_detail", kwargs={"pk": self.pk})
     def __str__(self):
         return f"{self.title}"
 
@@ -316,3 +320,21 @@ class PromotionOption(models.Model):
 
     def __str__(self):
         return f"{self.duration} дней – {self.discounted_price}₸"
+
+
+class Notification(models.Model):
+    NOTIFICATION_TYPES = (
+        ('favourite', 'Favourite'),
+        ('booking', 'Booking Request'),
+    )
+
+    recipient = models.ForeignKey(User, on_delete=models.CASCADE, related_name='notifications', null=True)
+    sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='sent_notifications', null=True)
+    apartment = models.ForeignKey(Apartment, on_delete=models.CASCADE, null=True, blank=True)
+    type = models.CharField(max_length=20, choices=NOTIFICATION_TYPES, null=True)
+    message = models.TextField(max_length=255)
+    created_at = models.DateTimeField(auto_now_add=True)
+    is_read = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f'{self.type} for {self.recipient.username} from {self.sender.username}'

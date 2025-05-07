@@ -8,6 +8,7 @@ import random
 from datetime import timedelta
 
 
+
 class User(AbstractUser):
     email = models.EmailField(unique=True)
     image = models.ImageField(upload_to='users_images', null=True, blank=True)

@@ -843,243 +843,27 @@
         <div class="commentsofclients">
             <div>
                 <div class="comment-row">
-                    <div class="comment">
-                        <svg width="328" height="26" viewBox="0 0 328 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <g clip-path="url(#clip0_324_2838)">
-                            <path d="M10.25 17.6522L16.58 21.4722L14.9 14.2622L20.49 9.42219L13.12 8.78219L10.25 1.99219L7.37 8.79219L0 9.42219L5.59 14.2622L3.91 21.4722L10.25 17.6522Z" fill="#FFC247"/>
-                            </g>
-                            <g clip-path="url(#clip1_324_2838)">
-                            <path d="M37.8438 17.6522L44.1737 21.4722L42.4937 14.2622L48.0837 9.42219L40.7137 8.78219L37.8438 1.99219L34.9637 8.79219L27.5938 9.42219L33.1838 14.2622L31.5038 21.4722L37.8438 17.6522Z" fill="#FFC247"/>
-                            </g>
-                            <g clip-path="url(#clip2_324_2838)">
-                            <path d="M65.4375 17.6522L71.7675 21.4722L70.0875 14.2622L75.6775 9.42219L68.3075 8.78219L65.4375 1.99219L62.5575 8.79219L55.1875 9.42219L60.7775 14.2622L59.0975 21.4722L65.4375 17.6522Z" fill="#FFC247"/>
-                            </g>
-                            <g clip-path="url(#clip3_324_2838)">
-                            <path d="M93.0312 17.6522L99.3612 21.4722L97.6812 14.2622L103.271 9.42219L95.9012 8.78219L93.0312 1.99219L90.1512 8.79219L82.7812 9.42219L88.3713 14.2622L86.6913 21.4722L93.0312 17.6522Z" fill="#FFC247"/>
-                            </g>
-                            <g clip-path="url(#clip4_324_2838)">
-                            <path d="M120.625 17.6522L126.955 21.4722L125.275 14.2622L130.865 9.42219L123.495 8.78219L120.625 1.99219L117.745 8.79219L110.375 9.42219L115.965 14.2622L114.285 21.4722L120.625 17.6522Z" fill="#FFC247"/>
-                            </g>
-                            <defs>
-                            <clipPath id="clip0_324_2838">
-                            <rect width="24" height="24" fill="white" transform="translate(0 1.99219)"/>
-                            </clipPath>
-                            <clipPath id="clip1_324_2838">
-                            <rect width="24" height="24" fill="white" transform="translate(27.5938 1.99219)"/>
-                            </clipPath>
-                            <clipPath id="clip2_324_2838">
-                            <rect width="24" height="24" fill="white" transform="translate(55.1875 1.99219)"/>
-                            </clipPath>
-                            <clipPath id="clip3_324_2838">
-                            <rect width="24" height="24" fill="white" transform="translate(82.7812 1.99219)"/>
-                            </clipPath>
-                            <clipPath id="clip4_324_2838">
-                            <rect width="24" height="24" fill="white" transform="translate(110.375 1.99219)"/>
-                            </clipPath>
-                            </defs>
-                        </svg>
+                    {% for review in reviews %}
+                      <div class="comment">
+                          <div class="stars">
+                          {% for i in "12345" %}
+                            {% if forloop.counter <= review.rating %}
+                              <span style="color: #FFC247;">★</span>
+                            {% else %}
+                              <span style="color: #ccc;">★</span>
+                            {% endif %}
+                          {% endfor %}
+                        </div>
+                        <p class="text">{{ review.text }}</p>
+                        <p class="username">{{ review.author.username }}</p>
 
-                        <p class="text">My son who works in IT suggested I try this app after I was getting lots of strange messages and things happening on my phone. Since running it once a week I have had no viruses or malware problems. I also got a VPN app so I think with both I’m all set!</p>
-                        <p class="username"></p>
-                            
-                    </div>
-                    <div class="comment">
-                        <svg width="328" height="26" viewBox="0 0 328 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <g clip-path="url(#clip0_324_2838)">
-                            <path d="M10.25 17.6522L16.58 21.4722L14.9 14.2622L20.49 9.42219L13.12 8.78219L10.25 1.99219L7.37 8.79219L0 9.42219L5.59 14.2622L3.91 21.4722L10.25 17.6522Z" fill="#FFC247"/>
-                            </g>
-                            <g clip-path="url(#clip1_324_2838)">
-                            <path d="M37.8438 17.6522L44.1737 21.4722L42.4937 14.2622L48.0837 9.42219L40.7137 8.78219L37.8438 1.99219L34.9637 8.79219L27.5938 9.42219L33.1838 14.2622L31.5038 21.4722L37.8438 17.6522Z" fill="#FFC247"/>
-                            </g>
-                            <g clip-path="url(#clip2_324_2838)">
-                            <path d="M65.4375 17.6522L71.7675 21.4722L70.0875 14.2622L75.6775 9.42219L68.3075 8.78219L65.4375 1.99219L62.5575 8.79219L55.1875 9.42219L60.7775 14.2622L59.0975 21.4722L65.4375 17.6522Z" fill="#FFC247"/>
-                            </g>
-                            <g clip-path="url(#clip3_324_2838)">
-                            <path d="M93.0312 17.6522L99.3612 21.4722L97.6812 14.2622L103.271 9.42219L95.9012 8.78219L93.0312 1.99219L90.1512 8.79219L82.7812 9.42219L88.3713 14.2622L86.6913 21.4722L93.0312 17.6522Z" fill="#FFC247"/>
-                            </g>
-                            <g clip-path="url(#clip4_324_2838)">
-                            <path d="M120.625 17.6522L126.955 21.4722L125.275 14.2622L130.865 9.42219L123.495 8.78219L120.625 1.99219L117.745 8.79219L110.375 9.42219L115.965 14.2622L114.285 21.4722L120.625 17.6522Z" fill="#FFC247"/>
-                            </g>
-                            <defs>
-                            <clipPath id="clip0_324_2838">
-                            <rect width="24" height="24" fill="white" transform="translate(0 1.99219)"/>
-                            </clipPath>
-                            <clipPath id="clip1_324_2838">
-                            <rect width="24" height="24" fill="white" transform="translate(27.5938 1.99219)"/>
-                            </clipPath>
-                            <clipPath id="clip2_324_2838">
-                            <rect width="24" height="24" fill="white" transform="translate(55.1875 1.99219)"/>
-                            </clipPath>
-                            <clipPath id="clip3_324_2838">
-                            <rect width="24" height="24" fill="white" transform="translate(82.7812 1.99219)"/>
-                            </clipPath>
-                            <clipPath id="clip4_324_2838">
-                            <rect width="24" height="24" fill="white" transform="translate(110.375 1.99219)"/>
-                            </clipPath>
-                            </defs>
-                        </svg>
-                    
-                        <p class="text">The perfect platform for finding roommates! Thanks to EasyStay I found guys with whom I rent housing cheaper and more comfortably.</p>
-                        <p class="username">colinandmandy94</p>
-                    </div>
-                    <div class="comment">
-                        <svg width="328" height="26" viewBox="0 0 328 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <g clip-path="url(#clip0_324_2838)">
-                            <path d="M10.25 17.6522L16.58 21.4722L14.9 14.2622L20.49 9.42219L13.12 8.78219L10.25 1.99219L7.37 8.79219L0 9.42219L5.59 14.2622L3.91 21.4722L10.25 17.6522Z" fill="#FFC247"/>
-                            </g>
-                            <g clip-path="url(#clip1_324_2838)">
-                            <path d="M37.8438 17.6522L44.1737 21.4722L42.4937 14.2622L48.0837 9.42219L40.7137 8.78219L37.8438 1.99219L34.9637 8.79219L27.5938 9.42219L33.1838 14.2622L31.5038 21.4722L37.8438 17.6522Z" fill="#FFC247"/>
-                            </g>
-                            <g clip-path="url(#clip2_324_2838)">
-                            <path d="M65.4375 17.6522L71.7675 21.4722L70.0875 14.2622L75.6775 9.42219L68.3075 8.78219L65.4375 1.99219L62.5575 8.79219L55.1875 9.42219L60.7775 14.2622L59.0975 21.4722L65.4375 17.6522Z" fill="#FFC247"/>
-                            </g>
-                            <g clip-path="url(#clip3_324_2838)">
-                            <path d="M93.0312 17.6522L99.3612 21.4722L97.6812 14.2622L103.271 9.42219L95.9012 8.78219L93.0312 1.99219L90.1512 8.79219L82.7812 9.42219L88.3713 14.2622L86.6913 21.4722L93.0312 17.6522Z" fill="#FFC247"/>
-                            </g>
-                            <g clip-path="url(#clip4_324_2838)">
-                            <path d="M120.625 17.6522L126.955 21.4722L125.275 14.2622L130.865 9.42219L123.495 8.78219L120.625 1.99219L117.745 8.79219L110.375 9.42219L115.965 14.2622L114.285 21.4722L120.625 17.6522Z" fill="#FFC247"/>
-                            </g>
-                            <defs>
-                            <clipPath id="clip0_324_2838">
-                            <rect width="24" height="24" fill="white" transform="translate(0 1.99219)"/>
-                            </clipPath>
-                            <clipPath id="clip1_324_2838">
-                            <rect width="24" height="24" fill="white" transform="translate(27.5938 1.99219)"/>
-                            </clipPath>
-                            <clipPath id="clip2_324_2838">
-                            <rect width="24" height="24" fill="white" transform="translate(55.1875 1.99219)"/>
-                            </clipPath>
-                            <clipPath id="clip3_324_2838">
-                            <rect width="24" height="24" fill="white" transform="translate(82.7812 1.99219)"/>
-                            </clipPath>
-                            <clipPath id="clip4_324_2838">
-                            <rect width="24" height="24" fill="white" transform="translate(110.375 1.99219)"/>
-                            </clipPath>
-                            </defs>
-                        </svg>
-                            
-                        <p class="text">Posted an advert for renting an apartment – ​​found tenants in a couple of days. Everything is simple and convenient, you can easily update the information.</p>
-                        <p class="username">Jennifer Black</p>
-                    </div>
-                    <div class="comment">
-                        <svg width="328" height="26" viewBox="0 0 328 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <g clip-path="url(#clip0_324_2838)">
-                            <path d="M10.25 17.6522L16.58 21.4722L14.9 14.2622L20.49 9.42219L13.12 8.78219L10.25 1.99219L7.37 8.79219L0 9.42219L5.59 14.2622L3.91 21.4722L10.25 17.6522Z" fill="#FFC247"/>
-                            </g>
-                            <g clip-path="url(#clip1_324_2838)">
-                            <path d="M37.8438 17.6522L44.1737 21.4722L42.4937 14.2622L48.0837 9.42219L40.7137 8.78219L37.8438 1.99219L34.9637 8.79219L27.5938 9.42219L33.1838 14.2622L31.5038 21.4722L37.8438 17.6522Z" fill="#FFC247"/>
-                            </g>
-                            <g clip-path="url(#clip2_324_2838)">
-                            <path d="M65.4375 17.6522L71.7675 21.4722L70.0875 14.2622L75.6775 9.42219L68.3075 8.78219L65.4375 1.99219L62.5575 8.79219L55.1875 9.42219L60.7775 14.2622L59.0975 21.4722L65.4375 17.6522Z" fill="#FFC247"/>
-                            </g>
-                            <g clip-path="url(#clip3_324_2838)">
-                            <path d="M93.0312 17.6522L99.3612 21.4722L97.6812 14.2622L103.271 9.42219L95.9012 8.78219L93.0312 1.99219L90.1512 8.79219L82.7812 9.42219L88.3713 14.2622L86.6913 21.4722L93.0312 17.6522Z" fill="#FFC247"/>
-                            </g>
-                            <g clip-path="url(#clip4_324_2838)">
-                            <path d="M120.625 17.6522L126.955 21.4722L125.275 14.2622L130.865 9.42219L123.495 8.78219L120.625 1.99219L117.745 8.79219L110.375 9.42219L115.965 14.2622L114.285 21.4722L120.625 17.6522Z" fill="#FFC247"/>
-                            </g>
-                            <defs>
-                            <clipPath id="clip0_324_2838">
-                            <rect width="24" height="24" fill="white" transform="translate(0 1.99219)"/>
-                            </clipPath>
-                            <clipPath id="clip1_324_2838">
-                            <rect width="24" height="24" fill="white" transform="translate(27.5938 1.99219)"/>
-                            </clipPath>
-                            <clipPath id="clip2_324_2838">
-                            <rect width="24" height="24" fill="white" transform="translate(55.1875 1.99219)"/>
-                            </clipPath>
-                            <clipPath id="clip3_324_2838">
-                            <rect width="24" height="24" fill="white" transform="translate(82.7812 1.99219)"/>
-                            </clipPath>
-                            <clipPath id="clip4_324_2838">
-                            <rect width="24" height="24" fill="white" transform="translate(110.375 1.99219)"/>
-                            </clipPath>
-                            </defs>
-                        </svg>
-                            
-                        <p class="text">Posted an advert for renting an apartment – ​​found tenants in a couple of days. Everything is simple and convenient, you can easily update the information.</p>
-                        <p class="username">Jennifer Black</p>
-                    </div>
-                    <div class="comment">
-                        <svg width="328" height="26" viewBox="0 0 328 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <g clip-path="url(#clip0_324_2838)">
-                            <path d="M10.25 17.6522L16.58 21.4722L14.9 14.2622L20.49 9.42219L13.12 8.78219L10.25 1.99219L7.37 8.79219L0 9.42219L5.59 14.2622L3.91 21.4722L10.25 17.6522Z" fill="#FFC247"/>
-                            </g>
-                            <g clip-path="url(#clip1_324_2838)">
-                            <path d="M37.8438 17.6522L44.1737 21.4722L42.4937 14.2622L48.0837 9.42219L40.7137 8.78219L37.8438 1.99219L34.9637 8.79219L27.5938 9.42219L33.1838 14.2622L31.5038 21.4722L37.8438 17.6522Z" fill="#FFC247"/>
-                            </g>
-                            <g clip-path="url(#clip2_324_2838)">
-                            <path d="M65.4375 17.6522L71.7675 21.4722L70.0875 14.2622L75.6775 9.42219L68.3075 8.78219L65.4375 1.99219L62.5575 8.79219L55.1875 9.42219L60.7775 14.2622L59.0975 21.4722L65.4375 17.6522Z" fill="#FFC247"/>
-                            </g>
-                            <g clip-path="url(#clip3_324_2838)">
-                            <path d="M93.0312 17.6522L99.3612 21.4722L97.6812 14.2622L103.271 9.42219L95.9012 8.78219L93.0312 1.99219L90.1512 8.79219L82.7812 9.42219L88.3713 14.2622L86.6913 21.4722L93.0312 17.6522Z" fill="#FFC247"/>
-                            </g>
-                            <g clip-path="url(#clip4_324_2838)">
-                            <path d="M120.625 17.6522L126.955 21.4722L125.275 14.2622L130.865 9.42219L123.495 8.78219L120.625 1.99219L117.745 8.79219L110.375 9.42219L115.965 14.2622L114.285 21.4722L120.625 17.6522Z" fill="#FFC247"/>
-                            </g>
-                            <defs>
-                            <clipPath id="clip0_324_2838">
-                            <rect width="24" height="24" fill="white" transform="translate(0 1.99219)"/>
-                            </clipPath>
-                            <clipPath id="clip1_324_2838">
-                            <rect width="24" height="24" fill="white" transform="translate(27.5938 1.99219)"/>
-                            </clipPath>
-                            <clipPath id="clip2_324_2838">
-                            <rect width="24" height="24" fill="white" transform="translate(55.1875 1.99219)"/>
-                            </clipPath>
-                            <clipPath id="clip3_324_2838">
-                            <rect width="24" height="24" fill="white" transform="translate(82.7812 1.99219)"/>
-                            </clipPath>
-                            <clipPath id="clip4_324_2838">
-                            <rect width="24" height="24" fill="white" transform="translate(110.375 1.99219)"/>
-                            </clipPath>
-                            </defs>
-                        </svg>
-                        
-                        <p class="text">Very convenient site! Found myself a place to live near campus in just a couple of days. Filters helped sort options quickly, and the ability to contact the owner directly is super!</p>
-                        <p class="username">Phillip Colligan</p>
-                    </div>
-                    <div class="comment">
-                        <svg width="328" height="26" viewBox="0 0 328 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <g clip-path="url(#clip0_324_2838)">
-                            <path d="M10.25 17.6522L16.58 21.4722L14.9 14.2622L20.49 9.42219L13.12 8.78219L10.25 1.99219L7.37 8.79219L0 9.42219L5.59 14.2622L3.91 21.4722L10.25 17.6522Z" fill="#FFC247"/>
-                            </g>
-                            <g clip-path="url(#clip1_324_2838)">
-                            <path d="M37.8438 17.6522L44.1737 21.4722L42.4937 14.2622L48.0837 9.42219L40.7137 8.78219L37.8438 1.99219L34.9637 8.79219L27.5938 9.42219L33.1838 14.2622L31.5038 21.4722L37.8438 17.6522Z" fill="#FFC247"/>
-                            </g>
-                            <g clip-path="url(#clip2_324_2838)">
-                            <path d="M65.4375 17.6522L71.7675 21.4722L70.0875 14.2622L75.6775 9.42219L68.3075 8.78219L65.4375 1.99219L62.5575 8.79219L55.1875 9.42219L60.7775 14.2622L59.0975 21.4722L65.4375 17.6522Z" fill="#FFC247"/>
-                            </g>
-                            <g clip-path="url(#clip3_324_2838)">
-                            <path d="M93.0312 17.6522L99.3612 21.4722L97.6812 14.2622L103.271 9.42219L95.9012 8.78219L93.0312 1.99219L90.1512 8.79219L82.7812 9.42219L88.3713 14.2622L86.6913 21.4722L93.0312 17.6522Z" fill="#FFC247"/>
-                            </g>
-                            <g clip-path="url(#clip4_324_2838)">
-                            <path d="M120.625 17.6522L126.955 21.4722L125.275 14.2622L130.865 9.42219L123.495 8.78219L120.625 1.99219L117.745 8.79219L110.375 9.42219L115.965 14.2622L114.285 21.4722L120.625 17.6522Z" fill="#FFC247"/>
-                            </g>
-                            <defs>
-                            <clipPath id="clip0_324_2838">
-                            <rect width="24" height="24" fill="white" transform="translate(0 1.99219)"/>
-                            </clipPath>
-                            <clipPath id="clip1_324_2838">
-                            <rect width="24" height="24" fill="white" transform="translate(27.5938 1.99219)"/>
-                            </clipPath>
-                            <clipPath id="clip2_324_2838">
-                            <rect width="24" height="24" fill="white" transform="translate(55.1875 1.99219)"/>
-                            </clipPath>
-                            <clipPath id="clip3_324_2838">
-                            <rect width="24" height="24" fill="white" transform="translate(82.7812 1.99219)"/>
-                            </clipPath>
-                            <clipPath id="clip4_324_2838">
-                            <rect width="24" height="24" fill="white" transform="translate(110.375 1.99219)"/>
-                            </clipPath>
-                            </defs>
-                        </svg>
-                            
-                        <p class="text">I wish they had a VPN, I’d be signing up for that too. Apart from that the app is top notch. I had Certo on my last phone and it was the first app I put on this phone when I got it from the store. The scanner and other parts of the app are really easy and simple to use, even for a non-techie like me</p>
-                        <p class="username">Leslie Carrillo</p>
-                    </div>
+                      </div>
+                    {% empty %}
+                      <p>No reviews yet.</p>
                 </div>
+                {% endfor %}
             </div>
+
         </div>
 
         <div id="clients-bottom">
@@ -1102,37 +886,40 @@
     </section>
 
     <section class="feedback-section">
-        <h2>Leave feedback</h2>
-        <form class="feedback-form" id="feedbackForm">
-          <div class="form-group">
-            <label for="name">Name</label>
-            <input type="text" id="name" placeholder="Your name" required />
-          </div>
-          <div class="form-group">
-            <label for="phone">Phone</label>
-            <input type="tel" id="phone" placeholder="Your phone" required />
-          </div>
-          <div class="form-group large">
-            <label for="message">Message</label>
-            <input type="text" id="message" placeholder="Your message" required />
-          </div>
-    
-          <button type="submit" class="send-btn">SEND</button>
-        </form>
-    
-          <div class="stars">
-            <input type="radio" id="star1" name="rating" value="1" />
-            <label for="star1">★</label>
-            <input type="radio" id="star2" name="rating" value="2" />
-            <label for="star2">★</label>
-            <input type="radio" id="star3" name="rating" value="3" />
-            <label for="star3">★</label>
-            <input type="radio" id="star4" name="rating" value="4" />
-            <label for="star4">★</label>
-            <input type="radio" id="star5" name="rating" value="5" />
-            <label for="star5">★</label>
-          </div>
-      </section>
+     <h2>Leave feedback</h2>
+     <form class="feedback-form" id="feedbackForm" method="POST">
+       {% csrf_token %}
+       <div class="form-group">
+         <label for="name">Name</label>
+         <input type="text" id="name" placeholder="Your name" required />
+       </div>
+       <div class="form-group">
+         <label for="phone">Phone</label>
+         <input type="tel" id="phone" placeholder="Your phone" required />
+       </div>
+       <div class="form-group large">
+         <label for="message">Message</label>
+         <input type="text" id="message" placeholder="Your message" required />
+       </div>
+         <div class="stars">
+          <input type="radio" id="star5" name="rating" value="5" />
+          <label for="star5">★</label>
+          <input type="radio" id="star4" name="rating" value="4" />
+          <label for="star4">★</label>
+          <input type="radio" id="star3" name="rating" value="3" />
+          <label for="star3">★</label>
+          <input type="radio" id="star2" name="rating" value="2" />
+          <label for="star2">★</label>
+          <input type="radio" id="star1" name="rating" value="1" />
+          <label for="star1">★</label>
+        </div>
+
+       <button type="submit" class="send-btn" id="submitReviewBtn">SEND</button>
+     </form>
+
+
+ </section>
+
 
 
     <footer class="footer">
@@ -1269,6 +1056,61 @@ document.getElementById('check-dates').addEventListener('click', function (e) {
         updateDateInputs();  // записываем даты перед отправкой формы
     }
 });
+
+
+        document.addEventListener("DOMContentLoaded", function() {
+    const form = document.getElementById('feedbackForm');
+    const submitBtn = document.getElementById('submitReviewBtn');
+
+    form.addEventListener("submit", function(event) {
+        event.preventDefault();  // предотвращаем стандартное отправление формы
+
+        // Получаем данные формы
+        const name = document.getElementById('name').value;
+        const phone = document.getElementById('phone').value;
+        const message = document.getElementById('message').value;
+        const rating = document.querySelector('input[name="rating"]:checked')?.value;
+
+        if (!rating) {
+            alert("Please select a rating!");
+            return;
+        }
+
+        // Данные для отправки
+        const data = {
+            name: name,
+            phone: phone,
+            message: message,
+            rating: rating,
+            apartment_id: "{{ apartment.id }}", // Передаём ID квартиры
+            csrfmiddlewaretoken: document.querySelector('[name=csrfmiddlewaretoken]').value
+        };
+
+        // Отправка данных на сервер через AJAX
+        fetch("{% url 'booking:submit_review' apartment.id %}", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert("Thank you for your review!");
+                // Можно добавить код для обновления UI с новым отзывом
+                location.reload();  // Для простоты перезагружаем страницу
+            } else {
+                alert("There was an error. Please try again.");
+            }
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            alert("There was an error. Please try again.");
+        });
+    });
+});
+
 </script>
 <script src="{% static 'vendor/main.js' %}"></script>
     <script src="{% static 'vendor/script.js' %}"></script>
