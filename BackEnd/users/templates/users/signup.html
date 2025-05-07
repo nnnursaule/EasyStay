@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+        .modal {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 350px;
+            text-align: center;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        }
+        h2 {
+            margin-bottom: 10px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        form input {
+            width: 95%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .checkbox-group {
+            text-align: left;
+            font-size: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .checkbox-group label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .checkbox-group input {
+            margin: 0;
+            width: 16px;
+            height: 16px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #ff5722;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            opacity: 1;
+        }
+        .back-btn {
+            margin-top: 10px;
+            width: 100%;
+            padding: 10px;
+            background: #555;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <button class="back-btn" onclick="history.back()">← Back</button>
+        <div class="modal">
+            <h2>Sign up</h2>
+            <form method="POST" action="{% url 'users:registration' %}">
+                {% csrf_token %}
+                <input type="email" name="email" placeholder="E-mail address" required>
+                <input type="text" name="username" placeholder="Username" required>
+                <input type="password" name="password1" placeholder="Password" required>
+                <input type="password" name="password2" placeholder="Confirm Password" required>
+                <input type="text" name="first_name" placeholder="First Name" required>
+                <input type="text" name="last_name" placeholder="Last Name" required>
+
+                <div class="checkbox-group">
+                    <label>
+                        <input type="radio" name="role_choice" value="True" required>
+                        I am a Landlord
+                    </label>
+                    <label>
+                        <input type="radio" name="role_choice" value="False" required>
+                        I am a Student
+                    </label>
+                </div>
+
+                <div class="checkbox-group">
+                    <label for="termsCheckbox">
+                        <input type="checkbox" id="termsCheckbox" required>
+                        <span>By continuing, I accept the Terms of use, Privacy policy and Cookie policy.</span>
+                    </label>
+                </div>
+                <button type="submit">Sign up</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
