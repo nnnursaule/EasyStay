@@ -569,12 +569,14 @@
       margin-top: 20px;
     }
   }
-
+      .back_url{
+        text-decoration: none;
+      }
   </style>
 </head>
 <body>
     <header class="top-nav">
-        <a href="{% url 'booking:index' %}"><div class="logo">EASYSTAY</div></a>
+        <a href="{% url 'booking:index' %}" class="back_url"><div class="logo">EASYSTAY</div></a>
         <div class="nav-icons">
           <img src="img/profile.png" alt="Аватар" class="nav-ava">
           <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -625,6 +627,7 @@
       </div>
 
     </div>
+
       {% if not form.instance.is_top %}
           <p>Do you want to add to the top?</p>
           <form action="{% url 'booking:choose_promotion_plan' form.instance.id %}" method="GET">
@@ -634,7 +637,7 @@
         {% else %}
           <p style="color: green;">This apartment is already in TOP</p>
         {% endif %}
-      {% if apartment.top_promotion %}
+      {% if apartment.is_top and apartment.top_promotion %}
         <p>Продвижение активно до: {{ apartment.top_promotion.end_date }}</p>
     {% endif %}
   </div>

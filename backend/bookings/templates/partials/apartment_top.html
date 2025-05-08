@@ -1,12 +1,17 @@
 <div class="card" style="position: relative;">
+    <div class="top-badge"
+                     style="position: absolute; top: 10px; left: 10px;
+                            background: gold; color: black;
+                            padding: 4px 8px; font-size: 16px;
+                            border-radius: 5px; font-weight: bold;
+                            z-index: 2;">
+                        ТОП
+                </div>
     <img src="{{ apartment.image.url }}" alt="Apartment">
 
     <div class="card-top-icons" style="position: absolute; top: 10px; right: 10px; display: flex; gap: 10px;">
-            {% if apartment.is_top %}
-                <div class="top-badge" style="background: gold; color: black; padding: 4px 6px; font-size: 12px; border-radius: 5px; font-weight: bold;">
-                    ТОП
-                </div>
-            {% endif %}
+
+
 
         <form method="post" action="{% url 'booking:add_to_favourites' apartment.id %}">
             {% csrf_token %}

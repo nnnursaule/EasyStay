@@ -116,7 +116,7 @@
   <form method="POST" action="{% url 'booking:submit_complaint' apartment.id %}">
     {% csrf_token %}
     <div class="modal">
-      <span class="close-btn" onclick="alert('Closed')">&times;</span>
+      <span class="close-btn" onclick="window.location.href='{% url 'booking:apartment_detail' pk=apartment.id %}'">&times;</span>
       <h2>Why are you complaining about this housing?</h2>
       <p class="description">The owner will not see this information.</p>
 

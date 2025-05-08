@@ -452,22 +452,18 @@ def promote_success(request, apartment_id):
     if option_id:
         option = get_object_or_404(PromotionOption, pk=option_id)
 
-        # Проверка: есть ли уже активная промо
-        active_promo = TopPromotion.objects.filter(
-            apartment=apartment,
-            end_date__gt=timezone.now()
-        ).first()
+        # Обновим статус квартиры
+        apartment.is_top = True
+        apartment.save()
 
-        if not active_promo:
-            apartment.is_top = True
-            apartment.save()
+        # Найдём существующую промо-акцию
+        top_promo, created = TopPromotion.objects.get_or_create(apartment=apartment)
 
-            TopPromotion.objects.create(
-                apartment=apartment,
-                end_date=timezone.now() + timedelta(days=option.duration)
-            )
+        # Обновим дату окончания
+        top_promo.end_date = timezone.now() + timedelta(days=option.duration)
+        top_promo.save()
 
-    return redirect('apartment_create', pk=apartment_id)
+    return redirect('booking:main', pk=apartment_id)
 
 def promote_cancel(request):
     return render(request, 'promotion/promotion_cancel.html')
@@ -622,3 +618,10 @@ def submit_complaint_to_rc(request, rc_id):
         return redirect('booking:complex_details', pk=rc_id)
 
     return render(request, 'profile/complaint_rc.html', {'rc': rc})
+
+
+
+def share(request, complex_id):
+    complex = get_object_or_404(ResidentialComplex, id=complex_id)
+    return render(request, "complex/share_others_rc.html", {"complex": complex})
+

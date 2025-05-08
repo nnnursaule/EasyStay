@@ -73,7 +73,7 @@
     </div>
     <script>
         function closeModal() {
-            window.location.href = "{% url 'booking:apartment_detail' apartment.id %}";
+            window.location.href = "{% url 'booking:complex_details' complex.id %}";
         }
         function share(url) {
             window.open(url, '_blank');
