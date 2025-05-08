@@ -129,7 +129,7 @@
     </header>
 
 
-    <section class="hero">
+    <section class="hero" style="background-image: url('{% static 'vendor/img/products/main.png' %}');">
     <h1>Hi, {{ user.first_name }}! <br>Welcome to the <span class="highlight">EASYSTAY!</span></h1>
 
     <form method="get" action="{% url 'booking:main' user.id %}">

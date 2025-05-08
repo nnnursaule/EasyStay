@@ -256,12 +256,24 @@ class Complaint(models.Model):
     ]
 
     user = models.ForeignKey("users.User", on_delete=models.CASCADE)
-    apartment = models.ForeignKey('bookings.Apartment', on_delete=models.CASCADE)
+    apartment = models.ForeignKey(Apartment, on_delete=models.CASCADE, null=True, blank=True)
+    residential_complex = models.ForeignKey(ResidentialComplex, on_delete=models.CASCADE, null=True, blank=True)
     reason = models.CharField(max_length=50, choices=REASONS)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        unique_together = ('user', 'apartment')  # 👈 ограничение на уникальность жалобы
+        constraints = [
+            models.UniqueConstraint(fields=['user', 'apartment'], name='unique_user_apartment_complaint'),
+            models.UniqueConstraint(fields=['user', 'residential_complex'], name='unique_user_rc_complaint'),
+        ]
+
+    def clean(self):
+        from django.core.exceptions import ValidationError
+        if not self.apartment and not self.residential_complex:
+            raise ValidationError('Complaint must be related to either an apartment or a residential complex.')
+        if self.apartment and self.residential_complex:
+            raise ValidationError('Complaint cannot be related to both apartment and residential complex.')
+
 
     def __str__(self):
         return f"{self.user} - {self.get_reason_display()}"

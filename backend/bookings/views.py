@@ -558,35 +558,6 @@ def submit_review(request, apartment_id):
 
 
 
-def submit_complaint_zhk(request, complex_id):
-    complex = get_object_or_404(ResidentialComplex, id=complex_id)
-
-    if request.method == 'POST':
-        reason = request.POST.get('reason')
-
-        if not reason:
-            messages.error(request, 'Пожалуйста, выберите причину жалобы.')
-            return redirect('submit_complaint', apartment_id=complex_id)
-
-        # Проверка на уже существующую жалобу от пользователя
-        if Complaint.objects.filter(user=request.user, complex=complex).exists():
-            messages.error(request, 'Вы уже отправили жалобу на это объявление.')
-            return redirect('booking:apartment_detail', pk=complex_id)
-
-        # Создание жалобы
-        Complaint.objects.create(
-            user=request.user,
-            complex=complex,
-            reason=reason
-        )
-        messages.success(request, 'Жалоба успешно отправлена.')
-        return redirect('booking:apartment_detail', pk=complex_id)
-
-    # GET-запрос — показываем форму
-    return render(request, 'profile/complaint_zhk.html', {'complex': complex})
-
-
-
 def booking_requests_view(request):
     # Показываем заявки, полученные владельцем (текущим пользователем)
     booking_requests = Booking.objects.filter(apartment__landlord=request.user).order_by('-created_at')
@@ -626,3 +597,28 @@ def upload_documents(request, pk):
         student_card=student_card
     )
     return JsonResponse({"success": "Documents uploaded successfully."})
+
+
+def submit_complaint_to_rc(request, rc_id):
+    rc = get_object_or_404(ResidentialComplex, id=rc_id)
+
+    if request.method == 'POST':
+        reason = request.POST.get('reason')
+
+        if not reason:
+            messages.error(request, 'Пожалуйста, выберите причину жалобы.')
+            return redirect('booking:submit_complaint_complex', rc_id=rc_id)
+
+        if Complaint.objects.filter(user=request.user, residential_complex=rc).exists():
+            messages.error(request, 'Вы уже отправили жалобу на этот жилой комплекс.')
+            return redirect('booking:complex_details', pk=rc_id)
+
+        Complaint.objects.create(
+            user=request.user,
+            residential_complex=rc,
+            reason=reason
+        )
+        messages.success(request, 'Жалоба успешно отправлена.')
+        return redirect('booking:complex_details', pk=rc_id)
+
+    return render(request, 'profile/complaint_rc.html', {'rc': rc})
