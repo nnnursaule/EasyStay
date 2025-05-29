@@ -40,9 +40,11 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "bookings",
     "users",
+    "ai_assistant",
 
     'rest_framework',
     'rest_framework.authtoken',
+    'corsheaders',
 ]
 
 REST_FRAMEWORK = {
@@ -55,6 +57,7 @@ REST_FRAMEWORK = {
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",  # Должно быть выше!
@@ -188,3 +191,11 @@ print(BASE_DIR)
 print(STRIPE_SECRET_KEY)
 print(STRIPE_PUBLIC_KEY)
 print(STRIPE_WEBHOOK_SECRET)
+
+# OpenAI API key for AI assistant
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+
+# CORS settings
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_METHODS = ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS']

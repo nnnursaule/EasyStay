@@ -24,7 +24,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("booking/", include("bookings.urls", namespace='booking')),
     path("users/", include("users.urls", namespace='users')),
-
+    path("api/ai/", include("ai_assistant.urls")),
 
 ]+static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
