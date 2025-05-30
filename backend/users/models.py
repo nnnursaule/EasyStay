@@ -13,7 +13,7 @@ class User(AbstractUser):
     email = models.EmailField(unique=True)
     image = models.ImageField(upload_to='users_images', null=True, blank=True)
     is_landlord = models.BooleanField(default=False)  # Арендодатель или студент
-    phone_number = models.CharField(max_length=15, unique=True, blank=True, null=True)
+    phone_number = models.CharField(max_length=15, unique=False, blank=True, null=True)
     is_verified = models.BooleanField(default=False)
     date_joined = models.DateTimeField(null=True, auto_now_add=True)
     age = models.PositiveIntegerField(null=True, blank=True)
