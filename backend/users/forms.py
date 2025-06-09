@@ -191,3 +191,6 @@ class VerificationCodeForm(forms.Form):
     digit2 = forms.CharField(max_length=1, required=True)
     digit3 = forms.CharField(max_length=1, required=True)
     digit4 = forms.CharField(max_length=1, required=True)
+
+
+

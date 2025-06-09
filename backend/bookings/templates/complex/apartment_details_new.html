@@ -326,31 +326,39 @@
     </div>
 </section>
 
-        <section class="documents-desc">
+      <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <section class="documents-desc">
         <div class="documents">
             <div class="doc-left">
                 <p id="doc-text">Documents required to book</p>
-                <button class="doc-btn" id="doc-btn1">
+
+                <!-- Кастомная кнопка загрузки -->
+                <label for="id_student_id_photo" class="doc-btn" id="doc-btn1" style="cursor: pointer;">
                     <p class="docbtn-t1">Proof of identity</p>
                     <p class="docbtn-t2">Government issued ID or passport.</p>
-                </button>
-                <button class="doc-btn" id="doc-btn2">
-                    <p class="docbtn-t1">Proof of identity</p>
-                    <p class="docbtn-t2">Government issued ID or passport.</p>
-                </button>
+                </label>
+
+                <!-- Скрытый input -->
+                {{ form.student_id_photo }}
+
+                <!-- Дополнительная кнопка (если нужно) -->
             </div>
+
             <div class="doc-right">
                 <img src="{% static 'vendor/img/products/details-doc.png' %}" alt="">
                 <figure></figure>
             </div>
-            <!-- <div class="doc-bottom">
-                <button class="upload">Upload</button>
-            </div> -->
         </div>
+
         <div class="doc-bottom">
-            <button class="upload">Upload</button>
+            <button type="submit" class="upload">Upload</button>
         </div>
     </section>
+</form>
+
+
+
 
     <section class="location-desc">
         <div>

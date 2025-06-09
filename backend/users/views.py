@@ -338,3 +338,5 @@ class ReviewUpdateView(UpdateView):
             return reverse('users:landlord_profile', kwargs={'pk': self.object.author.id})
         else:
             return reverse('users:tenant_profile', kwargs={'pk': self.object.author.id})
+
+

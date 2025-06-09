@@ -20,7 +20,9 @@ from django.http import HttpResponse
 from django.utils import timezone
 from django.urls import reverse
 from django.views.decorators.http import require_POST
-
+from django.db.models import Q
+from decimal import Decimal
+from .forms import StudentIDUploadForm
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 class ResidentialComplexView(DetailView):
@@ -125,6 +127,7 @@ class ApartmentDetailView(DetailView):
 
         # Похожие квартиры (кроме текущей)
         context["similar_apartments"] = Apartment.objects.exclude(pk=apartment.pk).order_by("?")[:6]
+        context["form"] = StudentIDUploadForm()
 
         return context
 
@@ -143,7 +146,13 @@ class ApartmentDetailView(DetailView):
                 rating=int(rating)
             )
 
+        form = StudentIDUploadForm(request.POST, request.FILES, instance=request.user)
+        if form.is_valid():
+            form.save()
+
         return redirect(apartment.get_absolute_url())
+
+
 
 
 def share_with_others(request, apartment_id):
@@ -154,17 +163,16 @@ def share_with_others(request, apartment_id):
 def main_page(request, pk):
     user = get_object_or_404(User, id=pk)
 
-    # Последние 3 отзыва
     latest_feedbacks = Feedback.objects.order_by('-created_at')[:3]
-
-    # Топ квартиры (максимум 3)
     top_apartments = Apartment.objects.filter(is_top=True)[:3]
     other_apartments = Apartment.objects.exclude(id__in=top_apartments.values_list('id', flat=True))
 
-    # Фильтрация
+    # Получаем фильтры из GET-параметров
     complex_id = request.GET.get("complex_id")
     max_price = request.GET.get("max_price")
     room_count = request.GET.get("rooms")
+    region = request.GET.get("city")
+    gender = request.GET.get("gender")
     rental_type = request.GET.get("rental_type")
 
     apartments = other_apartments
@@ -172,17 +180,30 @@ def main_page(request, pk):
     if complex_id:
         apartments = apartments.filter(complex_id=complex_id)
 
-    if max_price:
-        if rental_type == "month":
-            apartments = apartments.filter(price_per_month__lte=max_price)
-        elif rental_type == "day":
-            apartments = apartments.filter(price_per_day__lte=max_price)
+    if region:
+        apartments = apartments.filter(region=region)
 
     if room_count:
         if room_count == "4":
-            apartments = apartments.filter(room_count__gte=4)
+            apartments = apartments.filter(rooms__gte=4)
         else:
-            apartments = apartments.filter(room_count=room_count)
+            apartments = apartments.filter(rooms=room_count)
+
+    # ✅ Фильтрация по цене — только по цене за месяц
+    if max_price:
+        try:
+            max_price = Decimal(max_price)
+            apartments = apartments.filter(price_per_month__lte=max_price)
+        except:
+            pass  # если цена некорректная
+
+    if rental_type in ["day", "month"]:
+        apartments = apartments.filter(rental_type=rental_type)
+
+    if gender in ["male", "female"]:
+        apartments = apartments.filter(
+            Q(gender_preference=gender) | Q(gender_preference="no_preference") | Q(gender_preference__isnull=True)
+        )
 
     complexes = ResidentialComplex.objects.all()
 
@@ -190,7 +211,6 @@ def main_page(request, pk):
     if request.user.is_authenticated:
         favourite_ids = Favourite.objects.filter(user=request.user).values_list("apartment_id", flat=True)
 
-    # Похожие варианты: 3 случайные квартиры
     similar_apartments = Apartment.objects.order_by('?')[:3]
 
     return render(request, "bookings/index.html", {
@@ -212,7 +232,9 @@ class ApartmentCreateView(LoginRequiredMixin, CreateView):
     model = Apartment
     form_class = ApartmentCreateForm  # меняем на новую форму
     template_name = 'apartments/add_advertisement.html'
-    success_url = reverse_lazy('apartment_list')
+
+    def get_success_url(self):
+        return reverse('users:landlord_profile', kwargs={'pk': self.request.user.id})
 
     def form_valid(self, form):
         form.instance.landlord = self.request.user  # Привязываем хозяина

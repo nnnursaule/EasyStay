@@ -1,6 +1,6 @@
 from django import forms
 from .models import Apartment, Booking
-
+from users.models import User
 class ApartmentForm(forms.ModelForm):
     class Meta:
         model = Apartment
@@ -28,4 +28,16 @@ class BookingForm(forms.ModelForm):
         widgets = {
             'status': forms.RadioSelect,
             'type_of_booking': forms.RadioSelect,
+        }
+
+
+class StudentIDUploadForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['student_id_photo']
+        widgets = {
+            'student_id_photo': forms.ClearableFileInput(attrs={
+                'style': 'display:none;',
+                'id': 'id_student_id_photo'
+            })
         }
