@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Report Modal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: system-ui, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: rgba(0, 0, 0, 0.85);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .modal {
+      background: #D9D9D9;
+      padding: 30px;
+      width: 810px;
+      border-radius: 14px;
+      position: relative;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .modal h2 {
+      margin-top: 0;
+      font-size: 23spx;
+      font-weight: 500;
+    }
+
+    .modal p.description {
+      font-size: 16px;
+      color: #666;
+      margin-bottom: 20px;
+    }
+
+    .option {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid #8a8989;
+    }
+
+    .option:last-child {
+      border-bottom: none;
+    }
+
+    .option label {
+      font-size: 19px;
+      color: #222;
+      cursor: pointer;
+    }
+
+    .option input[type="radio"] {
+      transform: scale(1.9);
+      accent-color: #007aff;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 16px;
+      right: 20px;
+      font-size: 25px;
+      font-weight: bold;
+      cursor: pointer;
+      color: #222;
+    }
+
+    .submit-btn {
+      margin-top: 25px;
+      float: right;
+      padding: 10px 22px;
+      background: linear-gradient(90deg, #FDD836, #FF5A30);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 400;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    @media (max-width: 768px) {
+      .modal {
+        width: 80%;
+        padding: 20px;
+      }
+
+      .submit-btn {
+        width: 30%;
+
+      }
+    }
+
+    @media (max-width: 480px) {
+      .modal {
+        width: 70%;
+        padding: 20px;
+      }
+
+      .submit-btn {
+        width: 20%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <form method="POST" action="{% url 'booking:submit_complaint' apartment.id %}">
+    {% csrf_token %}
+    <div class="modal">
+      <span class="close-btn" onclick="window.location.href='{% url 'booking:apartment_detail' pk=apartment.id %}'">&times;</span>
+      <h2>Why are you complaining about this housing?</h2>
+      <p class="description">The owner will not see this information.</p>
+
+      <div class="option">
+        <label for="r1">The ad contains incorrect information</label>
+        <input type="radio" name="reason" id="r1" value="incorrect">
+      </div>
+
+      <div class="option">
+        <label for="r2">This is not a real home</label>
+        <input type="radio" name="reason" id="r2" value="fake">
+      </div>
+
+      <div class="option">
+        <label for="r3">This is a scam</label>
+        <input type="radio" name="reason" id="r3" value="scam">
+      </div>
+
+      <div class="option">
+        <label for="r4">This is offensive</label>
+        <input type="radio" name="reason" id="r4" value="offensive">
+      </div>
+
+      <div class="option">
+        <label for="r5">The problem is different</label>
+        <input type="radio" name="reason" id="r5" value="other">
+      </div>
+
+      <button class="submit-btn" type="submit">
+        Submit
+        <!-- тут можно вставить вашу SVG-иконку, если надо -->
+      </button>
+    </div>
+  </form>
+</body>
+
+</html>

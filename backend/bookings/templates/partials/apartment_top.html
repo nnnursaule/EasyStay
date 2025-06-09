@@ -1,0 +1,45 @@
+<div class="card" style="position: relative;">
+    <div class="top-badge"
+                     style="position: absolute; top: 10px; left: 10px;
+                            background: gold; color: black;
+                            padding: 4px 8px; font-size: 16px;
+                            border-radius: 5px; font-weight: bold;
+                            z-index: 2;">
+                        ТОП
+                </div>
+    <img src="{{ apartment.image.url }}" alt="Apartment">
+
+    <div class="card-top-icons" style="position: absolute; top: 10px; right: 10px; display: flex; gap: 10px;">
+
+
+
+        <form method="post" action="{% url 'booking:add_to_favourites' apartment.id %}">
+            {% csrf_token %}
+            <button type="submit" class="heart-button" style="background: none; border: none;">
+                {% if apartment.id in favourite_ids %}
+                    <svg class="heart-icon" ... fill="red">...</svg>
+                {% else %}
+                    <svg class="heart-icon" ... fill="white" stroke="black">...</svg>
+                {% endif %}
+            </button>
+        </form>
+    </div>
+
+    <div class="card-info">
+        <h3>{{ apartment.title }}</h3>
+        <h6>{{ apartment.complex.name }}</h6>
+        <p>
+            {% if apartment.rental_type == "month" %}
+                {{ apartment.price_per_month }}₸ in month
+            {% else %}
+                {{ apartment.price_per_day }}₸ per day
+            {% endif %}
+        </p>
+    </div>
+    <div class="card-hover">
+        <p>{{ apartment.description|truncatechars:100 }}</p>
+        <button>
+            <a href="{% url 'booking:apartment_detail' apartment.id %}" class="view-details">View details</a>
+        </button>
+    </div>
+</div>

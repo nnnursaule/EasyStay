@@ -1,0 +1,100 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'vendor/login.css' %}">
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            background: white;
+            }
+        .back-btn {
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            color: #FF5722;
+            margin-bottom: 10px;
+        }
+        .error-message {
+            color: red; /* Делает текст красным */
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        .modal-content {
+            background: white;
+            padding: 30px;
+            width: 350px;
+            border-radius: 10px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .errorlist {
+            color: red; /* Цвет текста ошибок для конкретных полей формы */
+        }
+
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 30px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="window.location.href='{% url 'booking:index' %}'">&times;</span>
+            <h2>Log in</h2>
+            <form method="POST" action="{% url 'users:login' %}">
+                {% csrf_token %}
+
+                <!-- Display form errors (if any) -->
+                {% if messages %}
+                    <div class="error-message">
+                        {% for message in messages %}
+                            <p>{{ message }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                <!-- Username Field -->
+                {{ form.username }}
+                {% if form.username.errors %}
+                    <ul class="errorlist">
+                        {% for error in form.username.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+
+                <!-- Password Field -->
+                {{ form.password }}
+                {% if form.password.errors %}
+                    <ul class="errorlist">
+                        {% for error in form.password.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+
+                <button class="continue-btn" type="submit">Log in</button>
+            </form>
+            <a href="{% url 'users:password_reset_request' %}" class="forgot-password">Forgot your password?</a>
+        </div>
+    </div>
+
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</body>
+
+
+</html>
