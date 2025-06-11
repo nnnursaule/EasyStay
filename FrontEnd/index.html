@@ -23,24 +23,33 @@
                 </ul>
     </header>
     <section id="hero" class="hero">
-        <div class="overlay"></div>
-        <div class="content">
-        <span class="title">Platform for SDU students where <br>renting is made <span class="highlight">EASY!</span></span>
-        
+      <div class="slide current-slide" style="background-image: url('img/main1.png');"></div>
+      <div class="slide" style="background-image: url('img/main2.png');"></div>
+      <div class="slide" style="background-image: url('img/main3.png');"></div>
+    
+      <div class="overlay"></div>
+    
+      <div class="content">
+        <span class="title">
+          Platform for SDU students where <br>
+          renting is made <span class="highlight">EASY!</span>
+        </span>
+    
         <div class="search-bar">
-            <input type="text" placeholder="Search by regions, residential complex">
-            <button class="search-btn">
-                <i class="fas fa-search"></i>
-            </button>            
+          <input type="text" placeholder="Search by regions, residential complex">
+          <button class="search-btn">
+            <i class="fas fa-search"></i>
+          </button>
         </div>
-    </div>
-
-        <div class="pagination">
-            <span class="active" onclick="changeImage(1)">01</span>
-            <span onclick="changeImage(2)">02</span>
-            <span onclick="changeImage(3)">03</span>
-        </div>
+      </div>
+    
+      <div class="pagination">
+        <span class="active">01</span>
+        <span>02</span>
+        <span>03</span>
+      </div>
     </section>
+    
 
     <section id="about-us" class="about-us">
         <div class="container">
@@ -478,17 +487,17 @@
         <form class="feedback-form" id="feedbackForm">
           <div class="form-group">
             <label for="name">Name</label>
-            <input type="text" id="name" placeholder="Your name" required />
+            <input type="text" id="name" placeholder="Your name" required>
           </div>
           <div class="form-group">
             <label for="phone">Phone</label>
-            <input type="tel" id="phone" placeholder="Your phone" required />
+            <input type="tel" id="phone" placeholder="Your phone" required>
           </div>
-          <div class="form-group large">
+          <div class="form-group">
             <label for="message">Message</label>
-            <input type="text" id="message" placeholder="Your message" required />
+            <textarea id="message" placeholder="Your message" required></textarea>
           </div>
-    
+          
           <button type="submit" class="send-btn">SEND</button>
         </form>
     
