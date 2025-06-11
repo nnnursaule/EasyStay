@@ -1,18 +1,38 @@
-const images = ["img/main1.png", "img/main2.png", "img/main3.png"];
-let currentIndex = 0;
 
-function changeImage(index) {
-    document.querySelector(".hero").style.backgroundImage = `url(${images[index - 1]})`;
-    document.querySelectorAll(".pagination span").forEach((dot, i) => {
-        dot.classList.toggle("active", i === index - 1);
-    });
-}
+  const slides = document.querySelectorAll('.slide');
+  const paginations = document.querySelectorAll('.pagination span');
+  let currentIndex = 0;
+  const totalSlides = slides.length;
 
-document.querySelectorAll(".heart-icon").forEach(heart => {
-    heart.addEventListener("click", function() {
-        heart.classList.toggle('active');
+  function goToSlide(index) {
+    slides.forEach((slide, i) => {
+      slide.classList.toggle('current-slide', i === index);
     });
-});
+
+    paginations.forEach((dot, i) => {
+      dot.classList.toggle('active', i === index);
+    });
+  }
+
+  function nextSlide() {
+    currentIndex = (currentIndex + 1) % totalSlides;
+    goToSlide(currentIndex);
+  }
+
+  setInterval(nextSlide, 3000);
+
+
+  paginations.forEach((dot, index) => {
+    dot.addEventListener('click', () => {
+      currentIndex = index;
+      goToSlide(currentIndex);
+    });
+  });
+
+  goToSlide(currentIndex);
+
+
+  
 document.querySelectorAll(".faq-header").forEach((item) => {
     item.addEventListener("click", function () {
         const faqItem = this.parentElement;
@@ -20,6 +40,15 @@ document.querySelectorAll(".faq-header").forEach((item) => {
         this.querySelector(".faq-toggle").textContent = faqItem.classList.contains("active") ? "✖" : "+";
     });
 });
+
+
+  const textarea = document.getElementById("message");
+  textarea.addEventListener("input", () => {
+    textarea.style.height = "auto";
+    textarea.style.height = textarea.scrollHeight + "px";
+  });
+
+
 
 document.getElementById("goToTop").addEventListener("click", function () {
     window.scrollTo({ top: 0, behavior: "smooth" });
