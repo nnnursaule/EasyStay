@@ -244,11 +244,11 @@ document.addEventListener('DOMContentLoaded', function() {
             
             try {
                 // Make API call to your backend
-                const response = await fetch('/api/ai/chat/', {
+                const response = await fetch('http://127.0.0.1:8011/api/ai/chat/', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'X-CSRFToken': getCookie('csrftoken') // Function to get CSRF token
+                        'X-CSRFToken': getCookie('csrftoken')
                     },
                     body: JSON.stringify({
                         message: userMessage,
@@ -259,7 +259,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 const data = await response.json();
                 
                 // Remove loading indicator
-                elements.conversation.removeChild(loadingIndicator);
+                if (elements.conversation.contains(loadingIndicator)) {
+                    elements.conversation.removeChild(loadingIndicator);
+                }
                 
                 if (response.ok) {
                     // Add assistant response to the conversation
@@ -300,7 +302,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     };
     
-    // Function to get CSRF token
+    // Helper function to get CSRF token
     function getCookie(name) {
         let cookieValue = null;
         if (document.cookie && document.cookie !== '') {
