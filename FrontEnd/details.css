@@ -9,7 +9,7 @@
 body {
     width: 100vw;
     height: 100vh;
-    overflow-x: hidden; 
+    overflow-x: hidden;
     background-color: #fafafa;
 }
 .left-nav{margin-left: 3%;}
@@ -366,7 +366,7 @@ ul.fac-list {
     left: -1%;
     list-style-type: none;
     display: grid;
-    grid-template-columns: repeat(3, 1fr); 
+    grid-template-columns: repeat(3, 1fr);
     justify-items: start;
 }
 ul.fac-list li{margin-right: 60px;}
@@ -391,7 +391,7 @@ ul.fac-list li.x{
     height: 32px;
     gap: 13px;
 }
-  
+
 
 .rules-pref{
     position: absolute;
@@ -413,7 +413,7 @@ ul.fac-list li.x{
     top: 20px;
     left: 2%;
     display: grid;
-    grid-template-columns: repeat(2, 1fr); 
+    grid-template-columns: repeat(2, 1fr);
     justify-items: start;
     gap: 10px;
 
@@ -447,7 +447,7 @@ ul.fac-list li.x{
     height: 496px;
     padding-right: 60px;
     gap: 60px;
-    
+
 }
 .documents-desc .documents .doc-left{
     width: 50%;
@@ -545,13 +545,13 @@ ul.fac-list li.x{
     top: -7.02px;
     left: 7.02px;
     z-index: 1;
-  
+
   }
 
  .doc-right img {
     display: block;
     position: absolute;
-    z-index: 2; 
+    z-index: 2;
   }
 
   .location-desc{
@@ -683,8 +683,11 @@ ul.fac-list li.x{
     width: 100%;
     display: flex;
     flex-direction: row;
-    /* align-items: flex-start; */
+    align-items: center;
     justify-content: center;
+    gap: 8px;
+    padding: 8px 0;
+
 }
 .availability #cal-1 button#prevmonth {
     position: absolute;
@@ -707,49 +710,52 @@ ul.fac-list li.x{
     box-shadow: 0px 1px 1px 0px  #000E330D;
     border-color: transparent;
 }
-.cal-components .w-days{
-    position: relative;
-    width: 90%;
-    height: 44px;
-    top: 10px;
-    left: 3%;
-    display: grid;
-    grid-template-columns: repeat(7,1fr);
-    gap: 5px;
+
+.cal-components .w-days {
+  position: relative;
+  width: 100%;
+  height: 30px;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  padding: 0 5%;
+  margin-bottom: 8px;
+  top: 10px;
 
 }
+
 .cal-components .w-days div{
-    position: relative; 
-    width: 54px; 
-    height: 44px; 
+    position: relative;
+    width: 44px;
+    height: 30px;
     top: 0px;
-    height: 44;
-    left: 2.5px;
-    gap: 10px;
-    padding: 13px 15px 13px 15px;
+
+
     border-radius: 4px;
-    font-size: 20px;
+    font-size: 14px;
     font-weight: 500;
-    vertical-align: center;
+    display: flex;
     color: #1F1F1F;
 
     font-family: 'Lexend';
 
     line-height: 100%;
     letter-spacing: 0%;
-    text-align: center;
-    vertical-align: middle;
+    justify-content: center;
+    align-items: center;
 
 
 }
 .cal-components .cal-header .month-year-div{
     display: flex;
-    position: absolute;
-    width: 215px;
-    height: 44px;
+    position: relative;
+    width: auto;
+    height: auto;
     top: 0px;
-    left: 30%;
+
     gap: 10px;
+    justify-content: center;
+    align-items: center;
+
 }
 select.month-year{
     height: 44px;
@@ -791,20 +797,25 @@ select.month-year::after{
     /* gap: 5px; */
     color: #000000;
 }
-.cal-dates .date{ 
+.cal-dates .date{
     position: relative;
     top: 0px;
     left: 0px;
     width: 100%;
     margin: 0 5%;
-    height: 44px;
     border-radius: 6px;
-    padding:  13px 20px 13px 20px;
-    
+    font-size: 13px;
+    height: 44px;
+    padding: 0;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center
+
 }
 
 .cal-dates .date{
-    color: #000000; 
+    color: #000000;
     background-color: #FFFFFF;
     box-shadow: 0px 1px 1px 0px #000E330D;
     cursor: pointer;
@@ -827,8 +838,8 @@ select.month-year::after{
     color: #0047FF;
 }
 .cal-dates .date.range-start,.cal-dates .date.range-end  {
-    background-color: #022442; 
-    color: white; 
+    background-color: #022442;
+    color: white;
     box-shadow: 0px 3px 2px 0px #0047FF33;
     box-shadow: 0px 1.5px 1px 0px #001F7040;
     font-weight: 500;
@@ -939,7 +950,7 @@ button#check-dates{
 
 }
 .clients .commentsofclients div .comment-row {
-    
+
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -951,12 +962,12 @@ button#check-dates{
     height: 306px;
     left: 424px;
     top: 0px;
-    
+
     display: flex;
-    overflow-x: scroll; 
-    scroll-behavior: smooth; 
-    -webkit-overflow-scrolling: touch; 
-  
+    overflow-x: scroll;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+
     scrollbar-width: none;
 
 
@@ -1053,57 +1064,45 @@ top: 623.98px;
     width: 100%;
 }
 
-@media (max-width: 1600px) {
-    .availability .calendar-check {
-      width: 30%;
-    }
-  
-    .availability #cal-2 {
-      left: 60%;
-    }
-  
-    .cal-components {
-      width: 90%;
-    }
-  
-    .cal-components .w-days,
-    .cal-components .cal-dates {
-      width: 90%;
-    }
-  
-    .cal-components .cal-dates {
-        width: 80%;
-      }
-    .cal-components .w-days div,
-    .cal-dates .date {
-      width: 48px;
-      font-size: 16px;
-    }
-  
-    .cal-components .cal-header .month-year-div {
-      width: 220px;
-      left: 25%;
-    }
-  
-    select#month-c1, select#month-c2 {
-      width: 120px;
-    }
-  
-    select#year-c1, select#year-c2 {
-      width: 80px;
-    }
-    select.month-year{
-        font-size: 16px;
-    }
-    .availability #cal-2 button#nextmonth{
-        position: absolute;
-        right: 2.5%;
-        
-    }
-    button#check-dates{
-        font-size: 12px;
-    }
-    
+@media screen and (max-width: 1440px) {
+  .availability .calendar-check {
+
+    height: 50%;
   }
-  
-  
+  .cal-dates .date {
+    font-size: 12px;
+    height: 35px;
+    margin: 0 5%;
+  }
+  .cal-components .w-days div {
+    font-size: 13px;
+    padding: 5px 0;
+    width: 90%;
+    margin: 0;
+  }
+  .cal-components .w-days{
+    width: 100%;
+  }
+
+
+
+  select#month-c1,
+  select#month-c2 {
+    width: 110px;
+  }
+
+  select#year-c1,
+  select#year-c2 {
+    width: 70px;
+  }
+
+  select.month-year {
+    height: 36px;
+    font-size: 14px;
+    padding: 6px 10px;
+  }
+  button#check-dates{
+    font-size: 12px;
+    padding: 0px;
+  }
+}
