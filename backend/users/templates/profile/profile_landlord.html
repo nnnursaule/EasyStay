@@ -688,11 +688,23 @@ footer {
       </div>
   {% endfor %}
     </div>
-  {% if request.user.id == user.id %}
-  <a href="{% url 'booking:apartment_create' user.id %}">
-    Add new
-  </a>
+{% if request.user.id == user.id %}
+  <form action="{% url 'booking:apartment_create' user.id %}" method="get" style="display: inline;">
+    <button type="submit" style="
+      background-color: #ff5a30;
+      color: white;
+       margin-top: 16px;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    ">
+      Add new
+    </button>
+  </form>
 {% endif %}
+
 
 </section>
 
