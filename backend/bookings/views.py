@@ -23,6 +23,8 @@ from django.views.decorators.http import require_POST
 from django.db.models import Q
 from decimal import Decimal
 from .forms import StudentIDUploadForm
+import zipfile
+from io import BytesIO
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 class ResidentialComplexView(DetailView):
@@ -128,7 +130,7 @@ class ApartmentDetailView(DetailView):
         # Похожие квартиры (кроме текущей)
         context["similar_apartments"] = Apartment.objects.exclude(pk=apartment.pk).order_by("?")[:6]
         context["form"] = StudentIDUploadForm()
-
+        context["apartment_images"] = apartment.images.all()
         return context
 
     def post(self, request, *args, **kwargs):
@@ -647,3 +649,22 @@ def share(request, complex_id):
     complex = get_object_or_404(ResidentialComplex, id=complex_id)
     return render(request, "complex/share_others_rc.html", {"complex": complex})
 
+
+
+def download_apartment_images(request, pk):
+    apartment = Apartment.objects.get(pk=pk)
+    images = apartment.images.all()
+
+    # Временный буфер в памяти
+    buffer = BytesIO()
+    with zipfile.ZipFile(buffer, 'w') as zip_file:
+        for img in images:
+            img_path = img.image.path
+            img_name = img.image.name.split('/')[-1]
+            zip_file.write(img_path, img_name)
+
+    buffer.seek(0)
+
+    response = HttpResponse(buffer, content_type='application/zip')
+    response['Content-Disposition'] = f'attachment; filename=apartment_{pk}_images.zip'
+    return response

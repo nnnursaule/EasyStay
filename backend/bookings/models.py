@@ -368,3 +368,10 @@ class BookingDocument(models.Model):
 
     def __str__(self):
         return f"{self.user.username} documents for {self.apartment.title}"
+
+
+class ApartmentImage(models.Model):
+    apartment = models.ForeignKey(
+        Apartment, on_delete=models.CASCADE, related_name='images'
+    )
+    image = models.ImageField(upload_to='apartment_images/')

@@ -1,5 +1,5 @@
 from django import forms
-from .models import Apartment, Booking
+from .models import Apartment, Booking, ApartmentImage
 from users.models import User
 class ApartmentForm(forms.ModelForm):
     class Meta:
@@ -41,3 +41,5 @@ class StudentIDUploadForm(forms.ModelForm):
                 'id': 'id_student_id_photo'
             })
         }
+
+

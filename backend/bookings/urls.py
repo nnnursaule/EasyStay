@@ -32,7 +32,7 @@ urlpatterns = [
     path('booking-requests/', views.booking_requests_view, name='booking_requests'),
     path('requests/<int:booking_id>/action/', views.handle_booking_action, name='handle_booking_action'),
     path("apartments/<int:pk>/upload-documents/", views.upload_documents, name="upload_documents"),
-    path("share_with_others/<int:complex_id>", views.share, name="share_with_others")
-
+    path("share_with_others/<int:complex_id>", views.share, name="share_with_others"),
+    path('apartments/<int:pk>/download-images/', views.download_apartment_images, name='download_apartment_images'),
 
 ]

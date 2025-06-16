@@ -10,10 +10,7 @@
     background: white;
 }
 
-.hero{
-    height: 350px;
-    background: url('img/profile-back.png') no-repeat center center/cover;
-}
+
 
 .favourites {
     background-color: #fafafa;
