@@ -665,14 +665,14 @@ input[type="text"] {
 }
 
 .faq-number {
-    font-size: 58px;
+    font-size: 45px;
     font-weight: bold;
     color: #FF5A30;
     margin-right: 10px;
 }
 
 .faq-header h3 {
-    font-size: 41.5px;
+    font-size: 22px;
     font-weight: bold;
     text-align: left;
     margin-left: 24px;
