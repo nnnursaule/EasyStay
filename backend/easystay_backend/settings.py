@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from pathlib import Path
 import os
 from dotenv import load_dotenv
+load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -197,8 +198,9 @@ print(STRIPE_PUBLIC_KEY)
 print(STRIPE_WEBHOOK_SECRET)
 
 # OpenAI API key for AI assistant
-load_dotenv()
+
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+print(OPENAI_API_KEY)
 
 # CORS settings
 CORS_ALLOW_ALL_ORIGINS = True
