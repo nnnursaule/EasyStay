@@ -480,7 +480,7 @@
         }
 
         .faq-number {
-            font-size: 47px;
+            font-size: 45px;
             color: #FF5A30;
             font-weight: 700;
             flex-shrink: 0;
@@ -493,7 +493,7 @@
         }
 
         .faq-content-container h3 {
-            font-size: 24px;
+            font-size: 22px;
             font-weight: bold;
             margin: 10px 0 10px 0;
             text-align: left;
