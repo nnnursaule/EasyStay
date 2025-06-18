@@ -197,6 +197,7 @@ print(STRIPE_PUBLIC_KEY)
 print(STRIPE_WEBHOOK_SECRET)
 
 # OpenAI API key for AI assistant
+load_dotenv()
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
 # CORS settings

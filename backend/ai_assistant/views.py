@@ -10,12 +10,15 @@ from .models import Conversation, Message
 from bookings.models import Apartment
 import openai
 
+import os
+from dotenv import load_dotenv
 
 openai.api_key = settings.OPENAI_API_KEY
 class AIAssistantView(APIView):
     permission_classes = [AllowAny]
 
     def post(self, request):
+        print("API KEY ===>", os.environ.get("OPENAI_API_KEY"))
         user_message = request.data.get('message')
         conversation_id = request.data.get('conversation_id')
 
