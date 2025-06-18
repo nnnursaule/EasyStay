@@ -11,7 +11,7 @@ from bookings.models import Apartment
 import openai
 
 
-
+openai.api_key = settings.OPENAI_API_KEY
 class AIAssistantView(APIView):
     permission_classes = [AllowAny]
 
