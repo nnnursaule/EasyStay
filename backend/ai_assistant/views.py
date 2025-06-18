@@ -10,6 +10,8 @@ from .models import Conversation, Message
 from bookings.models import Apartment
 import openai
 
+
+
 class AIAssistantView(APIView):
     permission_classes = [AllowAny]
 
@@ -151,6 +153,7 @@ class AIAssistantView(APIView):
             })
 
         except Exception as e:
+            print(str(e))
             return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 def ai_assistant_template(request):

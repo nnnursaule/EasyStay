@@ -14,4 +14,4 @@ echo "📦 Сбор статических файлов..."
 python manage.py collectstatic --noinput
 
 echo "🚀 Запуск сервера..."
-python manage.py runserver 0.0.0.0:8000
+exec python manage.py runserver 0.0.0.0:8000

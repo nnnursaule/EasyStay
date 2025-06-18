@@ -779,7 +779,7 @@ select.month-year::after{
 
 .cal-components .cal-dates{
     position: relative;
-    width: 90%;
+    width: 85%;
     height: 236px;
     top: 10px;
     left: 3%;
@@ -794,7 +794,7 @@ select.month-year::after{
     position: relative;
     top: 0px;
     left: 0px;
-    width: 100%;
+    width: 80%;
     height: 44px;
     border-radius: 6px;
     padding:  13px 20px 13px 20px;

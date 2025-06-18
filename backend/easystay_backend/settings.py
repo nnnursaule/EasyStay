@@ -26,7 +26,8 @@ SECRET_KEY = "django-insecure-zf8w0_gvwkpmj-xau&assca0zxj2))z1wmq@%xz+8mlnla%#1z
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*', '195.49.215.149', 'localhost']
+
 
 
 # Application definition
@@ -107,7 +108,7 @@ DATABASES = {
         'NAME': os.getenv('POSTGRES_DB'),
         'USER': os.getenv('POSTGRES_USER'),
         'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
-        'HOST': 'localhost',  # Or your database server's hostname
+        'HOST': 'db',  # Or your database server's hostname
         'PORT': '5432',       # Default PostgreSQL port
     }
 }
