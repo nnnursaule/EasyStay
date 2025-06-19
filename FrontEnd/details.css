@@ -867,8 +867,8 @@ button#check-dates{
     position: relative;
     width: 10%;
     height: 44px;
-    margin-top: 55%;
-    margin-left: 67.5%;
+    top: 55%;
+    left: 45%;
     border-radius: 4px;
     padding: 0 16px;
     background-color: #FF5A30;
@@ -884,10 +884,11 @@ button#check-dates{
 
 .availability img{
     position: relative;
-    width: 264.3084716796875;
-    height: 263;
-    margin-top: 50px;
-    margin-left: auto;
+    display: block;
+    width: 250px;
+    height: 250px;
+    top: 35%;
+    left: 39%;
 
 }
 
@@ -1105,13 +1106,7 @@ top: 623.98px;
     padding: 6px 10px;
   }
 
-  button#check-dates {
-      display: block;
-      margin-left: auto;
-      margin-right: 0;
-      position: static;
-      float: none;
-    }
+  
   .navbar{
     height: 6%;
   }
