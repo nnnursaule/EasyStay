@@ -1105,8 +1105,10 @@ top: 623.98px;
     font-size: 14px;
     padding: 6px 10px;
   }
+  button#check-dates{
+    top: 50% !important;
+  }
 
-  
   .navbar{
     height: 6%;
   }
@@ -1121,7 +1123,6 @@ top: 623.98px;
     width: 100% !important;
     left: 0 !important;
     min-width: 0 !important;
-    overflow-x: auto !important;
   }
   #clients-bottom rect {
     width: 100vw !important;
