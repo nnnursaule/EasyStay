@@ -231,21 +231,21 @@ ul.fac-list {
 }
 
 .announcements{
-    position: absolute;
-    top: 2700px;
+    position: relative;
+    margin-top: 300px;
 }
 
 .clients{
     position: relative;
-    top: 1800px;
+    margin-top: 100px;
 }
 
 .feedback-section{
     position: relative;
-    top: 1900px;
+    margin-top: 50px;
 }
 
 .footer{
     position: relative;
-    top: 2000px;
+    margin-top: 50px;
 }
