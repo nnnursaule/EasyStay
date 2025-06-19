@@ -181,9 +181,10 @@
             <h2>Your notifications</h2>
             <span>All notifications will be here</span>
         </div>
-        <button id="close-btn" class="btn btn-dark rounded-circle" type="button">
+        <button id="close-btn" class="btn btn-dark rounded-circle" type="button" onclick="window.history.back()">
             <i class="bi bi-x-lg"></i>
         </button>
+
     </div>
 
     <div class="notification-list">
@@ -215,12 +216,12 @@
 
 </div>
 
-<script>
-    document.getElementById('close-btn').addEventListener('click', function() {
-        const userId = "{{ user_id }}";  // Django вставит ID
-        window.location.href = `/booking/main/${userId}/`;  // редирект
-    });
-</script>
+<!--<script>-->
+<!--    document.getElementById('close-btn').addEventListener('click', function() {-->
+<!--        const userId = "{{ user_id }}";  // Django вставит ID-->
+<!--        window.location.href = `/booking/main/${userId}/`;  // редирект-->
+<!--    });-->
+<!--</script>-->
 
 </body>
 </html>

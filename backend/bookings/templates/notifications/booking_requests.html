@@ -218,8 +218,8 @@
         <span class="badge">{{ request.status|title }}</span>
       </div>
       <div class="actions">
-        <button class="decline">Decline</button>
-        <button class="approve" onclick="window.location.href='profile.landlord.html';">Approve</button>
+        <button class="decline" onclick="window.history.back()">Decline</button>
+        <button class="approve" onclick="window.history.back()">Approve</button>
       </div>
     </div>
   </div>
