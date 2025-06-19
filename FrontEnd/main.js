@@ -297,7 +297,7 @@ document.getElementById("logo2-img").addEventListener("click", function() {
         const firstMonth = cal1.getThisMonth();
         const firstYear = cal1.getThisYear();
 
-        cal2.show(firstMonth + 1, firstYear);
+        cal2.show((firstMonth + 1) % 12, firstMonth === 11 ? firstYear + 1 : firstYear);
         select();
         showUnavailable();
     });
@@ -306,7 +306,7 @@ document.getElementById("logo2-img").addEventListener("click", function() {
         const firstMonth = cal1.getThisMonth();
         const firstYear = cal1.getThisYear();
 
-        cal2.show(firstMonth + 1, firstYear);
+        cal2.show((firstMonth + 1) % 12, firstMonth === 11 ? firstYear + 1 : firstYear);
         select();
         showUnavailable();
     });
@@ -315,7 +315,7 @@ document.getElementById("logo2-img").addEventListener("click", function() {
         const firstMonth = cal2.getThisMonth();
         const firstYear = cal2.getThisYear();
 
-        cal1.show(firstMonth - 1, firstYear);
+        cal1.show((firstMonth + 11) % 12, firstMonth === 0 ? firstYear - 1 : firstYear);
         select();
         showUnavailable();
     });
@@ -324,7 +324,7 @@ document.getElementById("logo2-img").addEventListener("click", function() {
         const firstMonth = cal2.getThisMonth();
         const firstYear = cal2.getThisYear();
 
-        cal1.show(firstMonth - 1, firstYear);
+        cal1.show((firstMonth + 11) % 12, firstMonth === 0 ? firstYear - 1 : firstYear);
         select();
         showUnavailable();
     });
