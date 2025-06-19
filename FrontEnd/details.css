@@ -1063,7 +1063,7 @@ top: 623.98px;
     width: 100%;
 }
 
-@media screen and (max-width: 1439px) {
+@media screen and (max-width: 1500px) {
   .clients .commentsofclients,
   .clients .comment-row,
   #clients-bottom div, #clients-bottom {
