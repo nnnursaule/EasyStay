@@ -1115,6 +1115,7 @@ top: 623.98px;
 
   #clients-bottom {
     width: 100% !important;
+    height: 100%;
     left: 0 !important;
     min-width: 0 !important;
     overflow-x: hidden !important;
