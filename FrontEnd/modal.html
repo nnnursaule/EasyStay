@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Identity Verification</title>
+        
+        <style>
+            body {
+                margin: 0;
+                background-image: url(img/ex.png);
+                background-repeat: no-repeat;
+                background-size: cover;
+                text-align: center;
+                font-family: Ubuntu;
+                height: 100vh;
+                overflow: hidden;
+            }
+   
+
+            .modal-overlay {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+            }
+
+            .modal {
+                background-color: white;
+                padding: 2rem;
+                width: 500px;
+                border-radius: 12px;
+                text-align: center;
+                position: relative;
+                box-shadow: 0 4px 25px rgba(0, 0, 0, 0.3);
+            }
+
+            h2 {
+                font-size: 24px;
+                font-weight: 700;
+                color: #1d1d1f;
+                margin-bottom: 1rem;
+            }
+
+            .description {
+                font-size: 18px;
+                color: #444;
+                line-height: 1.5;
+                margin-bottom: 1.2rem;
+            }
+
+            .accepted {
+                font-size: 20px;
+                color: #ff5a30;
+                font-weight: 600;
+                margin-bottom: 1.5rem;
+            }
+
+            .accepted span {
+                font-weight: 400;
+                color: #444;
+            }
+
+            .upload-button {
+                background-color: #ff5a30;
+                color: white;
+                border: none;
+                padding: 14px 30px;
+                font-size: 18px;
+                font-weight: 600;
+                border-radius: 8px;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+            }
+
+            .upload-button:hover {
+                background-color: #e64a19;
+            }
+
+            .close-button {
+                position: absolute;
+                top: 15px;
+                right: 15px;
+                font-size: 30px;
+                background: none;
+                border: none;
+                cursor: pointer;
+                color: #666;
+            }
+
+            .close-button:hover {
+                color: #000;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div class="modal-overlay">
+            <div class="modal">
+            <button class="close-button">&times;</button>
+            <h2>Verify your identity to continue</h2>
+            <p class="description">
+                To protect our community and ensure trust between landlords and students, we require all landlords to upload a valid ID.<br>
+                This step helps us prevent fraud and maintain a safe platform.
+            </p>
+            <p class="accepted">Accepted documents: <span>identity document</span></p>
+            <button class="upload-button">Upload</button>
+            </div>
+        </div>
+    </body>
+    </html>
