@@ -196,8 +196,8 @@
                     <strong>{{ notification.sender.username }}</strong>
                     {% if notification.type == 'favourite' %}
                         Saved your apartment to favourites
-                    {% elif notification.type == 'booking' %}
-                        Requested to book your apartment
+                    {% elif notification.type == 'booking' and notification.sender.is_landlord %}
+                        {{ notification.message }}
                     {% elif notification.type == 'review' %}
                         Left a review on your apartment
                     {% endif %}

@@ -83,15 +83,50 @@
 </section>
 
 
-    {% block extra_js %}
-        <script>
-            const images = [
-                "{% static 'vendor/img/products/main1.png' %}",
-                "{% static 'vendor/img/products/main2.png' %}",
-                "{% static 'vendor/img/products/main3.png' %}"
-            ];
-        </script>
-    {% endblock %}
+ {% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const images = [
+            "{% static 'vendor/img/products/main1.png' %}",
+            "{% static 'vendor/img/products/main2.png' %}",
+            "{% static 'vendor/img/products/main3.png' %}"
+        ];
+
+        let currentIndex = 0;
+        const hero = document.querySelector(".hero");
+        const dots = document.querySelectorAll(".pagination span");
+
+        function changeImage(index) {
+            hero.style.animation = 'none'; // сбрасываем анимацию
+            void hero.offsetWidth; // принудительный рефлоу
+            hero.style.backgroundImage = `url(${images[index]})`;
+            hero.style.animation = 'fadeBg 1s ease-in-out';
+
+            dots.forEach((dot, i) => {
+                dot.classList.toggle("active", i === index);
+            });
+        }
+
+        // Инициализация
+        changeImage(currentIndex);
+
+        // Автосмена каждые 3 секунды
+        setInterval(() => {
+            currentIndex = (currentIndex + 1) % images.length;
+            changeImage(currentIndex);
+        }, 3000);
+
+        // Обработка клика
+        dots.forEach((dot, index) => {
+            dot.addEventListener("click", () => {
+                currentIndex = index;
+                changeImage(currentIndex);
+            });
+        });
+    });
+</script>
+{% endblock %}
+
 
 
 {% endblock %}

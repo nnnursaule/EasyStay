@@ -34,5 +34,9 @@ urlpatterns = [
     path("apartments/<int:pk>/upload-documents/", views.upload_documents, name="upload_documents"),
     path("share_with_others/<int:complex_id>", views.share, name="share_with_others"),
     path('apartments/<int:pk>/download-images/', views.download_apartment_images, name='download_apartment_images'),
+    path('booking/<int:booking_id>/approve/', views.approve_booking, name='approve_booking'),
+    path('booking/<int:booking_id>/decline/', views.decline_booking, name='decline_booking'),
+
+
 
 ]

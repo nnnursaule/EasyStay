@@ -188,19 +188,18 @@
 </head>
 <body>
     <header class="top-nav">
-        <div class="logo" style="cursor: pointer;" onclick="location.href='index.html';">EASYSTAY</div>
-        <div class="nav-icons">
-          <img src="img/landlord.ava.png" alt="Аватар" class="nav-ava">
-        </div>
+        <div class="logo" style="cursor: pointer;" onclick="location.href='{% url "booking:main" request.user.id %}'">EASYSTAY</div>
+
       </header>
   <div class="container">
     <h1>Booking requests</h1>
     <div class="tabs">
-      <button class="active">All</button>
-      <button>New</button>
-      <button>Approved</button>
-      <button>Declined</button>
+      <a href="?filter=new"><button class="{% if request.GET.filter == 'new' %}active{% endif %}">New</button></a>
+      <a href="?filter=approved"><button class="{% if request.GET.filter == 'approved' %}active{% endif %}">Approved</button></a>
+      <a href="?filter=declined"><button class="{% if request.GET.filter == 'declined' %}active{% endif %}">Declined</button></a>
     </div>
+
+
 
    {% for request in booking_requests %}
 <div class="card">
@@ -218,8 +217,10 @@
         <span class="badge">{{ request.status|title }}</span>
       </div>
       <div class="actions">
-        <button class="decline" onclick="window.history.back()">Decline</button>
-        <button class="approve" onclick="window.history.back()">Approve</button>
+        {% if request.decision == "new" %}
+          <button class="approve" data-id="{{ request.id }}" onclick="handleDecision(this, 'approve')">Approve</button>
+          <button class="decline" data-id="{{ request.id }}" onclick="handleDecision(this, 'decline')">Decline</button>
+        {% endif %}
       </div>
     </div>
   </div>
@@ -232,5 +233,48 @@
 
     <!-- AI Assistant Script -->
     <script src="/static/js/ai_assistant.js"></script>
+
+
+    <script>
+    function handleDecision(button, action) {
+        const bookingId = button.getAttribute('data-id');
+        fetch(`/booking/${bookingId}/${action}/`, {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': getCookie('csrftoken'),
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'approved' || data.status === 'declined') {
+                // Удаляем карточку из DOM
+                button.closest('.card').remove();
+            } else {
+                alert('Something went wrong');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Error occurred');
+        });
+    }
+
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+</script>
+
 </body>
 </html>

@@ -141,6 +141,8 @@ document.getElementById("logo2-img").addEventListener("click", function() {
                 daycontDiv.dataset.date = date;
                 this.daycont.appendChild(daycontDiv);
             }
+
+
         }
 
         changeDropdowns() {
@@ -196,9 +198,7 @@ document.getElementById("logo2-img").addEventListener("click", function() {
 
 
     }
-    const takenDates = [
-        '01/04/2025', '02/04/2025','03/04/2025', '04/04/2025', '05/04/2025'
-      ];
+
     let first_date = null;
     let snd_date = null;
 
@@ -207,12 +207,11 @@ document.getElementById("logo2-img").addEventListener("click", function() {
 
     function showUnavailable() {
         document.querySelectorAll('.date').forEach(date => {
-            const dateEl = new Date(date.dataset.date);
-            if(takenDates.includes(dateEl.toLocaleDateString("en-GB"))){
-                date.classList.add('unavailable');
-            }
-
-        });
+            const formattedDate = dateEl.toISOString().split('T')[0];  // YYYY-MM-DD
+                if (takenDates.includes(formattedDate)) {
+                    date.classList.add('unavailable');
+                }
+           });
     }
 
     function select() {
@@ -249,6 +248,8 @@ document.getElementById("logo2-img").addEventListener("click", function() {
     endDate = snd_date;
 
     highlightSelectedDates();
+     select();
+    showUnavailable();
 }
 
 

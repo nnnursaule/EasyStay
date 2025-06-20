@@ -25,7 +25,7 @@ from decimal import Decimal
 from .forms import StudentIDUploadForm
 import zipfile
 from io import BytesIO
-
+from django.contrib.auth.decorators import login_required
 stripe.api_key = settings.STRIPE_SECRET_KEY
 class ResidentialComplexView(DetailView):
     model = ResidentialComplex
@@ -449,7 +449,8 @@ def confirm_booking(request, apartment_id):
             type_of_booking=type_of_booking,
             comment=comment,
             start_date=start_date,
-            end_date=end_date
+            end_date=end_date,
+            user = request.user
         )
         return redirect('booking:success', apartment_id=apartment.id)  # после отправки формы
 
@@ -581,7 +582,10 @@ def submit_review(request, apartment_id):
 def booking_requests_view(request):
     # Показываем заявки, полученные владельцем (текущим пользователем)
     booking_requests = Booking.objects.filter(apartment__landlord=request.user).order_by('-created_at')
-    print("USER:", request.user, type(request.user))
+
+    filter_value = request.GET.get('filter', 'new')
+    if filter_value in ['new', 'approved', 'declined']:
+        booking_requests = booking_requests.filter(decision=filter_value)
 
     return render(request, 'notifications/booking_requests.html', {
         'booking_requests': booking_requests,
@@ -668,3 +672,42 @@ def download_apartment_images(request, pk):
     response = HttpResponse(buffer, content_type='application/zip')
     response['Content-Disposition'] = f'attachment; filename=apartment_{pk}_images.zip'
     return response
+
+
+@login_required
+def approve_booking(request, booking_id):
+    if request.method == 'POST':
+        booking = get_object_or_404(Booking, id=booking_id, apartment__landlord=request.user)
+        booking.decision = 'approved'
+        booking.save()
+
+        # Найти пользователя, которому нужно отправить уведомление
+
+
+        # Создать уведомление
+        Notification.objects.create(
+            recipient=booking.user,  # студент
+            sender=request.user,  # арендодатель
+            apartment=booking.apartment,
+            type='booking',
+            message=f"Ваш запрос на бронирование квартиры '{booking.apartment.title}' был одобрен. Свяжитесь со мной."
+        )
+
+        return JsonResponse({'status': 'approved'})
+
+    return JsonResponse({'error': 'Invalid request'}, status=400)
+
+@login_required
+def decline_booking(request, booking_id):
+    if request.method == 'POST':
+        booking = get_object_or_404(Booking, id=booking_id, apartment__landlord=request.user)
+        booking.decision = 'declined'
+        booking.save()
+        return JsonResponse({'status': 'declined'})
+    return JsonResponse({'error': 'Invalid request'}, status=400)
+
+
+
+
+
+

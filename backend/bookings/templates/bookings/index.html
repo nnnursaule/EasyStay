@@ -32,6 +32,11 @@
    .hero-section{
         background: url("{% static 'vendor/img/products/feedback.png' %}") no-repeat center center/cover;
     }
+
+    .team-container {
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
+                url("{% static 'vendor/img/products/team.png' %}") center/cover no-repeat;
+    }
 </style>
 <body>
     <header>
@@ -95,18 +100,18 @@
                                         <a href="{% url 'users:tenant_profile' user.id %}">Account</a>
                                     {% endif %}
                               </li>
+                                {% if user.is_landlord %}
                               <li>
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <circle cx="12" cy="12" r="9" stroke="#33363F" stroke-width="2"/>
                                     <circle cx="12" cy="18" r="0.5" fill="#33363F" stroke="#33363F"/>
                                     <path d="M12 16V14.5811C12 13.6369 12.6042 12.7986 13.5 12.5V12.5C14.3958 12.2014 15 11.3631 15 10.4189V9.90569C15 8.30092 13.6991 7 12.0943 7H12C10.3431 7 9 8.34315 9 10V10" stroke="#33363F" stroke-width="2"/>
                                 </svg>
-                                {% if user.is_landlord %}
-                                        <a href="{% url 'booking:booking_requests' %}">Request for booking</a>
-                                    {% else %}
 
-                                    {% endif %}
+                                        <a href="{% url 'booking:booking_requests' %}">Request for booking</a>
                               </li>
+                                {% endif %}
+
                               <li>
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <circle cx="12" cy="12" r="9" stroke="#33363F" stroke-width="2"/>
@@ -138,7 +143,7 @@
 
 
     <section class="hero" style="background-image: url('{% static 'vendor/img/products/main.png' %}');">
-    <h1>Hi, {{ user.first_name }}! <br>Welcome to the <span class="highlight">EASYSTAY!</span></h1>
+    <h1>Hi, {{ user.username }}! <br>Welcome to the <span class="highlight">EASYSTAY!</span></h1>
 
     <form method="get" action="{% url 'booking:main' user.id %}">
         <div class="search-container">

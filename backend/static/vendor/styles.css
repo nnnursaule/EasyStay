@@ -199,10 +199,12 @@ body {
     color: white;
     margin: 0 10px;
     cursor: pointer;
+
 }
 
 .pagination .active {
     font-weight: bold;
+    color: orange;
 }
 
 .about-us {
@@ -1196,6 +1198,12 @@ p {
     .hero {
         height: auto;
         padding: 100px 15px;
+        transition: background-image 1s ease-in-out;
+        background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: background-image 2s ease-in-out;
+    animation: fadeBg 1s ease-in-out;
     }
 
     .title {
@@ -1262,4 +1270,6 @@ p {
     .go-top {
         margin-top: 10px;
     }
+
+
 }

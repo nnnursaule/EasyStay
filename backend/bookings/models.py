@@ -304,7 +304,7 @@ class Booking(models.Model):
         ('approved', 'Approved'),
         ('declined', 'Declined'),
     ]
-
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='bookings', null=True, blank=True)
     decision = models.CharField(max_length=10, choices=DECISION_CHOICES, default='new')
     apartment = models.ForeignKey(Apartment, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)

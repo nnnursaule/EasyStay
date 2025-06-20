@@ -1,12 +1,7 @@
 
 let currentIndex = 0;
 
-function changeImage(index) {
-    document.querySelector(".hero").style.backgroundImage = `url(${images[index - 1]})`;
-    document.querySelectorAll(".pagination span").forEach((dot, i) => {
-        dot.classList.toggle("active", i === index - 1);
-    });
-}
+
 
 document.getElementById("languageButton").addEventListener("click", function () {
     document.getElementById("languageDropdown").classList.toggle("hidden");

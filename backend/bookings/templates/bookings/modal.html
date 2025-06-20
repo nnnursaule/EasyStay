@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Identity Verification</title>
+
+        <style>
+            body {
+                margin: 0;
+                background-image: url(img/ex.png);
+                background-repeat: no-repeat;
+                background-size: cover;
+                text-align: center;
+                font-family: Ubuntu;
+                height: 100vh;
+                overflow: hidden;
+            }
+
+            .modal-overlay {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+            }
+
+            .modal {
+                background-color: white;
+                padding: 20px;
+                width: 500px;
+                border-radius: 12px;
+                text-align: center;
+                position: relative;
+            }
+
+            h2 {
+                font-size: 24px;
+                font-weight: 700;
+                color: #1d1d1f;
+                margin-bottom: 20px;
+            }
+
+            .description {
+                font-size: 18px;
+                color: #444;
+                line-height: 1.5;
+                margin-bottom: 20px;
+            }
+
+            .accepted {
+                font-size: 20px;
+                color: #ff5a30;
+                font-weight: 600;
+                margin-bottom: 22px;
+            }
+
+            .accepted span {
+                font-weight: 400;
+                color: #444;
+            }
+
+            .upload-button {
+                background-color: #ff5a30;
+                color: white;
+                border: none;
+                padding: 14px 30px;
+                font-size: 18px;
+                font-weight: 600;
+                border-radius: 8px;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+            }
+
+            .upload-button:hover {
+                background-color: #e64a19;
+            }
+
+            .close-button {
+                position: absolute;
+                top: 15px;
+                right: 15px;
+                font-size: 30px;
+                background: none;
+                border: none;
+                cursor: pointer;
+                color: #666;
+            }
+
+            .close-button:hover {
+                color: #000;
+            }
+
+        </style>
+    </head>
+    <body>
+<form method="POST" enctype="multipart/form-data" action="{% url 'booking:upload_documents_landlord' %}">
+    {% csrf_token %}
+    <div class="modal-overlay">
+        <div class="modal">
+            <button class="close-button" onclick="window.history.back()">&times;</button>
+            <h2>Verify your identity to continue</h2>
+            <p class="description">
+                To protect our community and ensure trust between landlords and students...
+            </p>
+            <p class="accepted">Accepted documents: <span>identity document</span></p>
+
+
+            <input type="file" name="id_document" accept=".pdf,.jpg,.png" required>
+
+            <button class="upload-button" type="button">Upload</button>
+        </div>
+    </div>
+</form>
+    <script>
+    document.querySelector('.upload-button:last-of-type').addEventListener('click', function () {
+        this.closest('form').submit();
+    });
+</script>
+    </body>
+
+    </html>
